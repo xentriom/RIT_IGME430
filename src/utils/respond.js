@@ -1,9 +1,9 @@
-const respond = (req, res, status, type, object) => {
-  let content = object;
+const respond = (req, res, status, type, data) => {
+  let content = data;
 
-  // If the object is an object, we need to stringify it.
-  if (typeof object === 'object') {
-    content = JSON.stringify(object);
+  // If the data is an object, we need to stringify it.
+  if (typeof data === 'object') {
+    content = JSON.stringify(data);
   }
 
   res.writeHead(status, {

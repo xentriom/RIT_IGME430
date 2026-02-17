@@ -1,7 +1,11 @@
-const { createServer } = require("http");
-const { join } = require("path");
-const { existsSync } = require("fs");
-const { parseBody, respond } = require("./utils/index.js");
+// Comments for how this file functions can be found on the original assignment:
+// https://github.com/xentriom/http-api-assignment-ii/blob/master/src/server.js
+// Everything is copied and pasted
+
+const { createServer } = require('http');
+const { join } = require('path');
+const { existsSync } = require('fs');
+const { parseBody, respond } = require('./utils/index.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const baseDir = join(__dirname, 'app');

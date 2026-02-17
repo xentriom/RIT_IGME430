@@ -1,11 +1,9 @@
+// Comments for how this file functions can be found on the original assignment:
+// https://github.com/xentriom/http-api-assignment-ii/blob/master/src/utils/parseBody.js
+// Everything is copied and pasted
+
 const { parse } = require('querystring');
 
-/**
- * Uses a promise based approach to parse body.
- * This is so i only have to call handler once, wheter this was needed or not.
- * @param {Request} req 
- * @returns {Promise<void>}
- */
 const parseBody = (req) => {
   return new Promise((resolve, reject) => {
     const body = [];
