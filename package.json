@@ -1,0 +1,36 @@
+{
+  "name": "rit_igme430",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "heroku-postbuild": "webpack --mode production",
+    "pretest": "eslint ./src --fix",
+    "start": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
+    "test": "echo \"Tests complete\"",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xentriom/RIT_IGME430.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/xentriom/RIT_IGME430/issues"
+  },
+  "homepage": "https://github.com/xentriom/RIT_IGME430#readme",
+  "dependencies": {
+    "webpack": "^5.105.2",
+    "webpack-cli": "^6.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.0",
+    "globals": "^17.3.0",
+    "nodemon": "^3.1.11"
+  }
+}
