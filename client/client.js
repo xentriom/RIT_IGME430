@@ -1,2 +1,2 @@
-const pokedex = require('./pokedex.json');
+const pokedex = require("./pokedex.json");
 console.log(pokedex);
