@@ -4,7 +4,7 @@ const { Pokedex } = require("../../utils/pokedex");
 const GET = (req, res) => {
   // Check for search params
   const { id, num, name } = getParams(req);
-  if (!id || !num || !name) {
+  if (!id && !num && !name) {
     respond(req, res, 400, "application/json", {
       id: "missingRequiredFields",
       message: "Missing required fields",
@@ -27,7 +27,7 @@ const GET = (req, res) => {
 
 const HEAD = (req, res) => {
   const { id, num, name } = getParams(req);
-  if (!id || !num || !name) {
+  if (!id && !num && !name) {
     respond(req, res, 400, "application/json", {
       id: "missingRequiredFields",
       message: "Missing required fields",
