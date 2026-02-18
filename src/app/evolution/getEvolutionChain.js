@@ -17,7 +17,7 @@ function getEvolutionChain(pokemon) {
 
   // Reverse so we start with the base form
   previous_evolution.reverse();
-  
+
   return { previous_evolution, next_evolution };
 }
 

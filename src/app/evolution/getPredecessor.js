@@ -1,7 +1,7 @@
-const pokedex = require("../../../client/pokedex.json");
+const { Pokedex } = require("../../utils/pokedex");
 
 function getPredecessor(currentNum) {
-  const candidates = pokedex.filter((p) =>
+  const candidates = Pokedex.pokedex.filter((p) =>
     p.next_evolution?.some((e) => e.num === currentNum),
   );
 

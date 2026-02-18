@@ -1,8 +1,8 @@
-const pokedex = require("../../../client/pokedex.json");
+const { Pokedex } = require("../../utils/pokedex");
 
 function getRandomPokemon(limit) {
   // Copy pokedex
-  const copy = [...pokedex];
+  const copy = [...Pokedex.pokedex];
 
   // Shuffles the copy using Fisher Yates shuffle
   // https://www.w3schools.com/js/tryit.asp?filename=tryjs_array_sort_random2

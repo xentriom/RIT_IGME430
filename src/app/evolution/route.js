@@ -1,6 +1,6 @@
 const { getParams, respond } = require("../../utils/index");
 const { getEvolutionChain } = require("./getEvolutionChain");
-const pokedex = require("../../../client/pokedex.json");
+const { Pokedex } = require("../../utils/pokedex");
 
 const GET = (req, res) => {
   const { id, num, name } = getParams(req);
@@ -13,10 +13,7 @@ const GET = (req, res) => {
   }
 
   // Find a matching pokemon
-  const pokemon = pokedex.find(
-    (p) => p.id === parseInt(id) || p.num === num || p.name === name,
-  );
-
+  const pokemon = Pokedex.getPokemon(id || num || name);
   if (!pokemon) {
     respond(req, res, 404, "application/json", {
       id: "pokemonNotFound",
@@ -40,10 +37,7 @@ const HEAD = (req, res) => {
   }
 
   // Find a matching pokemon
-  const pokemon = pokedex.find(
-    (p) => p.id === parseInt(id) || p.num === num || p.name === name,
-  );
-
+  const pokemon = Pokedex.getPokemon(id || num || name);
   if (!pokemon) {
     respond(req, res, 404, "application/json", {
       id: "pokemonNotFound",
