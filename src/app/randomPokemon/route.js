@@ -6,7 +6,7 @@ const GET = (req, res) => {
   const limit = getParams(req).limit || 1;
 
   // Invalid limit range
-  if (limit < 1 || limit > Pokedex.length) {
+  if (!limit || limit < 1 || limit > Pokedex.length) {
     respond(req, res, 400, "application/json", {
       id: "invalidLimit",
       message: "Invalid limit provided",
@@ -23,7 +23,7 @@ const HEAD = (req, res) => {
   const limit = getParams(req).limit || 1;
 
   // Invalid limit range
-  if (limit < 1 || limit > Pokedex.length) {
+  if (!limit || limit < 1 || limit > Pokedex.length) {
     respond(req, res, 400, "application/json", {
       id: "invalidLimit",
       message: "Invalid limit provided",
