@@ -25,7 +25,7 @@ const HEAD = (req, res) => {
     respond(req, res, 200, "application/json", Team.team);
     return;
   }
-  
+
   const team = Team.getTeam(id);
   if (!team) {
     respond(req, res, 404, "application/json", {
