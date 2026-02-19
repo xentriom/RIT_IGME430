@@ -1,4 +1,5 @@
 const { resolve } = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
@@ -13,6 +14,11 @@ module.exports = {
     path: resolve(__dirname, "hosted"),
     filename: "bundles/[name].js",
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "bundles/[name].css",
+    }),
+  ],
   module: {
     rules: [
       {
@@ -21,8 +27,12 @@ module.exports = {
         use: "babel-loader",
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        test: /.css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "@tailwindcss/webpack",
+        ],
       },
     ],
   },

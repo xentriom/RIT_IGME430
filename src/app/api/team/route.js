@@ -1,5 +1,5 @@
-const { getParams, respond } = require("../../utils/index");
-const { Team } = require("../../utils/team");
+const { getParams, respond } = require("../../../utils/index");
+const { Team } = require("../../../utils/team");
 
 const GET = (req, res) => {
   const { id } = getParams(req);
@@ -39,15 +39,25 @@ const HEAD = (req, res) => {
 };
 
 const POST = (req, res) => {
-  const { name, pokemons } = req.body;
+  const { name, pokemons } = req.body || {};
   if (!name || !pokemons) {
     respond(req, res, 400, "application/json", {
       id: "missingRequiredFields",
-      message: "Missing required fields",
+      message: "Missing required fields: name and pokemons",
     });
+    return;
   }
 
-  // idk how its gonna work so its gonna be empty for now
+  const team = Team.createTeam(name, pokemons);
+  if (!team) {
+    respond(req, res, 400, "application/json", {
+      id: "invalidTeam",
+      message: "Team must have 1-6 pokémon",
+    });
+    return;
+  }
+
+  respond(req, res, 201, "application/json", team);
 };
 
 module.exports = {

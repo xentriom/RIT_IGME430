@@ -12,7 +12,18 @@ const parseBody = (req) => {
 
     req.on("end", () => {
       const bodyString = Buffer.concat(body).toString();
-      req.body = parse(bodyString);
+      const contentType = req.headers["content-type"] || "";
+
+      if (contentType.includes("application/json")) {
+        try {
+          req.body = bodyString ? JSON.parse(bodyString) : {};
+        } catch {
+          req.body = {};
+        }
+      } else {
+        req.body = parse(bodyString);
+      }
+
       resolve();
     });
 

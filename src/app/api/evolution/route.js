@@ -1,6 +1,6 @@
-const { getParams, respond } = require("../../utils/index");
+const { getParams, respond } = require("../../../utils/index");
 const { getEvolutionChain } = require("./getEvolutionChain");
-const { Pokedex } = require("../../utils/pokedex");
+const { Pokedex } = require("../../../utils/pokedex");
 
 const GET = (req, res) => {
   const { id, num, name } = getParams(req);

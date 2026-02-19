@@ -1,4 +1,4 @@
-const { Pokedex } = require("../../utils/pokedex");
+const { Pokedex } = require("../../../utils/pokedex");
 
 function getRandomPokemon(limit) {
   // Copy pokedex

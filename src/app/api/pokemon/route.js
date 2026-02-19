@@ -1,5 +1,5 @@
-const { getParams, respond } = require("../../utils/index");
-const { Pokedex } = require("../../utils/pokedex");
+const { getParams, respond } = require("../../../utils/index");
+const { Pokedex } = require("../../../utils/pokedex");
 
 const GET = (req, res) => {
   // Check for search params
