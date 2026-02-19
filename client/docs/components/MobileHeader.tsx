@@ -1,0 +1,99 @@
+import MenuIcon from "./MenuIcon";
+import { Link } from "react-router";
+import { cn } from "../../lib/utils";
+import { INTRO_TABS, API_ENDPOINTS } from "../utils/constants";
+
+export type BreadcrumbItem = { label: string; path: string | null };
+
+function getBreadcrumbs(tab: string | null): BreadcrumbItem[] {
+  const items: BreadcrumbItem[] = [{ label: "Docs", path: null }];
+
+  const intro = INTRO_TABS.find((t) => t.path === tab);
+  if (intro) {
+    items.push({ label: "Introduction", path: null });
+    items.push({ label: intro.label, path: intro.path });
+    return items;
+  }
+
+  const endpoint = API_ENDPOINTS.find((e) => e.path === tab);
+  if (endpoint) {
+    items.push({ label: "Endpoints", path: null });
+    items.push({ label: endpoint.label, path: endpoint.path });
+    return items;
+  }
+
+  return items;
+}
+
+export default function MobileHeader({
+  tab,
+  sidebarOpen,
+  setSidebarOpen,
+}: {
+  tab: string | null;
+  sidebarOpen: boolean;
+  setSidebarOpen: (open: boolean) => void;
+}) {
+  const breadcrumbs = getBreadcrumbs(tab);
+
+  return (
+    <div className="md:hidden z-50 flex items-center gap-2 h-10 px-2 border-b border-taupe-300 bg-taupe-100">
+      <button
+        type="button"
+        className="p-2 rounded-md hover:bg-taupe-200 transition-colors"
+        aria-label={sidebarOpen ? "Close menu" : "Open menu"}
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        <MenuIcon open={sidebarOpen} />
+      </button>
+
+      <nav
+        aria-label="Breadcrumb"
+        className="flex items-center gap-2 text-sm text-taupe-600 min-w-0"
+      >
+        <ol className="flex items-center gap-2 list-none p-0 m-0 min-w-0 flex-wrap">
+          {breadcrumbs.map((item, i) => (
+            <li key={i} className="flex items-center gap-2 shrink-0 min-w-0">
+              {i > 0 && (
+                <span
+                  className="text-taupe-400 shrink-0 select-none"
+                  aria-hidden
+                >
+                  /
+                </span>
+              )}
+
+              {item.path !== null ? (
+                <Link
+                  to={{
+                    pathname: "/docs",
+                    search: item.path ? `?tab=${item.path}` : "",
+                  }}
+                  className={cn(
+                    "shrink-0 no-underline",
+                    i === breadcrumbs.length - 1
+                      ? "font-medium text-taupe-800 truncate"
+                      : "text-taupe-500 hover:text-taupe-900",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <span
+                  className={cn(
+                    "shrink-0 select-none",
+                    i === breadcrumbs.length - 1
+                      ? "font-medium text-taupe-800 truncate"
+                      : "text-taupe-500",
+                  )}
+                >
+                  {item.label}
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  );
+}
