@@ -1,4 +1,4 @@
-import { Activity, useState, Suspense } from "react";
+import { Activity, useState } from "react";
 import { useSearchParams } from "react-router";
 import Header from "./components/Header";
 import MobileHeader from "./components/MobileHeader";

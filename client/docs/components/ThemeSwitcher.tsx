@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getTheme, setTheme, THEMES, type Theme } from "../utils/theme";
+import { cn } from "../../lib/utils";
 
 export default function ThemeSwitcher() {
   const [theme, setThemeState] = useState<Theme>(getTheme);
@@ -19,11 +20,12 @@ export default function ThemeSwitcher() {
             key={t}
             type="button"
             onClick={() => setThemeState(t)}
-            className={`rounded px-2 py-1 text-xs font-medium capitalize transition-colors ${
+            className={cn(
+              "rounded px-2 py-1 text-xs font-medium capitalize transition-colors",
               theme === t
                 ? "bg-taupe-700 text-white"
-                : "text-taupe-700 hover:bg-taupe-200"
-            }`}
+                : "text-taupe-700 hover:bg-taupe-200",
+            )}
             aria-pressed={theme === t}
             aria-label={`Switch to ${t} theme`}
           >

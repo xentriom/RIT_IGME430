@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CodeBlock from "./CodeBlock";
+import { cn } from "../../lib/utils";
 
 const BODY_METHODS = ["POST", "PUT", "PATCH"];
 
@@ -102,11 +103,12 @@ export default function Console({
               <button
                 key={m}
                 type="button"
-                className={`border-l border-taupe-200 px-4 py-2 font-mono text-sm font-medium transition-colors first:border-l-0 ${
+                className={cn(
+                  "border-l border-taupe-200 px-4 py-2 font-mono text-sm font-medium transition-colors first:border-l-0",
                   method === m
                     ? "bg-taupe-800 text-white"
-                    : "bg-taupe-100 text-taupe-700 hover:bg-taupe-200"
-                }`}
+                    : "bg-taupe-100 text-taupe-700 hover:bg-taupe-200",
+                )}
                 onClick={() => setMethod(m)}
               >
                 {m}
