@@ -19,7 +19,7 @@ export default function App() {
         setSidebarOpen={setSidebarOpen}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] overflow-hidden h-screen max-h-[calc(100dvh - 4rem)]">
+      <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] md:grid-rows-1 overflow-hidden min-h-0 h-full md:h-[calc(100dvh-3rem)]">
         <Sidebar tab={tab} sidebarOpen={sidebarOpen} />
         <div className="overflow-y-auto h-full">
           <main className="p-8 pb-20 md:p-16 md:pb-40">

@@ -1,0 +1,36 @@
+import { useState, useEffect } from "react";
+import { getTheme, setTheme, THEMES, type Theme } from "../utils/theme";
+
+export default function ThemeSwitcher() {
+  const [theme, setThemeState] = useState<Theme>(getTheme);
+
+  useEffect(() => {
+    setTheme(theme);
+  }, [theme]);
+
+  return (
+    <div className="shrink-0 p-4">
+      <h2 className="text-xs font-semibold uppercase text-taupe-400 select-none py-1">
+        Theme
+      </h2>
+      <div className="grid grid-cols-3 items-center gap-1 rounded-md border border-taupe-300 bg-taupe-50 p-1">
+        {THEMES.map((t) => (
+          <button
+            key={t}
+            type="button"
+            onClick={() => setThemeState(t)}
+            className={`rounded px-2 py-1 text-xs font-medium capitalize transition-colors ${
+              theme === t
+                ? "bg-taupe-700 text-white"
+                : "text-taupe-700 hover:bg-taupe-200"
+            }`}
+            aria-pressed={theme === t}
+            aria-label={`Switch to ${t} theme`}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}

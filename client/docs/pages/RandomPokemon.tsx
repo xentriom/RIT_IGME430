@@ -120,7 +120,7 @@ export default function RandomPokemon() {
                   number?
                 </td>
                 <td className="px-4 py-3 text-taupe-600">
-                  Number of random Pokémon to return (1–151, default 1)
+                  Number of random Pokémon to return (1-151, default 1)
                 </td>
               </tr>
             </tbody>

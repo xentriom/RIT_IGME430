@@ -120,7 +120,7 @@ export default function Pokedex() {
                   number?
                 </td>
                 <td className="px-4 py-3 text-taupe-600">
-                  Number of Pokémon to return (1–151, default 5)
+                  Number of Pokémon to return (1-151, default 5)
                 </td>
               </tr>
             </tbody>
