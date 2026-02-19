@@ -22,7 +22,7 @@ export default function App() {
       <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] md:grid-rows-1 overflow-hidden min-h-0 h-full md:h-[calc(100dvh-3rem)]">
         <Sidebar tab={tab} sidebarOpen={sidebarOpen} />
         <div className="overflow-y-auto h-full">
-          <main className="p-8 pb-20 md:p-16 md:pb-40">
+          <main className="px-6 pt-8 pb-20 md:px-12 md:pt-16 md:pb-40">
             {PAGES.map((p) => (
               <Activity
                 key={p.path}
