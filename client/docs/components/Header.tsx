@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router";
 import MenuIcon from "./MenuIcon";
 import Menu from "./Menu";
 
@@ -10,31 +9,31 @@ export default function Header() {
     <>
       <header className="row-span-1 z-50 h-12 flex items-center border-b border-taupe-300 bg-taupe-100">
         <div className="flex items-center px-4 md:px-8 w-full justify-between">
-          <Link to="/" className="text-xl font-bold">
+          <a href="/" className="text-xl font-bold">
             Pokémon API
-          </Link>
+          </a>
 
           <nav className="hidden sm:flex items-center gap-4" aria-label="Main">
-            <Link
-              to="/docs"
+            <a
+              href="/docs"
               className="text-sm text-taupe-700 hover:text-taupe-900 no-underline"
             >
               Docs
-            </Link>
-            <Link
-              to="/team"
+            </a>
+            <a
+              href="/team"
               className="text-sm text-taupe-700 hover:text-taupe-900 no-underline"
             >
               Team
-            </Link>
-            <Link
-              to="https://github.com/xentriom/RIT_IGME430/tree/Project1"
+            </a>
+            <a
+              href="https://github.com/xentriom/RIT_IGME430/tree/Project1"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-taupe-700 hover:text-taupe-900 no-underline"
             >
               GitHub
-            </Link>
+            </a>
           </nav>
 
           <button
