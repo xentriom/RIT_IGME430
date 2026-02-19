@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "dev": "npm run watch & npm run start",
+    "dev": "npm run watch & npm run nodemon",
     "format": "prettier . --write",
     "heroku-postbuild": "webpack --mode production",
+    "nodemon": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
     "pretest": "eslint ./src --fix",
-    "start": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
+    "start": "node ./src/server.js",
     "test": "echo \"Tests complete\"",
     "watch": "webpack --watch"
   },
