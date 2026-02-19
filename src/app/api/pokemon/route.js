@@ -49,8 +49,8 @@ const HEAD = (req, res) => {
 };
 
 const POST = (req, res) => {
-  const { name, type, height, weight, weaknesses, next_evolution } = req.body;
-  if (!name || !type || !height || !weight || !weaknesses || !next_evolution) {
+  const { name, type, height, weight } = req.body;
+  if (!name || !type || !height || !weight) {
     respond(req, res, 400, "application/json", {
       id: "missingRequiredFields",
       message: "Missing required fields",
@@ -58,15 +58,34 @@ const POST = (req, res) => {
     return;
   }
 
-  // Add the new pokemon to the pokedex
-  const newPokemon = Pokedex.addPokemon(
-    name,
-    type,
-    height,
-    weight,
-    weaknesses,
-    next_evolution,
-  );
+  // Only 2 types max
+  if (type.length > 2) {
+    respond(req, res, 400, "application/json", {
+      id: "invalidTypes",
+      message: "Only 2 types max",
+    });
+    return;
+  }
+
+  // Check if the types are valid
+  let invalidTypes = [];
+  for (const t of type) {
+    if (!Pokedex.getTypes().includes(t)) {
+      invalidTypes.push(t);
+    }
+  }
+
+  // If there are invalid types, return an error
+  if (invalidTypes.length > 0) {
+    respond(req, res, 400, "application/json", {
+      id: "invalidTypes",
+      message: "Invalid type(s): " + invalidTypes.join(", "),
+    });
+    return;
+  }
+
+  // Add the new pokemon to the pokedex (weaknesses are computed from type)
+  const newPokemon = Pokedex.addPokemon(name, type, height, weight);
 
   // If the pokemon already exists, return an error
   if (!newPokemon) {

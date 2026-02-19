@@ -1,3 +1,123 @@
+const TYPE_CHART = {
+  Normal: { weak: ["Fighting"], resist: [], immune: ["Ghost"] },
+  Fire: {
+    weak: ["Water", "Ground", "Rock"],
+    resist: ["Fire", "Grass", "Ice", "Bug", "Steel", "Fairy"],
+    immune: [],
+  },
+  Water: {
+    weak: ["Electric", "Grass"],
+    resist: ["Fire", "Water", "Ice", "Steel"],
+    immune: [],
+  },
+  Electric: {
+    weak: ["Ground"],
+    resist: ["Electric", "Flying", "Steel"],
+    immune: [],
+  },
+  Grass: {
+    weak: ["Fire", "Ice", "Poison", "Flying", "Bug"],
+    resist: ["Water", "Electric", "Grass", "Ground"],
+    immune: [],
+  },
+  Ice: {
+    weak: ["Fire", "Fighting", "Rock", "Steel"],
+    resist: ["Ice"],
+    immune: [],
+  },
+  Fighting: {
+    weak: ["Flying", "Psychic", "Fairy"],
+    resist: ["Rock", "Bug", "Dark"],
+    immune: [],
+  },
+  Poison: {
+    weak: ["Ground", "Psychic"],
+    resist: ["Fighting", "Poison", "Bug", "Grass", "Fairy"],
+    immune: [],
+  },
+  Ground: {
+    weak: ["Water", "Grass", "Ice"],
+    resist: ["Poison", "Rock"],
+    immune: ["Electric"],
+  },
+  Flying: {
+    weak: ["Electric", "Ice", "Rock"],
+    resist: ["Fighting", "Bug", "Grass"],
+    immune: ["Ground"],
+  },
+  Psychic: {
+    weak: ["Bug", "Ghost", "Dark"],
+    resist: ["Fighting", "Psychic"],
+    immune: [],
+  },
+  Bug: {
+    weak: ["Fire", "Flying", "Rock"],
+    resist: ["Fighting", "Ground", "Grass"],
+    immune: [],
+  },
+  Rock: {
+    weak: ["Water", "Grass", "Fighting", "Ground", "Steel"],
+    resist: ["Normal", "Fire", "Poison", "Flying"],
+    immune: [],
+  },
+  Ghost: {
+    weak: ["Ghost", "Dark"],
+    resist: ["Poison", "Bug"],
+    immune: ["Normal", "Fighting"],
+  },
+  Dragon: {
+    weak: ["Ice", "Dragon", "Fairy"],
+    resist: ["Fire", "Water", "Electric", "Grass"],
+    immune: [],
+  },
+  Dark: {
+    weak: ["Fighting", "Bug", "Fairy"],
+    resist: ["Ghost", "Dark"],
+    immune: ["Psychic"],
+  },
+  Steel: {
+    weak: ["Fire", "Fighting", "Ground"],
+    resist: [
+      "Normal",
+      "Grass",
+      "Ice",
+      "Flying",
+      "Psychic",
+      "Bug",
+      "Rock",
+      "Dragon",
+      "Steel",
+      "Fairy",
+    ],
+    immune: ["Poison"],
+  },
+  Fairy: {
+    weak: ["Poison", "Steel"],
+    resist: ["Fighting", "Bug", "Dark"],
+    immune: ["Dragon"],
+  },
+};
+
+const ALL_TYPES = Object.keys(TYPE_CHART);
+
+function getWeaknesses(types) {
+  const typeList = Array.isArray(types) ? types : [types];
+  const weaknesses = [];
+
+  for (const attackingType of ALL_TYPES) {
+    let effectiveness = 1;
+    for (const defendingType of typeList) {
+      const chart = TYPE_CHART[defendingType];
+      if (!chart) continue;
+      if (chart.immune.includes(attackingType)) effectiveness *= 0;
+      else if (chart.weak.includes(attackingType)) effectiveness *= 2;
+      else if (chart.resist.includes(attackingType)) effectiveness *= 0.5;
+    }
+    if (effectiveness >= 2) weaknesses.push(attackingType);
+  }
+  return weaknesses;
+}
+
 class PokedexUtils {
   pokedex = [];
   length = 0;
@@ -7,17 +127,25 @@ class PokedexUtils {
     this.length = this.pokedex.length;
   }
 
+  getTypes() {
+    return ALL_TYPES;
+  }
+
+  getTypeChart() {
+    return TYPE_CHART;
+  }
+
   getPokemon(identifier) {
     return this.pokedex.find(
       (p) =>
         p.id === parseInt(identifier) ||
         p.num === identifier ||
-        p.name === identifier,
+        p.name.toLowerCase() === identifier.toLowerCase(),
     );
   }
 
   getPokemonById(id) {
-    return this.pokedex.find((p) => p.id === id);
+    return this.pokedex.find((p) => p.id === parseInt(id));
   }
 
   getPokemonByNum(num) {
@@ -25,10 +153,12 @@ class PokedexUtils {
   }
 
   getPokemonByName(name) {
-    return this.pokedex.find((p) => p.name === name);
+    return this.pokedex.find(
+      (p) => p.name.toLowerCase() === name.toLowerCase(),
+    );
   }
 
-  addPokemon(name, type, height, weight, weaknesses, next_evolution) {
+  addPokemon(name, type, height, weight, next_evolution) {
     // Check if the pokemon already exists
     if (this.getPokemonByName(name)) {
       return null;
@@ -36,16 +166,17 @@ class PokedexUtils {
 
     // Get the last pokemon
     const lastPokemon = this.pokedex[this.pokedex.length - 1];
+    const weaknesses = getWeaknesses(type);
 
     // Create the new pokemon
     const newPokemon = {
       id: lastPokemon.id + 1,
-      num: String(lastPokemon.num).padStart(3, "0") + 1,
+      num: String(parseInt(lastPokemon.num) + 1).padStart(3, "0"),
       name: name,
       type: type,
       height: height,
       weight: weight,
-      weaknesses: weaknesses,
+      weaknesses,
       next_evolution: next_evolution,
     };
 
