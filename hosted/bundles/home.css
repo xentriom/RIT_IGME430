@@ -323,6 +323,9 @@
   .-inset-1 {
     inset: calc(var(--spacing) * -1);
   }
+  .inset-x-0 {
+    inset-inline: calc(var(--spacing) * 0);
+  }
   .start {
     inset-inline-start: var(--spacing);
   }
@@ -400,6 +403,12 @@
   }
   .mx-auto {
     margin-inline: auto;
+  }
+  .my-2 {
+    margin-block: calc(var(--spacing) * 2);
+  }
+  .mt-6 {
+    margin-top: calc(var(--spacing) * 6);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -480,6 +489,9 @@
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
+  .h-auto {
+    height: auto;
+  }
   .h-dvh {
     height: 100dvh;
   }
@@ -494,6 +506,9 @@
   }
   .w-72 {
     width: calc(var(--spacing) * 72);
+  }
+  .w-fit {
+    width: fit-content;
   }
   .w-full {
     width: 100%;
@@ -558,6 +573,9 @@
   }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -863,6 +881,107 @@
   .bg-white {
     background-color: var(--color-white);
   }
+  .to-0\% {
+    --tw-gradient-to-position: 0%;
+  }
+  .mask-t-to-70\% {
+    mask-image:
+      var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+    --tw-mask-linear:
+      var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom),
+      var(--tw-mask-top);
+    --tw-mask-top: linear-gradient(
+      to top,
+      var(--tw-mask-top-from-color) var(--tw-mask-top-from-position),
+      var(--tw-mask-top-to-color) var(--tw-mask-top-to-position)
+    );
+    --tw-mask-top-to-position: 70%;
+  }
+  .mask-b-from-2 {
+    mask-image:
+      var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+    --tw-mask-linear:
+      var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom),
+      var(--tw-mask-top);
+    --tw-mask-bottom: linear-gradient(
+      to bottom,
+      var(--tw-mask-bottom-from-color) var(--tw-mask-bottom-from-position),
+      var(--tw-mask-bottom-to-color) var(--tw-mask-bottom-to-position)
+    );
+    --tw-mask-bottom-from-position: calc(var(--spacing) * 2);
+  }
+  .mask-b-from-3 {
+    mask-image:
+      var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+    --tw-mask-linear:
+      var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom),
+      var(--tw-mask-top);
+    --tw-mask-bottom: linear-gradient(
+      to bottom,
+      var(--tw-mask-bottom-from-color) var(--tw-mask-bottom-from-position),
+      var(--tw-mask-bottom-to-color) var(--tw-mask-bottom-to-position)
+    );
+    --tw-mask-bottom-from-position: calc(var(--spacing) * 3);
+  }
+  .mask-b-from-10\% {
+    mask-image:
+      var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+    --tw-mask-linear:
+      var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom),
+      var(--tw-mask-top);
+    --tw-mask-bottom: linear-gradient(
+      to bottom,
+      var(--tw-mask-bottom-from-color) var(--tw-mask-bottom-from-position),
+      var(--tw-mask-bottom-to-color) var(--tw-mask-bottom-to-position)
+    );
+    --tw-mask-bottom-from-position: 10%;
+  }
+  .mask-b-from-20 {
+    mask-image:
+      var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+    --tw-mask-linear:
+      var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom),
+      var(--tw-mask-top);
+    --tw-mask-bottom: linear-gradient(
+      to bottom,
+      var(--tw-mask-bottom-from-color) var(--tw-mask-bottom-from-position),
+      var(--tw-mask-bottom-to-color) var(--tw-mask-bottom-to-position)
+    );
+    --tw-mask-bottom-from-position: calc(var(--spacing) * 20);
+  }
+  .mask-b-from-30 {
+    mask-image:
+      var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+    --tw-mask-linear:
+      var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom),
+      var(--tw-mask-top);
+    --tw-mask-bottom: linear-gradient(
+      to bottom,
+      var(--tw-mask-bottom-from-color) var(--tw-mask-bottom-from-position),
+      var(--tw-mask-bottom-to-color) var(--tw-mask-bottom-to-position)
+    );
+    --tw-mask-bottom-from-position: calc(var(--spacing) * 30);
+  }
+  .mask-b-from-30\% {
+    mask-image:
+      var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+    --tw-mask-linear:
+      var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom),
+      var(--tw-mask-top);
+    --tw-mask-bottom: linear-gradient(
+      to bottom,
+      var(--tw-mask-bottom-from-color) var(--tw-mask-bottom-from-position),
+      var(--tw-mask-bottom-to-color) var(--tw-mask-bottom-to-position)
+    );
+    --tw-mask-bottom-from-position: 30%;
+  }
   .bg-repeat {
     background-repeat: repeat;
   }
@@ -871,6 +990,12 @@
   }
   .mask-repeat {
     mask-repeat: repeat;
+  }
+  .object-contain {
+    object-fit: contain;
+  }
+  .object-cover {
+    object-fit: cover;
   }
   .p-0 {
     padding: calc(var(--spacing) * 0);
@@ -925,6 +1050,9 @@
   }
   .pb-20 {
     padding-bottom: calc(var(--spacing) * 20);
+  }
+  .text-center {
+    text-align: center;
   }
   .text-left {
     text-align: left;
@@ -1310,6 +1438,23 @@
   .ring-inset {
     --tw-ring-inset: inset;
   }
+  .group-hover\:block {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
+  .group-hover\:scale-105 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        --tw-scale-x: 105%;
+        --tw-scale-y: 105%;
+        --tw-scale-z: 105%;
+        scale: var(--tw-scale-x) var(--tw-scale-y);
+      }
+    }
+  }
   .placeholder\:text-taupe-400 {
     &::placeholder {
       color: var(--color-taupe-400);
@@ -1347,6 +1492,11 @@
       border-color: var(--color-slate-500);
     }
   }
+  .focus\:border-taupe-500 {
+    &:focus {
+      border-color: var(--color-taupe-500);
+    }
+  }
   .focus\:ring-2 {
     &:focus {
       --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0
@@ -1365,6 +1515,11 @@
   .focus\:ring-taupe-400 {
     &:focus {
       --tw-ring-color: var(--color-taupe-400);
+    }
+  }
+  .focus\:ring-taupe-500 {
+    &:focus {
+      --tw-ring-color: var(--color-taupe-500);
     }
   }
   .focus\:outline-none {
@@ -1386,6 +1541,11 @@
   .sm\:hidden {
     @media (width >= 40rem) {
       display: none;
+    }
+  }
+  .sm\:grid-cols-3 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .md\:static {
@@ -1414,6 +1574,11 @@
       translate: var(--tw-translate-x) var(--tw-translate-y);
     }
   }
+  .md\:grid-cols-4 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
   .md\:grid-cols-\[auto_1fr\] {
     @media (width >= 48rem) {
       grid-template-columns: auto 1fr;
@@ -1434,6 +1599,11 @@
       align-items: center;
     }
   }
+  .md\:p-8 {
+    @media (width >= 48rem) {
+      padding: calc(var(--spacing) * 8);
+    }
+  }
   .md\:px-8 {
     @media (width >= 48rem) {
       padding-inline: calc(var(--spacing) * 8);
@@ -1452,6 +1622,36 @@
   .md\:pb-40 {
     @media (width >= 48rem) {
       padding-bottom: calc(var(--spacing) * 40);
+    }
+  }
+  .lg\:grid-cols-5 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+  .lg\:grid-cols-6 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+  .xl\:grid {
+    @media (width >= 80rem) {
+      display: grid;
+    }
+  }
+  .xl\:grid-cols-6 {
+    @media (width >= 80rem) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+  .xl\:grid-cols-8 {
+    @media (width >= 80rem) {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+    }
+  }
+  .xl\:grid-cols-10 {
+    @media (width >= 80rem) {
+      grid-template-columns: repeat(10, minmax(0, 1fr));
     }
   }
 }
@@ -1631,6 +1831,123 @@ body {
   syntax: "*";
   inherits: false;
   initial-value: 0;
+}
+@property --tw-gradient-position {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-via {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-to {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-via-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --tw-gradient-via-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+@property --tw-gradient-to-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-mask-linear {
+  syntax: "*";
+  inherits: false;
+  initial-value: linear-gradient(#fff, #fff);
+}
+@property --tw-mask-radial {
+  syntax: "*";
+  inherits: false;
+  initial-value: linear-gradient(#fff, #fff);
+}
+@property --tw-mask-conic {
+  syntax: "*";
+  inherits: false;
+  initial-value: linear-gradient(#fff, #fff);
+}
+@property --tw-mask-left {
+  syntax: "*";
+  inherits: false;
+  initial-value: linear-gradient(#fff, #fff);
+}
+@property --tw-mask-right {
+  syntax: "*";
+  inherits: false;
+  initial-value: linear-gradient(#fff, #fff);
+}
+@property --tw-mask-bottom {
+  syntax: "*";
+  inherits: false;
+  initial-value: linear-gradient(#fff, #fff);
+}
+@property --tw-mask-top {
+  syntax: "*";
+  inherits: false;
+  initial-value: linear-gradient(#fff, #fff);
+}
+@property --tw-mask-top-from-position {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --tw-mask-top-to-position {
+  syntax: "*";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-mask-top-from-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: black;
+}
+@property --tw-mask-top-to-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: transparent;
+}
+@property --tw-mask-bottom-from-position {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --tw-mask-bottom-to-position {
+  syntax: "*";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-mask-bottom-from-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: black;
+}
+@property --tw-mask-bottom-to-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: transparent;
 }
 @property --tw-font-weight {
   syntax: "*";
@@ -1849,6 +2166,30 @@ body {
       --tw-divide-x-reverse: 0;
       --tw-border-style: solid;
       --tw-divide-y-reverse: 0;
+      --tw-gradient-position: initial;
+      --tw-gradient-from: #0000;
+      --tw-gradient-via: #0000;
+      --tw-gradient-to: #0000;
+      --tw-gradient-stops: initial;
+      --tw-gradient-via-stops: initial;
+      --tw-gradient-from-position: 0%;
+      --tw-gradient-via-position: 50%;
+      --tw-gradient-to-position: 100%;
+      --tw-mask-linear: linear-gradient(#fff, #fff);
+      --tw-mask-radial: linear-gradient(#fff, #fff);
+      --tw-mask-conic: linear-gradient(#fff, #fff);
+      --tw-mask-left: linear-gradient(#fff, #fff);
+      --tw-mask-right: linear-gradient(#fff, #fff);
+      --tw-mask-bottom: linear-gradient(#fff, #fff);
+      --tw-mask-top: linear-gradient(#fff, #fff);
+      --tw-mask-top-from-position: 0%;
+      --tw-mask-top-to-position: 100%;
+      --tw-mask-top-from-color: black;
+      --tw-mask-top-to-color: transparent;
+      --tw-mask-bottom-from-position: 0%;
+      --tw-mask-bottom-to-position: 100%;
+      --tw-mask-bottom-from-color: black;
+      --tw-mask-bottom-to-color: transparent;
       --tw-font-weight: initial;
       --tw-ordinal: initial;
       --tw-slashed-zero: initial;
