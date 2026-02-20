@@ -1,3 +1,6 @@
+const { readFileSync, writeFileSync, existsSync } = require("fs");
+const { join } = require("path");
+
 const TYPE_CHART = {
   Normal: { weak: ["Fighting"], resist: [], immune: ["Ghost"] },
   Fire: {
@@ -120,7 +123,7 @@ function getWeaknesses(types) {
   return weaknesses;
 }
 
-const POKEDEX_FILE = "../../client/pokedex.json";
+const POKEDEX_FILE = join(__dirname, "../../client/pokedex.json");
 
 class PokedexUtils {
   pokedex = [];
@@ -141,7 +144,7 @@ class PokedexUtils {
       const data = readFileSync(POKEDEX_FILE, "utf-8");
       this.pokedex = JSON.parse(data);
       this.length = this.pokedex.length;
-    } catch (err) {
+    } catch {
       this.pokedex = [];
       this.length = 0;
     }
