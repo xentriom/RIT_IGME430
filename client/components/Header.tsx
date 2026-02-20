@@ -15,7 +15,7 @@ export default function Header() {
 
           <nav className="hidden sm:flex items-center gap-4" aria-label="Main">
             <a
-              href="/docs"
+              href="/"
               className="text-sm text-taupe-700 hover:text-taupe-900 no-underline"
             >
               Docs

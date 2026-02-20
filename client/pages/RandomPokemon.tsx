@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from "../utils/constants";
+import { getApiBase } from "../utils/constants";
 import Console from "../components/Console";
 import Example from "../components/Example";
 
@@ -68,7 +68,7 @@ const RANDOM_POKEMON_SCHEMA = [
 ] as const;
 
 export default function RandomPokemon() {
-  const ENDPOINT = `${getApiBaseUrl()}/randomPokemon`;
+  const ENDPOINT = `${getApiBase()}/randomPokemon`;
 
   return (
     <article className="max-w-none space-y-8">

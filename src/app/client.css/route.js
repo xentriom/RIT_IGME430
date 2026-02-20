@@ -1,10 +1,10 @@
 const { readFileSync } = require("fs");
 const { respond } = require("../../utils/index.js");
 
-const index = readFileSync(`${__dirname}/../../../hosted/docs.html`, "utf-8");
+const css = readFileSync(`${__dirname}/../../../hosted/client.css`, "utf-8");
 
 const GET = (req, res) => {
-  respond(req, res, 200, "text/html", index);
+  respond(req, res, 200, "text/css", css);
 };
 
 module.exports = {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CodeBlock from "./CodeBlock";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 const BODY_METHODS = ["POST", "PUT", "PATCH"];
 

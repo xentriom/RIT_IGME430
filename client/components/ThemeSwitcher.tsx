@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getTheme, setTheme, THEMES, type Theme } from "../utils/theme";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 export default function ThemeSwitcher() {
   const [theme, setThemeState] = useState<Theme>(getTheme);

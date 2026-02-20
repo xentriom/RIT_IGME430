@@ -1,25 +1,21 @@
 import MenuIcon from "./MenuIcon";
 import { Link } from "react-router";
-import { cn } from "../../lib/utils";
-import { INTRO_TABS, API_ENDPOINTS } from "../utils/constants";
+import { cn } from "../lib/utils";
+import { SIDEBAR, type Tab } from "../utils/constants";
 
-export type BreadcrumbItem = { label: string; path: string | null };
+type BreadcrumbItem = { label: string; path: string | null };
 
 function getBreadcrumbs(tab: string | null): BreadcrumbItem[] {
-  const items: BreadcrumbItem[] = [{ label: "Docs", path: null }];
+  const items: BreadcrumbItem[] = [{ label: "Home", path: "" }];
+  if (!tab) return items;
 
-  const intro = INTRO_TABS.find((t) => t.path === tab);
-  if (intro) {
-    items.push({ label: "Introduction", path: null });
-    items.push({ label: intro.label, path: intro.path });
-    return items;
-  }
-
-  const endpoint = API_ENDPOINTS.find((e) => e.path === tab);
-  if (endpoint) {
-    items.push({ label: "Endpoints", path: null });
-    items.push({ label: endpoint.label, path: endpoint.path });
-    return items;
+  for (const section of SIDEBAR) {
+    const found = (section.items as Tab[]).find((item) => item.path === tab);
+    if (found) {
+      items.push({ label: section.label, path: null });
+      items.push({ label: found.label, path: found.path });
+      return items;
+    }
   }
 
   return items;
@@ -66,7 +62,7 @@ export default function MobileHeader({
               {item.path !== null ? (
                 <Link
                   to={{
-                    pathname: "/docs",
+                    pathname: "/",
                     search: item.path ? `?tab=${item.path}` : "",
                   }}
                   className={cn(

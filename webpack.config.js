@@ -2,21 +2,18 @@ const { resolve } = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: {
-    home: "./client/home.tsx",
-    docs: "./client/docs.tsx",
-  },
+  entry: "./client/main.tsx",
   mode: "development",
   watchOptions: {
     aggregateTimeout: 200,
   },
   output: {
     path: resolve(__dirname, "hosted"),
-    filename: "bundles/[name].js",
+    filename: "client.js",
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "bundles/[name].css",
+      filename: "client.css",
     }),
   ],
   module: {

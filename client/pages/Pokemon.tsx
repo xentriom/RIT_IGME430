@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from "../utils/constants";
+import { getApiBase } from "../utils/constants";
 import Console from "../components/Console";
 import Example from "../components/Example";
 
@@ -89,7 +89,7 @@ const POST_BODY_SCHEMA = [
 ] as const;
 
 export default function Pokemon() {
-  const ENDPOINT = `${getApiBaseUrl()}/pokemon`;
+  const ENDPOINT = `${getApiBase()}/pokemon`;
 
   return (
     <article className="max-w-none space-y-8">

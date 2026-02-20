@@ -1,9 +1,8 @@
-import { getApiBaseUrl } from "../utils/constants";
+import { getApiBase } from "../utils/constants";
 import Console from "../components/Console";
 import Example from "../components/Example";
 
 const METHODS = ["GET", "HEAD"] as const;
-const DEFAULT_GET_QUERY = "?limit=5";
 
 const SCHEMA_ID = {
   field: "id",
@@ -68,15 +67,14 @@ const POKEDEX_SCHEMA = [
 ] as const;
 
 export default function Pokedex() {
-  const ENDPOINT = `${getApiBaseUrl()}/pokedex`;
+  const ENDPOINT = `${getApiBase()}/pokedex`;
 
   return (
     <article className="max-w-none space-y-8">
       <header>
         <h1 className="text-3xl font-bold mb-2">Pokedex</h1>
         <p className="text-taupe-600">
-          Returns the complete Pokédex - an array of every Pokémon in the
-          database.
+          Returns the complete Pokédex - an array of all 151 Pokémon.
         </p>
       </header>
 
@@ -92,39 +90,6 @@ export default function Pokedex() {
           <code className="block w-full rounded-md border border-taupe-300 bg-taupe-100 px-4 py-3 font-mono text-sm text-taupe-900 break-all">
             {ENDPOINT}
           </code>
-        </div>
-      </section>
-
-      <section className="space-y-4 border-t border-taupe-200">
-        <h2 className="text-xl font-semibold">Request Schema</h2>
-        <p className="text-taupe-600">Query parameters for GET / HEAD.</p>
-        <div className="overflow-hidden rounded-md border border-taupe-300">
-          <table className="min-w-full divide-y divide-taupe-200 text-sm">
-            <thead>
-              <tr className="bg-taupe-100">
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Field
-                </th>
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Type
-                </th>
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Description
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-taupe-200 bg-white">
-              <tr>
-                <td className="px-4 py-3 font-mono text-taupe-800">limit</td>
-                <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
-                  number?
-                </td>
-                <td className="px-4 py-3 text-taupe-600">
-                  Number of Pokémon to return (1-151, default 5)
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </section>
 
@@ -164,11 +129,7 @@ export default function Pokedex() {
 
       <section className="space-y-4 border-t border-taupe-200">
         <h2 className="text-xl font-semibold">Test Request</h2>
-        <Console
-          endpoint={ENDPOINT}
-          methods={METHODS}
-          defaultQuery={DEFAULT_GET_QUERY}
-        />
+        <Console endpoint={ENDPOINT} methods={METHODS} />
       </section>
 
       <section className="space-y-4 border-t border-taupe-200">
@@ -176,7 +137,7 @@ export default function Pokedex() {
         <div className="space-y-4">
           <Example
             method="GET"
-            url={`${ENDPOINT}?limit=3`}
+            url={ENDPOINT}
             response={`[
   {
     "id": 1,
@@ -190,7 +151,8 @@ export default function Pokedex() {
     "next_evolution": [{ "num": "002", "name": "Ivysaur" }]
   },
   { "id": 2, "num": "002", "name": "Ivysaur", "..." },
-  { "id": 3, "num": "003", "name": "Venusaur", "..." }
+  ...
+  { "id": 151, "num": "151", "name": "Mew", "..." }
 ]`}
           />
         </div>

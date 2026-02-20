@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from "../utils/constants";
+import { getApiBase } from "../utils/constants";
 import Console from "../components/Console";
 import Example from "../components/Example";
 
@@ -23,7 +23,7 @@ const TEAM_SCHEMA = [SCHEMA_UUID, SCHEMA_NAME, SCHEMA_POKEMONS] as const;
 const POST_BODY_SCHEMA = [SCHEMA_NAME, SCHEMA_POKEMONS] as const;
 
 export default function Team() {
-  const ENDPOINT = `${getApiBaseUrl()}/team`;
+  const ENDPOINT = `${getApiBase()}/team`;
 
   // Choose a random starter Pokémon ID
   const starterIds = [1, 4, 7];

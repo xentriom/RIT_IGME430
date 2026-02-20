@@ -123,7 +123,7 @@ function getWeaknesses(types) {
   return weaknesses;
 }
 
-const POKEDEX_FILE = join(__dirname, "../../client/pokedex.json");
+const POKEDEX_FILE = join(__dirname, "../data/pokedex.json");
 
 class PokedexUtils {
   pokedex = [];

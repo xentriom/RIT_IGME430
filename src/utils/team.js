@@ -2,7 +2,7 @@ const { readFileSync, writeFileSync, existsSync } = require("fs");
 const { join } = require("path");
 const { randomUUID } = require("crypto");
 
-const TEAM_FILE = join(__dirname, "../../client/team.json");
+const TEAM_FILE = join(__dirname, "../data/team.json");
 
 class TeamUtils {
   team = [];

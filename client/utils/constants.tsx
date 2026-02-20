@@ -1,0 +1,111 @@
+import type { ReactNode } from "react";
+import Overview from "../pages/Overview";
+import GettingStarted from "../pages/GettingStarted";
+import Pokedex from "../pages/Pokedex";
+import Pokemon from "../pages/Pokemon";
+import RandomPokemon from "../pages/RandomPokemon";
+import Evolution from "../pages/Evolution";
+import Team from "../pages/Team";
+import ExplorePokemon from "../pages/explore/Pokemon";
+
+export type Tab = {
+  path: string;
+  label: string;
+  component: ReactNode;
+};
+
+export type Link = {
+  path: string;
+  label: string;
+  url: string;
+  icon?: ReactNode;
+};
+
+export const INTRO_TABS: Tab[] = [
+  { path: "overview", label: "Overview", component: <Overview /> },
+  {
+    path: "getting-started",
+    label: "Getting started",
+    component: <GettingStarted />,
+  },
+];
+
+export const VIEW_TABS: Tab[] = [
+  {
+    path: "view-pokedex",
+    label: "Pokedex",
+    component: <ExplorePokemon />,
+  },
+  { path: "view-team", label: "Teams", component: <div>View the Teams</div> },
+];
+
+export const CREATOR_TABS: Tab[] = [
+  {
+    path: "create-pokemon",
+    label: "Pokemon",
+    component: <div>Create a new Pokemon</div>,
+  },
+  {
+    path: "create-team",
+    label: "Team",
+    component: <div>Create a new Team</div>,
+  },
+];
+
+export const API_ENDPOINTS: Tab[] = [
+  { path: "pokedex", label: "Pokedex", component: <Pokedex /> },
+  { path: "pokemon", label: "Pokemon", component: <Pokemon /> },
+  {
+    path: "randomPokemon",
+    label: "Random Pokemon",
+    component: <RandomPokemon />,
+  },
+  { path: "evolution", label: "Evolution", component: <Evolution /> },
+  { path: "team", label: "Team", component: <Team /> },
+];
+
+export const LINKS: Link[] = [
+  {
+    path: "github",
+    label: "GitHub Repository",
+    url: "https://github.com/xentriom/RIT_IGME430/tree/Project1",
+  },
+];
+
+export type SidebarItem = {
+  label: string;
+  items: Tab[] | Link[];
+};
+
+export const SIDEBAR: SidebarItem[] = [
+  {
+    label: "Introduction",
+    items: INTRO_TABS,
+  },
+  {
+    label: "Explore",
+    items: VIEW_TABS,
+  },
+  {
+    label: "Build Your Own",
+    items: CREATOR_TABS,
+  },
+  {
+    label: "Endpoints",
+    items: API_ENDPOINTS,
+  },
+  {
+    label: "Links",
+    items: LINKS,
+  },
+];
+
+export const PAGES: Tab[] = [
+  ...INTRO_TABS,
+  ...VIEW_TABS,
+  ...CREATOR_TABS,
+  ...API_ENDPOINTS,
+];
+
+export const getApiBase = () =>
+  typeof window !== "undefined" ? `${window.location.origin}/api` : "/api";
