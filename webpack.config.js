@@ -24,6 +24,7 @@ module.exports = {
         use: "babel-loader",
       },
       {
+        // https://github.com/tailwindlabs/tailwindcss/pull/19610
         test: /.css$/i,
         use: [
           MiniCssExtractPlugin.loader,

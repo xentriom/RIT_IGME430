@@ -132,8 +132,6 @@ code.hljs {
     --color-taupe-900: oklch(21.4% 0.009 43.1);
     --color-white: #fff;
     --spacing: 0.25rem;
-    --container-4xl: 56rem;
-    --container-6xl: 72rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
     --text-sm: 0.875rem;
@@ -1595,9 +1593,9 @@ code.hljs {
       translate: var(--tw-translate-x) var(--tw-translate-y);
     }
   }
-  .md\:grid-cols-5 {
+  .md\:grid-cols-3 {
     @media (width >= 48rem) {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .md\:grid-cols-\[auto_1fr\] {
@@ -1640,9 +1638,19 @@ code.hljs {
       padding-bottom: calc(var(--spacing) * 40);
     }
   }
-  .lg\:grid-cols-6 {
+  .lg\:grid-cols-4 {
     @media (width >= 64rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .xl\:grid-cols-6 {
+    @media (width >= 80rem) {
       grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+  .\32 xl\:grid-cols-8 {
+    @media (width >= 96rem) {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
     }
   }
 }

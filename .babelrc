@@ -4,5 +4,6 @@
     // Automatically import React
     ["@babel/preset-react", { "runtime": "automatic" }]
   ],
+  // https://react.dev/learn/react-compiler
   "plugins": ["babel-plugin-react-compiler"]
 }

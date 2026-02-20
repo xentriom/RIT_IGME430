@@ -84,13 +84,13 @@ export default function Sidebar({
           <div className="flex items-center gap-2 border-b border-taupe-300 pb-4">
             <img
               src="/pokeball.png"
-              alt="Pdexiom"
+              alt="P'dexiom"
               className="size-10 rounded-md"
             />
             <div className="flex flex-col">
-              <h1 className="text-2xl font-bold">Pdexiom</h1>
+              <h1 className="text-2xl font-bold">P'dexiom</h1>
               <span className="text-sm text-taupe-500">
-                The ultimate API for Pokemon
+                The ultimate API for Pokémon
               </span>
             </div>
           </div>
