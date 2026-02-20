@@ -6,7 +6,8 @@ import Pokemon from "../pages/Pokemon";
 import RandomPokemon from "../pages/RandomPokemon";
 import Evolution from "../pages/Evolution";
 import Team from "../pages/Team";
-import ExplorePokemon from "../pages/explore/Pokemon";
+import ExplorePokemon from "../pages/explore/Pokedex";
+import ExploreTeam from "../pages/explore/Team";
 
 export type Tab = {
   path: string;
@@ -36,7 +37,7 @@ export const VIEW_TABS: Tab[] = [
     label: "Pokedex",
     component: <ExplorePokemon />,
   },
-  { path: "view-team", label: "Teams", component: <div>View the Teams</div> },
+  { path: "view-team", label: "Teams", component: <ExploreTeam /> },
 ];
 
 export const CREATOR_TABS: Tab[] = [

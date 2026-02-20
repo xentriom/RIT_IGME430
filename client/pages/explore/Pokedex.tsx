@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Pokemon } from "../../lib/types";
 
-export default function App() {
+export default function Pokedex() {
   const [pokedex, setPokedex] = useState<Pokemon[]>([]);
   const [filtered, setFiltered] = useState<Pokemon[]>([]);
 
@@ -18,7 +18,10 @@ export default function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-2">Pokedex</h1>
+      <header>
+        <h1 className="text-3xl font-bold">Pokedex</h1>
+      </header>
+
       <div className="py-8">
         <input
           className="w-full p-2 border border-taupe-300 rounded-md shadow-sm focus:ring-2 focus:ring-taupe-500 focus:border-taupe-500"
