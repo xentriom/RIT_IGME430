@@ -101,6 +101,8 @@ const TYPE_CHART = {
 const ALL_TYPES = Object.keys(TYPE_CHART);
 
 function getWeaknesses(types) {
+  // Inspired by:
+  // https://github.com/yashrajbharti/Pokemon-Type-Weakness-Calculator/blob/main/script.js
   const typeList = Array.isArray(types) ? types : [types];
   const weaknesses = [];
 
@@ -118,12 +120,35 @@ function getWeaknesses(types) {
   return weaknesses;
 }
 
+const POKEDEX_FILE = "../../client/pokedex.json";
+
 class PokedexUtils {
   pokedex = [];
   length = 0;
 
   constructor() {
-    this.pokedex = require("../../client/pokedex.json");
+    this._load();
+  }
+
+  _load() {
+    if (!existsSync(POKEDEX_FILE)) {
+      this.pokedex = [];
+      this.length = 0;
+      return;
+    }
+
+    try {
+      const data = readFileSync(POKEDEX_FILE, "utf-8");
+      this.pokedex = JSON.parse(data);
+      this.length = this.pokedex.length;
+    } catch (err) {
+      this.pokedex = [];
+      this.length = 0;
+    }
+  }
+
+  _save() {
+    writeFileSync(POKEDEX_FILE, JSON.stringify(this.pokedex, null, 2), "utf-8");
     this.length = this.pokedex.length;
   }
 
@@ -182,6 +207,7 @@ class PokedexUtils {
 
     // Add the new pokemon to the pokedex
     this.pokedex.push(newPokemon);
+    this._save();
     return newPokemon;
   }
 }
