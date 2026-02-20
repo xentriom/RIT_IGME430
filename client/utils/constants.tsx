@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import Overview from "../pages/Overview";
 import GettingStarted from "../pages/GettingStarted";
-import Pokedex from "../pages/Pokedex";
-import Pokemon from "../pages/Pokemon";
-import RandomPokemon from "../pages/RandomPokemon";
-import Evolution from "../pages/Evolution";
-import Team from "../pages/Team";
-import ExplorePokemon from "../pages/explore/Pokedex";
+import Pokedex from "../pages/endpoint/Pokedex";
+import Pokemon from "../pages/endpoint/Pokemon";
+import RandomPokemon from "../pages/endpoint/RandomPokemon";
+import Evolution from "../pages/endpoint/Evolution";
+import Team from "../pages/endpoint/Team";
+import ExplorePokedex from "../pages/explore/Pokedex";
 import ExploreTeam from "../pages/explore/Team";
 
 export type Tab = {
@@ -35,7 +35,7 @@ export const VIEW_TABS: Tab[] = [
   {
     path: "view-pokedex",
     label: "Pokedex",
-    component: <ExplorePokemon />,
+    component: <ExplorePokedex />,
   },
   { path: "view-team", label: "Teams", component: <ExploreTeam /> },
 ];

@@ -1,45 +1,103 @@
-import { getApiBase } from "../utils/constants";
-import Console from "../components/Console";
-import Example from "../components/Example";
+import { getApiBase } from "../../utils/constants";
+import Console from "../../components/Console";
+import Example from "../../components/Example";
 
 const METHODS = ["GET", "HEAD", "POST"] as const;
-const DEFAULT_GET_QUERY = "";
+const DEFAULT_GET_QUERY = "?id=1";
 const DEFAULT_POST_BODY = `{
-  "name": "Team Name",
-  "pokemons": [
-    { "id": {{randomPokemonId}}, "position": 1 }
-  ]
+  "name": "New Pokemon",
+  "type": ["Fire", "Flying"],
+  "height": "1.2 m",
+  "weight": "25.0 kg"
 }`;
 
-const SCHEMA_UUID = { field: "id", type: "string", description: "Unique UUID" };
-const SCHEMA_NAME = { field: "name", type: "string", description: "Team name" };
-const SCHEMA_POKEMONS = {
-  field: "pokemons",
-  type: "{ id: number, position: number }[]",
-  description: "1-6 pokémon",
+const SCHEMA_ID = {
+  field: "id",
+  type: "number",
+  description: "Unique numeric identifier",
 };
 
-const TEAM_SCHEMA = [SCHEMA_UUID, SCHEMA_NAME, SCHEMA_POKEMONS] as const;
-const POST_BODY_SCHEMA = [SCHEMA_NAME, SCHEMA_POKEMONS] as const;
+const SCHEMA_NUM = {
+  field: "num",
+  type: "string",
+  description: 'Pokédex number (e.g. "001")',
+};
 
-export default function Team() {
-  const ENDPOINT = `${getApiBase()}/team`;
+const SCHEMA_NAME = {
+  field: "name",
+  type: "string",
+  description: "Pokémon name",
+};
 
-  // Choose a random starter Pokémon ID
-  const starterIds = [1, 4, 7];
-  const randomId = starterIds[Math.floor(Math.random() * starterIds.length)];
-  const POST_BODY = DEFAULT_POST_BODY.replace(
-    "{{randomPokemonId}}",
-    randomId.toString(),
-  );
+const SCHEMA_IMG = { field: "img", type: "string", description: "Image URL" };
+
+const SCHEMA_TYPE = {
+  field: "type",
+  type: "string[]",
+  description: "Element type(s) (max 2)",
+};
+
+const SCHEMA_HEIGHT = {
+  field: "height",
+  type: "string",
+  description: 'Height with unit (e.g. "0.71 m")',
+};
+
+const SCHEMA_WEIGHT = {
+  field: "weight",
+  type: "string",
+  description: 'Weight with unit (e.g. "6.9 kg")',
+};
+
+const SCHEMA_WEAKNESSES = {
+  field: "weaknesses",
+  type: "string[]",
+  description: "Weakness types",
+};
+
+const SCHEMA_NEXT_EVOLUTION = {
+  field: "next_evolution",
+  type: "object[]?",
+  description: "Evolutions { num, name }",
+};
+
+const POKEMON_RESPONSE_SCHEMA = [
+  SCHEMA_ID,
+  SCHEMA_NUM,
+  SCHEMA_NAME,
+  SCHEMA_IMG,
+  SCHEMA_TYPE,
+  SCHEMA_HEIGHT,
+  SCHEMA_WEIGHT,
+  SCHEMA_WEAKNESSES,
+  SCHEMA_NEXT_EVOLUTION,
+] as const;
+
+const POST_BODY_SCHEMA = [
+  { field: "name", type: "string", description: "Pokémon name" },
+  { field: "type", type: "string[]", description: "Element type(s) (max 2)" },
+  {
+    field: "height",
+    type: "string",
+    description: 'Height with unit (e.g. "0.71 m")',
+  },
+  {
+    field: "weight",
+    type: "string",
+    description: 'Weight with unit (e.g. "6.9 kg")',
+  },
+] as const;
+
+export default function Pokemon() {
+  const ENDPOINT = `${getApiBase()}/pokemon`;
 
   return (
     <article className="max-w-none space-y-8">
       <header>
-        <h1 className="text-3xl font-bold mb-2">Team</h1>
+        <h1 className="text-3xl font-bold mb-2">Pokemon</h1>
         <p className="text-taupe-600">
-          Manage Pokémon teams. GET returns all teams or a team by ID. POST
-          creates a new team.
+          Fetch a single Pokémon by id, num, or name. POST creates a new Pokémon
+          in the database.
         </p>
       </header>
 
@@ -66,7 +124,7 @@ export default function Team() {
 
         <div className="space-y-3">
           <h3 className="text-base font-medium text-taupe-800">
-            GET / HEAD - Query parameters
+            GET / HEAD - Query parameters (optional)
           </h3>
           <div className="overflow-hidden rounded-md border border-taupe-300">
             <table className="min-w-full divide-y divide-taupe-200 text-sm">
@@ -87,10 +145,28 @@ export default function Team() {
                 <tr>
                   <td className="px-4 py-3 font-mono text-taupe-800">id</td>
                   <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
+                    number?
+                  </td>
+                  <td className="px-4 py-3 text-taupe-600">
+                    Pokémon ID (e.g. 1)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 font-mono text-taupe-800">num</td>
+                  <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
                     string?
                   </td>
                   <td className="px-4 py-3 text-taupe-600">
-                    Team UUID. Omit for all teams
+                    Pokédex number (e.g. &quot;001&quot;)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 font-mono text-taupe-800">name</td>
+                  <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
+                    string?
+                  </td>
+                  <td className="px-4 py-3 text-taupe-600">
+                    Pokémon name (e.g. &quot;Bulbasaur&quot;)
                   </td>
                 </tr>
               </tbody>
@@ -153,7 +229,7 @@ export default function Team() {
               </tr>
             </thead>
             <tbody className="divide-y divide-taupe-200 bg-white">
-              {TEAM_SCHEMA.map(({ field, type, description }) => (
+              {POKEMON_RESPONSE_SCHEMA.map(({ field, type, description }) => (
                 <tr key={field}>
                   <td className="px-4 py-3 font-mono text-taupe-800">
                     {field}
@@ -175,7 +251,7 @@ export default function Team() {
           endpoint={ENDPOINT}
           methods={METHODS}
           defaultQuery={DEFAULT_GET_QUERY}
-          defaultBody={POST_BODY}
+          defaultBody={DEFAULT_POST_BODY}
         />
       </section>
 
@@ -184,51 +260,50 @@ export default function Team() {
         <div className="space-y-4">
           <Example
             method="GET"
-            url={ENDPOINT}
-            response={`[
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440000",
-    "name": "Kanto Starters",
-    "pokemons": [
-      { "id": 1, "position": 1 },
-      { "id": 4, "position": 2 },
-      { "id": 7, "position": 3 }
-    ]
-  }
-]`}
+            url={`${ENDPOINT}?id=1`}
+            response={`{
+  "id": 1,
+  "num": "001",
+  "name": "Bulbasaur",
+  "img": "http://www.serebii.net/pokemongo/pokemon/001.png",
+  "type": ["Grass", "Poison"],
+  "height": "0.71 m",
+  "weight": "6.9 kg",
+  "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+  "next_evolution": [{ "num": "002", "name": "Ivysaur" }]
+}`}
           />
           <Example
             method="GET"
-            url={`${ENDPOINT}?id=550e8400-e29b-41d4-a716-446655440000`}
+            url={`${ENDPOINT}?name=Charizard`}
             response={`{
-  "id": "550e8400-e29b-41d4-a716-446655440000",
-  "name": "Kanto Starters",
-  "pokemons": [
-    { "id": 1, "position": 1 },
-    { "id": 4, "position": 2 },
-    { "id": 7, "position": 3 }
-  ]
+  "id": 6,
+  "num": "006",
+  "name": "Charizard",
+  "img": "http://www.serebii.net/pokemongo/pokemon/006.png",
+  "type": ["Fire", "Flying"],
+  "height": "1.70 m",
+  "weight": "90.5 kg",
+  "weaknesses": ["Water", "Electric", "Ice", "Rock"]
 }`}
           />
           <Example
             method="POST"
             url={ENDPOINT}
             body={`{
-  "name": "Dream Team",
-  "pokemons": [
-    { "id": 25, "position": 1 },
-    { "id": 150, "position": 2 },
-    { "id": 143, "position": 3 }
-  ]
+  "name": "Victini",
+  "type": ["Psychic", "Fire"],
+  "height": "0.4 m",
+  "weight": "4.0 kg"
 }`}
             response={`{
-  "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
-  "name": "Dream Team",
-  "pokemons": [
-    { "id": 25, "position": 1 },
-    { "id": 150, "position": 2 },
-    { "id": 143, "position": 3 }
-  ]
+  "id": 152,
+  "num": "152",
+  "name": "Victini",
+  "type": ["Psychic", "Fire"],
+  "height": "0.4 m",
+  "weight": "4.0 kg",
+  "weaknesses": ["Ground", "Rock", "Ghost", "Water", "Dark"]
 }`}
             responseStatus={201}
           />

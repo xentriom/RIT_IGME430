@@ -1,9 +1,8 @@
-import { getApiBase } from "../utils/constants";
-import Console from "../components/Console";
-import Example from "../components/Example";
+import { getApiBase } from "../../utils/constants";
+import Console from "../../components/Console";
+import Example from "../../components/Example";
 
 const METHODS = ["GET", "HEAD"] as const;
-const DEFAULT_GET_QUERY = "?limit=3";
 
 const SCHEMA_ID = {
   field: "id",
@@ -55,7 +54,7 @@ const SCHEMA_NEXT_EVOLUTION = {
   description: "Evolutions { num, name }",
 };
 
-const RANDOM_POKEMON_SCHEMA = [
+const POKEDEX_SCHEMA = [
   SCHEMA_ID,
   SCHEMA_NUM,
   SCHEMA_NAME,
@@ -67,16 +66,15 @@ const RANDOM_POKEMON_SCHEMA = [
   SCHEMA_NEXT_EVOLUTION,
 ] as const;
 
-export default function RandomPokemon() {
-  const ENDPOINT = `${getApiBase()}/randomPokemon`;
+export default function Pokedex() {
+  const ENDPOINT = `${getApiBase()}/pokedex`;
 
   return (
     <article className="max-w-none space-y-8">
       <header>
-        <h1 className="text-3xl font-bold mb-2">Random Pokemon</h1>
+        <h1 className="text-3xl font-bold mb-2">Pokedex</h1>
         <p className="text-taupe-600">
-          Returns one or more random Pokémon from the Pokédex. Useful for
-          discovery or random team-building.
+          Returns the complete Pokédex - an array of all 151 Pokémon.
         </p>
       </header>
 
@@ -96,43 +94,7 @@ export default function RandomPokemon() {
       </section>
 
       <section className="space-y-4 border-t border-taupe-200">
-        <h2 className="text-xl font-semibold">Request Schema</h2>
-        <p className="text-taupe-600">Query parameters for GET / HEAD.</p>
-        <div className="overflow-hidden rounded-md border border-taupe-300">
-          <table className="min-w-full divide-y divide-taupe-200 text-sm">
-            <thead>
-              <tr className="bg-taupe-100">
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Field
-                </th>
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Type
-                </th>
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Description
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-taupe-200 bg-white">
-              <tr>
-                <td className="px-4 py-3 font-mono text-taupe-800">limit</td>
-                <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
-                  number?
-                </td>
-                <td className="px-4 py-3 text-taupe-600">
-                  Number of random Pokémon to return (1-151, default 1)
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="space-y-4 border-t border-taupe-200">
         <h2 className="text-xl font-semibold">Response Schema</h2>
-        <p className="text-taupe-600">
-          Returns an array of Pokémon objects. Each object has:
-        </p>
         <div className="overflow-hidden rounded-md border border-taupe-300">
           <table className="min-w-full divide-y divide-taupe-200 text-sm">
             <thead>
@@ -149,7 +111,7 @@ export default function RandomPokemon() {
               </tr>
             </thead>
             <tbody className="divide-y divide-taupe-200 bg-white">
-              {RANDOM_POKEMON_SCHEMA.map(({ field, type, description }) => (
+              {POKEDEX_SCHEMA.map(({ field, type, description }) => (
                 <tr key={field}>
                   <td className="px-4 py-3 font-mono text-taupe-800">
                     {field}
@@ -167,11 +129,7 @@ export default function RandomPokemon() {
 
       <section className="space-y-4 border-t border-taupe-200">
         <h2 className="text-xl font-semibold">Test Request</h2>
-        <Console
-          endpoint={ENDPOINT}
-          methods={METHODS}
-          defaultQuery={DEFAULT_GET_QUERY}
-        />
+        <Console endpoint={ENDPOINT} methods={METHODS} />
       </section>
 
       <section className="space-y-4 border-t border-taupe-200">
@@ -179,28 +137,22 @@ export default function RandomPokemon() {
         <div className="space-y-4">
           <Example
             method="GET"
-            url={`${ENDPOINT}?limit=1`}
+            url={ENDPOINT}
             response={`[
   {
-    "id": 42,
-    "num": "042",
-    "name": "Golbat",
-    "img": "http://www.serebii.net/pokemongo/pokemon/042.png",
-    "type": ["Poison", "Flying"],
-    "height": "1.60 m",
-    "weight": "55.0 kg",
-    "weaknesses": ["Electric", "Ice", "Psychic", "Rock"],
-    "next_evolution": [{ "num": "169", "name": "Crobat" }]
-  }
-]`}
-          />
-          <Example
-            method="GET"
-            url={`${ENDPOINT}?limit=3`}
-            response={`[
-  { "id": 12, "num": "012", "name": "Butterfree", "..." },
-  { "id": 87, "num": "087", "name": "Dewgong", "..." },
-  { "id": 131, "num": "131", "name": "Lapras", "..." }
+    "id": 1,
+    "num": "001",
+    "name": "Bulbasaur",
+    "img": "http://www.serebii.net/pokemongo/pokemon/001.png",
+    "type": ["Grass", "Poison"],
+    "height": "0.71 m",
+    "weight": "6.9 kg",
+    "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "next_evolution": [{ "num": "002", "name": "Ivysaur" }]
+  },
+  { "id": 2, "num": "002", "name": "Ivysaur", "..." },
+  ...
+  { "id": 151, "num": "151", "name": "Mew", "..." }
 ]`}
           />
         </div>
