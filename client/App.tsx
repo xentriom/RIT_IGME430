@@ -7,24 +7,24 @@ import { PAGES } from "./utils/constants";
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchParams] = useSearchParams();
-  const tab = searchParams.get("tab") || "overview";
+  const page = searchParams.get("page") || "overview";
 
   return (
     <div className="grid grid-rows-[auto_auto_1fr] h-dvh bg-taupe-200 text-taupe-900 overflow-hidden">
       <MobileHeader
-        tab={tab}
+        tab={page}
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] md:grid-rows-1 overflow-hidden min-h-0 h-full md:h-dvh">
-        <Sidebar tab={tab} sidebarOpen={sidebarOpen} />
+        <Sidebar tab={page} sidebarOpen={sidebarOpen} />
         <div className="overflow-y-auto h-full">
           <main className="px-6 pt-8 pb-20 md:px-12 md:pt-16 md:pb-40">
             {PAGES.map((p) => (
               <Activity
                 key={p.path}
-                mode={tab === p.path ? "visible" : "hidden"}
+                mode={page === p.path ? "visible" : "hidden"}
               >
                 {p.component}
               </Activity>

@@ -48,6 +48,7 @@ export default function Pokedex() {
             <img
               src={p.img}
               alt={p.name}
+              title={p.name}
               className="aspect-square w-full h-auto object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
             />
             <div className="text-center py-2">

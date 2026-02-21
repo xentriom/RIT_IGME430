@@ -454,9 +454,6 @@ code.hljs {
   .z-100 {
     z-index: 100;
   }
-  .row-span-1 {
-    grid-row: span 1 / span 1;
-  }
   .\!container {
     width: 100% !important;
     @media (width >= 40rem) {
@@ -498,6 +495,9 @@ code.hljs {
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
   }
   .-ml-0\.5 {
     margin-left: calc(var(--spacing) * -0.5);
@@ -585,9 +585,6 @@ code.hljs {
   .h-10 {
     height: calc(var(--spacing) * 10);
   }
-  .h-12 {
-    height: calc(var(--spacing) * 12);
-  }
   .h-auto {
     height: auto;
   }
@@ -672,6 +669,9 @@ code.hljs {
   }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
   .grid-rows-\[auto_auto_1fr\] {
     grid-template-rows: auto auto 1fr;
@@ -954,6 +954,20 @@ code.hljs {
   .bg-taupe-200 {
     background-color: var(--color-taupe-200);
   }
+  .bg-taupe-200\/50 {
+    background-color: color-mix(
+      in srgb,
+      oklch(92.2% 0.005 34.3) 50%,
+      transparent
+    );
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(
+        in oklab,
+        var(--color-taupe-200) 50%,
+        transparent
+      );
+    }
+  }
   .bg-taupe-200\/70 {
     background-color: color-mix(
       in srgb,
@@ -1111,6 +1125,9 @@ code.hljs {
   }
   .text-slate-800 {
     color: var(--color-slate-800);
+  }
+  .text-taupe-300 {
+    color: var(--color-taupe-300);
   }
   .text-taupe-400 {
     color: var(--color-taupe-400);
@@ -1555,11 +1572,6 @@ code.hljs {
       --tw-ring-inset: inset;
     }
   }
-  .sm\:flex {
-    @media (width >= 40rem) {
-      display: flex;
-    }
-  }
   .sm\:hidden {
     @media (width >= 40rem) {
       display: none;
@@ -1621,11 +1633,6 @@ code.hljs {
       align-items: center;
     }
   }
-  .md\:px-8 {
-    @media (width >= 48rem) {
-      padding-inline: calc(var(--spacing) * 8);
-    }
-  }
   .md\:px-12 {
     @media (width >= 48rem) {
       padding-inline: calc(var(--spacing) * 12);
@@ -1641,9 +1648,19 @@ code.hljs {
       padding-bottom: calc(var(--spacing) * 40);
     }
   }
+  .lg\:grid-cols-2 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
   .lg\:grid-cols-4 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .xl\:grid-cols-3 {
+    @media (width >= 80rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .xl\:grid-cols-6 {

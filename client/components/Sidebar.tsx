@@ -33,7 +33,7 @@ function NavItem({ item, tab }: { item: Tab | LinkType; tab: string | null }) {
   return (
     <li className="border-l-2 border-taupe-300">
       <Link
-        to={{ pathname: "/", search: `?tab=${item.path}` }}
+        to={{ pathname: "/", search: `?page=${item.path}` }}
         className={cn(baseStyles, isActive ? activeStyles : inactiveStyles)}
       >
         {item.label}

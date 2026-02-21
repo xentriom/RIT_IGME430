@@ -63,7 +63,7 @@ export default function MobileHeader({
                 <Link
                   to={{
                     pathname: "/",
-                    search: item.path ? `?tab=${item.path}` : "",
+                    search: item.path ? `?page=${item.path}` : "",
                   }}
                   className={cn(
                     "shrink-0 no-underline",
