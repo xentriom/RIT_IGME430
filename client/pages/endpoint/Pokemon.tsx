@@ -57,7 +57,7 @@ const SCHEMA_WEAKNESSES = {
 
 const SCHEMA_NEXT_EVOLUTION = {
   field: "next_evolution",
-  type: "object[]?",
+  type: "object[] | null",
   description: "Evolutions { num, name }",
 };
 
@@ -121,93 +121,85 @@ export default function Pokemon() {
 
       <section className="space-y-4 border-t border-taupe-200">
         <h2 className="text-xl font-semibold">Request Schema</h2>
-
-        <div className="space-y-3">
-          <h3 className="text-base font-medium text-taupe-800">
-            GET / HEAD - Query parameters (optional)
-          </h3>
-          <div className="overflow-hidden rounded-md border border-taupe-300">
-            <table className="min-w-full divide-y divide-taupe-200 text-sm">
-              <thead>
-                <tr className="bg-taupe-100">
-                  <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                    Field
-                  </th>
-                  <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                    Description
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-taupe-200 bg-taupe-50">
-                <tr>
-                  <td className="px-4 py-3 font-mono text-taupe-800">id</td>
-                  <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
-                    number?
-                  </td>
-                  <td className="px-4 py-3 text-taupe-600">
-                    Pokémon ID (e.g. 1)
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 font-mono text-taupe-800">num</td>
-                  <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
-                    string?
-                  </td>
-                  <td className="px-4 py-3 text-taupe-600">
-                    Pokédex number (e.g. &quot;001&quot;)
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 font-mono text-taupe-800">name</td>
-                  <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
-                    string?
-                  </td>
-                  <td className="px-4 py-3 text-taupe-600">
-                    Pokémon name (e.g. &quot;Bulbasaur&quot;)
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <p className="text-taupe-600">
+          GET / HEAD query parameters (optional).
+        </p>
+        <div className="overflow-hidden rounded-md border border-taupe-300">
+          <table className="min-w-full divide-y divide-taupe-200 text-sm">
+            <thead>
+              <tr className="bg-taupe-100">
+                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
+                  Field
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
+                  Type
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-taupe-200 bg-taupe-50">
+              <tr>
+                <td className="px-4 py-3 font-mono text-taupe-800">id</td>
+                <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
+                  number?
+                </td>
+                <td className="px-4 py-3 text-taupe-600">
+                  Pokémon ID (e.g. 1)
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-taupe-800">num</td>
+                <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
+                  string?
+                </td>
+                <td className="px-4 py-3 text-taupe-600">
+                  Pokédex number (e.g. &quot;001&quot;)
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-taupe-800">name</td>
+                <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
+                  string?
+                </td>
+                <td className="px-4 py-3 text-taupe-600">
+                  Pokémon name (e.g. &quot;Bulbasaur&quot;)
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <div className="space-y-3">
-          <h3 className="text-base font-medium text-taupe-800">
-            POST - Request body (JSON)
-          </h3>
-          <div className="overflow-hidden rounded-md border border-taupe-300">
-            <table className="min-w-full divide-y divide-taupe-200 text-sm">
-              <thead>
-                <tr className="bg-taupe-100">
-                  <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                    Field
-                  </th>
-                  <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                    Description
-                  </th>
+        <p className="text-taupe-600">POST request body (JSON).</p>
+        <div className="overflow-hidden rounded-md border border-taupe-300">
+          <table className="min-w-full divide-y divide-taupe-200 text-sm">
+            <thead>
+              <tr className="bg-taupe-100">
+                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
+                  Field
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
+                  Type
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-taupe-200 bg-taupe-50">
+              {POST_BODY_SCHEMA.map(({ field, type, description }) => (
+                <tr key={field}>
+                  <td className="px-4 py-3 font-mono text-taupe-800">
+                    {field}
+                  </td>
+                  <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
+                    {type}
+                  </td>
+                  <td className="px-4 py-3 text-taupe-600">{description}</td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-taupe-200 bg-taupe-50">
-                {POST_BODY_SCHEMA.map(({ field, type, description }) => (
-                  <tr key={field}>
-                    <td className="px-4 py-3 font-mono text-taupe-800">
-                      {field}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
-                      {type}
-                    </td>
-                    <td className="px-4 py-3 text-taupe-600">{description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 

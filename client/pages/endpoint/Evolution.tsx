@@ -2,44 +2,36 @@ import { getApiBase } from "../../lib/constants";
 import Console from "../../components/Console";
 import Example from "../../components/Example";
 
-const METHODS = ["GET", "HEAD", "POST"] as const;
-const DEFAULT_GET_QUERY = "";
-const DEFAULT_POST_BODY = `{
-  "name": "Team Name",
-  "pokemons": [
-    { "id": {{randomPokemonId}}, "position": 1 }
-  ]
-}`;
+const METHODS = ["GET", "HEAD"] as const;
+const DEFAULT_GET_QUERY = "?id=1";
 
-const SCHEMA_UUID = { field: "id", type: "string", description: "Unique UUID" };
-const SCHEMA_NAME = { field: "name", type: "string", description: "Team name" };
-const SCHEMA_POKEMONS = {
-  field: "pokemons",
-  type: "{ id: number, position: number }[]",
-  description: "1-6 pokémon",
+const SCHEMA_PREVIOUS_EVOLUTION = {
+  field: "previous_evolution",
+  type: "object[]",
+  description: "Previous evolutions { num, name }",
 };
 
-const TEAM_SCHEMA = [SCHEMA_UUID, SCHEMA_NAME, SCHEMA_POKEMONS] as const;
-const POST_BODY_SCHEMA = [SCHEMA_NAME, SCHEMA_POKEMONS] as const;
+const SCHEMA_NEXT_EVOLUTION = {
+  field: "next_evolution",
+  type: "object[]",
+  description: "Next evolutions { num, name }",
+};
 
-export default function Team() {
-  const ENDPOINT = `${getApiBase()}/team`;
+const EVOLUTION_RESPONSE_SCHEMA = [
+  SCHEMA_PREVIOUS_EVOLUTION,
+  SCHEMA_NEXT_EVOLUTION,
+] as const;
 
-  // Choose a random starter Pokémon ID
-  const starterIds = [1, 4, 7];
-  const randomId = starterIds[Math.floor(Math.random() * starterIds.length)];
-  const POST_BODY = DEFAULT_POST_BODY.replace(
-    "{{randomPokemonId}}",
-    randomId.toString(),
-  );
+export default function Evolution() {
+  const ENDPOINT = `${getApiBase()}/evolution`;
 
   return (
     <article className="max-w-none space-y-8">
       <header>
-        <h1 className="text-3xl font-bold mb-2">Team</h1>
+        <h1 className="text-3xl font-bold mb-2">Evolution</h1>
         <p className="text-taupe-600">
-          Manage Pokémon teams. GET returns all teams or a team by ID. POST
-          creates a new team.
+          Returns the complete evolution chain for a Pokémon, including both
+          previous and next evolutions.
         </p>
       </header>
 
@@ -52,9 +44,6 @@ export default function Team() {
           <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-800">
             HEAD
           </span>
-          <span className="rounded-md bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">
-            POST
-          </span>
           <code className="block w-full rounded-md border border-taupe-300 bg-taupe-100 px-4 py-3 font-mono text-sm text-taupe-900 break-all">
             {ENDPOINT}
           </code>
@@ -63,7 +52,9 @@ export default function Team() {
 
       <section className="space-y-4 border-t border-taupe-200">
         <h2 className="text-xl font-semibold">Request Schema</h2>
-        <p className="text-taupe-600">GET / HEAD query parameters.</p>
+        <p className="text-taupe-600">
+          Query parameters (at least one required).
+        </p>
         <div className="overflow-hidden rounded-md border border-taupe-300">
           <table className="min-w-full divide-y divide-taupe-200 text-sm">
             <thead>
@@ -83,43 +74,30 @@ export default function Team() {
               <tr>
                 <td className="px-4 py-3 font-mono text-taupe-800">id</td>
                 <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
+                  number?
+                </td>
+                <td className="px-4 py-3 text-taupe-600">
+                  Pokémon ID (e.g. 1)
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-taupe-800">num</td>
+                <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
                   string?
                 </td>
                 <td className="px-4 py-3 text-taupe-600">
-                  Team UUID. Omit for all teams
+                  Pokédex number (e.g. &quot;001&quot;)
                 </td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-        <p className="text-taupe-600">POST request body (JSON).</p>
-        <div className="overflow-hidden rounded-md border border-taupe-300">
-          <table className="min-w-full divide-y divide-taupe-200 text-sm">
-            <thead>
-              <tr className="bg-taupe-100">
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Field
-                </th>
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Type
-                </th>
-                <th className="px-4 py-3 text-left font-semibold text-taupe-900">
-                  Description
-                </th>
+              <tr>
+                <td className="px-4 py-3 font-mono text-taupe-800">name</td>
+                <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
+                  string?
+                </td>
+                <td className="px-4 py-3 text-taupe-600">
+                  Pokémon name (e.g. &quot;Bulbasaur&quot;)
+                </td>
               </tr>
-            </thead>
-            <tbody className="divide-y divide-taupe-200 bg-taupe-50">
-              {POST_BODY_SCHEMA.map(({ field, type, description }) => (
-                <tr key={field}>
-                  <td className="px-4 py-3 font-mono text-taupe-800">
-                    {field}
-                  </td>
-                  <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
-                    {type}
-                  </td>
-                  <td className="px-4 py-3 text-taupe-600">{description}</td>
-                </tr>
-              ))}
             </tbody>
           </table>
         </div>
@@ -143,7 +121,7 @@ export default function Team() {
               </tr>
             </thead>
             <tbody className="divide-y divide-taupe-200 bg-taupe-50">
-              {TEAM_SCHEMA.map(({ field, type, description }) => (
+              {EVOLUTION_RESPONSE_SCHEMA.map(({ field, type, description }) => (
                 <tr key={field}>
                   <td className="px-4 py-3 font-mono text-taupe-800">
                     {field}
@@ -165,7 +143,6 @@ export default function Team() {
           endpoint={ENDPOINT}
           methods={METHODS}
           defaultQuery={DEFAULT_GET_QUERY}
-          defaultBody={POST_BODY}
         />
       </section>
 
@@ -174,53 +151,37 @@ export default function Team() {
         <div className="space-y-4">
           <Example
             method="GET"
-            url={ENDPOINT}
-            response={`[
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440000",
-    "name": "Kanto Starters",
-    "pokemons": [
-      { "id": 1, "position": 1 },
-      { "id": 4, "position": 2 },
-      { "id": 7, "position": 3 }
-    ]
-  }
-]`}
+            url={`${ENDPOINT}?id=1`}
+            response={`{
+  "previous_evolution": [],
+  "next_evolution": [
+    { "num": "002", "name": "Ivysaur" },
+    { "num": "003", "name": "Venusaur" }
+  ]
+}`}
           />
           <Example
             method="GET"
-            url={`${ENDPOINT}?id=550e8400-e29b-41d4-a716-446655440000`}
+            url={`${ENDPOINT}?name=Charmeleon`}
             response={`{
-  "id": "550e8400-e29b-41d4-a716-446655440000",
-  "name": "Kanto Starters",
-  "pokemons": [
-    { "id": 1, "position": 1 },
-    { "id": 4, "position": 2 },
-    { "id": 7, "position": 3 }
+  "previous_evolution": [
+    { "num": "004", "name": "Charmander" }
+  ],
+  "next_evolution": [
+    { "num": "006", "name": "Charizard" }
   ]
 }`}
           />
           <Example
-            method="POST"
-            url={ENDPOINT}
-            body={`{
-  "name": "Dream Team",
-  "pokemons": [
-    { "id": 25, "position": 1 },
-    { "id": 150, "position": 2 },
-    { "id": 143, "position": 3 }
-  ]
-}`}
+            method="GET"
+            url={`${ENDPOINT}?num=006`}
             response={`{
-  "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
-  "name": "Dream Team",
-  "pokemons": [
-    { "id": 25, "position": 1 },
-    { "id": 150, "position": 2 },
-    { "id": 143, "position": 3 }
-  ]
+  "previous_evolution": [
+    { "num": "004", "name": "Charmander" },
+    { "num": "005", "name": "Charmeleon" }
+  ],
+  "next_evolution": []
 }`}
-            responseStatus={201}
           />
         </div>
       </section>

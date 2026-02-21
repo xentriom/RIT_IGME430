@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Overview from "../pages/Overview";
 import GettingStarted from "../pages/GettingStarted";
+import Evolution from "../pages/endpoint/Evolution";
 import Pokedex from "../pages/endpoint/Pokedex";
 import Pokemon from "../pages/endpoint/Pokemon";
 import RandomPokemon from "../pages/endpoint/RandomPokemon";
@@ -55,6 +56,7 @@ export const CREATOR_TABS: Tab[] = [
 ];
 
 export const API_ENDPOINTS: Tab[] = [
+  { path: "evolution", label: "Evolution", component: <Evolution /> },
   { path: "pokedex", label: "Pokedex", component: <Pokedex /> },
   { path: "pokemon", label: "Pokémon", component: <Pokemon /> },
   {
