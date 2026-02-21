@@ -5,6 +5,7 @@
 const { createServer } = require("http");
 const { join } = require("path");
 const { existsSync } = require("fs");
+require("dotenv").config();
 const { parseBody, respond } = require("./utils/index.js");
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
@@ -19,7 +20,7 @@ const onRequest = async (req, res) => {
     : join(baseDir, "route.js");
 
   if (!existsSync(routePath)) {
-    respond(req, res, 404, "application/json", {
+    await respond(req, res, 404, "application/json", {
       id: "notFound",
       message: "The page you are looking for was not found.",
     });
@@ -30,7 +31,7 @@ const onRequest = async (req, res) => {
   const handler = route[req.method];
 
   if (!handler || typeof handler !== "function") {
-    respond(req, res, 405, "application/json", {
+    await respond(req, res, 405, "application/json", {
       id: "methodNotAllowed",
       message: "The method you are trying to use is not allowed.",
     });
@@ -41,7 +42,15 @@ const onRequest = async (req, res) => {
     await parseBody(req);
   }
 
-  await handler(req, res);
+  try {
+    await handler(req, res);
+  } catch (err) {
+    console.error("Handler error:", err);
+    await respond(req, res, 500, "application/json", {
+      id: "serverError",
+      message: "An internal server error occurred.",
+    });
+  }
 };
 
 createServer(onRequest).listen(port, () => {

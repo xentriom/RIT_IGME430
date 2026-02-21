@@ -8,6 +8,7 @@ import Evolution from "../pages/endpoint/Evolution";
 import Team from "../pages/endpoint/Team";
 import ExplorePokedex from "../pages/explore/Pokedex";
 import ExploreTeam from "../pages/explore/Team";
+import BuilderPokemon from "../pages/builder/Pokemon";
 
 export type Tab = {
   path: string;
@@ -44,7 +45,7 @@ export const CREATOR_TABS: Tab[] = [
   {
     path: "create-pokemon",
     label: "Pokemon",
-    component: <div>Create a new Pokemon</div>,
+    component: <BuilderPokemon />,
   },
   {
     path: "create-team",

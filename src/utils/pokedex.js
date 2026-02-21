@@ -1,5 +1,4 @@
-const { readFileSync, writeFileSync, existsSync } = require("fs");
-const { join } = require("path");
+const supabase = require("./db");
 
 const TYPE_CHART = {
   Normal: { weak: ["Fighting"], resist: [], immune: ["Ghost"] },
@@ -123,95 +122,102 @@ function getWeaknesses(types) {
   return weaknesses;
 }
 
-const POKEDEX_FILE = join(__dirname, "../data/pokedex.json");
-
 class PokedexUtils {
-  pokedex = [];
-  length = 0;
-
-  constructor() {
-    this._load();
-  }
-
-  _load() {
-    if (!existsSync(POKEDEX_FILE)) {
-      this.pokedex = [];
-      this.length = 0;
-      return;
-    }
-
-    try {
-      const data = readFileSync(POKEDEX_FILE, "utf-8");
-      this.pokedex = JSON.parse(data);
-      this.length = this.pokedex.length;
-    } catch {
-      this.pokedex = [];
-      this.length = 0;
-    }
-  }
-
-  _save() {
-    writeFileSync(POKEDEX_FILE, JSON.stringify(this.pokedex, null, 2), "utf-8");
-    this.length = this.pokedex.length;
-  }
-
   getTypes() {
     return ALL_TYPES;
   }
 
-  getTypeChart() {
-    return TYPE_CHART;
+  async getAll() {
+    const { data, error } = await supabase
+      .from("pokedex")
+      .select("*")
+      .order("id");
+    if (error) throw error;
+    return data;
   }
 
-  getPokemon(identifier) {
-    return this.pokedex.find(
-      (p) =>
-        p.id === parseInt(identifier) ||
-        p.num === identifier ||
-        p.name.toLowerCase() === identifier.toLowerCase(),
-    );
+  async getCount() {
+    const { count, error } = await supabase
+      .from("pokedex")
+      .select("*", { count: "exact", head: true });
+    if (error) throw error;
+    return count;
   }
 
-  getPokemonById(id) {
-    return this.pokedex.find((p) => p.id === parseInt(id));
+  async getPokemon(identifier) {
+    const id = parseInt(identifier);
+    const { data, error } = await supabase
+      .from("pokedex")
+      .select("*")
+      .or(
+        `id.eq.${isNaN(id) ? -1 : id},num.eq.${identifier},name.ilike.${identifier}`,
+      )
+      .limit(1)
+      .maybeSingle();
+    if (error) throw error;
+    return data;
   }
 
-  getPokemonByNum(num) {
-    return this.pokedex.find((p) => p.num === num);
+  async getPokemonByName(name) {
+    const { data, error } = await supabase
+      .from("pokedex")
+      .select("*")
+      .ilike("name", name)
+      .maybeSingle();
+    if (error) throw error;
+    return data;
   }
 
-  getPokemonByName(name) {
-    return this.pokedex.find(
-      (p) => p.name.toLowerCase() === name.toLowerCase(),
-    );
-  }
-
-  addPokemon(name, type, height, weight, next_evolution) {
-    // Check if the pokemon already exists
-    if (this.getPokemonByName(name)) {
+  async addPokemon(
+    name,
+    type,
+    height,
+    weight,
+    next_evolution = null,
+    img = null,
+  ) {
+    const existing = await this.getPokemonByName(name);
+    if (existing) {
       return null;
     }
 
-    // Get the last pokemon
-    const lastPokemon = this.pokedex[this.pokedex.length - 1];
+    const { data: lastPokemon } = await supabase
+      .from("pokedex")
+      .select("*")
+      .order("id", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
     const weaknesses = getWeaknesses(type);
 
-    // Create the new pokemon
-    const newPokemon = {
-      id: lastPokemon.id + 1,
-      num: String(parseInt(lastPokemon.num) + 1).padStart(3, "0"),
-      name: name,
-      type: type,
-      height: height,
-      weight: weight,
+    const newId = lastPokemon ? lastPokemon.id + 1 : 1;
+    const newNum = lastPokemon
+      ? String(parseInt(lastPokemon.num) + 1).padStart(3, "0")
+      : "001";
+
+    const pokemonData = {
+      id: newId,
+      num: newNum,
+      name,
+      type,
+      height,
+      weight,
       weaknesses,
-      next_evolution: next_evolution,
+      next_evolution: next_evolution ?? null,
     };
 
-    // Add the new pokemon to the pokedex
-    this.pokedex.push(newPokemon);
-    this._save();
-    return newPokemon;
+    if (img) {
+      pokemonData.img = img;
+    }
+
+    const { data: inserted, error } = await supabase
+      .from("pokedex")
+      .insert(pokemonData)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return inserted;
   }
 }
 

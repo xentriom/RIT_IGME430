@@ -3,8 +3,8 @@ const { respond } = require("../../utils/index.js");
 
 const script = readFileSync(`${__dirname}/../../../hosted/client.js`, "utf-8");
 
-const GET = (req, res) => {
-  respond(req, res, 200, "application/javascript", script);
+const GET = async (req, res) => {
+  await respond(req, res, 200, "application/javascript", script);
 };
 
 module.exports = {

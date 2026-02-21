@@ -18,7 +18,7 @@ export default function ThemeSwitcher() {
             className={cn(
               "rounded px-2 py-1 text-xs font-medium capitalize transition-colors",
               theme === t
-                ? "bg-taupe-700 text-white"
+                ? "bg-taupe-700 text-taupe-50"
                 : "text-taupe-700 hover:bg-taupe-200",
             )}
             aria-pressed={theme === t}

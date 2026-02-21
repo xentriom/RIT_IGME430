@@ -2,11 +2,12 @@ const { getParams, respond } = require("../../../utils/index");
 const { getRandomPokemon } = require("./getRandomPokemon");
 const { Pokedex } = require("../../../utils/pokedex");
 
-const GET = (req, res) => {
+const GET = async (req, res) => {
   const limit = getParams(req).limit || 1;
+  const count = await Pokedex.getCount();
 
   // Invalid limit range
-  if (!limit || limit < 1 || limit > Pokedex.length) {
+  if (!limit || limit < 1 || limit > count) {
     respond(req, res, 400, "application/json", {
       id: "invalidLimit",
       message: "Invalid limit provided",
@@ -15,15 +16,16 @@ const GET = (req, res) => {
   }
 
   // Pick random Pokemon and return them
-  const randomPokemon = getRandomPokemon(limit);
+  const randomPokemon = await getRandomPokemon(limit);
   respond(req, res, 200, "application/json", randomPokemon);
 };
 
-const HEAD = (req, res) => {
+const HEAD = async (req, res) => {
   const limit = getParams(req).limit || 1;
+  const count = await Pokedex.getCount();
 
   // Invalid limit range
-  if (!limit || limit < 1 || limit > Pokedex.length) {
+  if (!limit || limit < 1 || limit > count) {
     respond(req, res, 400, "application/json", {
       id: "invalidLimit",
       message: "Invalid limit provided",
@@ -32,7 +34,7 @@ const HEAD = (req, res) => {
   }
 
   // Pick random Pokemon and return them
-  const randomPokemon = getRandomPokemon(limit);
+  const randomPokemon = await getRandomPokemon(limit);
   respond(req, res, 200, "application/json", randomPokemon);
 };
 

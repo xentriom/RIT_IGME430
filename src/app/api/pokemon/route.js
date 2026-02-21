@@ -1,7 +1,8 @@
 const { getParams, respond } = require("../../../utils/index");
 const { Pokedex } = require("../../../utils/pokedex");
+const { optimizeAndUpload } = require("../../../utils/optimizeImage");
 
-const GET = (req, res) => {
+const GET = async (req, res) => {
   // Check for search params
   const { id, num, name } = getParams(req);
   if (!id && !num && !name) {
@@ -13,7 +14,7 @@ const GET = (req, res) => {
   }
 
   // Find a matching pokemon
-  const pokemon = Pokedex.getPokemon(id || num || name);
+  const pokemon = await Pokedex.getPokemon(id || num || name);
   if (!pokemon) {
     respond(req, res, 404, "application/json", {
       id: "pokemonNotFound",
@@ -25,7 +26,7 @@ const GET = (req, res) => {
   respond(req, res, 200, "application/json", pokemon);
 };
 
-const HEAD = (req, res) => {
+const HEAD = async (req, res) => {
   const { id, num, name } = getParams(req);
   if (!id && !num && !name) {
     respond(req, res, 400, "application/json", {
@@ -36,7 +37,7 @@ const HEAD = (req, res) => {
   }
 
   // Find a matching pokemon
-  const pokemon = Pokedex.getPokemon(id || num || name);
+  const pokemon = await Pokedex.getPokemon(id || num || name);
   if (!pokemon) {
     respond(req, res, 404, "application/json", {
       id: "pokemonNotFound",
@@ -48,8 +49,18 @@ const HEAD = (req, res) => {
   respond(req, res, 200, "application/json", pokemon);
 };
 
-const POST = (req, res) => {
-  const { name, type, height, weight } = req.body;
+const POST = async (req, res) => {
+  let { name, type, height, weight } = req.body;
+
+  // Parse type if it's a JSON string (from FormData)
+  if (typeof type === "string") {
+    try {
+      type = JSON.parse(type);
+    } catch {
+      type = [type];
+    }
+  }
+
   if (!name || !type || !height || !weight) {
     respond(req, res, 400, "application/json", {
       id: "missingRequiredFields",
@@ -84,8 +95,27 @@ const POST = (req, res) => {
     return;
   }
 
-  // Add the new pokemon to the pokedex (weaknesses are computed from type)
-  const newPokemon = Pokedex.addPokemon(name, type, height, weight);
+  // Handle image upload if there
+  let imageUrl = null;
+  const imageFile = req.files?.image;
+  if (imageFile) {
+    const { url } = await optimizeAndUpload(
+      imageFile.buffer,
+      name,
+      "custom-pkm",
+    );
+    imageUrl = url;
+  }
+
+  // Add the new pokemon
+  const newPokemon = await Pokedex.addPokemon(
+    name,
+    type,
+    height,
+    weight,
+    null,
+    imageUrl,
+  );
 
   // If the pokemon already exists, return an error
   if (!newPokemon) {
