@@ -44,8 +44,7 @@ const onRequest = async (req, res) => {
 
   try {
     await handler(req, res);
-  } catch (err) {
-    console.error("Handler error:", err);
+  } catch {
     await respond(req, res, 500, "application/json", {
       id: "serverError",
       message: "An internal server error occurred.",

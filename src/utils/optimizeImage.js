@@ -24,7 +24,6 @@ const optimizeAndUpload = async (buffer, fileName, bucket) => {
       });
 
     if (error) {
-      console.error(`Image upload error (${bucket}):`, error);
       return { url: null, error };
     }
 
@@ -35,7 +34,6 @@ const optimizeAndUpload = async (buffer, fileName, bucket) => {
 
     return { url: publicUrl, error: null };
   } catch (error) {
-    console.error(`Image optimization error:`, error);
     return { url: null, error };
   }
 };
