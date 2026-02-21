@@ -21,6 +21,12 @@ body {
   font-family: var(--font-sans);
 }
 
+/* 
+* Theme colors
+* Source: https://tailwindcss.com/docs/colors
+* Basically overrides the taupe variables
+*/
+
 [data-theme="neutral"] {
   --color-taupe-50: oklch(98.5% 0 0);
   --color-taupe-100: oklch(97% 0 0);

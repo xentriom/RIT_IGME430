@@ -1,6 +1,6 @@
 const { getParams, respond } = require("../../../utils/index");
 const { getRandomPokemon } = require("./getRandomPokemon");
-const { Pokedex } = require("../../../utils/pokedex");
+const { Pokedex } = require("../../../db/pokedex");
 
 const GET = async (req, res) => {
   const limit = getParams(req).limit || 1;

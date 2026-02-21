@@ -4,11 +4,11 @@ import GettingStarted from "../pages/GettingStarted";
 import Pokedex from "../pages/endpoint/Pokedex";
 import Pokemon from "../pages/endpoint/Pokemon";
 import RandomPokemon from "../pages/endpoint/RandomPokemon";
-import Evolution from "../pages/endpoint/Evolution";
 import Team from "../pages/endpoint/Team";
 import ExplorePokedex from "../pages/explore/Pokedex";
 import ExploreTeam from "../pages/explore/Team";
 import BuilderPokemon from "../pages/builder/Pokemon";
+import BuilderTeam from "../pages/builder/Team";
 
 export type Tab = {
   path: string;
@@ -50,7 +50,7 @@ export const CREATOR_TABS: Tab[] = [
   {
     path: "create-team",
     label: "Team",
-    component: <div>Create a new Team</div>,
+    component: <BuilderTeam />,
   },
 ];
 
@@ -62,7 +62,6 @@ export const API_ENDPOINTS: Tab[] = [
     label: "Random Pokemon",
     component: <RandomPokemon />,
   },
-  { path: "evolution", label: "Evolution", component: <Evolution /> },
   { path: "team", label: "Team", component: <Team /> },
 ];
 

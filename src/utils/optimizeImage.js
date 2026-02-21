@@ -1,5 +1,5 @@
 const sharp = require("sharp");
-const supabase = require("./db");
+const supabase = require("../db/index");
 
 // https://www.npmjs.com/package/sharp
 // https://supabase.com/docs/reference/javascript/storage-listbuckets

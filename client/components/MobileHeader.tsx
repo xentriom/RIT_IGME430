@@ -1,7 +1,7 @@
 import MenuIcon from "./MenuIcon";
 import { Link } from "react-router";
 import { cn } from "../lib/utils";
-import { SIDEBAR, type Tab } from "../utils/constants";
+import { SIDEBAR, type Tab } from "../lib/constants";
 
 type BreadcrumbItem = { label: string; path: string | null };
 
@@ -21,6 +21,8 @@ function getBreadcrumbs(tab: string | null): BreadcrumbItem[] {
   return items;
 }
 
+// The mobile header that is shown on smaller screen
+// Allows the user to open/close the sidebar
 export default function MobileHeader({
   tab,
   sidebarOpen,

@@ -2,7 +2,7 @@ import { Activity, useState } from "react";
 import { useSearchParams } from "react-router";
 import MobileHeader from "./components/MobileHeader";
 import Sidebar from "./components/Sidebar";
-import { PAGES } from "./utils/constants";
+import { PAGES } from "./lib/constants";
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -22,6 +22,8 @@ export default function App() {
         <div className="overflow-y-auto h-full">
           <main className="px-6 pt-8 pb-20 md:px-12 md:pt-16 md:pb-40">
             {PAGES.map((p) => (
+              // Uses Activity to keep component mounted
+              // Also speeds up the page load time
               <Activity
                 key={p.path}
                 mode={page === p.path ? "visible" : "hidden"}

@@ -10,6 +10,7 @@ type CodeBlockProps = {
   className?: string;
 };
 
+// Uses highlight.js to add syntax highlighting to code blocks
 export default function CodeBlock({
   code,
   language = "json",

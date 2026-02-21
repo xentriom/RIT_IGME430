@@ -1,5 +1,5 @@
 const { getParams, respond } = require("../../../utils/index");
-const { Team } = require("../../../utils/team");
+const { Team } = require("../../../db/team");
 
 const GET = async (req, res) => {
   const { id } = getParams(req);

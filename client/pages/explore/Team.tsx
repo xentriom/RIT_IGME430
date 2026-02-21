@@ -73,13 +73,14 @@ export default function Team() {
                 </span>
               </div>
               <div className="grid grid-cols-6 gap-1">
-                {Array.from({ length: 6 }).map((_, i) => {
-                  const pokemon = t.pokemons[i]
-                    ? getPokemonById(t.pokemons[i].id)
-                    : null;
+                {[1, 2, 3, 4, 5, 6].map((position) => {
+                  // Position aware slots
+                  const slot = t.pokemons.find((p) => p.position === position);
+                  const pokemon = slot ? getPokemonById(slot.id) : null;
+
                   return (
                     <div
-                      key={`${t.id}-${i}`}
+                      key={`${t.id}-${position}`}
                       className="aspect-square rounded-xl bg-taupe-200/50 flex items-center justify-center overflow-hidden"
                     >
                       {pokemon ? (

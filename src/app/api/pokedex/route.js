@@ -1,5 +1,5 @@
 const { respond } = require("../../../utils/respond");
-const { Pokedex } = require("../../../utils/pokedex");
+const { Pokedex } = require("../../../db/pokedex");
 
 const GET = async (req, res) => {
   const pokedex = await Pokedex.getAll();

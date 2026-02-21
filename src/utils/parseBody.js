@@ -1,6 +1,6 @@
 // Comments for how this file functions can be found on the original assignment:
 // https://github.com/xentriom/http-api-assignment-ii/blob/master/src/utils/parseBody.js
-// Everything is copied and pasted
+// Everything is copied and pasted, additional comments added
 
 const { parse } = require("querystring");
 const busboy = require("busboy");
@@ -56,6 +56,8 @@ const parseBody = (req) => {
     req.on("end", () => {
       const bodyString = Buffer.concat(body).toString();
 
+      // parse json if application/json
+      // otherwise parse form data
       if (contentType.includes("application/json")) {
         try {
           req.body = bodyString ? JSON.parse(bodyString) : {};

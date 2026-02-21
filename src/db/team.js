@@ -1,4 +1,4 @@
-const supabase = require("./db");
+const supabase = require("./index");
 
 class TeamUtils {
   async getAll() {

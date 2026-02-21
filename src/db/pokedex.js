@@ -1,4 +1,4 @@
-const supabase = require("./db");
+const supabase = require("./index");
 
 const TYPE_CHART = {
   Normal: { weak: ["Fighting"], resist: [], immune: ["Ghost"] },

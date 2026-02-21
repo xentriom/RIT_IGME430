@@ -3,7 +3,7 @@
 
 import { useCallback } from "react";
 import { useDropzone, type Accept } from "react-dropzone";
-import { Upload, X, FileImage, CheckCircle } from "lucide-react";
+import { Upload, X, CheckCircle } from "lucide-react";
 import { cn } from "../lib/utils";
 
 export function formatBytes(
@@ -75,7 +75,6 @@ export default function Dropzone({
   });
 
   const hasError = isDragReject || fileRejections.length > 0;
-  const isSuccess = !!file && !hasError;
 
   if (file && preview) {
     return (

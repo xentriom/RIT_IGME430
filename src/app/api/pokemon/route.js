@@ -1,6 +1,9 @@
-const { getParams, respond } = require("../../../utils/index");
-const { Pokedex } = require("../../../utils/pokedex");
-const { optimizeAndUpload } = require("../../../utils/optimizeImage");
+const {
+  getParams,
+  respond,
+  optimizeAndUpload,
+} = require("../../../utils/index");
+const { Pokedex } = require("../../../db/pokedex");
 
 const GET = async (req, res) => {
   // Check for search params

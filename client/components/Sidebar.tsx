@@ -1,6 +1,6 @@
 import { cn } from "../lib/utils";
 import { Link } from "react-router";
-import { SIDEBAR, type Tab, type Link as LinkType } from "../utils/constants";
+import { SIDEBAR, type Tab, type Link as LinkType } from "../lib/constants";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 function isLink(item: Tab | LinkType): item is LinkType {

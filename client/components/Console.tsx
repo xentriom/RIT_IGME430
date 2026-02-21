@@ -67,7 +67,10 @@ export default function Console({
       try {
         JSON.parse(bodyInput);
         options.body = bodyInput.trim();
-        options.headers = { "Content-Type": "application/json" };
+        options.headers = {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        };
       } catch {
         setResponse({
           status: 0,

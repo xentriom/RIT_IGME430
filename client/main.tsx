@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
+import { ThemeProvider } from "./lib/theme";
 import App from "./App";
-import { ThemeProvider } from "./utils/theme";
 import "./globals.css";
 
 createRoot(document.getElementById("root")!).render(

@@ -1,6 +1,8 @@
-import { useTheme, THEMES } from "../utils/theme";
+import { useTheme, THEMES } from "../lib/theme";
 import { cn } from "../lib/utils";
 
+// A 2x3 grid of buttons, each representing a theme
+// Allows the user to switch between preset themes
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
 

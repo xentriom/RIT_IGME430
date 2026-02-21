@@ -1,4 +1,4 @@
-import { getApiBase } from "../../utils/constants";
+import { getApiBase } from "../../lib/constants";
 import Console from "../../components/Console";
 import Example from "../../components/Example";
 
