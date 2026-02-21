@@ -83,7 +83,7 @@ export default function Sidebar({
         <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4 text-sm">
           <div className="flex items-center gap-2 border-b border-taupe-300 pb-4">
             <img
-              src="/pokeball.png"
+              src="/assets/pokeball.png"
               alt="P'dexiom"
               className="size-10 rounded-md"
             />
