@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Team, Pokemon } from "../../lib/types";
 import { Loader2, Search } from "lucide-react";
+import type { Team, Pokemon } from "../../lib/types";
 
 export default function Team() {
   const [pokedex, setPokedex] = useState<Pokemon[]>([]);
@@ -10,8 +10,6 @@ export default function Team() {
 
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
-
       const [teamsRes, pokedexRes] = await Promise.all([
         fetch("/api/team"),
         fetch("/api/pokedex"),
@@ -26,6 +24,7 @@ export default function Team() {
       setLoading(false);
     }
 
+    setLoading(true);
     fetchData();
   }, []);
 
