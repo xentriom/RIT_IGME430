@@ -87,7 +87,7 @@ export default function PokemonBuilder() {
   return (
     <article className="max-w-none space-y-8">
       <header>
-        <h1 className="text-3xl font-bold mb-2">Create Pokémon</h1>
+        <h1 className="text-3xl font-bold mb-2">Build Your Own Pokémon</h1>
         <p className="text-taupe-600">
           Add a new custom Pokémon to the database with your own stats and
           image.
@@ -99,7 +99,7 @@ export default function PokemonBuilder() {
           title="Basic Info"
           description="The name and physical attributes of your Pokémon"
         >
-          <div className="overflow-hidden rounded-md border border-taupe-300 bg-white">
+          <div className="overflow-hidden rounded-md border border-taupe-300 bg-taupe-50">
             <FormRow label="Name" htmlFor="name">
               <input
                 type="text"
@@ -191,13 +191,13 @@ function CreatedModal({
       <div className="rounded-lg border border-taupe-200 bg-taupe-50 p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-bold text-taupe-900">{pokemon.name}</h3>
-          <span className="text-xs font-mono text-taupe-400 bg-white px-2 py-1 rounded border border-taupe-200">
+          <span className="text-xs font-mono text-taupe-400 bg-taupe-50 px-2 py-1 rounded border border-taupe-200">
             #{pokemon.num}
           </span>
         </div>
 
         <div className="flex gap-4">
-          <div className="w-20 aspect-square rounded-lg bg-white flex items-center justify-center overflow-hidden shrink-0 border border-taupe-200">
+          <div className="w-20 aspect-square rounded-lg bg-taupe-50 flex items-center justify-center overflow-hidden shrink-0 border border-taupe-200">
             {pokemon.img ? (
               <img
                 src={pokemon.img}

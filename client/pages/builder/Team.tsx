@@ -187,7 +187,7 @@ export default function TeamBuilder() {
   return (
     <article className="max-w-none space-y-8">
       <header>
-        <h1 className="text-3xl font-bold mb-2">Create Team</h1>
+        <h1 className="text-3xl font-bold mb-2">Build Your Own Team</h1>
         <p className="text-taupe-600">
           Build a team of up to 6 Pokémon from the Pokédex.
         </p>
@@ -198,7 +198,7 @@ export default function TeamBuilder() {
           title="Team Info"
           description="Give your team a memorable name"
         >
-          <div className="overflow-hidden rounded-md border border-taupe-300 bg-white">
+          <div className="overflow-hidden rounded-md border border-taupe-300 bg-taupe-50">
             <FormRow label="Name" htmlFor="name">
               <input
                 type="text"
@@ -225,10 +225,10 @@ export default function TeamBuilder() {
                   <div
                     key={position}
                     className={cn(
-                      "relative aspect-square rounded-lg border-2 border-dashed flex flex-col items-center justify-center transition-all",
+                      "relative aspect-square rounded-lg border-2 border-dashed flex flex-col items-center justify-center transition-all bg-taupe-50 border-taupe-200",
                       member
-                        ? "border-taupe-200 bg-taupe-50"
-                        : "border-taupe-200 bg-taupe-50/50",
+                        ? "border-taupe-200 bg-taupe-100"
+                        : "border-taupe-200 bg-taupe-50",
                     )}
                   >
                     <span className="absolute top-1 left-2 text-xs font-mono text-taupe-400">
@@ -304,7 +304,7 @@ export default function TeamBuilder() {
               })}
             </div>
 
-            <div className="rounded-md border border-taupe-300 bg-white overflow-hidden">
+            <div className="rounded-md border border-taupe-300 bg-taupe-50 overflow-hidden">
               <div className="p-3 border-b border-taupe-200 bg-taupe-50 flex flex-row gap-2 items-center">
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-taupe-400" />
@@ -313,7 +313,7 @@ export default function TeamBuilder() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search by name or number..."
-                    className="w-full pl-10 pr-10 py-2 bg-white border border-taupe-200 rounded-md text-sm placeholder:text-taupe-400 focus:outline-none focus:ring-2 focus:ring-taupe-400 focus:ring-inset"
+                    className="w-full pl-10 pr-10 py-2 bg-taupe-50 border border-taupe-200 rounded-md text-sm placeholder:text-taupe-400 focus:outline-none focus:ring-2 focus:ring-taupe-400 focus:ring-inset"
                   />
                   {searchQuery && (
                     <button
@@ -336,7 +336,7 @@ export default function TeamBuilder() {
                       setSearchQuery(randomPokemon.num);
                     }}
                     disabled={loadingPokedex || pokedex.length === 0}
-                    className="py-2 px-3 rounded-md border border-taupe-300 bg-white text-taupe-600 font-medium text-sm transition-colors flex items-center gap-2 hover:border-taupe-400 hover:bg-taupe-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="py-2 px-3 rounded-md border border-taupe-300 bg-taupe-50 text-taupe-600 font-medium text-sm transition-colors flex items-center gap-2 hover:border-taupe-400 hover:bg-taupe-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Search for a random Pokémon"
                   >
                     <Dices size={16} />
@@ -346,7 +346,7 @@ export default function TeamBuilder() {
                     type="button"
                     onClick={randomizeTeam}
                     disabled={loadingPokedex || pokedex.length === 0}
-                    className="py-2 px-3 rounded-md border border-taupe-300 bg-white text-taupe-600 font-medium text-sm transition-colors flex items-center gap-2 hover:border-taupe-400 hover:bg-taupe-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="py-2 px-3 rounded-md border border-taupe-300 bg-taupe-50 text-taupe-600 font-medium text-sm transition-colors flex items-center gap-2 hover:border-taupe-400 hover:bg-taupe-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Fill all slots with random Pokémon"
                   >
                     <Shuffle size={16} />
@@ -436,7 +436,7 @@ function CreatedModal({
       <div className="rounded-lg border border-taupe-200 bg-taupe-50 p-4">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-bold text-taupe-900">{team.name}</h3>
-          <span className="text-xs font-mono text-taupe-400 bg-white px-2 py-1 rounded border border-taupe-200 truncate max-w-32">
+          <span className="text-xs font-mono text-taupe-400 bg-taupe-50 px-2 py-1 rounded border border-taupe-200 truncate max-w-32">
             {team.id}
           </span>
         </div>
@@ -449,7 +449,7 @@ function CreatedModal({
               return (
                 <div
                   key={slot.position}
-                  className="aspect-square rounded-lg bg-white border border-taupe-200 flex flex-col items-center justify-center p-1"
+                  className="aspect-square rounded-lg bg-taupe-50 border border-taupe-200 flex flex-col items-center justify-center p-1"
                 >
                   {pokemon ? (
                     <>

@@ -44,7 +44,7 @@ export const VIEW_TABS: Tab[] = [
 export const CREATOR_TABS: Tab[] = [
   {
     path: "create-pokemon",
-    label: "Pokemon",
+    label: "Pokémon",
     component: <BuilderPokemon />,
   },
   {
@@ -56,10 +56,10 @@ export const CREATOR_TABS: Tab[] = [
 
 export const API_ENDPOINTS: Tab[] = [
   { path: "pokedex", label: "Pokedex", component: <Pokedex /> },
-  { path: "pokemon", label: "Pokemon", component: <Pokemon /> },
+  { path: "pokemon", label: "Pokémon", component: <Pokemon /> },
   {
     path: "randomPokemon",
-    label: "Random Pokemon",
+    label: "Random Pokémon",
     component: <RandomPokemon />,
   },
   { path: "team", label: "Team", component: <Team /> },
@@ -79,26 +79,11 @@ export type SidebarItem = {
 };
 
 export const SIDEBAR: SidebarItem[] = [
-  {
-    label: "Introduction",
-    items: INTRO_TABS,
-  },
-  {
-    label: "Explore",
-    items: VIEW_TABS,
-  },
-  {
-    label: "Build Your Own",
-    items: CREATOR_TABS,
-  },
-  {
-    label: "Endpoints",
-    items: API_ENDPOINTS,
-  },
-  {
-    label: "Links",
-    items: LINKS,
-  },
+  { label: "Introduction", items: INTRO_TABS },
+  { label: "Explore", items: VIEW_TABS },
+  { label: "Build Your Own", items: CREATOR_TABS },
+  { label: "Endpoints", items: API_ENDPOINTS },
+  { label: "Links", items: LINKS },
 ];
 
 export const PAGES: Tab[] = [

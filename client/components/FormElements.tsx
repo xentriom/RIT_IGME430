@@ -3,7 +3,7 @@ import { X, Loader2 } from "lucide-react";
 import { cn } from "../lib/utils";
 
 export const inputClass =
-  "w-full px-4 py-3 border-0 bg-white text-sm text-taupe-900 placeholder:text-taupe-400 focus:outline-none focus:ring-2 focus:ring-taupe-500 focus:ring-inset";
+  "w-full px-4 py-3 border-0 bg-taupe-50 text-sm text-taupe-900 placeholder:text-taupe-400 focus:outline-none focus:ring-2 focus:ring-taupe-500 focus:ring-inset";
 
 export function FormRow({
   label,
@@ -127,7 +127,7 @@ export function Modal({
 
       <div
         className={cn(
-          "relative w-full rounded-xl bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200",
+          "relative w-full rounded-xl bg-taupe-50 shadow-2xl animate-in fade-in zoom-in-95 duration-200",
           maxWidth,
         )}
         onClick={(e) => e.stopPropagation()}

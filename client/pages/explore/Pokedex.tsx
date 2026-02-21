@@ -27,7 +27,7 @@ export default function Pokedex() {
   return (
     <>
       <header>
-        <h1 className="text-3xl font-bold">Pokedex</h1>
+        <h1 className="text-3xl font-bold">P'dexiom Pokédex</h1>
       </header>
 
       {pokemon ? (

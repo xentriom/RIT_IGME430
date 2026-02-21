@@ -141,7 +141,7 @@ export default function Pokemon() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-taupe-200 bg-white">
+              <tbody className="divide-y divide-taupe-200 bg-taupe-50">
                 <tr>
                   <td className="px-4 py-3 font-mono text-taupe-800">id</td>
                   <td className="px-4 py-3 font-mono text-taupe-600 text-xs">
@@ -193,7 +193,7 @@ export default function Pokemon() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-taupe-200 bg-white">
+              <tbody className="divide-y divide-taupe-200 bg-taupe-50">
                 {POST_BODY_SCHEMA.map(({ field, type, description }) => (
                   <tr key={field}>
                     <td className="px-4 py-3 font-mono text-taupe-800">
@@ -228,7 +228,7 @@ export default function Pokemon() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-taupe-200 bg-white">
+            <tbody className="divide-y divide-taupe-200 bg-taupe-50">
               {POKEMON_RESPONSE_SCHEMA.map(({ field, type, description }) => (
                 <tr key={field}>
                   <td className="px-4 py-3 font-mono text-taupe-800">

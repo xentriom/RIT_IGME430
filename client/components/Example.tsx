@@ -20,7 +20,7 @@ export default function Example({
       <div className="bg-taupe-100 px-4 py-2 font-mono text-sm font-medium text-taupe-800">
         {method} {url}
       </div>
-      <div className="space-y-0 border-t border-taupe-200 bg-white">
+      <div className="space-y-0 border-t border-taupe-200 bg-taupe-50">
         {body !== undefined && (
           <>
             <div className="border-b border-taupe-200 bg-taupe-50 px-4 py-2 text-xs font-medium text-taupe-700">
