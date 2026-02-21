@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { TypeBadge } from "../../../components/TypeSelector";
 import EvolutionSection from "./EvolutionSection";
 import type { Pokemon } from "../../../lib/types";
@@ -100,7 +100,7 @@ export default function PokemonDetail({
 
 function PokemonDetailSkeleton() {
   return (
-    <div className="flex flex-col gap-6 p-6 rounded-xl bg-taupe-100 border border-taupe-200 animate-pulse">
+    <div className="flex flex-col gap-6 p-6 rounded-xl bg-taupe-100 animate-pulse">
       <div className="flex gap-6">
         <div className="w-36 aspect-square rounded-xl bg-taupe-200" />
         <div className="flex flex-col gap-3 flex-1">

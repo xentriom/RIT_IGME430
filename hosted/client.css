@@ -663,6 +663,9 @@ code.hljs {
   .table-row-group {
     display: table-row-group;
   }
+  .aspect-3\/4 {
+    aspect-ratio: 3/4;
+  }
   .aspect-square {
     aspect-ratio: 1 / 1;
   }
@@ -677,10 +680,6 @@ code.hljs {
   .size-10 {
     width: calc(var(--spacing) * 10);
     height: calc(var(--spacing) * 10);
-  }
-  .size-12 {
-    width: calc(var(--spacing) * 12);
-    height: calc(var(--spacing) * 12);
   }
   .size-full {
     width: 100%;
@@ -700,6 +699,9 @@ code.hljs {
   }
   .h-12 {
     height: calc(var(--spacing) * 12);
+  }
+  .h-28 {
+    height: calc(var(--spacing) * 28);
   }
   .h-auto {
     height: auto;

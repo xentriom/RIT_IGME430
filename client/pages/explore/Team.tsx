@@ -55,9 +55,7 @@ export default function Team() {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-full">
-          <Loader2 className="size-12 text-taupe-500 animate-spin" />
-        </div>
+        <TeamSkeleton />
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
           {filtered.map((t) => (
@@ -101,5 +99,18 @@ export default function Team() {
         </div>
       )}
     </>
+  );
+}
+
+function TeamSkeleton() {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      {Array.from({ length: 4 }).map((_, index) => (
+        <div
+          key={index}
+          className="h-28 animate-pulse rounded-xl bg-taupe-100"
+        />
+      ))}
+    </div>
   );
 }

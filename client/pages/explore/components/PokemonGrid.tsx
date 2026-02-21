@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import { Loader2, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { TypeBadge } from "../../../components/TypeSelector";
 import type { Pokemon } from "../../../lib/types";
 
@@ -38,11 +38,9 @@ export default function PokemonGrid({
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-full">
-          <Loader2 className="size-12 text-taupe-500 animate-spin" />
-        </div>
+        <PokemonGridSkeleton />
       ) : (
-        <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
           {filtered.map((p) => (
             <Link
               key={p.id}
@@ -74,5 +72,18 @@ export default function PokemonGrid({
         </div>
       )}
     </>
+  );
+}
+
+function PokemonGridSkeleton() {
+  return (
+    <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
+      {Array.from({ length: 12 }).map((_, index) => (
+        <div
+          key={index}
+          className="aspect-3/4 animate-pulse rounded-xl bg-taupe-100"
+        />
+      ))}
+    </div>
   );
 }
