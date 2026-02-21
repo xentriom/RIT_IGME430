@@ -13,5 +13,6 @@ export interface Pokemon {
 export interface Team {
   id: string;
   name: string;
+  created_at: string;
   pokemons: { id: number; position: number }[];
 }
