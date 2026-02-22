@@ -3,7 +3,7 @@ import Console from "../../components/Console";
 import Example from "../../components/Example";
 
 const METHODS = ["GET", "HEAD", "POST"] as const;
-const DEFAULT_GET_QUERY = "?id=1";
+const DEFAULT_GET_QUERY = "?id={{id}}";
 const DEFAULT_POST_BODY = `{
   "name": "New Pokemon",
   "type": ["Fire", "Flying"],
@@ -90,6 +90,9 @@ const POST_BODY_SCHEMA = [
 
 export default function Pokemon() {
   const ENDPOINT = `${getApiBase()}/pokemon`;
+
+  const randomId = Math.floor(Math.random() * 151) + 1;
+  const GET_QUERY = DEFAULT_GET_QUERY.replace("{{id}}", randomId.toString());
 
   return (
     <article className="max-w-none space-y-8">
@@ -242,7 +245,7 @@ export default function Pokemon() {
         <Console
           endpoint={ENDPOINT}
           methods={METHODS}
-          defaultQuery={DEFAULT_GET_QUERY}
+          defaultQuery={GET_QUERY}
           defaultBody={DEFAULT_POST_BODY}
         />
       </section>

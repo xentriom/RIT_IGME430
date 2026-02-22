@@ -3,7 +3,7 @@ import Console from "../../components/Console";
 import Example from "../../components/Example";
 
 const METHODS = ["GET", "HEAD"] as const;
-const DEFAULT_GET_QUERY = "?id=1";
+const DEFAULT_GET_QUERY = "?id={{id}}";
 
 const SCHEMA_PREVIOUS_EVOLUTION = {
   field: "previous_evolution",
@@ -24,6 +24,9 @@ const EVOLUTION_RESPONSE_SCHEMA = [
 
 export default function Evolution() {
   const ENDPOINT = `${getApiBase()}/evolution`;
+
+  const randomId = Math.floor(Math.random() * 151) + 1;
+  const GET_QUERY = DEFAULT_GET_QUERY.replace("{{id}}", randomId.toString());
 
   return (
     <article className="max-w-none space-y-8">
@@ -142,7 +145,7 @@ export default function Evolution() {
         <Console
           endpoint={ENDPOINT}
           methods={METHODS}
-          defaultQuery={DEFAULT_GET_QUERY}
+          defaultQuery={GET_QUERY}
         />
       </section>
 
