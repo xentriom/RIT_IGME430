@@ -56,15 +56,15 @@ export const CREATOR_TABS: Tab[] = [
 ];
 
 export const API_ENDPOINTS: Tab[] = [
-  { path: "evolution", label: "Evolution", component: <Evolution /> },
-  { path: "pokedex", label: "Pokedex", component: <Pokedex /> },
-  { path: "pokemon", label: "Pokémon", component: <Pokemon /> },
+  { path: "evolution", label: "/evolution", component: <Evolution /> },
+  { path: "pokedex", label: "/pokedex", component: <Pokedex /> },
+  { path: "pokemon", label: "/pokemon", component: <Pokemon /> },
   {
     path: "randomPokemon",
-    label: "Random Pokémon",
+    label: "/randomPokemon",
     component: <RandomPokemon />,
   },
-  { path: "team", label: "Team", component: <Team /> },
+  { path: "team", label: "/team", component: <Team /> },
 ];
 
 export const LINKS: Link[] = [
