@@ -126,6 +126,18 @@ const PATCH = async (req, res) => {
     return;
   }
 
+  // Apparently an evo chain cannot exceed 3
+  // https://pokemon.fandom.com/wiki/Evolution#:~:text=achieving%20self%2Dimprovements.-,Evolutionary%20lines,own%20branched%20evolutionary%20line%20each.
+  const { previous_evolution } = await getEvolutionChain(pokemon);
+  const chainLength = previous_evolution.length + 1 + nextEvolution.length;
+  if (chainLength >= 3) {
+    await respond(req, res, 400, "application/json", {
+      id: "invalidNext",
+      message: "Evolution chain cannot exceed 3 pokemon (includes previous)",
+    });
+    return;
+  }
+
   // Get the highest id in next_evolution
   const maxId = Math.max(
     ...nextEvolution.map((e) => parseInt(e.num, 10)),
