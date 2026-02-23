@@ -57,15 +57,18 @@ const parseBody = (req) => {
       const bodyString = Buffer.concat(body).toString();
 
       // parse json if application/json
-      // otherwise parse form data
+      // parse form data if application/x-www-form-urlencoded
+      // otherwise set body to empty object
       if (contentType.includes("application/json")) {
         try {
           req.body = bodyString ? JSON.parse(bodyString) : {};
         } catch {
           req.body = {};
         }
-      } else {
+      } else if (contentType.includes("application/x-www-form-urlencoded")) {
         req.body = parse(bodyString);
+      } else {
+        req.body = {};
       }
 
       resolve();

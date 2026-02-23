@@ -127,6 +127,7 @@ class PokedexUtils {
     return ALL_TYPES;
   }
 
+  // Get all pokemon
   async getAll() {
     const { data, error } = await supabase
       .from("pokedex")
@@ -136,6 +137,7 @@ class PokedexUtils {
     return data;
   }
 
+  // Get the total number of pokemon
   async getCount() {
     const { count, error } = await supabase
       .from("pokedex")
@@ -144,6 +146,7 @@ class PokedexUtils {
     return count;
   }
 
+  // Get a single pokemon by id, num, or name
   async getPokemon(identifier) {
     const id = parseInt(identifier);
     const { data, error } = await supabase
@@ -158,6 +161,7 @@ class PokedexUtils {
     return data;
   }
 
+  // Get a single pokemon by name
   async getPokemonByName(name) {
     const { data, error } = await supabase
       .from("pokedex")
@@ -168,6 +172,7 @@ class PokedexUtils {
     return data;
   }
 
+  // Add a new pokemon
   async addPokemon(
     name,
     type,
@@ -176,11 +181,13 @@ class PokedexUtils {
     next_evolution = null,
     img = null,
   ) {
+    // Check if the pokemon already exists
     const existing = await this.getPokemonByName(name);
     if (existing) {
       return null;
     }
 
+    // Get last pokemon
     const { data: lastPokemon } = await supabase
       .from("pokedex")
       .select("*")
@@ -190,6 +197,7 @@ class PokedexUtils {
 
     const weaknesses = getWeaknesses(type);
 
+    // Create new id and num
     const newId = lastPokemon ? lastPokemon.id + 1 : 1;
     const newNum = lastPokemon
       ? String(parseInt(lastPokemon.num) + 1).padStart(3, "0")
@@ -206,6 +214,7 @@ class PokedexUtils {
       next_evolution: next_evolution ?? null,
     };
 
+    // Add image if provided
     if (img) {
       pokemonData.img = img;
     }

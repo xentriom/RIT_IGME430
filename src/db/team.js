@@ -1,6 +1,7 @@
 const supabase = require("./index");
 
 class TeamUtils {
+  // Get all teams
   async getAll() {
     const { data: teams, error } = await supabase
       .from("teams")
@@ -18,6 +19,7 @@ class TeamUtils {
     return teamsWithPokemons;
   }
 
+  // Get all pokemons for a team
   async _getTeamPokemons(teamId) {
     const { data, error } = await supabase
       .from("team_members")
@@ -28,15 +30,19 @@ class TeamUtils {
     return data.map((row) => ({ id: row.pid, position: row.position }));
   }
 
+  // Create a new team
   async createTeam(name, pokemons) {
+    // Check if name and pokemons are provided
     if (!name || !pokemons) {
       return null;
     }
 
+    // Check if the number of pokemons is between 1 and 6
     if (pokemons.length < 1 || pokemons.length > 6) {
       return null;
     }
 
+    // Create the team
     const { data: team, error: teamError } = await supabase
       .from("teams")
       .insert({ name })
@@ -44,6 +50,7 @@ class TeamUtils {
       .single();
     if (teamError) throw teamError;
 
+    // Create the team members
     const members = pokemons.map((p) => ({
       tid: team.id,
       pid: p.id,
@@ -58,6 +65,7 @@ class TeamUtils {
     return { ...team, pokemons };
   }
 
+  // Get a single team by id
   async getTeam(id) {
     const { data: team, error } = await supabase
       .from("teams")
@@ -71,6 +79,7 @@ class TeamUtils {
     return { ...team, pokemons };
   }
 
+  // Update the name of a team
   async updateTeamName(id, name) {
     if (!name) {
       return null;
@@ -89,6 +98,7 @@ class TeamUtils {
     return { ...team, pokemons };
   }
 
+  // Update the pokemons of a team
   async updateTeamPokemons(id, pokemons) {
     if (!pokemons) {
       return null;
@@ -122,6 +132,7 @@ class TeamUtils {
     return { ...team, pokemons };
   }
 
+  // Delete a team
   async deleteTeam(id) {
     const team = await this.getTeam(id);
     if (!team) {

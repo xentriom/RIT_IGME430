@@ -16,6 +16,7 @@ const respond = async (req, res, status, type, data) => {
       : Buffer.byteLength(content, "utf8"),
   });
 
+  // only write if not HEAD or 204
   if (req.method !== "HEAD" && status !== 204) {
     res.write(content);
   }
