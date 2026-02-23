@@ -11,6 +11,7 @@ type ConsoleProps = {
   methods: readonly HttpMethod[];
   defaultQuery?: string;
   defaultBody?: string;
+  bodyContentType?: "application/json" | "application/x-www-form-urlencoded";
 };
 
 type ApiResponse = {
@@ -51,6 +52,7 @@ export default function Console({
   methods,
   defaultQuery = "",
   defaultBody = "{}",
+  bodyContentType = "application/json",
 }: ConsoleProps) {
   const [queryInput, setQueryInput] = useState(defaultQuery);
   const [bodyInput, setBodyInput] = useState(defaultBody);
@@ -64,20 +66,12 @@ export default function Console({
 
     const options: RequestInit = { method };
     if (showBody && bodyInput.trim()) {
-      try {
-        JSON.parse(bodyInput);
-        options.body = bodyInput.trim();
-        options.headers = {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-      } catch {
-        setResponse({
-          status: 0,
-          body: { error: "Invalid JSON in request body" },
-        });
-        return;
-      }
+      const trimmed = bodyInput.trim();
+      options.body = trimmed;
+      options.headers = {
+        Accept: "application/json",
+        "Content-Type": bodyContentType,
+      };
     }
 
     const res = await fetch(url, options);
@@ -149,8 +143,14 @@ export default function Console({
             <textarea
               value={bodyInput}
               onChange={(e) => setBodyInput(e.target.value)}
-              placeholder='{"key": "value"}'
-              rows={6}
+              placeholder={
+                bodyContentType === "application/x-www-form-urlencoded"
+                  ? "key=value&key2=value2"
+                  : '{"key": "value", "key2": "value2"}'
+              }
+              rows={
+                bodyContentType === "application/x-www-form-urlencoded" ? 3 : 6
+              }
               className="block w-full resize-none rounded-b-md border-0 border-t border-taupe-200 bg-taupe-50 p-3 font-mono text-sm text-taupe-800 placeholder:text-taupe-400 focus:outline-none focus:ring-2 focus:ring-taupe-400 focus:ring-inset"
               spellCheck={false}
             />

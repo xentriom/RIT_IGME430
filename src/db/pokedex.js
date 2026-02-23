@@ -161,6 +161,16 @@ class PokedexUtils {
     return data;
   }
 
+  async getPokemonById(id) {
+    const { data, error } = await supabase
+      .from("pokedex")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+    if (error) throw error;
+    return data;
+  }
+
   // Get a single pokemon by name
   async getPokemonByName(name) {
     const { data, error } = await supabase
@@ -227,6 +237,18 @@ class PokedexUtils {
 
     if (error) throw error;
     return inserted;
+  }
+
+  // Update next_evolution for a pokemon
+  async updateNextEvolution(pokemonId, nextEvolution) {
+    const { data, error } = await supabase
+      .from("pokedex")
+      .update({ next_evolution: nextEvolution })
+      .eq("id", pokemonId)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
   }
 }
 

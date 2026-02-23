@@ -2,7 +2,7 @@ import { getApiBase } from "../../lib/constants";
 import Console from "../../components/Console";
 import Example from "../../components/Example";
 
-const METHODS = ["GET", "HEAD"] as const;
+const METHODS = ["GET", "HEAD", "PATCH"] as const;
 const DEFAULT_GET_QUERY = "?id={{id}}";
 
 const SCHEMA_PREVIOUS_EVOLUTION = {
@@ -34,7 +34,8 @@ export default function Evolution() {
         <h1 className="text-3xl font-bold mb-2">Evolution</h1>
         <p className="text-taupe-600">
           Returns the complete evolution chain for a Pokémon, including both
-          previous and next evolutions.
+          previous and next evolutions. PATCH adds a Pokémon to the
+          next_evolution list.
         </p>
       </header>
 
@@ -47,6 +48,9 @@ export default function Evolution() {
           <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-800">
             HEAD
           </span>
+          <span className="rounded-md bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">
+            PATCH
+          </span>
           <code className="block w-full rounded-md border border-taupe-300 bg-taupe-100 px-4 py-3 font-mono text-sm text-taupe-900 break-all">
             {ENDPOINT}
           </code>
@@ -56,7 +60,7 @@ export default function Evolution() {
       <section className="space-y-4 border-t border-taupe-200">
         <h2 className="text-xl font-semibold">Request Schema</h2>
         <p className="text-taupe-600">
-          Query parameters (at least one required).
+          GET / HEAD: Query parameters (at least one required).
         </p>
         <div className="overflow-hidden rounded-md border border-taupe-300">
           <table className="min-w-full divide-y divide-taupe-200 text-sm">
@@ -104,6 +108,11 @@ export default function Evolution() {
             </tbody>
           </table>
         </div>
+        <p className="text-taupe-600">
+          PATCH: Query <code className="rounded bg-taupe-200 px-1">id</code>{" "}
+          (required). Body (form-urlencoded):{" "}
+          <code className="rounded bg-taupe-200 px-1">next=3</code>
+        </p>
       </section>
 
       <section className="space-y-4 border-t border-taupe-200">
@@ -146,6 +155,8 @@ export default function Evolution() {
           endpoint={ENDPOINT}
           methods={METHODS}
           defaultQuery={GET_QUERY}
+          defaultBody="next=3"
+          bodyContentType="application/x-www-form-urlencoded"
         />
       </section>
 
@@ -185,6 +196,13 @@ export default function Evolution() {
   ],
   "next_evolution": []
 }`}
+          />
+          <Example
+            method="PATCH"
+            url={`${ENDPOINT}?id=150`}
+            body="next=151"
+            response="(204 No Content)"
+            responseStatus={204}
           />
         </div>
       </section>

@@ -38,7 +38,8 @@ const onRequest = async (req, res) => {
     return;
   }
 
-  if (req.method === "POST") {
+  // Parse body for POST and PATCH
+  if (["POST", "PATCH"].includes(req.method)) {
     await parseBody(req);
   }
 
