@@ -55,6 +55,7 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
     --color-cyan-400: oklch(78.9% 0.154 211.53);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
+    --color-indigo-100: oklch(93% 0.034 272.788);
     --color-indigo-400: oklch(67.3% 0.182 276.935);
     --color-indigo-500: oklch(58.5% 0.233 277.117);
     --color-indigo-700: oklch(45.7% 0.24 277.023);
@@ -1059,6 +1060,9 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
   .bg-green-500 {
     background-color: var(--color-green-500);
   }
+  .bg-indigo-100 {
+    background-color: var(--color-indigo-100);
+  }
   .bg-indigo-400 {
     background-color: var(--color-indigo-400);
   }
@@ -1335,6 +1339,9 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
   }
   .text-green-600 {
     color: var(--color-green-600);
+  }
+  .text-indigo-800 {
+    color: var(--color-indigo-800);
   }
   .text-red-500 {
     color: var(--color-red-500);

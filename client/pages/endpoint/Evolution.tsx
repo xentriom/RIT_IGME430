@@ -48,7 +48,7 @@ export default function Evolution() {
           <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-800">
             HEAD
           </span>
-          <span className="rounded-md bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">
+          <span className="rounded-md bg-indigo-100 px-2.5 py-1 text-xs font-semibold text-indigo-800">
             PATCH
           </span>
           <code className="block w-full rounded-md border border-taupe-300 bg-taupe-100 px-4 py-3 font-mono text-sm text-taupe-900 break-all">

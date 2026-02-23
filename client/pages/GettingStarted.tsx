@@ -49,6 +49,51 @@ const response = await fetch('/api/team', {
 const team = await response.json();
 console.log(team.id); // UUID for your team`;
 
+const ENDPOINTS = [
+  {
+    endpoint: "evolution",
+    description: "Fetch evolution chain",
+    methods: ["GET", "HEAD", "PATCH"],
+  },
+  {
+    endpoint: "pokedex",
+    description: "Fetch all Pokémon",
+    methods: ["GET", "HEAD"],
+  },
+  {
+    endpoint: "pokemon",
+    description: "Fetch or create Pokémon",
+    methods: ["GET", "HEAD", "POST"],
+  },
+  {
+    endpoint: "randomPokemon",
+    description: "Fetch random Pokémon",
+    methods: ["GET", "HEAD"],
+  },
+  {
+    endpoint: "team",
+    description: "Manage Pokémon teams",
+    methods: ["GET", "HEAD", "POST"],
+  },
+];
+
+function StatusCode({ code }: { code: string }) {
+  const method = {
+    GET: "bg-emerald-100 text-emerald-800",
+    HEAD: "bg-slate-100 text-slate-800",
+    POST: "bg-amber-100 text-amber-800",
+    PATCH: "bg-indigo-100 text-indigo-800",
+  };
+
+  return (
+    <span
+      className={`rounded-md ${method[code as keyof typeof method]} px-1.5 py-0.5 text-xs font-semibold`}
+    >
+      {code}
+    </span>
+  );
+}
+
 export default function GettingStarted() {
   const apiBase = getApiBase();
 
@@ -81,13 +126,19 @@ export default function GettingStarted() {
             <code className="text-sm bg-taupe-100 px-1.5 py-0.5 rounded">
               200 OK
             </code>{" "}
-            - Successful GET request
+            - Successful GET/HEAD request
           </li>
           <li>
             <code className="text-sm bg-taupe-100 px-1.5 py-0.5 rounded">
               201 Created
             </code>{" "}
             - Successful POST request
+          </li>
+          <li>
+            <code className="text-sm bg-taupe-100 px-1.5 py-0.5 rounded">
+              204 No Content
+            </code>{" "}
+            - Successful PATCH request
           </li>
           <li>
             <code className="text-sm bg-taupe-100 px-1.5 py-0.5 rounded">
@@ -155,58 +206,28 @@ export default function GettingStarted() {
       <section className="space-y-4 border-t border-taupe-200 pt-8">
         <h2 className="text-2xl font-semibold">Available Endpoints</h2>
         <div className="grid gap-3 sm:grid-cols-2">
-          <Link
-            to={{ pathname: "/", search: "?page=pokedex" }}
-            className="flex items-center gap-3 rounded-lg border border-taupe-300 bg-taupe-50 p-4 hover:bg-taupe-100 transition-colors no-underline"
-          >
-            <span className="rounded-md bg-emerald-100 px-2 py-1 text-xs font-semibold text-emerald-800">
-              GET
-            </span>
-            <div>
-              <div className="font-mono text-sm text-taupe-900">/pokedex</div>
-              <div className="text-xs text-taupe-500">Fetch all Pokémon</div>
-            </div>
-          </Link>
-          <Link
-            to={{ pathname: "/", search: "?page=pokemon" }}
-            className="flex items-center gap-3 rounded-lg border border-taupe-300 bg-taupe-50 p-4 hover:bg-taupe-100 transition-colors no-underline"
-          >
-            <span className="rounded-md bg-emerald-100 px-2 py-1 text-xs font-semibold text-emerald-800">
-              GET
-            </span>
-            <div>
-              <div className="font-mono text-sm text-taupe-900">/pokemon</div>
+          {ENDPOINTS.map((endpoint) => (
+            <Link
+              key={endpoint.endpoint}
+              to={{ pathname: "/", search: `?page=${endpoint.endpoint}` }}
+              className="flex flex-col gap-1 rounded-lg border border-taupe-300 bg-taupe-50 p-4 hover:bg-taupe-100 transition-colors no-underline"
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  {endpoint.methods.map((method) => (
+                    <StatusCode key={method} code={method} />
+                  ))}
+                </div>
+                <div className="font-mono text-sm text-taupe-900">
+                  /{endpoint.endpoint}
+                </div>
+              </div>
+
               <div className="text-xs text-taupe-500">
-                Fetch or create Pokémon
+                {endpoint.description}
               </div>
-            </div>
-          </Link>
-          <Link
-            to={{ pathname: "/", search: "?page=randomPokemon" }}
-            className="flex items-center gap-3 rounded-lg border border-taupe-300 bg-taupe-50 p-4 hover:bg-taupe-100 transition-colors no-underline"
-          >
-            <span className="rounded-md bg-emerald-100 px-2 py-1 text-xs font-semibold text-emerald-800">
-              GET
-            </span>
-            <div>
-              <div className="font-mono text-sm text-taupe-900">
-                /randomPokemon
-              </div>
-              <div className="text-xs text-taupe-500">Fetch random Pokémon</div>
-            </div>
-          </Link>
-          <Link
-            to={{ pathname: "/", search: "?page=team" }}
-            className="flex items-center gap-3 rounded-lg border border-taupe-300 bg-taupe-50 p-4 hover:bg-taupe-100 transition-colors no-underline"
-          >
-            <span className="rounded-md bg-emerald-100 px-2 py-1 text-xs font-semibold text-emerald-800">
-              GET
-            </span>
-            <div>
-              <div className="font-mono text-sm text-taupe-900">/team</div>
-              <div className="text-xs text-taupe-500">Manage Pokémon teams</div>
-            </div>
-          </Link>
+            </Link>
+          ))}
         </div>
       </section>
     </article>
