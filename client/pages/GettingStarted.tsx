@@ -52,12 +52,12 @@ console.log(team.id); // UUID for your team`;
 const ENDPOINTS = [
   {
     endpoint: "evolution",
-    description: "Fetch evolution chain",
+    description: "Fetch or adjust evolution chain",
     methods: ["GET", "HEAD", "PATCH"],
   },
   {
     endpoint: "pokedex",
-    description: "Fetch all Pokémon",
+    description: "Fetch all Pokémon from the Pokédex",
     methods: ["GET", "HEAD"],
   },
   {
@@ -72,7 +72,7 @@ const ENDPOINTS = [
   },
   {
     endpoint: "team",
-    description: "Manage Pokémon teams",
+    description: "Fetch or create Pokémon teams",
     methods: ["GET", "HEAD", "POST"],
   },
 ];
