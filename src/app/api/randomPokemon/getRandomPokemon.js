@@ -1,4 +1,4 @@
-const { Pokedex } = require("../../../utils/pokedex");
+const { Pokedex } = require("../../../db/pokedex");
 
 async function getRandomPokemon(limit) {
   const pokedex = await Pokedex.getAll();
