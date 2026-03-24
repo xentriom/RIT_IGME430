@@ -2,12 +2,14 @@
   "name": "rit_igme430",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/app.js",
   "scripts": {
     "build": "webpack",
+    "dev": "npm run watch & npm run nodemon",
     "heroku-postbuild": "webpack --mode production",
-    "pretest": "eslint ./src --fix",
-    "start": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
+    "nodemon": "nodemon -e js,html,css --watch ./server --watch ./hosted ./server/app.js",
+    "pretest": "eslint ./server --fix",
+    "start": "node ./server/app.js",
     "test": "echo \"Tests complete\"",
     "watch": "webpack --watch"
   },
@@ -24,13 +26,24 @@
   },
   "homepage": "https://github.com/xentriom/RIT_IGME430#readme",
   "dependencies": {
-    "webpack": "^5.105.2",
-    "webpack-cli": "^6.0.1"
+    "bcrypt": "^6.0.0",
+    "compression": "^1.8.1",
+    "connect-redis": "^9.0.0",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "mongoose": "^8.19.3",
+    "redis": "^5.9.0",
+    "serve-favicon": "^2.5.1",
+    "underscore": "^1.13.7"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.0.0",
     "globals": "^17.3.0",
-    "nodemon": "^3.1.11"
+    "nodemon": "^3.1.10",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1"
   }
 }
