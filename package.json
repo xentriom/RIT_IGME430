@@ -2,12 +2,14 @@
   "name": "rit_igme430",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "build": "webpack",
+    "dev": "npm run watch && npm run nodemon",
     "heroku-postbuild": "webpack --mode production",
+    "nodemon": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
     "pretest": "eslint ./src --fix",
-    "start": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
+    "start": "node ./src/index.js",  
     "test": "echo \"Tests complete\"",
     "watch": "webpack --watch"
   },
