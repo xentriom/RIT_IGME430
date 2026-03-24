@@ -2,7 +2,7 @@
 const models = require('../models');
 
 // get the Cat model
-const { Cat } = models;
+const { Cat, Dog } = models;
 
 // Function to handle rendering the index page.
 const hostIndex = async (req, res) => {
@@ -95,9 +95,19 @@ const hostPage2 = (req, res) => {
   res.render('page2');
 };
 
-// Function to render the untemplated page3.
-const hostPage3 = (req, res) => {
+// Function to render page3 with the list of dogs.
+const hostPage3 = async (req, res) => {
   res.render('page3');
+};
+
+const hostPage4 = async (req, res) => {
+  try {
+    const docs = await Dog.find({}).sort({ createdDate: 'descending' }).lean().exec();
+    return res.render('page4', { dogs: docs });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'failed to find dogs' });
+  }
 };
 
 // Get name will return the name of the last added cat.
@@ -276,6 +286,54 @@ const updateLast = (req, res) => {
   });
 };
 
+const createDog = async (req, res) => {
+  if (!req.body.name || !req.body.breed || !req.body.age) {
+    return res.status(400).json({ error: 'name, breed and age are all required' });
+  }
+
+  // Create dog
+  const newDog = new Dog({
+    name: req.body.name,
+    breed: req.body.breed,
+    age: req.body.age,
+  });
+
+  try {
+    await newDog.save();
+    return res.status(201).json({ name: newDog.name, breed: newDog.breed, age: newDog.age });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'failed to create dog' });
+  }
+};
+
+const ageDog = async (req, res) => {
+  // Check for name
+  if (!req.body.name) {
+    return res.status(400).json({ error: 'name is required' });
+  }
+
+  // Check for dog
+  const dog = await Dog.findOne({ name: req.body.name }).exec();
+  if (!dog) {
+    return res.status(404).json({ error: 'dog not found' });
+  }
+
+  try {
+    // Update the dog age by 1 based on the dog's _id
+    const updatedDog = await Dog.findOneAndUpdate(
+      { _id: dog._id },
+      { $inc: { age: 1 } },
+      { returnDocument: 'after' },
+    ).lean().exec();
+
+    return res.status(200).json({ name: updatedDog.name, age: updatedDog.age });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'failed to age dog' });
+  }
+}
+
 // A function to send back the 404 page.
 const notFound = (req, res) => {
   res.status(404).render('notFound', {
@@ -289,9 +347,12 @@ module.exports = {
   page1: hostPage1,
   page2: hostPage2,
   page3: hostPage3,
+  page4: hostPage4,
   getName,
   setName,
   updateLast,
   searchName,
+  createDog,
+  ageDog,
   notFound,
 };
