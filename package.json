@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint ./src --fix",
+    "pretest": "eslint ./server --fix",
     "dev": "nodemon --watch ./server ./server/app.js",
     "start": "node ./server/app.js",
     "test": "echo \"Tests complete\""
