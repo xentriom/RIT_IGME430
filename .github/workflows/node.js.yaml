@@ -6,9 +6,9 @@ name: Node.js CI
 on:
   workflow_dispatch:
   push:
-    branches: [ "master", "main", "domomaker-a" ]
+    branches: [ "master", "main", "domomaker-b" ]
   pull_request:
-    branches: [ "master", "main", "domomaker-a" ]
+    branches: [ "master", "main", "domomaker-b" ]
 
 jobs:
   build:
