@@ -80,8 +80,43 @@ const SignupWindow = (props) => {
   );
 };
 
-const DomoCard = (props) => {
-  const domo = props.domo;
+const DomoList = () => {
+  const [domos, setDomos] = React.useState([]);
+
+  React.useEffect(() => {
+    const loadDomosFromServer = async () => {
+      const res = await fetch("/getAllPublicDomos");
+      const data = await res.json();
+      setDomos(data.domos);
+    };
+    loadDomosFromServer();
+  }, []);
+
+  if (domos.length === 0) {
+    return <div>No domos are made public yet!</div>;
+  }
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <h3 style={{ marginBlockStart: "0px", marginBlockEnd: "0px" }}>Public Domos:</h3>
+      <ul
+        className="domoList"
+        style={{
+          marginBlockStart: "0px",
+          marginBlockEnd: "0px",
+          listStyleType: "none",
+          paddingInlineStart: "10px",
+        }}
+      >
+        {domos.map((domo) => (
+          <DomoCard key={domo._id} domo={domo} />
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+const DomoCard = ({ domo }) => {
   const [owner, setOwner] = React.useState(null);
 
   React.useEffect(() => {
@@ -96,14 +131,21 @@ const DomoCard = (props) => {
   return (
     <li
       key={domo._id}
-      style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px" }}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: "10px",
+        marginTop: "0.5rem",
+        marginBottom: "0.5rem",
+      }}
     >
       <img
         src="/assets/img/domoface.jpeg"
         alt="domo face"
         style={{ width: "25px", height: "25px", borderRadius: "4px" }}
       />
-      <p>
+      <p style={{ marginBlockStart: "0px", marginBlockEnd: "0px" }}>
         {domo.name} is {domo.age} years old, created by {owner} on{" "}
         {new Date(domo.createdDate).toLocaleDateString()}
       </p>
@@ -112,39 +154,10 @@ const DomoCard = (props) => {
 };
 
 const App = ({ auth }) => {
-  const [domos, setDomos] = React.useState([]);
-
-  React.useEffect(() => {
-    const loadDomosFromServer = async () => {
-      const res = await fetch("/getAllPublicDomos");
-      const data = await res.json();
-      setDomos(data.domos);
-    };
-    loadDomosFromServer();
-  }, []);
-
   return (
     <React.Fragment>
       {auth === "login" ? <LoginWindow /> : <SignupWindow />}
-      {domos.length > 0 ? (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <h3 style={{ marginBlockStart: "0px", marginBlockEnd: "0px" }}>Public Domos:</h3>
-          <ul
-            style={{
-              marginBlockStart: "0px",
-              marginBlockEnd: "0px",
-              listStyleType: "none",
-              paddingInlineStart: "10px",
-            }}
-          >
-            {domos.map((domo) => (
-              <DomoCard key={domo._id} domo={domo} />
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div>No domos are made public yet!</div>
-      )}
+      <DomoList />
     </React.Fragment>
   );
 };
