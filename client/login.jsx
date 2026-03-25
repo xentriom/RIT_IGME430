@@ -90,7 +90,7 @@ const DomoList = () => {
       setDomos(data.domos);
     };
     loadDomosFromServer();
-  }, []);
+  });
 
   if (domos.length === 0) {
     return <div>No domos are made public yet!</div>;
