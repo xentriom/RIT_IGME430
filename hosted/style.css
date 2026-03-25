@@ -55,15 +55,25 @@ nav:nth-child(1) {
 .domoForm {
   border: 2px solid #338acc;
   height: 35px;
-  width: 700px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   margin-top: 0px;
   padding-top: 10px;
+  padding-bottom: 10px;
   background-color: #55acee;
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
 }
 
 .domoForm label {
+  font-size: 1.2em;
+  color: white;
+}
+
+/* .domoForm label {
   display: inline-block;
   width: 75px;
   margin-left: 10px;
@@ -74,7 +84,7 @@ nav:nth-child(1) {
 
 .domoForm input[type="text"] {
   float: left;
-}
+} */
 
 .makeDomoSubmit {
   transition: background-color 0.4s ease;

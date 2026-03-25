@@ -13,6 +13,7 @@ const makeDomo = async (req, res) => {
     name: req.body.name,
     age: req.body.age,
     owner: req.session.account._id,
+    isPublic: req.body?.isPublic ?? true,
   };
 
   try {

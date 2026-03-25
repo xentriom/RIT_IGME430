@@ -8,13 +8,14 @@ const handleDomo = (e, onDomoAdded) => {
 
   const name = e.target.querySelector("#domoName").value;
   const age = e.target.querySelector("#domoAge").value;
+  const isPublic = e.target.querySelector("#isPublic").value === "true";
 
   if (!name || !age) {
     helper.handleError("Both name and age are required");
     return false;
   }
 
-  helper.sendPost(e.target.action, { name, age }, onDomoAdded);
+  helper.sendPost(e.target.action, { name, age, isPublic }, onDomoAdded);
   return false;
 };
 
@@ -39,10 +40,21 @@ const DomoForm = (props) => {
       method="POST"
       className="domoForm"
     >
-      <label htmlFor="name">Name: </label>
-      <input type="text" id="domoName" name="name" placeholder="Domo Name" />
-      <label htmlFor="age">Age: </label>
-      <input type="number" id="domoAge" name="age" min="0" />
+      <div>
+        <label htmlFor="name">Name: </label>
+        <input type="text" id="domoName" name="name" placeholder="Domo Name" />
+      </div>
+      <div>
+        <label htmlFor="age">Age: </label>
+        <input type="number" id="domoAge" name="age" min="0" />
+      </div>
+      <div>
+        <label htmlFor="isPublic">Visibility: </label>
+        <select id="isPublic" name="isPublic">
+          <option value="true">Public</option>
+          <option value="false">Private</option>
+        </select>
+      </div>
       <input className="makeDomoSubmit" type="submit" value="Make Domo" />
     </form>
   );
