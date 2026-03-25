@@ -1,31 +1,31 @@
-const models = require('../models');
+const models = require("../models");
 const Account = models.Account;
 
 const loginPage = (req, res) => {
-  return res.render('login');
+  return res.render("login");
 };
 
 const logout = (req, res) => {
   req.session.destroy();
-  return res.redirect('/');
+  return res.redirect("/");
 };
 
 const login = (req, res) => {
   const username = req.body.username;
   const password = req.body.pass;
 
-  if(!username || !password) {
-    return res.status(400).json({error: 'All fields are required!'});
+  if (!username || !password) {
+    return res.status(400).json({ error: "All fields are required!" });
   }
 
   return Account.authenticate(username, password, (err, account) => {
-    if(err || !account) {
-      return res.status(401).json({error: 'Wrong username or password!'});
+    if (err || !account) {
+      return res.status(401).json({ error: "Wrong username or password!" });
     }
 
     req.session.account = Account.toAPI(account);
 
-    return res.json({redirect: '/maker'});
+    return res.json({ redirect: "/maker" });
   });
 };
 
@@ -34,26 +34,26 @@ const signup = async (req, res) => {
   const password = req.body.pass;
   const password2 = req.body.pass2;
 
-  if(!username || !password || !password2) {
-    return res.status(400).json({error: 'All fields are required!'});
+  if (!username || !password || !password2) {
+    return res.status(400).json({ error: "All fields are required!" });
   }
 
-  if(password !== password2) {
-    return res.status(400).json({error: 'Passwords do not match!'});
+  if (password !== password2) {
+    return res.status(400).json({ error: "Passwords do not match!" });
   }
 
   try {
     const hash = await Account.generateHash(password);
-    const newAccount = new Account({username, password: hash});
+    const newAccount = new Account({ username, password: hash });
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
-    return res.json({redirect: '/maker'});
+    return res.json({ redirect: "/maker" });
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
-      return res.status(400).json({error: 'Username already in use!'});
+      return res.status(400).json({ error: "Username already in use!" });
     }
-    return res.status(400).json({error: 'An error occurred'});
+    return res.status(400).json({ error: "An error occurred" });
   }
 };
 

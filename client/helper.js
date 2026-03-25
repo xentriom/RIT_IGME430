@@ -3,8 +3,8 @@
    end in an error.
 */
 const handleError = (message) => {
-  document.getElementById('errorMessage').textContent = message;
-  document.getElementById('domoMessage').classList.remove('hidden');
+  document.getElementById("errorMessage").textContent = message;
+  document.getElementById("domoMessage").classList.remove("hidden");
 };
 
 /* Sends post requests to the server using fetch. Will look for various
@@ -12,32 +12,32 @@ const handleError = (message) => {
 */
 const sendPost = async (url, data, handler) => {
   const response = await fetch(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
 
   const result = await response.json();
-  document.getElementById('domoMessage').classList.add('hidden');
+  document.getElementById("domoMessage").classList.add("hidden");
 
-  if(result.redirect) {
+  if (result.redirect) {
     window.location = result.redirect;
   }
 
-  if(result.error) {
+  if (result.error) {
     handleError(result.error);
   }
 
-  if(handler) {
+  if (handler) {
     handler(result);
   }
 };
 
 const hideError = () => {
-  document.getElementById('domoMessage').classList.add('hidden');
-}
+  document.getElementById("domoMessage").classList.add("hidden");
+};
 
 module.exports = {
   handleError,
