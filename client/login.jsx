@@ -108,9 +108,11 @@ const DomoList = () => {
           paddingInlineStart: "10px",
         }}
       >
-        {domos.map((domo) => (
-          <DomoCard key={domo._id} domo={domo} />
-        ))}
+        {[...domos]
+          .sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate))
+          .map((domo) => (
+            <DomoCard key={domo._id} domo={domo} />
+          ))}
       </ul>
     </div>
   );
