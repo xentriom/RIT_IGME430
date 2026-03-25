@@ -80,6 +80,75 @@ const SignupWindow = (props) => {
   );
 };
 
+const DomoCard = (props) => {
+  const domo = props.domo;
+  const [owner, setOwner] = React.useState(null);
+
+  React.useEffect(() => {
+    const loadOwnerFromServer = async () => {
+      const res = await fetch(`/getOwnerName/${domo.owner}`);
+      const data = await res.json();
+      setOwner(data.owner);
+    };
+    loadOwnerFromServer();
+  }, [domo]);
+
+  return (
+    <li
+      key={domo._id}
+      style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px" }}
+    >
+      <img
+        src="/assets/img/domoface.jpeg"
+        alt="domo face"
+        style={{ width: "25px", height: "25px", borderRadius: "4px" }}
+      />
+      <p>
+        {domo.name} is {domo.age} years old, created by {owner} on{" "}
+        {new Date(domo.createdDate).toLocaleDateString()}
+      </p>
+    </li>
+  );
+};
+
+const App = ({ auth }) => {
+  const [domos, setDomos] = React.useState([]);
+
+  React.useEffect(() => {
+    const loadDomosFromServer = async () => {
+      const res = await fetch("/getAllPublicDomos");
+      const data = await res.json();
+      setDomos(data.domos);
+    };
+    loadDomosFromServer();
+  }, []);
+
+  return (
+    <React.Fragment>
+      {auth === "login" ? <LoginWindow /> : <SignupWindow />}
+      {domos.length > 0 ? (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <h3 style={{ marginBlockStart: "0px", marginBlockEnd: "0px" }}>Public Domos:</h3>
+          <ul
+            style={{
+              marginBlockStart: "0px",
+              marginBlockEnd: "0px",
+              listStyleType: "none",
+              paddingInlineStart: "10px",
+            }}
+          >
+            {domos.map((domo) => (
+              <DomoCard key={domo._id} domo={domo} />
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div>No domos are made public yet!</div>
+      )}
+    </React.Fragment>
+  );
+};
+
 const init = () => {
   const loginButton = document.getElementById("loginButton");
   const signupButton = document.getElementById("signupButton");
@@ -88,17 +157,17 @@ const init = () => {
 
   loginButton.addEventListener("click", (e) => {
     e.preventDefault();
-    root.render(<LoginWindow />);
+    root.render(<App auth="login" />);
     return false;
   });
 
   signupButton.addEventListener("click", (e) => {
     e.preventDefault();
-    root.render(<SignupWindow />);
+    root.render(<App auth="signup" />);
     return false;
   });
 
-  root.render(<LoginWindow />);
+  root.render(<App auth="login" />);
 };
 
 window.onload = init;

@@ -3,7 +3,10 @@ const mid = require("./middleware");
 
 const router = (app) => {
   app.get("/getDomos", mid.requiresLogin, controllers.Domo.getDomos);
-  
+  app.get("/getAllPublicDomos", mid.requiresSecure, controllers.Domo.getAllPublicDomos);
+  app.post("/updateDomoVisibility", mid.requiresLogin, controllers.Domo.updateDomoVisibility);
+  app.get("/getOwnerName/:ownerId", mid.requiresSecure, controllers.Account.getOwnerName);
+
   app.get("/login", mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post("/login", mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
 

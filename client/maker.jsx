@@ -8,7 +8,7 @@ const handleDomo = (e, onDomoAdded) => {
 
   const name = e.target.querySelector("#domoName").value;
   const age = e.target.querySelector("#domoAge").value;
-  
+
   if (!name || !age) {
     helper.handleError("Both name and age are required");
     return false;
@@ -16,11 +16,23 @@ const handleDomo = (e, onDomoAdded) => {
 
   helper.sendPost(e.target.action, { name, age }, onDomoAdded);
   return false;
-}
+};
+
+const updateDomoVisibility = (e, onDomoUpdated) => {
+  e.preventDefault();
+  helper.hideError();
+
+  const id = e.target.querySelector("#_id").value;
+  const isPublic = e.target.querySelector("#isPublic").value === "true";
+
+  helper.sendPost(e.target.action, { _id: id, isPublic: !isPublic }, onDomoUpdated);
+  return false;
+};
 
 const DomoForm = (props) => {
   return (
-    <form id="domoForm"
+    <form
+      id="domoForm"
       onSubmit={(e) => handleDomo(e, props.triggerReload)}
       name="domoForm"
       action="/maker"
@@ -30,11 +42,11 @@ const DomoForm = (props) => {
       <label htmlFor="name">Name: </label>
       <input type="text" id="domoName" name="name" placeholder="Domo Name" />
       <label htmlFor="age">Age: </label>
-      <input type="number" id="domoAge" name='age' min='0' />
-      <input className='makeDomoSubmit' type='submit' value="Make Domo" />
+      <input type="number" id="domoAge" name="age" min="0" />
+      <input className="makeDomoSubmit" type="submit" value="Make Domo" />
     </form>
-  )
-}
+  );
+};
 
 const DomoList = (props) => {
   const [domos, setDomos] = React.useState(props.domos);
@@ -46,46 +58,59 @@ const DomoList = (props) => {
       setDomos(data.domos);
     };
     loadDomosFromServer();
-  }, [props.domos]);
+  }, [props.reloadDomos]);
 
   if (domos.length === 0) {
     return (
       <div className="domoList">
         <h3 className="emptyDomo">No Domos yet!</h3>
       </div>
-    )
+    );
   }
 
   return (
     <div className="domoList">
       {domos.map((domo) => (
-        <div key={domo._id} className="domo">
+        <form
+          key={domo._id}
+          onSubmit={(e) => updateDomoVisibility(e, props.triggerReload)}
+          name="visibilityForm"
+          action="/updateDomoVisibility"
+          method="POST"
+          className="domo"
+        >
+          {/* Hidden inputs to send the id and isPublic to the server */}
+          <input type="hidden" id="_id" value={domo._id} />
+          <input type="hidden" id="isPublic" value={domo.isPublic} />
+
           <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
           <h3 className="domoName">Name: {domo.name}</h3>
           <h3 className="domoAge">Age: {domo.age}</h3>
-        </div>
+          <input type="submit" value={`Make ${domo.isPublic ? "Private" : "Public"}`} />
+        </form>
       ))}
     </div>
-  )
-}
+  );
+};
 
 const App = () => {
   const [reloadDomos, setReloadDomos] = React.useState(false);
+  const triggerReload = () => setReloadDomos(!reloadDomos);
 
   return (
     <div>
       <div id="makeDomo">
-        <DomoForm triggerReload={() => setReloadDomos(!reloadDomos)} />
+        <DomoForm triggerReload={triggerReload} />
       </div>
       <div id="domos">
-        <DomoList domos={[]} reloadDomos={reloadDomos} />
+        <DomoList domos={[]} reloadDomos={reloadDomos} triggerReload={triggerReload} />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const init = () => {
-  const root = createRoot(document.getElementById('app'));
+  const root = createRoot(document.getElementById("app"));
   root.render(<App />);
 };
 

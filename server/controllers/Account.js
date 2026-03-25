@@ -57,9 +57,24 @@ const signup = async (req, res) => {
   }
 };
 
+const getOwnerName = async (req, res) => {
+  if (!req.params.ownerId) {
+    return res.status(400).json({ error: "Owner ID is required!" });
+  }
+
+  try {
+    const owner = await Account.findById(req.params.ownerId).select("username").lean().exec();
+    return res.json({ owner: owner.username });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ error: "An error occurred" });
+  }
+};
+
 module.exports = {
   loginPage,
   logout,
   login,
   signup,
+  getOwnerName,
 };

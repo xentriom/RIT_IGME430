@@ -9,8 +9,8 @@
 /******/ (() => {
   // webpackBootstrap
   /******/ var __webpack_modules__ = {
-    /***/ "./client/client.js" () {
-    /*!**************************!*\
+    /***/ "./client/client.js"() {
+      /*!**************************!*\
   !*** ./client/client.js ***!
   \**************************/
       eval(

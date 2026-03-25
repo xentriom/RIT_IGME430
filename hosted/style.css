@@ -99,10 +99,10 @@ nav:nth-child(1) {
 }
 
 .mainForm {
-  height: 300px;
+  height: 200px;
   width: 350px;
   margin: 0 auto;
-  padding-top: 350px;
+  padding-top: 250px;
   font-size: 1.2em;
 }
 
