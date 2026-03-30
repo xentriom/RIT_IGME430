@@ -15,11 +15,6 @@ const RelationshipSchema = new mongoose.Schema({
     ref: "Account",
     index: true,
   },
-  createdDate: {
-    type: Date,
-    default: Date.now,
-    index: true,
-  },
 });
 
 RelationshipSchema.index({ follower: 1, following: 1 }, { unique: true });
@@ -28,7 +23,6 @@ RelationshipSchema.statics.toAPI = (doc) => ({
   _id: doc._id,
   follower: doc.follower,
   following: doc.following,
-  createdDate: doc.createdDate,
 });
 
 RelationshipSchema.statics.follow = async (followerId, followingId) => {
