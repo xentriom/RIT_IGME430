@@ -11,9 +11,7 @@ const logout = (req, res) => {
 };
 
 const login = (req, res) => {
-  const username = req.body.username;
-  const password = req.body.pass;
-
+  const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ error: "All fields are required!" });
   }
@@ -24,21 +22,17 @@ const login = (req, res) => {
     }
 
     req.session.account = Account.toAPI(account);
-
     return res.json({ redirect: "/app" });
   });
 };
 
 const signup = async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.pass;
-  const password2 = req.body.pass2;
-
-  if (!username || !password || !password2) {
+  const { username, password, repeatPassword } = req.body;
+  if (!username || !password || !repeatPassword) {
     return res.status(400).json({ error: "All fields are required!" });
   }
 
-  if (password !== password2) {
+  if (password !== repeatPassword) {
     return res.status(400).json({ error: "Passwords do not match!" });
   }
 

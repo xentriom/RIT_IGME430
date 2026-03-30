@@ -36,8 +36,12 @@ const dmsPage = (req, res) => {
 };
 
 const authPage = (req, res) => {
+  const type = String(req.params.type ?? "login")
+    .trim()
+    .toLowerCase();
   res.render("auth", {
     title: "Auth",
+    type,
   });
 };
 
