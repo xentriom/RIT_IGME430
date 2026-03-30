@@ -23,7 +23,6 @@ const profilePage = (req, res) => {
 
 const dmsPage = (req, res) => {
   const userId = String(req.params.id ?? "").trim();
-  console.log("test", userId);
   if (!userId) return res.redirect("/app");
 
   // Fetch username based on userId
