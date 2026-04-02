@@ -1,8 +1,15 @@
 import { useState, useTransition } from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/card";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "../../../components/ui/card";
+import { Label } from "../../../components/ui/label";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
+import { Spinner } from "../../../components/ui/spinner";
 
 export function ForgotPasswordForm() {
   const [isPending, startTransition] = useTransition();
@@ -18,7 +25,7 @@ export function ForgotPasswordForm() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="mx-auto w-full max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Reset Your Password</CardTitle>
         <CardDescription>Enter your username below to reset your password</CardDescription>
@@ -31,7 +38,7 @@ export function ForgotPasswordForm() {
               <Input
                 id="username"
                 type="text"
-                placeholder="Enter your username"
+                placeholder="abc123"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -39,12 +46,13 @@ export function ForgotPasswordForm() {
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
             <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending && <Spinner data-icon="inline-start" />}
               Reset Password
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
-            <a href="/auth/login" className="underline-offset-4 underline">
+            <a href="/auth/login" className="underline underline-offset-4">
               Login
             </a>
           </div>
