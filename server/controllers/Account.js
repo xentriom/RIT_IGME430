@@ -7,7 +7,7 @@ const loginPage = (req, res) => {
 
 const logout = (req, res) => {
   req.session.destroy();
-  return res.redirect("/auth");
+  return res.redirect("/auth/login");
 };
 
 const login = (req, res) => {
@@ -22,7 +22,7 @@ const login = (req, res) => {
     }
 
     req.session.account = Account.toAPI(account);
-    return res.json({ redirect: "/app" });
+    return res.json({ redirect: "/" });
   });
 };
 
@@ -41,28 +41,25 @@ const signup = async (req, res) => {
     const newAccount = new Account({ username, password: hash });
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
-    return res.json({ redirect: "/app" });
+    return res.json({ redirect: "/" });
   } catch (err) {
-    console.log(err);
     if (err.code === 11000) {
       return res.status(400).json({ error: "Username already in use!" });
     }
-    return res.status(400).json({ error: "An error occurred" });
+
+    if (err.name === "ValidationError" && err.errors) {
+      const first = Object.values(err.errors)[0];
+      return res.status(400).json({
+        error: first?.message ?? err.message,
+      });
+    }
+
+    return res.status(500).json({ error: "An error occurred" });
   }
 };
 
-const getOwnerName = async (req, res) => {
-  if (!req.params.ownerId) {
-    return res.status(400).json({ error: "Owner ID is required!" });
-  }
-
-  try {
-    const owner = await Account.findById(req.params.ownerId).select("username").lean().exec();
-    return res.json({ owner: owner.username });
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json({ error: "An error occurred" });
-  }
+const getSession = (req, res) => {
+  return res.json(req.session.account || null);
 };
 
 module.exports = {
@@ -70,5 +67,5 @@ module.exports = {
   logout,
   login,
   signup,
-  getOwnerName,
+  getSession,
 };
