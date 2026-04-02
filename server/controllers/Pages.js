@@ -4,12 +4,6 @@ const webPage = (_req, res) => {
   res.render("web");
 };
 
-const appPage = (_req, res) => {
-  res.render("app", {
-    title: "Home",
-  });
-};
-
 const profilePage = async (req, res) => {
   const username = req.params.username ?? "".trim();
   if (!username) return res.redirect("/app");
@@ -19,19 +13,6 @@ const profilePage = async (req, res) => {
 
   res.render("profile", {
     username: account.username,
-  });
-};
-
-const dmsPage = (req, res) => {
-  const userId = String(req.params.id ?? "").trim();
-  if (!userId) return res.redirect("/app");
-
-  // Fetch username based on userId
-  const username = "Demo";
-
-  res.render("chat", {
-    userId: userId,
-    username: username,
   });
 };
 
