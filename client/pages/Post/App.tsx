@@ -32,44 +32,33 @@ export default function App() {
   const [isRepliesPending, startRepliesTransition] = useTransition();
   const [post, setPost] = useState<PostType | null>(null);
   const [replies, setReplies] = useState<PostType[]>([]);
-  const [loadError, setLoadError] = useState<string | null>(null);
-  const [likeCount, setLikeCount] = useState(0);
-  const [likedByMe, setLikedByMe] = useState(false);
   const [isLikePending, startLikeTransition] = useTransition();
 
   useEffect(() => {
     if (!postId) {
-      setLoadError("Invalid post");
       return;
     }
-
-    let cancelled = false;
-    setLoadError(null);
 
     startPostTransition(async () => {
       const res = await fetch(`/posts/${postId}`, {
         credentials: "same-origin",
         headers: { Accept: "application/json" },
       });
-      if (cancelled) return;
+
       if (!res.ok) {
         setPost(null);
         setReplies([]);
-        setLoadError(res.status === 404 ? "Post not found" : "Something went wrong");
         return;
       }
+
       const data = (await res.json()) as PostType;
       setPost(data);
-      setLikeCount(data.likeCount ?? 0);
-      setLikedByMe(!!data.likedByMe);
-      setLoadError(null);
 
       startRepliesTransition(async () => {
         const repliesRes = await fetch(`/posts/${postId}/replies`, {
           credentials: "same-origin",
           headers: { Accept: "application/json" },
         });
-        if (cancelled) return;
         if (!repliesRes.ok) {
           setReplies([]);
           return;
@@ -78,55 +67,39 @@ export default function App() {
         setReplies(repliesData);
       });
     });
-
-    return () => {
-      cancelled = true;
-    };
   }, [postId]);
-
-  useEffect(() => {
-    if (!post) return;
-    setLikeCount(post.likeCount ?? 0);
-    setLikedByMe(!!post.likedByMe);
-  }, [post?._id, post?.likeCount, post?.likedByMe]);
 
   const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
     if (!post || !isLoggedIn) return;
 
-    const prevCount = likeCount;
-    const prevLiked = likedByMe;
-    setLikedByMe(!prevLiked);
-    setLikeCount(prevLiked ? prevCount - 1 : prevCount + 1);
+    const prev = post;
+    const wasLiked = !!prev.likedByMe;
+    const n = prev.likeCount ?? 0;
+    setPost({
+      ...prev,
+      likedByMe: !wasLiked,
+      likeCount: wasLiked ? n - 1 : n + 1,
+    });
 
     startLikeTransition(async () => {
       try {
-        const res = await fetch(`/posts/${String(post._id)}/like`, {
+        const res = await fetch(`/posts/${String(prev._id)}/like`, {
           method: "POST",
           credentials: "same-origin",
           headers: { Accept: "application/json" },
         });
         if (!res.ok) {
-          setLikeCount(prevCount);
-          setLikedByMe(prevLiked);
+          setPost(prev);
           return;
         }
         const data = (await res.json()) as { likeCount: number; likedByMe: boolean };
-        setLikeCount(data.likeCount);
-        setLikedByMe(data.likedByMe);
         setPost((p) => (p ? { ...p, likeCount: data.likeCount, likedByMe: data.likedByMe } : p));
       } catch {
-        setLikeCount(prevCount);
-        setLikedByMe(prevLiked);
+        setPost(prev);
       }
     });
-  };
-
-  const scrollToReplyComposer = () => {
-    document
-      .getElementById("reply-composer")
-      ?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   };
 
   return (
@@ -141,9 +114,7 @@ export default function App() {
             <ArrowLeft className="size-4" />
             Post
           </div>
-          {loadError ? (
-            <div className="p-4 text-muted-foreground">{loadError}</div>
-          ) : isPostPending && !post ? (
+          {isPostPending && !post ? (
             <div className="p-4">Loading...</div>
           ) : post ? (
             <>
@@ -181,7 +152,6 @@ export default function App() {
                     <button
                       type="button"
                       className="flex flex-row items-center gap-1 rounded-md py-1 hover:text-foreground"
-                      onClick={scrollToReplyComposer}
                     >
                       <MessageCircle className="size-4" />
                       <span className="tabular-nums">{post.replyCount ?? 0}</span>
@@ -189,13 +159,13 @@ export default function App() {
                     <button
                       type="button"
                       className={`flex flex-row items-center gap-1 rounded-md py-1 hover:text-rose-400 ${
-                        likedByMe ? "text-rose-400" : ""
+                        post.likedByMe ? "text-rose-400" : ""
                       }`}
                       disabled={!isLoggedIn || isLikePending}
                       onClick={toggleLike}
                     >
-                      <Heart className={`size-4 ${likedByMe ? "fill-current" : ""}`} />
-                      <span className="tabular-nums">{likeCount}</span>
+                      <Heart className={`size-4 ${post.likedByMe ? "fill-current" : ""}`} />
+                      <span className="tabular-nums">{post.likeCount ?? 0}</span>
                     </button>
                     <button
                       type="button"
@@ -211,7 +181,7 @@ export default function App() {
               </div>
             </>
           ) : null}
-          {!loadError && post ? (
+          {post ? (
             <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto pb-8">
               {isRepliesPending ? (
                 <div className="p-4">Loading...</div>
