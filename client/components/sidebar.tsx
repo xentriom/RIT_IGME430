@@ -29,57 +29,68 @@ import {
 } from "./ui/dropdown-menu";
 import { useContext } from "react";
 import { SessionContext } from "../contexts/session";
+import { cn } from "../lib/utils";
 
 const sidebarItems = [
   {
     icon: HomeIcon,
     label: "Home",
     href: "/",
+    showOnMobile: true,
   },
   {
     icon: SearchIcon,
     label: "Explore",
     href: "/",
+    showOnMobile: true,
   },
   {
     icon: BellIcon,
     label: "Notifications",
     href: "/",
+    showOnMobile: false,
   },
   {
     icon: UserPlusIcon,
     label: "Follow",
     href: "/",
+    showOnMobile: false,
   },
   {
     icon: MessageCircleIcon,
     label: "Chat",
     href: "/",
+    showOnMobile: true,
   },
   {
     icon: SparklesIcon,
     label: "Myna",
     href: "/",
+    showOnMobile: true,
   },
   {
     icon: BookmarkIcon,
     label: "Bookmarks",
     href: "/",
+    showOnMobile: false,
   },
   {
     icon: RocketIcon,
     label: "Creator Studio",
     href: "/",
+    showOnMobile: false,
   },
   {
     icon: CrownIcon,
     label: "Premium",
     href: "/premium",
+    showOnMobile: true,
   },
   {
     icon: UserIcon,
     label: "Profile",
     href: "/profile",
+    showOnMobile: true,
   },
 ];
 
@@ -87,16 +98,21 @@ export function Sidebar() {
   const { isLoggedIn, session } = useContext(SessionContext);
 
   return (
-    <div className="flex flex-col items-center overflow-y-hidden px-2 py-4">
-      <div className="flex flex-col gap-4">
-        <div className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary select-none">
+    <div className="flex flex-row items-center overflow-y-hidden border-border px-2 py-4 max-sm:border-t sm:flex-col">
+      <div className="flex flex-row gap-4 max-sm:flex-1 sm:flex-col">
+        <div className="hidden size-9 shrink-0 items-center justify-center rounded-lg bg-primary select-none sm:inline-flex">
           C
         </div>
-        <div className="flex flex-col gap-0.5">
+        <div className="flex flex-row items-center gap-0.5 max-sm:w-full max-sm:justify-evenly sm:flex-col">
           {sidebarItems.map((item) => (
             <Tooltip key={item.href}>
               <TooltipTrigger asChild>
-                <Button variant="ghost" size="icon-lg" asChild>
+                <Button
+                  variant="ghost"
+                  size="icon-lg"
+                  className={cn(!item.showOnMobile && "hidden sm:inline-flex")}
+                  asChild
+                >
                   <a href={item.href}>
                     <item.icon className="size-5" />
                   </a>
@@ -107,7 +123,7 @@ export function Sidebar() {
           ))}
         </div>
       </div>
-      <div className="mt-auto">
+      <div className="ml-auto sm:mt-auto">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar>

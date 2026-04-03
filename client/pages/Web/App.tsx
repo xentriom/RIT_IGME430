@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
-      <div className="mx-auto flex h-full w-full max-w-5xl flex-row border-x border-border">
+      <div className="mx-auto flex h-full w-full max-w-5xl flex-col-reverse border-x border-border sm:flex-row">
         <Sidebar />
         <div className="flex min-h-0 flex-1 flex-col border-x border-border">
           {/* <Header /> */}
