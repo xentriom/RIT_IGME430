@@ -18,6 +18,7 @@ const router = (app) => {
 
   // Auth
   app.get("/auth/logout", mid.requiresLogin, controllers.Account.logout);
+  app.get("/auth/:type", mid.requiresSecure, mid.requiresLogout, controllers.Pages.authPage);
   app.post("/auth/login", mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post("/auth/signup", mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.get("/api/session", mid.requiresSecure, controllers.Account.getSession);
