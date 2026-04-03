@@ -123,7 +123,7 @@ export default function App() {
     <div className="flex h-dvh flex-col overflow-hidden">
       <div className="mx-auto flex h-full w-full max-w-5xl flex-col-reverse border-x border-border sm:flex-row">
         <Sidebar />
-        <div className="flex min-h-0 flex-1 flex-col border-x border-border">
+        <div className="flex min-h-0 flex-1 flex-col border-border sm:border-x">
           <div
             className="flex cursor-pointer flex-row items-center gap-4 p-4 pb-0 text-lg font-bold"
             onClick={() => history.back()}
