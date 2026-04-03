@@ -78,13 +78,17 @@ PostSchema.statics.findRecentWithOwner = (limit = 50) =>
 // this wouldve been so much easier if we used a sql database...
 // headache inducing and documentation sourcing
 PostSchema.statics.findRecentFeedForViewer = async (viewerId, followingIds, limit = 50) => {
-  // Filter for posts visible to the viewer
-  const visibilityMatch = viewerId
+  const viewerOid = viewerId ? new mongoose.Types.ObjectId(String(viewerId)) : null;
+  const followingOids = (followingIds ?? []).map((id) =>
+    id instanceof mongoose.Types.ObjectId ? id : new mongoose.Types.ObjectId(String(id)),
+  );
+
+  const visibilityMatch = viewerOid
     ? {
         $or: [
           { "ownerArr.isPublic": { $ne: false } },
-          { "ownerArr._id": viewerId },
-          { "ownerArr._id": { $in: followingIds } },
+          { "ownerArr._id": viewerOid },
+          { "ownerArr._id": { $in: followingOids } },
         ],
       }
     : { "ownerArr.isPublic": { $ne: false } };
