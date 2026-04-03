@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 let PostModel = {};
 
+const ownerPopulateFields = "username plan displayName bio isPublic";
+
 const PostSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -68,22 +70,72 @@ PostSchema.statics.findRecentWithOwner = (limit = 50) =>
   PostModel.find({ parent: null })
     .sort({ createdDate: -1 })
     .limit(limit)
-    .populate("owner", "username plan displayName bio")
+    .populate("owner", ownerPopulateFields)
     .lean()
     .exec();
+
+// since you read all code....
+// this wouldve been so much easier if we used a sql database...
+// headache inducing and documentation sourcing
+PostSchema.statics.findRecentFeedForViewer = async (viewerId, followingIds, limit = 50) => {
+  // Filter for posts visible to the viewer
+  const visibilityMatch = viewerId
+    ? {
+        $or: [
+          { "ownerArr.isPublic": { $ne: false } },
+          { "ownerArr._id": viewerId },
+          { "ownerArr._id": { $in: followingIds } },
+        ],
+      }
+    : { "ownerArr.isPublic": { $ne: false } };
+
+  return PostModel.aggregate([
+    { $match: { parent: null } }, // only parent posts
+    { $sort: { createdDate: -1 } }, // sort by created date descending
+    {
+      $lookup: {
+        from: "accounts",
+        localField: "owner",
+        foreignField: "_id",
+        as: "ownerArr",
+      },
+    },
+    { $unwind: "$ownerArr" }, // unwind the owner array
+    { $match: visibilityMatch }, // match the visibility
+    { $limit: limit }, // limit the results
+    {
+      // project the results
+      $project: {
+        _id: 1,
+        body: 1,
+        parent: 1,
+        audience: 1,
+        createdDate: 1,
+        owner: {
+          _id: "$ownerArr._id",
+          username: "$ownerArr.username",
+          plan: "$ownerArr.plan",
+          displayName: "$ownerArr.displayName",
+          bio: "$ownerArr.bio",
+          isPublic: "$ownerArr.isPublic",
+        },
+      },
+    },
+  ]).exec();
+};
 
 // find replies with owner
 PostSchema.statics.findRepliesWithOwner = (parentId, limit = 200) =>
   PostModel.find({ parent: parentId })
     .sort({ createdDate: 1 })
     .limit(limit)
-    .populate("owner", "username plan displayName bio")
+    .populate("owner", ownerPopulateFields)
     .lean()
     .exec();
 
 // find post by id with owner
 PostSchema.statics.findByIdWithOwner = (id) =>
-  PostModel.findById(id).populate("owner", "username plan displayName bio").lean().exec();
+  PostModel.findById(id).populate("owner", ownerPopulateFields).lean().exec();
 
 // check if post exists by id
 PostSchema.statics.existsById = async (id) => {

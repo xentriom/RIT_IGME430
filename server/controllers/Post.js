@@ -2,6 +2,7 @@ const models = require("../models");
 
 const Post = models.Post;
 const Like = models.Like;
+const Relationship = models.Relationship;
 
 const DEFAULT_FEED_LIMIT = 50;
 const MAX_REPLY_LIMIT = 200;
@@ -22,6 +23,13 @@ const parseRequiredOidParam = (req, key) => {
 };
 
 const isPaidPlan = (plan) => typeof plan === "string" && plan !== "free";
+
+const canViewPrivateAuthor = async (owner, viewerId) => {
+  if (!owner || owner.isPublic !== false) return true;
+  if (!viewerId) return false;
+  if (String(owner._id) === String(viewerId)) return true;
+  return Relationship.isFollowing(viewerId, owner._id);
+};
 
 const enrichPosts = async (posts, viewerId) => {
   if (!posts.length) return [];
@@ -75,7 +83,8 @@ const getFeed = async (req, res) => {
 
   try {
     const viewerId = sessionAccountId(req);
-    const posts = await Post.findRecentWithOwner(limit);
+    const followingIds = viewerId ? await Relationship.findFollowingIds(viewerId) : [];
+    const posts = await Post.findRecentFeedForViewer(viewerId, followingIds, limit);
 
     const payload = await enrichPosts(posts, viewerId);
     return res.json(payload);
@@ -111,13 +120,21 @@ const getPostReplies = async (req, res) => {
   if (!postId) return res.status(400).json({ error: "Invalid post id" });
 
   try {
-    const parentExists = await Post.existsById(postId);
-    if (!parentExists) return res.status(404).json({ error: "Post not found" });
+    const parent = await Post.findByIdWithOwner(postId);
+    if (!parent) return res.status(404).json({ error: "Post not found" });
 
     const viewerId = sessionAccountId(req);
-    const replies = await Post.findRepliesWithOwner(postId, MAX_REPLY_LIMIT);
+    if (!(await canViewPrivateAuthor(parent.owner, viewerId))) {
+      return res.status(404).json({ error: "Post not found" });
+    }
 
-    const payload = await enrichPosts(replies, viewerId);
+    const replies = await Post.findRepliesWithOwner(postId, MAX_REPLY_LIMIT);
+    const visible = [];
+    for (const reply of replies) {
+      if (await canViewPrivateAuthor(reply.owner, viewerId)) visible.push(reply);
+    }
+
+    const payload = await enrichPosts(visible, viewerId);
     return res.json(payload);
   } catch {
     return res.status(500).json({ error: "An error occurred" });
@@ -135,8 +152,11 @@ const createReply = async (req, res) => {
   if (!body) return res.status(400).json({ error: "Reply body is required" });
 
   try {
-    const parentExists = await Post.existsById(postId);
-    if (!parentExists) return res.status(404).json({ error: "Post not found" });
+    const parent = await Post.findByIdWithOwner(postId);
+    if (!parent) return res.status(404).json({ error: "Post not found" });
+    if (!(await canViewPrivateAuthor(parent.owner, accountId))) {
+      return res.status(404).json({ error: "Post not found" });
+    }
 
     const created = await Post.createReply(postId, accountId, body);
     const reply = await Post.findByIdWithOwner(created._id);
@@ -169,8 +189,11 @@ const toggleLike = async (req, res) => {
   if (!accountId) return res.status(401).json({ error: "Unauthorized" });
 
   try {
-    const targetExists = await Post.existsById(targetId);
-    if (!targetExists) return res.status(404).json({ error: "Post not found" });
+    const target = await Post.findByIdWithOwner(targetId);
+    if (!target) return res.status(404).json({ error: "Post not found" });
+    if (!(await canViewPrivateAuthor(target.owner, accountId))) {
+      return res.status(404).json({ error: "Post not found" });
+    }
     return res.json(await toggleLikeById(targetId, accountId));
   } catch {
     return res.status(500).json({ error: "An error occurred" });
@@ -186,6 +209,10 @@ const getPost = async (req, res) => {
     if (!post) return res.status(404).json({ error: "Post not found" });
 
     const viewerId = sessionAccountId(req);
+    if (!(await canViewPrivateAuthor(post.owner, viewerId))) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
     const [enriched] = await enrichPosts([post], viewerId);
     return res.json(enriched ?? null);
   } catch {
