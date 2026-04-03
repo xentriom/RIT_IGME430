@@ -194,8 +194,8 @@ export default function App() {
                       ))}
                     </>
                   ) : (
-                    <div className="flex h-full flex-col items-center justify-center">
-                      <Empty>
+                    <div className="flex flex-col items-center py-8">
+                      <Empty className="flex-none">
                         <EmptyHeader>
                           <EmptyMedia variant="icon">
                             <MessageCircleIcon />
