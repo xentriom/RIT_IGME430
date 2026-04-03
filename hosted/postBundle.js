@@ -9278,7 +9278,7 @@
               (e[14] = p),
               (e[15] = m))
             : (m = e[15]);
-          const h = t ? `@${n.username}` : "000000000000000000000000";
+          const h = t ? `@${n.username}` : "@guestuser";
           let g, v, y, b, w, x, k, S, E, C, N, j;
           return (
             e[16] !== h

@@ -152,7 +152,7 @@ export function Sidebar() {
                     {isLoggedIn ? session.displayName : "Guest User"}
                   </span>
                   <span className="truncate text-xs">
-                    {isLoggedIn ? `@${session.username}` : "000000000000000000000000"}
+                    {isLoggedIn ? `@${session.username}` : "@guestuser"}
                   </span>
                 </div>
               </div>
