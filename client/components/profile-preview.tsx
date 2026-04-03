@@ -18,7 +18,7 @@ export function ProfilePreview({ username }: { username: string }) {
       const res = await fetch(`/api/users/${username}`);
       const data = await res.json();
       setAccount(data);
-      setFollowing(data.isFollowing);
+      setFollowing(Boolean(data.isFollowing));
     });
   }, [username]);
 
@@ -36,6 +36,11 @@ export function ProfilePreview({ username }: { username: string }) {
       if (!res.ok) return;
       const data = await res.json();
       setFollowing(data.isFollowing);
+      setAccount((prev) =>
+        prev
+          ? { ...prev, followersCount: data.followersCount, isFollowing: data.isFollowing }
+          : null,
+      );
     });
   };
 
@@ -67,11 +72,11 @@ export function ProfilePreview({ username }: { username: string }) {
       <p className="line-clamp-3">{account.bio || "No bio yet"}</p>
       <div className="flex flex-row gap-2">
         <div className="flex flex-row items-center gap-1">
-          <span className="font-bold">0</span>
+          <span className="font-bold">{account.followingCount}</span>
           Following
         </div>
         <div className="flex flex-row items-center gap-1">
-          <span className="font-bold">0</span>
+          <span className="font-bold">{account.followersCount}</span>
           Followers
         </div>
       </div>

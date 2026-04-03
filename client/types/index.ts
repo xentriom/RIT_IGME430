@@ -19,6 +19,8 @@ export type Account = {
   plan: SubscriptionPlan;
   createdDate: string;
   isFollowing: boolean;
+  followingCount: number;
+  followersCount: number;
 };
 export type Post = {
   _id: string;
