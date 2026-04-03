@@ -14,7 +14,6 @@ import { ChatInput } from "../../components/chat-input";
 import { Sidebar } from "../../components/sidebar";
 import { Post } from "../../components/post";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
-import { Button } from "../../components/ui/button";
 import {
   Empty,
   EmptyDescription,
@@ -26,15 +25,17 @@ import { SessionContext } from "../../contexts/session";
 import type { Post as PostType } from "../../types";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../components/ui/hover-card";
 import { ProfilePreview } from "../../components/profile-preview";
+import { FollowButton } from "../../components/follow-button";
 
 export default function App() {
   const postId = window.location.pathname.split("/").pop();
-  const { isLoggedIn } = useContext(SessionContext);
+  const { isLoggedIn, session } = useContext(SessionContext);
   const [isPostPending, startPostTransition] = useTransition();
   const [isRepliesPending, startRepliesTransition] = useTransition();
   const [post, setPost] = useState<PostType | null>(null);
   const [replies, setReplies] = useState<PostType[]>([]);
   const [isLikePending, startLikeTransition] = useTransition();
+  const [ownerIsFollowing, setOwnerIsFollowing] = useState(false);
 
   useEffect(() => {
     if (!postId) {
@@ -70,6 +71,20 @@ export default function App() {
       });
     });
   }, [postId]);
+
+  useEffect(() => {
+    if (!post || !isLoggedIn || !session) return;
+    if (session.username === post.owner.username) return;
+    let ignore = false;
+    fetch(`/api/users/${post.owner.username}`, { credentials: "same-origin" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!ignore && data) setOwnerIsFollowing(Boolean(data.isFollowing));
+      });
+    return () => {
+      ignore = true;
+    };
+  }, [post, isLoggedIn, session]);
 
   const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -260,7 +275,12 @@ export default function App() {
                           {post.owner.bio?.trim() ? post.owner.bio : "No bio yet"}
                         </p>
                       </div>
-                      <Button className="shrink-0">Follow</Button>
+                      <FollowButton
+                        username={post.owner.username}
+                        isFollowing={ownerIsFollowing}
+                        onFollowStateChange={(s) => setOwnerIsFollowing(s.isFollowing)}
+                        className="shrink-0"
+                      />
                     </div>
                   </div>
                 </CardContent>

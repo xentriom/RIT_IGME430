@@ -1,48 +1,38 @@
-import { Button } from "./ui/button";
 import { useContext, useEffect, useState, useTransition } from "react";
 
 import { BadgeCheck } from "lucide-react";
 import { SessionContext } from "../contexts/session";
 import type { Account } from "../types";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { FollowButton } from "./follow-button";
 import { Spinner } from "./ui/spinner";
 
 export function ProfilePreview({ username }: { username: string }) {
   const { isLoggedIn, session } = useContext(SessionContext);
   const [isPending, startTransition] = useTransition();
   const [account, setAccount] = useState<Account | null>(null);
-  const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     startTransition(async () => {
       const res = await fetch(`/api/users/${username}`);
       const data = await res.json();
       setAccount(data);
-      setFollowing(Boolean(data.isFollowing));
     });
   }, [username]);
+
+  if (isPending) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Spinner data-icon="inline-start" />
+        Loading...
+      </div>
+    );
+  }
 
   if (!account) return null;
 
   const isSelf = Boolean(isLoggedIn && session.username === account.username);
   const showFollow = isLoggedIn && !isSelf;
-
-  const toggleFollow = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    startTransition(async () => {
-      const res = await fetch(`/api/users/${username}/follow`, { method: "POST" });
-      if (!res.ok) return;
-      const data = await res.json();
-      setFollowing(data.isFollowing);
-      setAccount((prev) =>
-        prev
-          ? { ...prev, followersCount: data.followersCount, isFollowing: data.isFollowing }
-          : null,
-      );
-    });
-  };
 
   return (
     <div className="flex flex-col gap-2">
@@ -52,11 +42,11 @@ export function ProfilePreview({ username }: { username: string }) {
           <AvatarFallback className="uppercase">{account.username.charAt(0)}</AvatarFallback>
         </Avatar>
         {showFollow && (
-          <Button onClick={toggleFollow} disabled={isPending}>
-            {/** its pretty quick so gonna be commented for now */}
-            {/* {isPending && <Spinner data-icon="inline-start" />} */}
-            {following ? "Unfollow" : "Follow"}
-          </Button>
+          <FollowButton
+            username={username}
+            isFollowing={account.isFollowing}
+            onFollowStateChange={(s) => setAccount((prev) => (prev ? { ...prev, ...s } : null))}
+          />
         )}
       </div>
       <a
