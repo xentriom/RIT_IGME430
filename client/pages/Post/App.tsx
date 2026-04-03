@@ -131,114 +131,116 @@ export default function App() {
             <ArrowLeft className="size-4" />
             Post
           </div>
-          {isPostPending && !post ? (
-            <div className="p-4">Loading...</div>
-          ) : post ? (
-            <>
-              <div className="border-b border-border">
-                <div className="flex flex-col gap-3 p-4 pb-4">
-                  <HoverCard>
-                    <HoverCardTrigger asChild>
-                      <a
-                        href={`/u/${post.owner.username}`}
-                        className="flex min-w-0 flex-row items-start gap-3"
-                      >
-                        <Avatar size="lg" className="shrink-0">
-                          <AvatarImage src="https://placehold.co/40" />
-                          <AvatarFallback className="uppercase">
-                            {post.owner.username.charAt(0)}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex min-w-0 flex-col gap-0.5 pt-0.5">
-                          <div className="flex flex-row flex-wrap items-center gap-x-1.5 gap-y-0">
-                            <span className="text-base leading-tight font-bold hover:underline">
-                              {post.owner.displayName}
+          <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto">
+            {isPostPending && !post ? (
+              <div className="p-4">Loading...</div>
+            ) : post ? (
+              <>
+                <div className="border-b border-border">
+                  <div className="flex flex-col gap-3 p-4 pb-4">
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <a
+                          href={`/u/${post.owner.username}`}
+                          className="flex min-w-0 flex-row items-start gap-3"
+                        >
+                          <Avatar size="lg" className="shrink-0">
+                            <AvatarImage src="https://placehold.co/40" />
+                            <AvatarFallback className="uppercase">
+                              {post.owner.username.charAt(0)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex min-w-0 flex-col gap-0.5 pt-0.5">
+                            <div className="flex flex-row flex-wrap items-center gap-x-1.5 gap-y-0">
+                              <span className="text-base leading-tight font-bold hover:underline">
+                                {post.owner.displayName}
+                              </span>
+                              {post.owner.isPremium && (
+                                <BadgeCheck className="size-4 shrink-0 text-primary" />
+                              )}
+                            </div>
+                            <span className="text-sm text-muted-foreground">
+                              @{post.owner.username}
                             </span>
-                            {post.owner.isPremium && (
-                              <BadgeCheck className="size-4 shrink-0 text-primary" />
-                            )}
                           </div>
-                          <span className="text-sm text-muted-foreground">
-                            @{post.owner.username}
-                          </span>
-                        </div>
-                      </a>
-                    </HoverCardTrigger>
-                    <HoverCardContent align="start">
-                      <ProfilePreview username={post.owner.username} />
-                    </HoverCardContent>
-                  </HoverCard>
-                  <p className="text-base leading-relaxed wrap-anywhere whitespace-pre-wrap">
-                    {post.body}
-                  </p>
-                  <p className="text-sm leading-snug text-muted-foreground">
-                    {new Date(post.createdDate).toLocaleString(undefined, {
-                      dateStyle: "full",
-                      timeStyle: "medium",
-                    })}
-                  </p>
-                  <div className="flex flex-row items-center gap-6 border-y border-border py-2 text-muted-foreground">
-                    <button
-                      type="button"
-                      className="flex flex-row items-center gap-1 rounded-md py-1 hover:text-foreground"
-                    >
-                      <MessageCircle className="size-4" />
-                      <span className="tabular-nums">{post.replyCount ?? 0}</span>
-                    </button>
-                    <button
-                      type="button"
-                      className={`flex flex-row items-center gap-1 rounded-md py-1 hover:text-rose-400 ${
-                        post.likedByMe ? "text-rose-400" : ""
-                      }`}
-                      disabled={!isLoggedIn || isLikePending}
-                      onClick={toggleLike}
-                    >
-                      <Heart className={`size-4 ${post.likedByMe ? "fill-current" : ""}`} />
-                      <span className="tabular-nums">{post.likeCount ?? 0}</span>
-                    </button>
-                    <button
-                      type="button"
-                      className="flex flex-row items-center gap-1 rounded-md py-1 hover:text-foreground"
-                    >
-                      <Share2 className="size-4" />
-                    </button>
+                        </a>
+                      </HoverCardTrigger>
+                      <HoverCardContent align="start">
+                        <ProfilePreview username={post.owner.username} />
+                      </HoverCardContent>
+                    </HoverCard>
+                    <p className="text-base leading-relaxed wrap-anywhere whitespace-pre-wrap">
+                      {post.body}
+                    </p>
+                    <p className="text-sm leading-snug text-muted-foreground">
+                      {new Date(post.createdDate).toLocaleString(undefined, {
+                        dateStyle: "full",
+                        timeStyle: "medium",
+                      })}
+                    </p>
+                    <div className="flex flex-row items-center gap-6 border-y border-border py-2 text-muted-foreground">
+                      <button
+                        type="button"
+                        className="flex flex-row items-center gap-1 rounded-md py-1 hover:text-foreground"
+                      >
+                        <MessageCircle className="size-4" />
+                        <span className="tabular-nums">{post.replyCount ?? 0}</span>
+                      </button>
+                      <button
+                        type="button"
+                        className={`flex flex-row items-center gap-1 rounded-md py-1 hover:text-rose-400 ${
+                          post.likedByMe ? "text-rose-400" : ""
+                        }`}
+                        disabled={!isLoggedIn || isLikePending}
+                        onClick={toggleLike}
+                      >
+                        <Heart className={`size-4 ${post.likedByMe ? "fill-current" : ""}`} />
+                        <span className="tabular-nums">{post.likeCount ?? 0}</span>
+                      </button>
+                      <button
+                        type="button"
+                        className="flex flex-row items-center gap-1 rounded-md py-1 hover:text-foreground"
+                      >
+                        <Share2 className="size-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <div id="reply-composer">
+                    <ChatInput parentId={post._id} allowReplyOption={false} />
                   </div>
                 </div>
-                <div id="reply-composer">
-                  <ChatInput parentId={post._id} allowReplyOption={false} />
-                </div>
-              </div>
-            </>
-          ) : null}
-          {post ? (
-            <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto pb-8">
-              {isRepliesPending ? (
-                <div className="p-4">Loading...</div>
-              ) : (
-                <>
-                  {replies.length > 0 ? (
-                    <>
-                      {replies.map((reply) => (
-                        <Post key={reply._id} post={reply} />
-                      ))}
-                    </>
-                  ) : (
-                    <div className="flex flex-col items-center py-8">
-                      <Empty className="flex-none">
-                        <EmptyHeader>
-                          <EmptyMedia variant="icon">
-                            <MessageCircleIcon />
-                          </EmptyMedia>
-                          <EmptyTitle>No replies yet</EmptyTitle>
-                          <EmptyDescription>Be the first to reply to this post</EmptyDescription>
-                        </EmptyHeader>
-                      </Empty>
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          ) : null}
+              </>
+            ) : null}
+            {post ? (
+              <>
+                {isRepliesPending ? (
+                  <div className="p-4">Loading...</div>
+                ) : (
+                  <>
+                    {replies.length > 0 ? (
+                      <>
+                        {replies.map((reply) => (
+                          <Post key={reply._id} post={reply} />
+                        ))}
+                      </>
+                    ) : (
+                      <div className="flex flex-col items-center py-8">
+                        <Empty className="flex-none">
+                          <EmptyHeader>
+                            <EmptyMedia variant="icon">
+                              <MessageCircleIcon />
+                            </EmptyMedia>
+                            <EmptyTitle>No replies yet</EmptyTitle>
+                            <EmptyDescription>Be the first to reply to this post</EmptyDescription>
+                          </EmptyHeader>
+                        </Empty>
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            ) : null}
+          </div>
         </div>
         {post ? (
           <div className="hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm">
