@@ -4,7 +4,6 @@ const mid = require("./middleware");
 const router = (app) => {
   // Pages
   app.get("/", mid.requiresSecure, controllers.Pages.webPage);
-  app.get("/auth/:type", mid.requiresSecure, mid.requiresLogout, controllers.Pages.authPage);
   app.get("/premium", mid.requiresSecure, controllers.Pages.premiumPage);
   app.get("/u/:username", mid.requiresSecure, controllers.Pages.profilePage);
   app.get("/p/:postId", mid.requiresSecure, controllers.Pages.postPage);

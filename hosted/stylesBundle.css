@@ -2779,16 +2779,6 @@
       flex: 1;
     }
   }
-  .max-sm\:justify-around {
-    @media (width < 40rem) {
-      justify-content: space-around;
-    }
-  }
-  .max-sm\:justify-between {
-    @media (width < 40rem) {
-      justify-content: space-between;
-    }
-  }
   .max-sm\:justify-evenly {
     @media (width < 40rem) {
       justify-content: space-evenly;
@@ -2813,11 +2803,6 @@
   .sm\:flex {
     @media (width >= 40rem) {
       display: flex;
-    }
-  }
-  .sm\:hidden {
-    @media (width >= 40rem) {
-      display: none;
     }
   }
   .sm\:inline-flex {

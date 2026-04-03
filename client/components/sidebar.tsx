@@ -183,13 +183,13 @@ export function Sidebar() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               {isLoggedIn ? (
-                <a href="/auth/logout" className="inline-flex items-center gap-2">
+                <a href="/auth/logout" className="flex items-center gap-2">
                   <LogOutIcon /> Log out
                 </a>
               ) : (
-                <a href="/auth/login" className="inline-flex items-center gap-2">
+                <a href="/auth/login" className="flex items-center gap-2">
                   <LogInIcon /> Log in
                 </a>
               )}
