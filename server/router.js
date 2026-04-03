@@ -48,6 +48,13 @@ const router = (app) => {
     mid.requiresLogin,
     controllers.Post.toggleLike,
   );
+
+  // Misc
+  app.get("/api/stories", mid.requiresSecure, async (req, res) => {
+    const stories = await fetch("https://actually-relevant-api.onrender.com/api/stories");
+    const data = await stories.json();
+    return res.json(data);
+  });
 };
 
 module.exports = router;

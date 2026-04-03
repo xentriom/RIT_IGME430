@@ -9,6 +9,7 @@ import { Post } from "../../components/post";
 import { useState, useEffect, useTransition } from "react";
 import { FocusedPost } from "../../components/focused-post";
 import type { Post as PostType } from "../../types";
+import { NewsCard } from "./components.tsx/news-card";
 
 export default function App() {
   const [isPending, startTransition] = useTransition();
@@ -48,14 +49,7 @@ export default function App() {
           </div>
           <div className="no-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto">
             <PremiumCard />
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  <span className="text-xl font-bold">Today&apos;s News</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>Placeholder for today&apos;s news</CardContent>
-            </Card>
+            <NewsCard />
             <Card>
               <CardHeader>
                 <CardTitle>
