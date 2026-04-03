@@ -18,6 +18,7 @@ export type Account = {
   bio: string;
   plan: SubscriptionPlan;
   createdDate: string;
+  isFollowing: boolean;
 };
 export type Post = {
   _id: string;
@@ -31,7 +32,7 @@ export type Post = {
   parent: string | null;
   audience: ReplyOptions;
   createdDate: string;
-  likeCount?: number;
-  replyCount?: number;
-  likedByMe?: boolean;
+  likeCount: number;
+  replyCount: number;
+  likedByMe: boolean;
 };

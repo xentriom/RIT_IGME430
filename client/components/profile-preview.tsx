@@ -11,26 +11,31 @@ export function ProfilePreview({ username }: { username: string }) {
   const { isLoggedIn, session } = useContext(SessionContext);
   const [isPending, startTransition] = useTransition();
   const [account, setAccount] = useState<Account | null>(null);
+  const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     startTransition(async () => {
       const res = await fetch(`/api/users/${username}`);
       const data = await res.json();
       setAccount(data);
+      setFollowing(data.isFollowing);
     });
   }, [username]);
 
   if (!account) return null;
 
   const isSelf = Boolean(isLoggedIn && session.username === account.username);
-  const canFollow = isLoggedIn && !isSelf;
+  const showFollow = isLoggedIn && !isSelf;
 
   const toggleFollow = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
     startTransition(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const res = await fetch(`/api/users/${username}/follow`, { method: "POST" });
+      if (!res.ok) return;
+      const data = await res.json();
+      setFollowing(data.isFollowing);
     });
   };
 
@@ -41,10 +46,11 @@ export function ProfilePreview({ username }: { username: string }) {
           <AvatarImage src="https://placehold.co/40" />
           <AvatarFallback className="uppercase">{account.username.charAt(0)}</AvatarFallback>
         </Avatar>
-        {!isSelf && (
+        {showFollow && (
           <Button onClick={toggleFollow} disabled={isPending}>
-            {isPending && <Spinner data-icon="inline-start" />}
-            {canFollow ? "Follow" : "Unfollow"}
+            {/** its pretty quick so gonna be commented for now */}
+            {/* {isPending && <Spinner data-icon="inline-start" />} */}
+            {following ? "Unfollow" : "Follow"}
           </Button>
         )}
       </div>
