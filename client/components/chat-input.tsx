@@ -79,7 +79,7 @@ export function ChatInput({
 
   return (
     <div className="flex flex-row gap-2 border-b border-border p-4">
-      <Avatar>
+      <Avatar className="hidden sm:block">
         <AvatarImage src="https://placehold.co/40" />
         <AvatarFallback className="uppercase">
           {isLoggedIn ? session.username.charAt(0) : "G"}
