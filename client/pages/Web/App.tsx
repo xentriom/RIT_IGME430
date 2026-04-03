@@ -26,7 +26,7 @@ export default function App() {
     <div className="flex h-dvh flex-col overflow-hidden">
       <div className="mx-auto flex h-full w-full max-w-5xl flex-col-reverse border-border sm:flex-row sm:border-x">
         <Sidebar />
-        <div className="flex min-h-0 flex-1 flex-col border-x border-border">
+        <div className="flex min-h-0 flex-1 flex-col border-border sm:border-x">
           {/* <Header /> */}
           <ChatInput />
           <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto pb-8">
