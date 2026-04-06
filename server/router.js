@@ -59,7 +59,12 @@ const router = (app) => {
   });
 
   // Premium
-  app.post("/api/premium/purchase", mid.requiresSecure, controllers.Premium.purchase);
+  app.post(
+    "/api/premium/purchase",
+    mid.requiresSecure,
+    mid.requiresLogin,
+    controllers.Premium.purchase,
+  );
 };
 
 module.exports = router;
