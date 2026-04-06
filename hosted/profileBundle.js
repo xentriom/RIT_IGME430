@@ -10350,7 +10350,7 @@
           return e instanceof Error ? e.message : "Failed to update profile";
         }
         function rd() {
-          const e = (0, l.c)(91),
+          const e = (0, l.c)(92),
             { isLoggedIn: t, session: n } = (0, r.useContext)(ds);
           let o;
           e[0] === Symbol.for("react.memo_cache_sentinel")
@@ -10522,77 +10522,80 @@
                 (e[27] = A),
                 (e[28] = F))
               : (F = e[28]),
-            e[29] !== d.isFollowing || e[30] !== d.username || e[31] !== N
+            e[29] !== d.isFollowing || e[30] !== d.username || e[31] !== t || e[32] !== N
               ? ((I = (0, R.jsx)("div", {
                   className: "self-end p-2",
-                  children: N
-                    ? (0, R.jsx)(td, { onSaved: S })
-                    : (0, R.jsx)(Ts, {
-                        username: d.username,
-                        isFollowing: d.isFollowing,
-                        onFollowStateChange: ad,
-                      }),
+                  children: t
+                    ? N
+                      ? (0, R.jsx)(td, { onSaved: S })
+                      : (0, R.jsx)(Ts, {
+                          username: d.username,
+                          isFollowing: d.isFollowing,
+                          onFollowStateChange: ad,
+                        })
+                    : (0, R.jsx)(xo, { disabled: !0, children: "Follow" }),
                 })),
                 (e[29] = d.isFollowing),
                 (e[30] = d.username),
-                (e[31] = N),
-                (e[32] = I))
-              : (I = e[32]),
-            e[33] !== d.displayName
+                (e[31] = t),
+                (e[32] = N),
+                (e[33] = I))
+              : (I = e[33]),
+            e[34] !== d.displayName
               ? ((B = (0, R.jsx)("h1", {
                   className: "text-xl font-bold",
                   children: d.displayName,
                 })),
-                (e[33] = d.displayName),
-                (e[34] = B))
-              : (B = e[34]),
-            e[35] !== d.plan
+                (e[34] = d.displayName),
+                (e[35] = B))
+              : (B = e[35]),
+            e[36] !== d.plan
               ? ((H =
                   "free" !== d.plan &&
                   (0, R.jsx)(Es, { className: "size-4 shrink-0 text-primary" })),
-                (e[35] = d.plan),
-                (e[36] = H))
-              : (H = e[36]),
-            e[37] !== B || e[38] !== H
+                (e[36] = d.plan),
+                (e[37] = H))
+              : (H = e[37]),
+            e[38] !== B || e[39] !== H
               ? (($ = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center gap-2",
                   children: [B, H],
                 })),
-                (e[37] = B),
-                (e[38] = H),
-                (e[39] = $))
-              : ($ = e[39]),
-            e[40] !== d.username
+                (e[38] = B),
+                (e[39] = H),
+                (e[40] = $))
+              : ($ = e[40]),
+            e[41] !== d.username
               ? ((U = (0, R.jsxs)("h2", {
                   className: "text-sm text-muted-foreground",
                   children: ["@", d.username],
                 })),
-                (e[40] = d.username),
-                (e[41] = U))
-              : (U = e[41]),
-            e[42] !== $ || e[43] !== U
+                (e[41] = d.username),
+                (e[42] = U))
+              : (U = e[42]),
+            e[43] !== $ || e[44] !== U
               ? ((W = (0, R.jsxs)("div", { className: "flex flex-col", children: [$, U] })),
-                (e[42] = $),
-                (e[43] = U),
-                (e[44] = W))
-              : (W = e[44]));
+                (e[43] = $),
+                (e[44] = U),
+                (e[45] = W))
+              : (W = e[45]));
           const V = d.bio || "No bio yet";
           let q, K, Q, Y, G, X, Z, J, ee, te, ne, re, oe, ae, le, ie, se, ce, ue, de, fe, pe, me;
           return (
-            e[45] !== V
+            e[46] !== V
               ? ((q = (0, R.jsx)("p", { className: "text-sm", children: V })),
-                (e[45] = V),
-                (e[46] = q))
-              : (q = e[46]),
-            e[47] === Symbol.for("react.memo_cache_sentinel")
-              ? ((K = (0, R.jsx)(Cs, { className: "size-4" })), (e[47] = K))
-              : (K = e[47]),
-            e[48] !== d.createdDate
+                (e[46] = V),
+                (e[47] = q))
+              : (q = e[47]),
+            e[48] === Symbol.for("react.memo_cache_sentinel")
+              ? ((K = (0, R.jsx)(Cs, { className: "size-4" })), (e[48] = K))
+              : (K = e[48]),
+            e[49] !== d.createdDate
               ? ((Q = new Date(d.createdDate).toLocaleString()),
-                (e[48] = d.createdDate),
-                (e[49] = Q))
-              : (Q = e[49]),
-            e[50] !== Q
+                (e[49] = d.createdDate),
+                (e[50] = Q))
+              : (Q = e[50]),
+            e[51] !== Q
               ? ((Y = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center gap-2",
                   children: [
@@ -10603,10 +10606,10 @@
                     }),
                   ],
                 })),
-                (e[50] = Q),
-                (e[51] = Y))
-              : (Y = e[51]),
-            e[52] !== d.followingCount
+                (e[51] = Q),
+                (e[52] = Y))
+              : (Y = e[52]),
+            e[53] !== d.followingCount
               ? ((G = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
@@ -10614,10 +10617,10 @@
                     "Following",
                   ],
                 })),
-                (e[52] = d.followingCount),
-                (e[53] = G))
-              : (G = e[53]),
-            e[54] !== d.followersCount
+                (e[53] = d.followingCount),
+                (e[54] = G))
+              : (G = e[54]),
+            e[55] !== d.followersCount
               ? ((X = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
@@ -10625,73 +10628,73 @@
                     "Followers",
                   ],
                 })),
-                (e[54] = d.followersCount),
-                (e[55] = X))
-              : (X = e[55]),
-            e[56] !== G || e[57] !== X
+                (e[55] = d.followersCount),
+                (e[56] = X))
+              : (X = e[56]),
+            e[57] !== G || e[58] !== X
               ? ((Z = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center gap-6",
                   children: [G, X],
                 })),
-                (e[56] = G),
-                (e[57] = X),
-                (e[58] = Z))
-              : (Z = e[58]),
-            e[59] !== W || e[60] !== q || e[61] !== Y || e[62] !== Z
+                (e[57] = G),
+                (e[58] = X),
+                (e[59] = Z))
+              : (Z = e[59]),
+            e[60] !== W || e[61] !== q || e[62] !== Y || e[63] !== Z
               ? ((J = (0, R.jsxs)("div", {
                   className: "flex flex-col gap-3 border-b border-border p-4",
                   children: [W, q, Y, Z],
                 })),
-                (e[59] = W),
-                (e[60] = q),
-                (e[61] = Y),
-                (e[62] = Z),
-                (e[63] = J))
-              : (J = e[63]),
-            e[64] !== m
+                (e[60] = W),
+                (e[61] = q),
+                (e[62] = Y),
+                (e[63] = Z),
+                (e[64] = J))
+              : (J = e[64]),
+            e[65] !== m
               ? ((ee =
                   m.length > 0
                     ? (0, R.jsx)("div", { children: m.map(od) })
                     : (0, R.jsx)("div", { children: "No posts yet" })),
-                (e[64] = m),
-                (e[65] = ee))
-              : (ee = e[65]),
-            e[66] !== F || e[67] !== I || e[68] !== J || e[69] !== ee
+                (e[65] = m),
+                (e[66] = ee))
+              : (ee = e[66]),
+            e[67] !== F || e[68] !== I || e[69] !== J || e[70] !== ee
               ? ((te = (0, R.jsxs)("div", {
                   className: "no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto",
                   children: [F, I, J, ee],
                 })),
-                (e[66] = F),
-                (e[67] = I),
-                (e[68] = J),
-                (e[69] = ee),
-                (e[70] = te))
-              : (te = e[70]),
-            e[71] !== O || e[72] !== te
+                (e[67] = F),
+                (e[68] = I),
+                (e[69] = J),
+                (e[70] = ee),
+                (e[71] = te))
+              : (te = e[71]),
+            e[72] !== O || e[73] !== te
               ? ((ne = (0, R.jsxs)("div", {
                   className: "flex min-h-0 flex-1 flex-col border-border sm:border-x",
                   children: [O, te],
                 })),
-                (e[71] = O),
-                (e[72] = te),
-                (e[73] = ne))
-              : (ne = e[73]),
-            e[74] === Symbol.for("react.memo_cache_sentinel")
-              ? ((re = (0, R.jsx)(ks, { placeholder: "Search..." })), (e[74] = re))
-              : (re = e[74]),
+                (e[72] = O),
+                (e[73] = te),
+                (e[74] = ne))
+              : (ne = e[74]),
             e[75] === Symbol.for("react.memo_cache_sentinel")
+              ? ((re = (0, R.jsx)(ks, { placeholder: "Search..." })), (e[75] = re))
+              : (re = e[75]),
+            e[76] === Symbol.for("react.memo_cache_sentinel")
               ? ((oe = (0, R.jsx)("div", {
                   className: "sticky top-0 z-10 bg-background/80 backdrop-blur-sm",
                   children: (0, R.jsxs)(ys, {
                     children: [re, (0, R.jsx)(ws, { children: (0, R.jsx)(h, {}) })],
                   }),
                 })),
-                (e[75] = oe))
-              : (oe = e[75]),
-            e[76] !== y
-              ? ((ae = (0, R.jsx)(zs, { followers: y })), (e[76] = y), (e[77] = ae))
-              : (ae = e[77]),
-            e[78] === Symbol.for("react.memo_cache_sentinel")
+                (e[76] = oe))
+              : (oe = e[76]),
+            e[77] !== y
+              ? ((ae = (0, R.jsx)(zs, { followers: y })), (e[77] = y), (e[78] = ae))
+              : (ae = e[78]),
+            e[79] === Symbol.for("react.memo_cache_sentinel")
               ? ((le = (0, R.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
@@ -10722,19 +10725,19 @@
                   className: "hover:underline",
                   children: "More ...",
                 })),
-                (e[78] = le),
-                (e[79] = ie),
-                (e[80] = se),
-                (e[81] = ce),
-                (e[82] = ue),
-                (e[83] = de))
-              : ((le = e[78]),
-                (ie = e[79]),
-                (se = e[80]),
-                (ce = e[81]),
-                (ue = e[82]),
-                (de = e[83])),
-            e[84] === Symbol.for("react.memo_cache_sentinel")
+                (e[79] = le),
+                (e[80] = ie),
+                (e[81] = se),
+                (e[82] = ce),
+                (e[83] = ue),
+                (e[84] = de))
+              : ((le = e[79]),
+                (ie = e[80]),
+                (se = e[81]),
+                (ce = e[82]),
+                (ue = e[83]),
+                (de = e[84])),
+            e[85] === Symbol.for("react.memo_cache_sentinel")
               ? ((fe = (0, R.jsxs)("div", {
                   className: "flex flex-wrap gap-2 text-xs text-muted-foreground",
                   children: [
@@ -10747,9 +10750,9 @@
                     (0, R.jsxs)("span", { children: ["© ", new Date().getFullYear(), " Chitter"] }),
                   ],
                 })),
-                (e[84] = fe))
-              : (fe = e[84]),
-            e[85] !== ae || e[86] !== fe
+                (e[85] = fe))
+              : (fe = e[85]),
+            e[86] !== ae || e[87] !== fe
               ? ((pe = (0, R.jsxs)("div", {
                   className: "hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm",
                   children: [
@@ -10760,11 +10763,11 @@
                     }),
                   ],
                 })),
-                (e[85] = ae),
-                (e[86] = fe),
-                (e[87] = pe))
-              : (pe = e[87]),
-            e[88] !== ne || e[89] !== pe
+                (e[86] = ae),
+                (e[87] = fe),
+                (e[88] = pe))
+              : (pe = e[88]),
+            e[89] !== ne || e[90] !== pe
               ? ((me = (0, R.jsx)("div", {
                   className: "flex h-dvh flex-col overflow-hidden",
                   children: (0, R.jsxs)("div", {
@@ -10773,10 +10776,10 @@
                     children: [_, ne, pe],
                   }),
                 })),
-                (e[88] = ne),
-                (e[89] = pe),
-                (e[90] = me))
-              : (me = e[90]),
+                (e[89] = ne),
+                (e[90] = pe),
+                (e[91] = me))
+              : (me = e[91]),
             me
           );
         }

@@ -9,6 +9,7 @@ import { Post } from "../../components/post";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { SessionContext } from "../../contexts/session";
 import { EditProfile } from "./components/edit-profile";
+import { Button } from "../../components/ui/button";
 
 export default function App() {
   const { isLoggedIn, session } = useContext(SessionContext);
@@ -108,14 +109,19 @@ export default function App() {
               </div>
             </div>
             <div className="self-end p-2">
-              {isSelf ? (
-                <EditProfile onSaved={refreshAccount} />
+              {isLoggedIn ? (
+                isSelf ? (
+                  <EditProfile onSaved={refreshAccount} />
+                ) : (
+                  <FollowButton
+                    username={account.username}
+                    isFollowing={account.isFollowing}
+                    onFollowStateChange={() => {}}
+                  />
+                )
               ) : (
-                <FollowButton
-                  username={account.username}
-                  isFollowing={account.isFollowing}
-                  onFollowStateChange={() => {}}
-                />
+                // Disabled button bc layout reasons
+                <Button disabled>Follow</Button>
               )}
             </div>
             <div className="flex flex-col gap-3 border-b border-border p-4">
