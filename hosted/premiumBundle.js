@@ -4243,7 +4243,7 @@
               ? ((h = (0, V.jsx)("a", {
                   href: "/",
                   className: "absolute top-4 left-4 rounded-full bg-muted p-2",
-                  children: (0, V.jsx)(M, { className: "size-4 cursor-pointer" }),
+                  children: (0, V.jsx)(M, { className: "size-4" }),
                 })),
                 (e[2] = h))
               : (h = e[2]),
@@ -4285,15 +4285,18 @@
                 (e[10] = k))
               : (k = e[10]),
             e[11] !== w || e[12] !== k
-              ? ((x = (0, V.jsxs)("div", {
-                  className: "space-y-8 p-8 text-center",
-                  children: [
-                    g,
-                    (0, V.jsxs)("div", {
-                      className: "mx-auto max-w-4xl space-y-2",
-                      children: [w, k],
-                    }),
-                  ],
+              ? ((x = (0, V.jsx)("div", {
+                  className: "flex-1 overflow-y-auto pb-48",
+                  children: (0, V.jsxs)("div", {
+                    className: "space-y-8 p-8 text-center",
+                    children: [
+                      g,
+                      (0, V.jsxs)("div", {
+                        className: "mx-auto max-w-4xl space-y-2",
+                        children: [w, k],
+                      }),
+                    ],
+                  }),
                 })),
                 (e[11] = w),
                 (e[12] = k),
@@ -4400,7 +4403,7 @@
             e[46] !== T || e[47] !== A
               ? ((D = (0, V.jsxs)("div", {
                   className:
-                    "absolute right-0 bottom-0 left-0 flex w-full flex-row items-start justify-center gap-2 bg-background/50 p-8 backdrop-blur-sm",
+                    "fixed right-0 bottom-0 left-0 flex w-full flex-row items-start justify-center gap-2 bg-background/50 p-8 backdrop-blur-sm",
                   children: [T, A],
                 })),
                 (e[46] = T),
@@ -4409,7 +4412,7 @@
               : (D = e[48]),
             e[49] !== D || e[50] !== x
               ? ((F = (0, V.jsxs)("div", {
-                  className: "relative flex min-h-dvh flex-col",
+                  className: "relative flex h-dvh flex-col",
                   children: [h, x, D],
                 })),
                 (e[49] = D),

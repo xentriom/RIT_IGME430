@@ -33,30 +33,32 @@ export default function App() {
   };
 
   return (
-    <div className="relative flex min-h-dvh flex-col">
+    <div className="relative flex h-dvh flex-col">
       <a href="/" className="absolute top-4 left-4 rounded-full bg-muted p-2">
-        <X className="size-4 cursor-pointer" />
+        <X className="size-4" />
       </a>
 
-      <div className="space-y-8 p-8 text-center">
-        <div className="space-y-4">
-          <BadgeCheck className="mx-auto size-30 text-chart-1" />
-          <h1 className="text-4xl font-bold">
-            Don&apos;t lose your {PremiumDiscount.premium.monthly}% discount on Premium
-          </h1>
-        </div>
-        <div className="mx-auto max-w-4xl space-y-2">
-          <Tabs value={cycle} onValueChange={(value) => setCycle(value as PaymentCycle)}>
-            <TabsList className="mx-auto">
-              <TabsTrigger value="annual">Annual</TabsTrigger>
-              <TabsTrigger value="monthly">Monthly</TabsTrigger>
-            </TabsList>
-          </Tabs>
-          <Plans cycle={cycle} model={model} setModel={setModel} />
+      <div className="flex-1 overflow-y-auto pb-48">
+        <div className="space-y-8 p-8 text-center">
+          <div className="space-y-4">
+            <BadgeCheck className="mx-auto size-30 text-chart-1" />
+            <h1 className="text-4xl font-bold">
+              Don&apos;t lose your {PremiumDiscount.premium.monthly}% discount on Premium
+            </h1>
+          </div>
+          <div className="mx-auto max-w-4xl space-y-2">
+            <Tabs value={cycle} onValueChange={(value) => setCycle(value as PaymentCycle)}>
+              <TabsList className="mx-auto">
+                <TabsTrigger value="annual">Annual</TabsTrigger>
+                <TabsTrigger value="monthly">Monthly</TabsTrigger>
+              </TabsList>
+            </Tabs>
+            <Plans cycle={cycle} model={model} setModel={setModel} />
+          </div>
         </div>
       </div>
 
-      <div className="absolute right-0 bottom-0 left-0 flex w-full flex-row items-start justify-center gap-2 bg-background/50 p-8 backdrop-blur-sm">
+      <div className="fixed right-0 bottom-0 left-0 flex w-full flex-row items-start justify-center gap-2 bg-background/50 p-8 backdrop-blur-sm">
         <div className="min-w-88 space-y-2">
           <h2 className="text-xl font-bold capitalize">{model}</h2>
           <div>
