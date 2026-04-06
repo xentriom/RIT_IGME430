@@ -49,4 +49,26 @@ const toggleFollow = async (req, res) => {
   return res.json({ isFollowing: true, followersCount });
 };
 
-module.exports = { getAccount, toggleFollow };
+// a variation of the stackoverflow answer
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#:~:text=58%20Answers,23%20revs%2C%2019%20users%2032%25
+const shuffleToNew = (arr) => {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+const getAccounts = async (req, res) => {
+  const limit = req.query.limit ?? 10;
+  const accounts = await models.Account.find({})
+    .select("_id username displayName isPublic bio plan createdDate")
+    .lean()
+    .exec();
+
+  const randomAccounts = shuffleToNew(accounts).slice(0, limit);
+  return res.json(randomAccounts);
+};
+
+module.exports = { getAccount, toggleFollow, getAccounts };

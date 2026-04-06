@@ -10,6 +10,7 @@ import { useState, useEffect, useTransition } from "react";
 import { FocusedPost } from "../../components/focused-post";
 import type { Post as PostType } from "../../types";
 import { NewsCard } from "./components.tsx/news-card";
+import { WhoToFollowCard } from "../../components/who-to-follow-card";
 
 export default function App() {
   const [isPending, startTransition] = useTransition();
@@ -58,14 +59,7 @@ export default function App() {
               </CardHeader>
               <CardContent>Placeholder for what&apos;s happening</CardContent>
             </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  <span className="text-xl font-bold">Who to follow</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>Placeholder for who to follow</CardContent>
-            </Card>
+            <WhoToFollowCard />
             <Card>
               <CardHeader>
                 <CardTitle>
