@@ -7637,15 +7637,25 @@
                   e.length > x ||
                   c ||
                   d(async () => {
-                    const t = await fetch(n ? `/posts/${n}/replies` : "/posts", {
-                      method: "POST",
-                      headers: { Accept: "application/json", "Content-Type": "application/json" },
-                      body: JSON.stringify({ body: e, audience: f, parent: n }),
-                    });
-                    if (!t.ok) return (console.error(t), void cn.error("Failed to chirp"));
-                    const r = await t.json();
-                    if (!r) return (console.error(r), void cn.error("Failed to chirp"));
-                    (cn.success("Chirped"), a?.(r), h(""));
+                    cn.promise(
+                      new Promise((t, r) => {
+                        fetch(n ? `/posts/${n}/replies` : "/posts", {
+                          method: "POST",
+                          headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            Credentials: "same-origin",
+                          },
+                          body: JSON.stringify({ body: e, audience: f, parent: n }),
+                        })
+                          .then(gs)
+                          .then((e) => {
+                            (a?.(e), h(""), t(e));
+                          })
+                          .catch((e) => r(e));
+                      }),
+                      { loading: "Chirping...", success: "Chirped", error: hs },
+                    );
                   });
               }),
               (v = Qt[f]),
@@ -7978,7 +7988,13 @@
             t,
           );
         }
-        const hs = p("house", [
+        function hs(e) {
+          return e instanceof Error ? e.message : "Failed to Chirp";
+        }
+        function gs(e) {
+          return e.json();
+        }
+        const vs = p("house", [
             ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
             [
               "path",
@@ -7988,7 +8004,7 @@
               },
             ],
           ]),
-          gs = p("bell", [
+          ys = p("bell", [
             ["path", { d: "M10.268 21a2 2 0 0 0 3.464 0", key: "vwvbt9" }],
             [
               "path",
@@ -7998,13 +8014,13 @@
               },
             ],
           ]),
-          vs = p("user-plus", [
+          bs = p("user-plus", [
             ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
             ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
             ["line", { x1: "19", x2: "19", y1: "8", y2: "14", key: "1bvyxn" }],
             ["line", { x1: "22", x2: "16", y1: "11", y2: "11", key: "1shjgl" }],
           ]),
-          ys = p("sparkles", [
+          ws = p("sparkles", [
             [
               "path",
               {
@@ -8016,7 +8032,7 @@
             ["path", { d: "M22 4h-4", key: "gwowj6" }],
             ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }],
           ]),
-          bs = p("bookmark", [
+          xs = p("bookmark", [
             [
               "path",
               {
@@ -8025,7 +8041,7 @@
               },
             ],
           ]),
-          ws = p("rocket", [
+          ks = p("rocket", [
             ["path", { d: "M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5", key: "qeys4" }],
             [
               "path",
@@ -8043,7 +8059,7 @@
             ],
             ["path", { d: "M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05", key: "92ym6u" }],
           ]),
-          xs = p("crown", [
+          Ss = p("crown", [
             [
               "path",
               {
@@ -8053,11 +8069,11 @@
             ],
             ["path", { d: "M5 21h14", key: "11awu3" }],
           ]),
-          ks = p("user", [
+          Es = p("user", [
             ["path", { d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2", key: "975kel" }],
             ["circle", { cx: "12", cy: "7", r: "4", key: "17ys0d" }],
           ]),
-          Ss = p("zap", [
+          Cs = p("zap", [
             [
               "path",
               {
@@ -8066,7 +8082,7 @@
               },
             ],
           ]),
-          Es = p("square-arrow-out-up-right", [
+          Ns = p("square-arrow-out-up-right", [
             [
               "path",
               { d: "M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6", key: "y09zxi" },
@@ -8074,7 +8090,7 @@
             ["path", { d: "m21 3-9 9", key: "mpx6sq" }],
             ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
           ]),
-          Cs = p("settings", [
+          _s = p("settings", [
             [
               "path",
               {
@@ -8084,17 +8100,17 @@
             ],
             ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }],
           ]),
-          Ns = p("log-out", [
+          js = p("log-out", [
             ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
             ["path", { d: "M21 12H9", key: "dn1m92" }],
             ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }],
           ]),
-          _s = p("log-in", [
+          zs = p("log-in", [
             ["path", { d: "m10 17 5-5-5-5", key: "1bsop3" }],
             ["path", { d: "M15 12H3", key: "6jk70r" }],
             ["path", { d: "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4", key: "u53s6r" }],
           ]);
-        var js = Object.freeze({
+        var Ps = Object.freeze({
             position: "absolute",
             border: 0,
             width: 1,
@@ -8106,21 +8122,21 @@
             whiteSpace: "nowrap",
             wordWrap: "normal",
           }),
-          zs = r.forwardRef((e, t) =>
-            (0, Ke.jsx)(vt.span, { ...e, ref: t, style: { ...js, ...e.style } }),
+          Ts = r.forwardRef((e, t) =>
+            (0, Ke.jsx)(vt.span, { ...e, ref: t, style: { ...Ps, ...e.style } }),
           );
-        zs.displayName = "VisuallyHidden";
-        var Ps = zs,
-          [Ts, Ms] = ft("Tooltip", [jo]),
-          Rs = jo(),
-          Os = "TooltipProvider",
-          Ls = 700,
-          Ds = "tooltip.open",
-          [As, Fs] = Ts(Os),
-          Is = (e) => {
+        Ts.displayName = "VisuallyHidden";
+        var Ms = Ts,
+          [Rs, Os] = ft("Tooltip", [jo]),
+          Ls = jo(),
+          Ds = "TooltipProvider",
+          As = 700,
+          Fs = "tooltip.open",
+          [Is, Bs] = Rs(Ds),
+          Hs = (e) => {
             const {
                 __scopeTooltip: t,
-                delayDuration: n = Ls,
+                delayDuration: n = As,
                 skipDelayDuration: o = 300,
                 disableHoverableContent: a = !1,
                 children: l,
@@ -8133,7 +8149,7 @@
                 const e = u.current;
                 return () => window.clearTimeout(e);
               }, []),
-              (0, Ke.jsx)(As, {
+              (0, Ke.jsx)(Is, {
                 scope: t,
                 isOpenDelayedRef: i,
                 delayDuration: n,
@@ -8153,10 +8169,10 @@
               })
             );
           };
-        Is.displayName = Os;
-        var Bs = "Tooltip",
-          [Hs, $s] = Ts(Bs),
-          Us = (e) => {
+        Hs.displayName = Ds;
+        var $s = "Tooltip",
+          [Us, Vs] = Rs($s),
+          Ws = (e) => {
             const {
                 __scopeTooltip: t,
                 children: n,
@@ -8166,8 +8182,8 @@
                 disableHoverableContent: i,
                 delayDuration: s,
               } = e,
-              u = Fs(Bs, e.__scopeTooltip),
-              c = Rs(t),
+              u = Bs($s, e.__scopeTooltip),
+              c = Ls(t),
               [d, f] = r.useState(null),
               p = qn(),
               m = r.useRef(0),
@@ -8178,10 +8194,10 @@
                 prop: o,
                 defaultProp: a ?? !1,
                 onChange: (e) => {
-                  (e ? (u.onOpen(), document.dispatchEvent(new CustomEvent(Ds))) : u.onClose(),
+                  (e ? (u.onOpen(), document.dispatchEvent(new CustomEvent(Fs))) : u.onClose(),
                     l?.(e));
                 },
-                caller: Bs,
+                caller: $s,
               }),
               w = r.useMemo(
                 () => (y ? (v.current ? "delayed-open" : "instant-open") : "closed"),
@@ -8208,7 +8224,7 @@
               ),
               (0, Ke.jsx)(Vo, {
                 ...c,
-                children: (0, Ke.jsx)(Hs, {
+                children: (0, Ke.jsx)(Us, {
                   scope: t,
                   contentId: p,
                   open: y,
@@ -8229,13 +8245,13 @@
               })
             );
           };
-        Us.displayName = Bs;
-        var Vs = "TooltipTrigger",
-          Ws = r.forwardRef((e, t) => {
+        Ws.displayName = $s;
+        var qs = "TooltipTrigger",
+          Ks = r.forwardRef((e, t) => {
             const { __scopeTooltip: n, ...o } = e,
-              a = $s(Vs, n),
-              l = Fs(Vs, n),
-              i = Rs(n),
+              a = Vs(qs, n),
+              l = Bs(qs, n),
+              i = Ls(n),
               s = qe(t, r.useRef(null), a.onTriggerChange),
               u = r.useRef(!1),
               c = r.useRef(!1),
@@ -8273,13 +8289,13 @@
               })
             );
           });
-        Ws.displayName = Vs;
-        var qs = "TooltipPortal",
-          [Ks, Qs] = Ts(qs, { forceMount: void 0 }),
-          Ys = (e) => {
+        Ks.displayName = qs;
+        var Qs = "TooltipPortal",
+          [Ys, Gs] = Rs(Qs, { forceMount: void 0 }),
+          Xs = (e) => {
             const { __scopeTooltip: t, forceMount: n, children: r, container: o } = e,
-              a = $s(qs, t);
-            return (0, Ke.jsx)(Ks, {
+              a = Vs(Qs, t);
+            return (0, Ke.jsx)(Ys, {
               scope: t,
               forceMount: n,
               children: (0, Ke.jsx)(Yo, {
@@ -8288,22 +8304,22 @@
               }),
             });
           };
-        Ys.displayName = qs;
-        var Gs = "TooltipContent",
-          Xs = r.forwardRef((e, t) => {
-            const n = Qs(Gs, e.__scopeTooltip),
+        Xs.displayName = Qs;
+        var Zs = "TooltipContent",
+          Js = r.forwardRef((e, t) => {
+            const n = Gs(Zs, e.__scopeTooltip),
               { forceMount: r = n.forceMount, side: o = "top", ...a } = e,
-              l = $s(Gs, e.__scopeTooltip);
+              l = Vs(Zs, e.__scopeTooltip);
             return (0, Ke.jsx)(Yo, {
               present: r || l.open,
               children: l.disableHoverableContent
-                ? (0, Ke.jsx)(nu, { side: o, ...a, ref: t })
-                : (0, Ke.jsx)(Zs, { side: o, ...a, ref: t }),
+                ? (0, Ke.jsx)(ou, { side: o, ...a, ref: t })
+                : (0, Ke.jsx)(eu, { side: o, ...a, ref: t }),
             });
           }),
-          Zs = r.forwardRef((e, t) => {
-            const n = $s(Gs, e.__scopeTooltip),
-              o = Fs(Gs, e.__scopeTooltip),
+          eu = r.forwardRef((e, t) => {
+            const n = Vs(Zs, e.__scopeTooltip),
+              o = Bs(Zs, e.__scopeTooltip),
               a = r.useRef(null),
               l = qe(t, a),
               [i, s] = r.useState(null),
@@ -8456,15 +8472,15 @@
                   );
                 }
               }, [u, d, i, c, p]),
-              (0, Ke.jsx)(nu, { ...e, ref: l })
+              (0, Ke.jsx)(ou, { ...e, ref: l })
             );
           }),
-          [Js, eu] = Ts(Bs, { isInside: !1 }),
-          tu = (function (e) {
+          [tu, nu] = Rs($s, { isInside: !1 }),
+          ru = (function (e) {
             const t = ({ children: e }) => (0, Ke.jsx)(Ke.Fragment, { children: e });
             return ((t.displayName = `${e}.Slottable`), (t.__radixId = Xe), t);
           })("TooltipContent"),
-          nu = r.forwardRef((e, t) => {
+          ou = r.forwardRef((e, t) => {
             const {
                 __scopeTooltip: n,
                 children: o,
@@ -8473,12 +8489,12 @@
                 onPointerDownOutside: i,
                 ...s
               } = e,
-              u = $s(Gs, n),
-              c = Rs(n),
+              u = Vs(Zs, n),
+              c = Ls(n),
               { onClose: d } = u;
             return (
               r.useEffect(
-                () => (document.addEventListener(Ds, d), () => document.removeEventListener(Ds, d)),
+                () => (document.addEventListener(Fs, d), () => document.removeEventListener(Fs, d)),
                 [d],
               ),
               r.useEffect(() => {
@@ -8517,11 +8533,11 @@
                     "--radix-tooltip-trigger-height": "var(--radix-popper-anchor-height)",
                   },
                   children: [
-                    (0, Ke.jsx)(tu, { children: o }),
-                    (0, Ke.jsx)(Js, {
+                    (0, Ke.jsx)(ru, { children: o }),
+                    (0, Ke.jsx)(tu, {
                       scope: n,
                       isInside: !0,
-                      children: (0, Ke.jsx)(Ps, {
+                      children: (0, Ke.jsx)(Ms, {
                         id: u.contentId,
                         role: "tooltip",
                         children: a || o,
@@ -8532,21 +8548,21 @@
               })
             );
           });
-        Xs.displayName = Gs;
-        var ru = "TooltipArrow",
-          ou = r.forwardRef((e, t) => {
+        Js.displayName = Zs;
+        var au = "TooltipArrow",
+          lu = r.forwardRef((e, t) => {
             const { __scopeTooltip: n, ...r } = e,
-              o = Rs(n);
-            return eu(ru, n).isInside ? null : (0, Ke.jsx)(Ko, { ...o, ...r, ref: t });
+              o = Ls(n);
+            return nu(au, n).isInside ? null : (0, Ke.jsx)(Ko, { ...o, ...r, ref: t });
           });
-        ou.displayName = ru;
-        var au = Is,
-          lu = Us,
-          iu = Ws,
-          su = Ys,
-          uu = Xs,
-          cu = ou;
-        function du(e) {
+        lu.displayName = au;
+        var iu = Hs,
+          su = Ws,
+          uu = Ks,
+          cu = Xs,
+          du = Js,
+          fu = lu;
+        function pu(e) {
           const t = (0, l.c)(6);
           let n, r;
           t[0] !== e
@@ -8556,7 +8572,7 @@
           let a;
           return (
             t[3] !== o || t[4] !== n
-              ? ((a = (0, Ke.jsx)(au, { "data-slot": "tooltip-provider", delayDuration: o, ...n })),
+              ? ((a = (0, Ke.jsx)(iu, { "data-slot": "tooltip-provider", delayDuration: o, ...n })),
                 (t[3] = o),
                 (t[4] = n),
                 (t[5] = a))
@@ -8564,31 +8580,31 @@
             a
           );
         }
-        function fu(e) {
+        function mu(e) {
           const t = (0, l.c)(4);
           let n, r;
           return (
             t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
             t[2] !== n
-              ? ((r = (0, Ke.jsx)(lu, { "data-slot": "tooltip", ...n })), (t[2] = n), (t[3] = r))
+              ? ((r = (0, Ke.jsx)(su, { "data-slot": "tooltip", ...n })), (t[2] = n), (t[3] = r))
               : (r = t[3]),
             r
           );
         }
-        function pu(e) {
+        function hu(e) {
           const t = (0, l.c)(4);
           let n, r;
           return (
             t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
             t[2] !== n
-              ? ((r = (0, Ke.jsx)(iu, { "data-slot": "tooltip-trigger", ...n })),
+              ? ((r = (0, Ke.jsx)(uu, { "data-slot": "tooltip-trigger", ...n })),
                 (t[2] = n),
                 (t[3] = r))
               : (r = t[3]),
             r
           );
         }
-        function mu(e) {
+        function gu(e) {
           const t = (0, l.c)(13);
           let n, r, o, a;
           t[0] !== e
@@ -8611,15 +8627,15 @@
                 (t[6] = s))
               : (s = t[6]),
             t[7] === Symbol.for("react.memo_cache_sentinel")
-              ? ((u = (0, Ke.jsx)(cu, {
+              ? ((u = (0, Ke.jsx)(fu, {
                   className:
                     "z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px] bg-foreground fill-foreground",
                 })),
                 (t[7] = u))
               : (u = t[7]),
             t[8] !== n || t[9] !== o || t[10] !== i || t[11] !== s
-              ? ((c = (0, Ke.jsx)(su, {
-                  children: (0, Ke.jsxs)(uu, {
+              ? ((c = (0, Ke.jsx)(cu, {
+                  children: (0, Ke.jsxs)(du, {
                     "data-slot": "tooltip-content",
                     sideOffset: i,
                     className: s,
@@ -8636,19 +8652,19 @@
             c
           );
         }
-        const hu = [
-          { icon: hs, label: "Home", href: "/", showOnMobile: !0 },
+        const vu = [
+          { icon: vs, label: "Home", href: "/", showOnMobile: !0 },
           { icon: b, label: "Explore", href: "/", showOnMobile: !0 },
-          { icon: gs, label: "Notifications", href: "/", showOnMobile: !1 },
-          { icon: vs, label: "Follow", href: "/", showOnMobile: !1 },
+          { icon: ys, label: "Notifications", href: "/", showOnMobile: !1 },
+          { icon: bs, label: "Follow", href: "/", showOnMobile: !1 },
           { icon: g, label: "Chat", href: "/", showOnMobile: !0 },
-          { icon: ys, label: "Myna", href: "/", showOnMobile: !0 },
-          { icon: bs, label: "Bookmarks", href: "/", showOnMobile: !1 },
-          { icon: ws, label: "Creator Studio", href: "/", showOnMobile: !1 },
-          { icon: xs, label: "Premium", href: "/premium", showOnMobile: !0 },
-          { icon: ks, label: "Profile", href: "/profile", showOnMobile: !0 },
+          { icon: ws, label: "Myna", href: "/", showOnMobile: !0 },
+          { icon: xs, label: "Bookmarks", href: "/", showOnMobile: !1 },
+          { icon: ks, label: "Creator Studio", href: "/", showOnMobile: !1 },
+          { icon: Ss, label: "Premium", href: "/premium", showOnMobile: !0 },
+          { icon: Es, label: "Profile", href: "/profile", showOnMobile: !0 },
         ];
-        function gu() {
+        function yu() {
           const e = (0, l.c)(41),
             { isLoggedIn: t, session: n } = (0, r.useContext)(Yt);
           let o, a, i, s, u, c, d, f;
@@ -8668,7 +8684,7 @@
                     (0, Ke.jsx)("div", {
                       className:
                         "flex flex-row items-center gap-0.5 max-sm:w-full max-sm:justify-evenly sm:flex-col",
-                      children: hu.map(vu),
+                      children: vu.map(bu),
                     }),
                   ],
                 })),
@@ -8753,7 +8769,7 @@
                           asChild: !0,
                           children: (0, Ke.jsxs)("a", {
                             href: "/premium",
-                            children: [(0, Ke.jsx)(xs, {}), "Upgrade to Premium"],
+                            children: [(0, Ke.jsx)(Ss, {}), "Upgrade to Premium"],
                           }),
                         }),
                       }),
@@ -8765,18 +8781,18 @@
                 (e[27] = w))
               : (w = e[27]),
             e[28] === Symbol.for("react.memo_cache_sentinel")
-              ? ((x = (0, Ke.jsxs)(ss, { children: [(0, Ke.jsx)(Ss, {}), " Business"] })),
+              ? ((x = (0, Ke.jsxs)(ss, { children: [(0, Ke.jsx)(Cs, {}), " Business"] })),
                 (e[28] = x))
               : (x = e[28]),
             e[29] === Symbol.for("react.memo_cache_sentinel")
-              ? ((k = (0, Ke.jsxs)(ss, { children: [(0, Ke.jsx)(Es, {}), " Ads"] })), (e[29] = k))
+              ? ((k = (0, Ke.jsxs)(ss, { children: [(0, Ke.jsx)(Ns, {}), " Ads"] })), (e[29] = k))
               : (k = e[29]),
             e[30] === Symbol.for("react.memo_cache_sentinel")
               ? ((S = (0, Ke.jsxs)(is, {
                   children: [
                     x,
                     k,
-                    (0, Ke.jsxs)(ss, { children: [(0, Ke.jsx)(Cs, {}), " Settings & Privacy"] }),
+                    (0, Ke.jsxs)(ss, { children: [(0, Ke.jsx)(_s, {}), " Settings & Privacy"] }),
                   ],
                 })),
                 (E = (0, Ke.jsx)(fs, {})),
@@ -8790,12 +8806,12 @@
                     ? (0, Ke.jsxs)("a", {
                         href: "/auth/logout",
                         className: "flex items-center gap-2",
-                        children: [(0, Ke.jsx)(Ns, {}), " Log out"],
+                        children: [(0, Ke.jsx)(js, {}), " Log out"],
                       })
                     : (0, Ke.jsxs)("a", {
                         href: "/auth/login",
                         className: "flex items-center gap-2",
-                        children: [(0, Ke.jsx)(_s, {}), " Log in"],
+                        children: [(0, Ke.jsx)(zs, {}), " Log in"],
                       }),
                 })),
                 (e[32] = t),
@@ -8833,12 +8849,12 @@
             _
           );
         }
-        function vu(e) {
+        function bu(e) {
           return (0, Ke.jsxs)(
-            fu,
+            mu,
             {
               children: [
-                (0, Ke.jsx)(pu, {
+                (0, Ke.jsx)(hu, {
                   asChild: !0,
                   children: (0, Ke.jsx)(et, {
                     variant: "ghost",
@@ -8851,18 +8867,18 @@
                     }),
                   }),
                 }),
-                (0, Ke.jsx)(mu, { side: "right", children: e.label }),
+                (0, Ke.jsx)(gu, { side: "right", children: e.label }),
               ],
             },
             e.href,
           );
         }
-        const yu = p("ellipsis", [
+        const wu = p("ellipsis", [
             ["circle", { cx: "12", cy: "12", r: "1", key: "41hilf" }],
             ["circle", { cx: "19", cy: "12", r: "1", key: "1wjl8i" }],
             ["circle", { cx: "5", cy: "12", r: "1", key: "1pcz8c" }],
           ]),
-          bu = p("link", [
+          xu = p("link", [
             [
               "path",
               { d: "M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71", key: "1cjeqo" },
@@ -8872,17 +8888,17 @@
               { d: "M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71", key: "19qd67" },
             ],
           ]),
-          wu = p("trash", [
+          ku = p("trash", [
             ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
             ["path", { d: "M3 6h18", key: "d0wm0j" }],
             ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }],
           ]);
-        var xu,
-          ku = "HoverCard",
-          [Su, Eu] = ft(ku, [jo]),
-          Cu = jo(),
-          [Nu, _u] = Su(ku),
-          ju = (e) => {
+        var Su,
+          Eu = "HoverCard",
+          [Cu, Nu] = ft(Eu, [jo]),
+          _u = jo(),
+          [ju, zu] = Cu(Eu),
+          Pu = (e) => {
             const {
                 __scopeHoverCard: t,
                 children: n,
@@ -8892,12 +8908,12 @@
                 openDelay: i = 700,
                 closeDelay: s = 300,
               } = e,
-              u = Cu(t),
+              u = _u(t),
               c = r.useRef(0),
               d = r.useRef(0),
               f = r.useRef(!1),
               p = r.useRef(!1),
-              [m, h] = kn({ prop: o, defaultProp: a ?? !1, onChange: l, caller: ku }),
+              [m, h] = kn({ prop: o, defaultProp: a ?? !1, onChange: l, caller: Eu }),
               g = r.useCallback(() => {
                 (clearTimeout(d.current), (c.current = window.setTimeout(() => h(!0), i)));
               }, [i, h]),
@@ -8913,7 +8929,7 @@
                 },
                 [],
               ),
-              (0, Ke.jsx)(Nu, {
+              (0, Ke.jsx)(ju, {
                 scope: t,
                 open: m,
                 onOpenChange: h,
@@ -8926,12 +8942,12 @@
               })
             );
           };
-        ju.displayName = ku;
-        var zu = "HoverCardTrigger",
-          Pu = r.forwardRef((e, t) => {
+        Pu.displayName = Eu;
+        var Tu = "HoverCardTrigger",
+          Mu = r.forwardRef((e, t) => {
             const { __scopeHoverCard: n, ...r } = e,
-              o = _u(zu, n),
-              a = Cu(n);
+              o = zu(Tu, n),
+              a = _u(n);
             return (0, Ke.jsx)(Wo, {
               asChild: !0,
               ...a,
@@ -8939,21 +8955,21 @@
                 "data-state": o.open ? "open" : "closed",
                 ...r,
                 ref: t,
-                onPointerEnter: wn(e.onPointerEnter, Fu(o.onOpen)),
-                onPointerLeave: wn(e.onPointerLeave, Fu(o.onClose)),
+                onPointerEnter: wn(e.onPointerEnter, Bu(o.onOpen)),
+                onPointerLeave: wn(e.onPointerLeave, Bu(o.onClose)),
                 onFocus: wn(e.onFocus, o.onOpen),
                 onBlur: wn(e.onBlur, o.onClose),
                 onTouchStart: wn(e.onTouchStart, (e) => e.preventDefault()),
               }),
             });
           });
-        Pu.displayName = zu;
-        var Tu = "HoverCardPortal",
-          [Mu, Ru] = Su(Tu, { forceMount: void 0 }),
-          Ou = (e) => {
+        Mu.displayName = Tu;
+        var Ru = "HoverCardPortal",
+          [Ou, Lu] = Cu(Ru, { forceMount: void 0 }),
+          Du = (e) => {
             const { __scopeHoverCard: t, forceMount: n, children: r, container: o } = e,
-              a = _u(Tu, t);
-            return (0, Ke.jsx)(Mu, {
+              a = zu(Ru, t);
+            return (0, Ke.jsx)(Ou, {
               scope: t,
               forceMount: n,
               children: (0, Ke.jsx)(Yo, {
@@ -8962,25 +8978,25 @@
               }),
             });
           };
-        Ou.displayName = Tu;
-        var Lu = "HoverCardContent",
-          Du = r.forwardRef((e, t) => {
-            const n = Ru(Lu, e.__scopeHoverCard),
+        Du.displayName = Ru;
+        var Au = "HoverCardContent",
+          Fu = r.forwardRef((e, t) => {
+            const n = Lu(Au, e.__scopeHoverCard),
               { forceMount: r = n.forceMount, ...o } = e,
-              a = _u(Lu, e.__scopeHoverCard);
+              a = zu(Au, e.__scopeHoverCard);
             return (0, Ke.jsx)(Yo, {
               present: r || a.open,
-              children: (0, Ke.jsx)(Au, {
+              children: (0, Ke.jsx)(Iu, {
                 "data-state": a.open ? "open" : "closed",
                 ...o,
-                onPointerEnter: wn(e.onPointerEnter, Fu(a.onOpen)),
-                onPointerLeave: wn(e.onPointerLeave, Fu(a.onClose)),
+                onPointerEnter: wn(e.onPointerEnter, Bu(a.onOpen)),
+                onPointerLeave: wn(e.onPointerLeave, Bu(a.onClose)),
                 ref: t,
               }),
             });
           });
-        Du.displayName = Lu;
-        var Au = r.forwardRef((e, t) => {
+        Fu.displayName = Au;
+        var Iu = r.forwardRef((e, t) => {
           const {
               __scopeHoverCard: n,
               onEscapeKeyDown: o,
@@ -8989,8 +9005,8 @@
               onInteractOutside: i,
               ...s
             } = e,
-            u = _u(Lu, n),
-            c = Cu(n),
+            u = zu(Au, n),
+            c = _u(n),
             d = r.useRef(null),
             f = qe(t, d),
             [p, m] = r.useState(!1);
@@ -8999,11 +9015,11 @@
               if (p) {
                 const e = document.body;
                 return (
-                  (xu = e.style.userSelect || e.style.webkitUserSelect),
+                  (Su = e.style.userSelect || e.style.webkitUserSelect),
                   (e.style.userSelect = "none"),
                   (e.style.webkitUserSelect = "none"),
                   () => {
-                    ((e.style.userSelect = xu), (e.style.webkitUserSelect = xu));
+                    ((e.style.userSelect = Su), (e.style.webkitUserSelect = Su));
                   }
                 );
               }
@@ -9076,43 +9092,43 @@
             })
           );
         });
-        function Fu(e) {
+        function Bu(e) {
           return (t) => ("touch" === t.pointerType ? void 0 : e());
         }
         r.forwardRef((e, t) => {
           const { __scopeHoverCard: n, ...r } = e,
-            o = Cu(n);
+            o = _u(n);
           return (0, Ke.jsx)(Ko, { ...o, ...r, ref: t });
         }).displayName = "HoverCardArrow";
-        var Iu = ju,
-          Bu = Pu,
-          Hu = Ou,
-          $u = Du;
-        function Uu(e) {
+        var Hu = Pu,
+          $u = Mu,
+          Uu = Du,
+          Vu = Fu;
+        function Wu(e) {
           const t = (0, l.c)(4);
           let n, r;
           return (
             t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
             t[2] !== n
-              ? ((r = (0, Ke.jsx)(Iu, { "data-slot": "hover-card", ...n })), (t[2] = n), (t[3] = r))
+              ? ((r = (0, Ke.jsx)(Hu, { "data-slot": "hover-card", ...n })), (t[2] = n), (t[3] = r))
               : (r = t[3]),
             r
           );
         }
-        function Vu(e) {
+        function qu(e) {
           const t = (0, l.c)(4);
           let n, r;
           return (
             t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
             t[2] !== n
-              ? ((r = (0, Ke.jsx)(Bu, { "data-slot": "hover-card-trigger", ...n })),
+              ? ((r = (0, Ke.jsx)($u, { "data-slot": "hover-card-trigger", ...n })),
                 (t[2] = n),
                 (t[3] = r))
               : (r = t[3]),
             r
           );
         }
-        function Wu(e) {
+        function Ku(e) {
           const t = (0, l.c)(12);
           let n, r, o, a;
           t[0] !== e
@@ -9136,9 +9152,9 @@
                 (t[6] = u))
               : (u = t[6]),
             t[7] !== i || t[8] !== r || t[9] !== s || t[10] !== u
-              ? ((c = (0, Ke.jsx)(Hu, {
+              ? ((c = (0, Ke.jsx)(Uu, {
                   "data-slot": "hover-card-portal",
-                  children: (0, Ke.jsx)($u, {
+                  children: (0, Ke.jsx)(Vu, {
                     "data-slot": "hover-card-content",
                     align: i,
                     sideOffset: s,
@@ -9155,7 +9171,7 @@
             c
           );
         }
-        function qu(e) {
+        function Qu(e) {
           const t = (0, l.c)(13),
             { username: n, isFollowing: o, onFollowStateChange: a, className: i } = e,
             { isLoggedIn: s, session: u } = (0, r.useContext)(Yt),
@@ -9215,7 +9231,7 @@
             w
           );
         }
-        function Ku(e) {
+        function Yu(e) {
           const t = (0, l.c)(43),
             { username: n } = e,
             { isLoggedIn: o, session: a } = (0, r.useContext)(Yt),
@@ -9272,7 +9288,7 @@
             t[9] !== u.isFollowing || t[10] !== m || t[11] !== n
               ? ((b =
                   m &&
-                  (0, Ke.jsx)(qu, {
+                  (0, Ke.jsx)(Qu, {
                     username: n,
                     isFollowing: u.isFollowing,
                     onFollowStateChange: (e) => c((t) => (t ? { ...t, ...e } : null)),
@@ -9385,7 +9401,7 @@
             M
           );
         }
-        function Qu(e) {
+        function Gu(e) {
           const t = (0, l.c)(85),
             { post: n } = e,
             { isLoggedIn: o, session: a } = (0, r.useContext)(Yt),
@@ -9457,7 +9473,7 @@
                       {
                         loading: "Deleting post...",
                         success: () => (m(!0), "Post deleted successfully"),
-                        error: Gu,
+                        error: Zu,
                       },
                     ));
               }),
@@ -9508,7 +9524,7 @@
                 (t[26] = R))
               : (R = t[26]),
             t[27] !== T || t[28] !== M || t[29] !== R || t[30] !== P
-              ? ((O = (0, Ke.jsx)(Vu, {
+              ? ((O = (0, Ke.jsx)(qu, {
                   asChild: !0,
                   children: (0, Ke.jsxs)("a", {
                     href: P,
@@ -9523,10 +9539,10 @@
                 (t[31] = O))
               : (O = t[31]),
             t[32] !== n.owner.username
-              ? ((L = (0, Ke.jsx)(Wu, {
+              ? ((L = (0, Ke.jsx)(Ku, {
                   children: (0, Ke.jsx)("div", {
                     className: "flex flex-col gap-1",
-                    children: (0, Ke.jsx)(Ku, { username: n.owner.username }),
+                    children: (0, Ke.jsx)(Yu, { username: n.owner.username }),
                   }),
                 })),
                 (t[32] = n.owner.username),
@@ -9579,7 +9595,7 @@
                   asChild: !0,
                   children: (0, Ke.jsx)("div", {
                     className: "rounded-full p-1 hover:bg-muted",
-                    children: (0, Ke.jsx)(yu, { className: "size-4" }),
+                    children: (0, Ke.jsx)(wu, { className: "size-4" }),
                   }),
                 })),
                 (t[43] = B))
@@ -9592,7 +9608,7 @@
                 (t[45] = H))
               : (H = t[45]),
             t[46] === Symbol.for("react.memo_cache_sentinel")
-              ? (($ = (0, Ke.jsx)(bu, { className: "size-4" })), (t[46] = $))
+              ? (($ = (0, Ke.jsx)(xu, { className: "size-4" })), (t[46] = $))
               : ($ = t[46]),
             t[47] !== H
               ? ((U = (0, Ke.jsx)(ss, {
@@ -9614,7 +9630,7 @@
                     children: (0, Ke.jsxs)("div", {
                       className: "flex flex-row items-center gap-2",
                       onClick: C,
-                      children: [(0, Ke.jsx)(wu, { className: "size-4" }), "Delete"],
+                      children: [(0, Ke.jsx)(ku, { className: "size-4" }), "Delete"],
                     }),
                   })),
                 (t[49] = C),
@@ -9649,7 +9665,7 @@
                   type: "button",
                   className:
                     "flex cursor-pointer flex-row items-center gap-1 hover:text-foreground/80",
-                  onClick: Yu,
+                  onClick: Xu,
                   children: [
                     Q,
                     (0, Ke.jsx)("span", { className: "tabular-nums", children: n.replyCount }),
@@ -9712,7 +9728,7 @@
               : (oe = t[80]),
             t[81] !== oe || t[82] !== N || t[83] !== z
               ? ((ae = (0, Ke.jsx)(Ke.Fragment, {
-                  children: (0, Ke.jsx)(Uu, {
+                  children: (0, Ke.jsx)(Wu, {
                     children: (0, Ke.jsxs)("a", {
                       href: N,
                       className:
@@ -9729,11 +9745,11 @@
             ae
           );
         }
-        function Yu() {}
-        function Gu(e) {
+        function Xu() {}
+        function Zu(e) {
           return e instanceof Error ? e.message : "Could not delete the post.";
         }
-        function Xu(e) {
+        function Ju(e) {
           const t = (0, l.c)(8);
           let n, r, o, a;
           return (
@@ -9757,7 +9773,7 @@
             a
           );
         }
-        function Zu(e) {
+        function ec(e) {
           const t = (0, l.c)(8);
           let n, r, o, a;
           return (
@@ -9776,7 +9792,7 @@
             a
           );
         }
-        const Ju = E(
+        const tc = E(
           "mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0",
           {
             variants: {
@@ -9788,7 +9804,7 @@
             defaultVariants: { variant: "default" },
           },
         );
-        function ec(e) {
+        function nc(e) {
           const t = (0, l.c)(11);
           let n, r, o;
           t[0] !== e
@@ -9802,7 +9818,7 @@
           let i, s;
           return (
             t[4] !== n || t[5] !== a
-              ? ((i = Ue(Ju({ variant: a, className: n }))), (t[4] = n), (t[5] = a), (t[6] = i))
+              ? ((i = Ue(tc({ variant: a, className: n }))), (t[4] = n), (t[5] = a), (t[6] = i))
               : (i = t[6]),
             t[7] !== r || t[8] !== i || t[9] !== a
               ? ((s = (0, Ke.jsx)("div", {
@@ -9819,7 +9835,7 @@
             s
           );
         }
-        function tc(e) {
+        function rc(e) {
           const t = (0, l.c)(8);
           let n, r, o, a;
           return (
@@ -9840,7 +9856,7 @@
             a
           );
         }
-        function nc(e) {
+        function oc(e) {
           const t = (0, l.c)(8);
           let n, r, o, a;
           return (
@@ -9864,7 +9880,7 @@
             a
           );
         }
-        function rc() {
+        function ac() {
           const e = (0, l.c)(33);
           let t;
           e[0] === Symbol.for("react.memo_cache_sentinel")
@@ -9915,7 +9931,7 @@
                   let e = !1;
                   return (
                     fetch(`/api/users/${d.owner.username}`, { credentials: "same-origin" })
-                      .then(ic)
+                      .then(uc)
                       .then((t) => {
                         !e && t && C(Boolean(t.isFollowing));
                       }),
@@ -9964,13 +9980,13 @@
           let M, R, O, L, D, A, F;
           return (
             e[12] === Symbol.for("react.memo_cache_sentinel")
-              ? ((M = (0, Ke.jsx)(gu, {})), (e[12] = M))
+              ? ((M = (0, Ke.jsx)(yu, {})), (e[12] = M))
               : (M = e[12]),
             e[13] === Symbol.for("react.memo_cache_sentinel")
               ? ((R = (0, Ke.jsxs)("div", {
                   className:
                     "flex cursor-pointer flex-row items-center gap-4 p-4 pb-0 text-lg font-bold",
-                  onClick: lc,
+                  onClick: sc,
                   children: [(0, Ke.jsx)(m, { className: "size-4" }), "Post"],
                 })),
                 (e[13] = R))
@@ -9987,9 +10003,9 @@
                               (0, Ke.jsxs)("div", {
                                 className: "flex flex-col gap-3 p-4 pb-4",
                                 children: [
-                                  (0, Ke.jsxs)(Uu, {
+                                  (0, Ke.jsxs)(Wu, {
                                     children: [
-                                      (0, Ke.jsx)(Vu, {
+                                      (0, Ke.jsx)(qu, {
                                         asChild: !0,
                                         children: (0, Ke.jsxs)("a", {
                                           href: `/u/${d.owner.username}`,
@@ -10033,9 +10049,9 @@
                                           ],
                                         }),
                                       }),
-                                      (0, Ke.jsx)(Wu, {
+                                      (0, Ke.jsx)(Ku, {
                                         align: "start",
-                                        children: (0, Ke.jsx)(Ku, { username: d.owner.username }),
+                                        children: (0, Ke.jsx)(Yu, { username: d.owner.username }),
                                       }),
                                     ],
                                   }),
@@ -10101,7 +10117,7 @@
                                   parentId: d._id,
                                   allowReplyOption: !1,
                                   onPosted: (e) => {
-                                    (x((t) => [e, ...t]), f(ac));
+                                    (x((t) => [e, ...t]), f(ic));
                                   },
                                 }),
                               }),
@@ -10124,19 +10140,19 @@
                         : (0, Ke.jsx)(Ke.Fragment, {
                             children:
                               w.length > 0
-                                ? (0, Ke.jsx)(Ke.Fragment, { children: w.map(oc) })
+                                ? (0, Ke.jsx)(Ke.Fragment, { children: w.map(lc) })
                                 : (0, Ke.jsx)("div", {
                                     className: "flex flex-col items-center py-8",
-                                    children: (0, Ke.jsx)(Xu, {
+                                    children: (0, Ke.jsx)(Ju, {
                                       className: "flex-none",
-                                      children: (0, Ke.jsxs)(Zu, {
+                                      children: (0, Ke.jsxs)(ec, {
                                         children: [
-                                          (0, Ke.jsx)(ec, {
+                                          (0, Ke.jsx)(nc, {
                                             variant: "icon",
                                             children: (0, Ke.jsx)(g, {}),
                                           }),
-                                          (0, Ke.jsx)(tc, { children: "No replies yet" }),
-                                          (0, Ke.jsx)(nc, {
+                                          (0, Ke.jsx)(rc, { children: "No replies yet" }),
+                                          (0, Ke.jsx)(oc, {
                                             children: "Be the first to reply to this post",
                                           }),
                                         ],
@@ -10230,7 +10246,7 @@
                                             }),
                                           ],
                                         }),
-                                        (0, Ke.jsx)(qu, {
+                                        (0, Ke.jsx)(Qu, {
                                           username: d.owner.username,
                                           isFollowing: E,
                                           onFollowStateChange: (e) => C(e.isFollowing),
@@ -10305,28 +10321,28 @@
             F
           );
         }
-        function oc(e) {
-          return (0, Ke.jsx)(Qu, { post: e }, e._id);
-        }
-        function ac(e) {
-          return e ? { ...e, replyCount: (e.replyCount ?? 0) + 1 } : e;
-        }
-        function lc() {
-          return history.back();
+        function lc(e) {
+          return (0, Ke.jsx)(Gu, { post: e }, e._id);
         }
         function ic(e) {
+          return e ? { ...e, replyCount: (e.replyCount ?? 0) + 1 } : e;
+        }
+        function sc() {
+          return history.back();
+        }
+        function uc(e) {
           return e.ok ? e.json() : null;
         }
-        const sc = p("circle-check", [
+        const cc = p("circle-check", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }],
           ]),
-          uc = p("info", [
+          dc = p("info", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "M12 16v-4", key: "1dtifu" }],
             ["path", { d: "M12 8h.01", key: "e9boi3" }],
           ]),
-          cc = p("triangle-alert", [
+          fc = p("triangle-alert", [
             [
               "path",
               {
@@ -10337,7 +10353,7 @@
             ["path", { d: "M12 9v4", key: "juzpu7" }],
             ["path", { d: "M12 17h.01", key: "p32p05" }],
           ]),
-          dc = p("octagon-x", [
+          pc = p("octagon-x", [
             ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
             [
               "path",
@@ -10348,17 +10364,17 @@
             ],
             ["path", { d: "m9 9 6 6", key: "z0biqf" }],
           ]),
-          fc = (e) => {
+          mc = (e) => {
             const t = (0, l.c)(7);
             let n, r, o, a, i;
             return (
               t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
               t[2] === Symbol.for("react.memo_cache_sentinel")
                 ? ((r = {
-                    success: (0, Ke.jsx)(sc, { className: "size-4" }),
-                    info: (0, Ke.jsx)(uc, { className: "size-4" }),
-                    warning: (0, Ke.jsx)(cc, { className: "size-4" }),
-                    error: (0, Ke.jsx)(dc, { className: "size-4" }),
+                    success: (0, Ke.jsx)(cc, { className: "size-4" }),
+                    info: (0, Ke.jsx)(dc, { className: "size-4" }),
+                    warning: (0, Ke.jsx)(fc, { className: "size-4" }),
+                    error: (0, Ke.jsx)(pc, { className: "size-4" }),
                     loading: (0, Ke.jsx)(Xt, { className: "size-4 animate-spin" }),
                   }),
                   (o = {
@@ -10391,10 +10407,10 @@
         (0, a.createRoot)(document.getElementById("root")).render(
           (0, Ke.jsx)(r.StrictMode, {
             children: (0, Ke.jsx)(Gt, {
-              children: (0, Ke.jsxs)(du, {
+              children: (0, Ke.jsxs)(pu, {
                 children: [
-                  (0, Ke.jsx)(rc, {}),
-                  (0, Ke.jsx)(fc, { position: "top-center", richColors: !0 }),
+                  (0, Ke.jsx)(ac, {}),
+                  (0, Ke.jsx)(mc, { position: "top-center", richColors: !0 }),
                 ],
               }),
             }),

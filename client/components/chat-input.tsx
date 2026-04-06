@@ -44,31 +44,35 @@ export function ChatInput({
     if (!isLoggedIn || !body || body.length > planLimit || isPending) return;
 
     startTransition(async () => {
-      const res = await fetch(parentId ? `/posts/${parentId}/replies` : "/posts", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      toast.promise(
+        new Promise((resolve, reject) => {
+          fetch(parentId ? `/posts/${parentId}/replies` : "/posts", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Credentials: "same-origin",
+            },
+            body: JSON.stringify({
+              body,
+              audience: replyOption,
+              parent: parentId,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              onPosted?.(data as PostType);
+              setDraft("");
+              resolve(data);
+            })
+            .catch((err) => reject(err));
+        }),
+        {
+          loading: "Chirping...",
+          success: "Chirped",
+          error: (err) => (err instanceof Error ? err.message : "Failed to Chirp"),
         },
-        body: JSON.stringify({ body, audience: replyOption, parent: parentId }),
-      });
-
-      if (!res.ok) {
-        console.error(res);
-        toast.error("Failed to chirp");
-        return;
-      }
-
-      const data = await res.json();
-      if (!data) {
-        console.error(data);
-        toast.error("Failed to chirp");
-        return;
-      }
-
-      toast.success("Chirped");
-      onPosted?.(data as PostType);
-      setDraft("");
+      );
     });
   };
 
