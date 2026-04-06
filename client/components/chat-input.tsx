@@ -1,9 +1,6 @@
 import { useContext, useRef, useState, useTransition } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Textarea } from "./ui/textarea";
-import { Popover, PopoverTrigger, PopoverContent } from "./ui/popover";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import {
   ImageIcon,
@@ -19,6 +16,13 @@ import { ReplyLength, PostReplyOptions } from "../constants";
 import { SessionContext } from "../contexts/session";
 import { Spinner } from "./ui/spinner";
 import { toast } from "sonner";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 export function ChatInput({
   parentId,
@@ -150,39 +154,29 @@ export function ChatInput({
         )}
         <div className="flex flex-row items-center justify-between">
           {allowReplyOption && (
-            <Popover>
-              <PopoverTrigger asChild>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
                 <div className="select-none">
                   <div className="inline-flex flex-row items-center gap-2 rounded-full px-2 py-1 hover:bg-muted">
                     <currentOption.icon className="size-4" />
                     <span className="text-sm">{currentOption.label}</span>
                   </div>
                 </div>
-              </PopoverTrigger>
-              <PopoverContent align="start">
-                <RadioGroup
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-fit">
+                <DropdownMenuRadioGroup
                   value={replyOption}
                   onValueChange={(value) => setReplyOption(value as ReplyOptions)}
                 >
-                  <div className="flex flex-row items-center gap-2">
-                    <RadioGroupItem value="everyone" />
-                    <Label>{PostReplyOptions.everyone.label}</Label>
-                  </div>
-                  <div className="flex flex-row items-center gap-2">
-                    <RadioGroupItem value="followers" />
-                    <Label>{PostReplyOptions.followers.label}</Label>
-                  </div>
-                  <div className="flex flex-row items-center gap-2">
-                    <RadioGroupItem value="verified" />
-                    <Label>{PostReplyOptions.verified.label}</Label>
-                  </div>
-                  <div className="flex flex-row items-center gap-2">
-                    <RadioGroupItem value="none" />
-                    <Label>{PostReplyOptions.none.label}</Label>
-                  </div>
-                </RadioGroup>
-              </PopoverContent>
-            </Popover>
+                  {Object.entries(PostReplyOptions).map(([value, option]) => (
+                    <DropdownMenuRadioItem key={value} value={value}>
+                      <option.icon className="size-4" />
+                      {option.label}
+                    </DropdownMenuRadioItem>
+                  ))}
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
           <div className="text-xs text-muted-foreground">
             <span className={cn(draft.length > planLimit && "text-destructive")}>

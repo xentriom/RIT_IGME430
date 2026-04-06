@@ -2347,13 +2347,6 @@
       }
     }
   }
-  .hover\:bg-mauve-500 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-mauve-500);
-      }
-    }
-  }
   .hover\:bg-muted {
     &:hover {
       @media (hover: hover) {
