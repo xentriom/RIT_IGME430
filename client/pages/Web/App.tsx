@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { MessageCircleIcon, Search } from "lucide-react";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../../components/ui/input-group";
 import { ChatInput } from "../../components/chat-input";
 import { PremiumCard } from "./components/premium-card";
@@ -8,6 +8,14 @@ import { useState, useEffect, useTransition } from "react";
 import type { Post as PostType } from "../../types";
 import { NewsCard } from "./components/news-card";
 import { WhoToFollowCard } from "./components/who-to-follow-card";
+import { PostSkeleton } from "../../components/post-skeleton";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "../../components/ui/empty";
 
 export default function App() {
   const [isPending, startTransition] = useTransition();
@@ -29,11 +37,27 @@ export default function App() {
           {/* <Header /> */}
           <ChatInput onPosted={(created) => setPosts((prev) => [created, ...prev])} />
           <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto pb-8">
-            {isPending && <div>Loading...</div>}
-            {posts.length === 0 && !isPending && <div>No posts found</div>}
-            {posts.map((post) => (
-              <Post key={post._id} post={post} />
-            ))}
+            {isPending ? (
+              <>
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <PostSkeleton key={index} />
+                ))}
+              </>
+            ) : posts.length > 0 ? (
+              posts.map((post) => <Post key={post._id} post={post} />)
+            ) : (
+              <div className="flex flex-col items-center py-8">
+                <Empty className="flex-none">
+                  <EmptyHeader>
+                    <EmptyMedia variant="icon">
+                      <MessageCircleIcon />
+                    </EmptyMedia>
+                    <EmptyTitle>No posts yet</EmptyTitle>
+                    <EmptyDescription>Be the first to post</EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
+              </div>
+            )}
           </div>
         </div>
         <div className="hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm">
