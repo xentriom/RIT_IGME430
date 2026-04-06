@@ -10209,15 +10209,14 @@
               (t[5] = g))
             : (g = t[5]);
           const v = g;
-          let y, b, w, x, k, S, E, C, N, _, j, P, z, T, M, O, D, L, A;
-          return (
-            t[6] === Symbol.for("react.memo_cache_sentinel")
-              ? ((y = (0, R.jsx)(wu, {
-                  asChild: !0,
-                  children: (0, R.jsx)(xo, { children: "Edit Profile" }),
-                })),
-                (t[6] = y))
-              : (y = t[6]),
+          let y, b, w, x, k, S, E, C;
+          (t[6] === Symbol.for("react.memo_cache_sentinel")
+            ? ((y = (0, R.jsx)(wu, {
+                asChild: !0,
+                children: (0, R.jsx)(xo, { children: "Edit Profile" }),
+              })),
+              (t[6] = y))
+            : (y = t[6]),
             t[7] === Symbol.for("react.memo_cache_sentinel")
               ? ((b = (0, R.jsx)(Cu, {
                   children: (0, R.jsx)(_u, {
@@ -10264,20 +10263,23 @@
                 })),
                 (t[14] = f),
                 (t[15] = C))
-              : (C = t[15]),
+              : (C = t[15]));
+          const N = !m;
+          let _, j, P, z, T, M, O, D, L, A, F;
+          return (
             t[16] === Symbol.for("react.memo_cache_sentinel")
-              ? ((N = (e) => h(!0 === e)), (t[16] = N))
-              : (N = t[16]),
-            t[17] !== m
-              ? ((_ = (0, R.jsx)(ed, { checked: m, onCheckedChange: N })), (t[17] = m), (t[18] = _))
-              : (_ = t[18]),
+              ? ((_ = (e) => h(!0 !== e)), (t[16] = _))
+              : (_ = t[16]),
+            t[17] !== N
+              ? ((j = (0, R.jsx)(ed, { checked: N, onCheckedChange: _ })), (t[17] = N), (t[18] = j))
+              : (j = t[18]),
             t[19] === Symbol.for("react.memo_cache_sentinel")
-              ? ((j = (0, R.jsx)(Du, { children: "Protect your posts" })), (t[19] = j))
-              : (j = t[19]),
+              ? ((P = (0, R.jsx)(Du, { children: "Protect your posts" })), (t[19] = P))
+              : (P = t[19]),
             t[20] === Symbol.for("react.memo_cache_sentinel")
-              ? ((P = (0, R.jsxs)(Ou, {
+              ? ((z = (0, R.jsxs)(Ou, {
                   children: [
-                    j,
+                    P,
                     (0, R.jsxs)(Lu, {
                       children: [
                         "When selected, your posts and other account information are only visible to people who follow you. ",
@@ -10286,62 +10288,62 @@
                     }),
                   ],
                 })),
-                (t[20] = P))
-              : (P = t[20]),
-            t[21] !== _
-              ? ((z = (0, R.jsxs)(Ru, { orientation: "horizontal", children: [_, P] })),
-                (t[21] = _),
-                (t[22] = z))
-              : (z = t[22]),
-            t[23] !== z || t[24] !== k || t[25] !== C
-              ? ((T = (0, R.jsxs)(Tu, { children: [k, C, z] })),
-                (t[23] = z),
+                (t[20] = z))
+              : (z = t[20]),
+            t[21] !== j
+              ? ((T = (0, R.jsxs)(Ru, { orientation: "horizontal", children: [j, z] })),
+                (t[21] = j),
+                (t[22] = T))
+              : (T = t[22]),
+            t[23] !== T || t[24] !== k || t[25] !== C
+              ? ((M = (0, R.jsxs)(Tu, { children: [k, C, T] })),
+                (t[23] = T),
                 (t[24] = k),
                 (t[25] = C),
-                (t[26] = T))
-              : (T = t[26]),
+                (t[26] = M))
+              : (M = t[26]),
             t[27] === Symbol.for("react.memo_cache_sentinel")
-              ? ((M = (0, R.jsx)(ku, {
+              ? ((O = (0, R.jsx)(ku, {
                   asChild: !0,
                   children: (0, R.jsx)(xo, { variant: "outline", children: "Cancel" }),
                 })),
-                (t[27] = M))
-              : (M = t[27]),
+                (t[27] = O))
+              : (O = t[27]),
             t[28] !== a
-              ? ((O = a && (0, R.jsx)(cc, { "data-icon": "inline-start" })),
+              ? ((D = a && (0, R.jsx)(cc, { "data-icon": "inline-start" })),
                 (t[28] = a),
-                (t[29] = O))
-              : (O = t[29]),
-            t[30] !== v || t[31] !== a || t[32] !== O
-              ? ((D = (0, R.jsxs)(Nu, {
+                (t[29] = D))
+              : (D = t[29]),
+            t[30] !== v || t[31] !== a || t[32] !== D
+              ? ((L = (0, R.jsxs)(Nu, {
                   children: [
-                    M,
+                    O,
                     (0, R.jsxs)(xo, {
                       type: "submit",
                       onClick: v,
                       disabled: a,
-                      children: [O, "Save"],
+                      children: [D, "Save"],
                     }),
                   ],
                 })),
                 (t[30] = v),
                 (t[31] = a),
-                (t[32] = O),
-                (t[33] = D))
-              : (D = t[33]),
-            t[34] !== T || t[35] !== D
-              ? ((L = (0, R.jsxs)(Eu, { children: [b, T, D] })),
-                (t[34] = T),
-                (t[35] = D),
-                (t[36] = L))
-              : (L = t[36]),
-            t[37] !== s || t[38] !== L
-              ? ((A = (0, R.jsxs)(bu, { open: s, onOpenChange: c, children: [y, L] })),
+                (t[32] = D),
+                (t[33] = L))
+              : (L = t[33]),
+            t[34] !== M || t[35] !== L
+              ? ((A = (0, R.jsxs)(Eu, { children: [b, M, L] })),
+                (t[34] = M),
+                (t[35] = L),
+                (t[36] = A))
+              : (A = t[36]),
+            t[37] !== s || t[38] !== A
+              ? ((F = (0, R.jsxs)(bu, { open: s, onOpenChange: c, children: [y, A] })),
                 (t[37] = s),
-                (t[38] = L),
-                (t[39] = A))
-              : (A = t[39]),
-            A
+                (t[38] = A),
+                (t[39] = F))
+              : (F = t[39]),
+            F
           );
         }
         function nd(e) {

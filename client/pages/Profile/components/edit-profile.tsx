@@ -105,8 +105,8 @@ export function EditProfile({ onSaved }: EditProfileProps) {
           </Field>
           <Field orientation="horizontal">
             <Checkbox
-              checked={isPublic}
-              onCheckedChange={(checked) => setIsPublic(checked === true)}
+              checked={!isPublic}
+              onCheckedChange={(checked) => setIsPublic(checked !== true)}
             />
             <FieldContent>
               <FieldLabel>Protect your posts</FieldLabel>
