@@ -29,7 +29,7 @@ export default function App() {
         <Sidebar />
         <div className="flex min-h-0 flex-1 flex-col border-border sm:border-x">
           {/* <Header /> */}
-          <ChatInput />
+          <ChatInput onPosted={(created) => setPosts((prev) => [created, ...prev])} />
           <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto pb-8">
             {isPending && <div>Loading...</div>}
             {posts.length === 0 && !isPending && <div>No posts found</div>}

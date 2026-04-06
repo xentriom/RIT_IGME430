@@ -206,7 +206,14 @@ export default function App() {
                     </div>
                   </div>
                   <div id="reply-composer">
-                    <ChatInput parentId={post._id} allowReplyOption={false} />
+                    <ChatInput
+                      parentId={post._id}
+                      allowReplyOption={false}
+                      onPosted={(created) => {
+                        setReplies((prev) => [created, ...prev]);
+                        setPost((p) => (p ? { ...p, replyCount: (p.replyCount ?? 0) + 1 } : p));
+                      }}
+                    />
                   </div>
                 </div>
               </>

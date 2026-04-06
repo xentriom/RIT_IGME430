@@ -14,7 +14,7 @@ import {
   FlagIcon,
 } from "lucide-react";
 import { cn } from "../lib/utils";
-import type { ReplyOptions } from "../types";
+import type { Post as PostType, ReplyOptions } from "../types";
 import { ReplyLength, PostReplyOptions } from "../constants";
 import { SessionContext } from "../contexts/session";
 import { Spinner } from "./ui/spinner";
@@ -23,9 +23,11 @@ import { toast } from "sonner";
 export function ChatInput({
   parentId,
   allowReplyOption = true,
+  onPosted,
 }: {
   parentId?: string;
   allowReplyOption?: boolean;
+  onPosted?: (post: PostType) => void;
 }) {
   const { isLoggedIn, session } = useContext(SessionContext);
   const [isPending, startTransition] = useTransition();
@@ -61,6 +63,7 @@ export function ChatInput({
       }
 
       toast.success("Chirped");
+      onPosted?.(data as PostType);
       setDraft("");
     });
   };
