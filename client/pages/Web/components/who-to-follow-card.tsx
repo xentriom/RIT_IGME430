@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avat
 import { FollowButton } from "../../../components/follow-button";
 import { BadgeCheck } from "lucide-react";
 import { SessionContext } from "../../../contexts/session";
+import { ProfilePreview } from "../../../components/profile-preview";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../../components/ui/hover-card";
 
 export function WhoToFollowCard() {
   const { isLoggedIn, session } = useContext(SessionContext);
@@ -72,12 +74,21 @@ export function WhoToFollowCard() {
                   </Avatar>
                   <div className="flex w-full flex-row items-center gap-2">
                     <div className="flex flex-1 flex-col">
-                      <div className="flex flex-row items-center gap-1">
-                        <span className="truncate text-lg font-bold">{account.displayName}</span>
-                        {account.plan !== "free" && (
-                          <BadgeCheck className="size-4 shrink-0 text-primary" />
-                        )}
-                      </div>
+                      <HoverCard>
+                        <HoverCardTrigger asChild>
+                          <div className="flex flex-row items-center gap-1">
+                            <span className="truncate text-base font-bold hover:underline">
+                              {account.displayName}
+                            </span>
+                            {account.plan !== "free" && (
+                              <BadgeCheck className="size-4 shrink-0 text-primary" />
+                            )}
+                          </div>
+                        </HoverCardTrigger>
+                        <HoverCardContent>
+                          <ProfilePreview username={account.username} />
+                        </HoverCardContent>
+                      </HoverCard>
                       <span className="text-sm text-muted-foreground">@{account.username}</span>
                     </div>
                     <div className="shrink-0 self-start">
