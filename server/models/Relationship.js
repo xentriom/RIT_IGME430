@@ -51,6 +51,13 @@ RelationshipSchema.statics.findFollowingIds = (followerId) =>
     .exec()
     .then((docs) => docs.map((d) => d.following));
 
+RelationshipSchema.statics.findFollowers = (followingId) =>
+  RelationshipModel.find({ following: followingId })
+    .populate("follower", "username displayName isPublic bio plan")
+    .lean()
+    .exec()
+    .then((docs) => docs.map((d) => d.follower));
+
 RelationshipSchema.statics.countFollowers = (accountId) =>
   RelationshipModel.countDocuments({ following: accountId }).exec();
 

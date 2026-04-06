@@ -57,6 +57,15 @@ PostSchema.statics.toAPI = (doc) => ({
 PostSchema.statics.findByOwner = (ownerId) =>
   PostModel.find({ owner: ownerId }).sort({ createdDate: -1 }).lean().exec();
 
+// root posts on a profile timeline (same shape as feed: populated owner)
+PostSchema.statics.findRootsByOwnerWithOwner = (ownerId, limit = 50) =>
+  PostModel.find({ owner: ownerId, parent: null })
+    .sort({ createdDate: -1 })
+    .limit(limit)
+    .populate("owner", ownerPopulateFields)
+    .lean()
+    .exec();
+
 // find recent posts
 PostSchema.statics.findRecent = (limit = 50) =>
   PostModel.find({ parent: null }).sort({ createdDate: -1 }).limit(limit).lean().exec();

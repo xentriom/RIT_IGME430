@@ -1,4 +1,5 @@
 const models = require("../models");
+const { enrichPosts, canViewPrivateAuthor, parseLimit } = require("./Post");
 
 const getAccount = async (req, res) => {
   const username = req.params.username;
@@ -71,4 +72,37 @@ const getAccounts = async (req, res) => {
   return res.json(randomAccounts);
 };
 
-module.exports = { getAccount, toggleFollow, getAccounts };
+const getFollowers = async (req, res) => {
+  const username = req.params.username;
+  if (!username) return res.status(400).json({ error: "Username is required!" });
+
+  const account = await models.Account.findByUsername(username);
+  if (!account) return res.status(404).json({ error: "User not found!" });
+
+  const followers = await models.Relationship.findFollowers(account._id);
+  return res.json(followers);
+};
+
+const getPosts = async (req, res) => {
+  const username = req.params.username;
+  if (!username) return res.status(400).json({ error: "Username is required!" });
+
+  try {
+    const account = await models.Account.findByUsername(username);
+    if (!account) return res.status(404).json({ error: "User not found!" });
+
+    const viewerId = req.session?.account?._id ?? null;
+    if (!(await canViewPrivateAuthor(account, viewerId))) {
+      return res.json([]);
+    }
+
+    const limit = parseLimit(req.query.limit);
+    const posts = await models.Post.findRootsByOwnerWithOwner(account._id, limit);
+    const payload = await enrichPosts(posts, viewerId);
+    return res.json(payload);
+  } catch {
+    return res.status(500).json({ error: "An error occurred" });
+  }
+};
+
+module.exports = { getAccount, toggleFollow, getAccounts, getFollowers, getPosts };

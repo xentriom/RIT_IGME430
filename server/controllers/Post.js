@@ -247,4 +247,7 @@ module.exports = {
   toggleLike,
   getPost,
   deletePost,
+  enrichPosts,
+  canViewPrivateAuthor,
+  parseLimit,
 };

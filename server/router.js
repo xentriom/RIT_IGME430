@@ -25,6 +25,8 @@ const router = (app) => {
   // Users
   app.get("/api/users", mid.requiresSecure, controllers.User.getAccounts);
   app.get("/api/users/:username", mid.requiresSecure, controllers.User.getAccount);
+  app.get("/api/users/:username/posts", mid.requiresSecure, controllers.User.getPosts);
+  app.get("/api/users/:username/followers", mid.requiresSecure, controllers.User.getFollowers);
   app.post(
     "/api/users/:username/follow",
     mid.requiresSecure,
