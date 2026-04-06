@@ -10656,7 +10656,7 @@
               : (ee = e[65]),
             e[66] !== F || e[67] !== I || e[68] !== J || e[69] !== ee
               ? ((te = (0, R.jsxs)("div", {
-                  className: "no-scrollbar flex flex-col overflow-y-auto",
+                  className: "no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto",
                   children: [F, I, J, ee],
                 })),
                 (e[66] = F),

@@ -83,7 +83,7 @@ export default function App() {
               <span className="text-sm text-muted-foreground">{posts.length} posts</span>
             </div>
           </div>
-          <div className="no-scrollbar flex flex-col overflow-y-auto">
+          <div className="no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto">
             <div className="relative h-full max-h-32 w-full shrink-0 bg-black">
               {/* Cosmic Aurora */}
               {/* https://gradienty.codes/pattern-backgrounds */}
