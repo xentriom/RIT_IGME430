@@ -22,11 +22,24 @@ export default function App() {
   const [posts, setPosts] = useState<PostType[]>([]);
 
   useEffect(() => {
-    startTransition(async () => {
-      const res = await fetch("/posts");
-      const data = await res.json();
-      setPosts(data);
-    });
+    const loadFeed = () => {
+      startTransition(async () => {
+        const res = await fetch("/posts");
+        if (!res.ok) return;
+        const data = (await res.json()) as PostType[];
+        setPosts(data);
+      });
+    };
+
+    loadFeed();
+
+    // BFCache
+    // https://www.linkedin.com/pulse/why-my-useeffect-didnt-run-what-hell-bfcache-suman-hansada-6vemc#:~:text=Computer%20Scientist%2D2%20(SDE%2D,and%20how%20to%20fix%20it.
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) loadFeed();
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
   }, [startTransition]);
 
   return (
