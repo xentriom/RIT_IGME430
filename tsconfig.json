@@ -13,6 +13,6 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["client/**/*.tsx", "client/**/*.ts"],
+  "include": ["client/**/*.tsx", "client/**/*.ts", "client/pages/Web/components"],
   "exclude": ["node_modules", "hosted", "server"]
 }

@@ -294,14 +294,6 @@ export default function App() {
                   </div>
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    <span className="text-xl font-bold">What&apos;s happening</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>Placeholder for what&apos;s happening</CardContent>
-              </Card>
               <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
                 <a href="/" className="hover:underline">
                   Terms of Service

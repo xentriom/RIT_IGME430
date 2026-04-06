@@ -1,16 +1,13 @@
 import { Search } from "lucide-react";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../../components/ui/input-group";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { ChatInput } from "../../components/chat-input";
-import { Header } from "./components.tsx/header";
-import { PremiumCard } from "./components.tsx/premium-card";
+import { PremiumCard } from "./components/premium-card";
 import { Sidebar } from "../../components/sidebar";
 import { Post } from "../../components/post";
 import { useState, useEffect, useTransition } from "react";
-import { FocusedPost } from "../../components/focused-post";
 import type { Post as PostType } from "../../types";
-import { NewsCard } from "./components.tsx/news-card";
-import { WhoToFollowCard } from "../../components/who-to-follow-card";
+import { NewsCard } from "./components/news-card";
+import { WhoToFollowCard } from "./components/who-to-follow-card";
 
 export default function App() {
   const [isPending, startTransition] = useTransition();
@@ -51,39 +48,7 @@ export default function App() {
           <div className="no-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto">
             <PremiumCard />
             <NewsCard />
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  <span className="text-xl font-bold">What&apos;s happening</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>Placeholder for what&apos;s happening</CardContent>
-            </Card>
             <WhoToFollowCard />
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  <span className="text-xl font-bold">Who to follow</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>Placeholder for who to follow</CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  <span className="text-xl font-bold">Who to follow</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>Placeholder for who to follow</CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  <span className="text-xl font-bold">Who to follow</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>Placeholder for who to follow</CardContent>
-            </Card>
             <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
               <a href="/" className="hover:underline">
                 Terms of Service

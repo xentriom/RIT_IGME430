@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState, useTransition } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Account } from "../types";
-import { Skeleton } from "./ui/skeleton";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { FollowButton } from "./follow-button";
+import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card";
+import { Account } from "../../../types";
+import { Skeleton } from "../../../components/ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
+import { FollowButton } from "../../../components/follow-button";
 import { BadgeCheck } from "lucide-react";
-import { SessionContext } from "../contexts/session";
+import { SessionContext } from "../../../contexts/session";
 
 export function WhoToFollowCard() {
   const { isLoggedIn, session } = useContext(SessionContext);
