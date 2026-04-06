@@ -13,6 +13,8 @@ const profilePage = async (req, res) => {
 
   res.render("profile", {
     username: account.username,
+    displayName: account.displayName,
+    bio: account.bio,
   });
 };
 
