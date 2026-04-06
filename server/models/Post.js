@@ -141,6 +141,10 @@ PostSchema.statics.findRepliesWithOwner = (parentId, limit = 200) =>
 PostSchema.statics.findByIdWithOwner = (id) =>
   PostModel.findById(id).populate("owner", ownerPopulateFields).lean().exec();
 
+// find post document by id with owner (non-lean; supports deleteOne/save/etc)
+PostSchema.statics.findDocByIdWithOwner = (id) =>
+  PostModel.findById(id).populate("owner", ownerPopulateFields).exec();
+
 // check if post exists by id
 PostSchema.statics.existsById = async (id) => {
   const doc = await PostModel.findById(id).select("_id").lean().exec();

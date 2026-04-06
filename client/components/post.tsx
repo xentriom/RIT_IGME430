@@ -1,10 +1,25 @@
-import { MoreHorizontal, MessageCircle, Share2, Heart, BadgeCheck } from "lucide-react";
+import {
+  MoreHorizontal,
+  MessageCircle,
+  Share2,
+  Heart,
+  BadgeCheck,
+  LinkIcon,
+  TrashIcon,
+} from "lucide-react";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "./ui/hover-card";
 import { ProfilePreview } from "./profile-preview";
 import { useContext, useEffect, useState, useTransition } from "react";
 import { SessionContext } from "../contexts/session";
 import type { Post as PostType } from "../types";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "./ui/dropdown-menu";
+import { toast } from "sonner";
 
 function formatDate(date: string) {
   const now = new Date();
@@ -18,15 +33,18 @@ function formatDate(date: string) {
 }
 
 export function Post({ post }: { post: PostType }) {
-  const { isLoggedIn } = useContext(SessionContext);
+  const { isLoggedIn, session } = useContext(SessionContext);
   const [isPending, startTransition] = useTransition();
   const [likeCount, setLikeCount] = useState(post.likeCount ?? 0);
   const [likedByMe, setLikedByMe] = useState(!!post.likedByMe);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     setLikeCount(post.likeCount ?? 0);
     setLikedByMe(!!post.likedByMe);
   }, [post._id, post.likeCount, post.likedByMe]);
+
+  const isOwner = isLoggedIn && post.owner.username === session.username;
 
   const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -59,6 +77,30 @@ export function Post({ post }: { post: PostType }) {
       }
     });
   };
+
+  const deletePost = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isOwner || isDeleted) return;
+
+    toast.promise(
+      fetch(`/posts/${String(post._id)}`, {
+        method: "DELETE",
+        credentials: "same-origin",
+        headers: { Accept: "application/json" },
+      }),
+      {
+        loading: "Deleting post...",
+        success: () => {
+          setIsDeleted(true);
+          return "Post deleted successfully";
+        },
+        error: (err) => (err instanceof Error ? err.message : "Could not delete the post."),
+      },
+    );
+  };
+
+  if (isDeleted) return null;
 
   return (
     <>
@@ -94,9 +136,34 @@ export function Post({ post }: { post: PostType }) {
                   {formatDate(post.createdDate)}
                 </span>
               </div>
-              <div className="rounded-full p-1 hover:bg-mauve-500">
-                <MoreHorizontal className="size-4" />
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="rounded-full p-1 hover:bg-muted">
+                    <MoreHorizontal className="size-4" />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem asChild>
+                    <div
+                      className="flex flex-row items-center gap-2"
+                      onClick={() => {
+                        navigator.clipboard.writeText(`${window.location.origin}/p/${post._id}`);
+                      }}
+                    >
+                      <LinkIcon className="size-4" />
+                      Copy link
+                    </div>
+                  </DropdownMenuItem>
+                  {isOwner && (
+                    <DropdownMenuItem asChild>
+                      <div className="flex flex-row items-center gap-2" onClick={deletePost}>
+                        <TrashIcon className="size-4" />
+                        Delete
+                      </div>
+                    </DropdownMenuItem>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
             <div className="w-full wrap-anywhere whitespace-pre-wrap">{post.body}</div>
             <div className="flex flex-row items-center gap-6">

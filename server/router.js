@@ -48,6 +48,7 @@ const router = (app) => {
     mid.requiresLogin,
     controllers.Post.toggleLike,
   );
+  app.delete("/posts/:postId", mid.requiresSecure, mid.requiresLogin, controllers.Post.deletePost);
 
   // Misc
   app.get("/api/stories", mid.requiresSecure, async (req, res) => {

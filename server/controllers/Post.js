@@ -220,6 +220,25 @@ const getPost = async (req, res) => {
   }
 };
 
+const deletePost = async (req, res) => {
+  const postId = parseRequiredOidParam(req, "postId");
+  if (!postId) return res.status(400).json({ error: "Invalid post id" });
+  const accountId = sessionAccountId(req);
+  if (!accountId) return res.status(401).json({ error: "Unauthorized" });
+
+  try {
+    const post = await Post.findDocByIdWithOwner(postId);
+    if (!post) return res.status(404).json({ error: "Post not found" });
+    if (post.owner._id.toString() !== accountId.toString()) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+    await post.deleteOne();
+    return res.status(200).json({ message: "Post deleted successfully" });
+  } catch {
+    return res.status(500).json({ error: "An error occurred" });
+  }
+};
+
 module.exports = {
   getFeed,
   createPost,
@@ -227,4 +246,5 @@ module.exports = {
   createReply,
   toggleLike,
   getPost,
+  deletePost,
 };
