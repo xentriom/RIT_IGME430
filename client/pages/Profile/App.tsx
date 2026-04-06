@@ -8,16 +8,7 @@ import { FollowButton } from "../../components/follow-button";
 import { Post } from "../../components/post";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { SessionContext } from "../../contexts/session";
-import { Button } from "../../components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogTrigger,
-} from "../../components/ui/dialog";
+import { EditProfile } from "./components/edit-profile";
 
 export default function App() {
   const { isLoggedIn, session } = useContext(SessionContext);
@@ -29,29 +20,35 @@ export default function App() {
   const [posts, setPosts] = useState<PostType[]>([]);
   const [followers, setFollowers] = useState<Account[]>([]);
 
-  useEffect(() => {
-    const loadAccount = () => {
-      startAccountTransition(async () => {
-        const res = await fetch(`/api/users/${username}`);
+  const loadAccount = () => {
+    startAccountTransition(async () => {
+      const res = await fetch(`/api/users/${username}`);
+      const data = await res.json();
+      setAccount(data);
+
+      // Get the account's posts
+      startPostsTransition(async () => {
+        const res = await fetch(`/api/users/${username}/posts`);
         const data = await res.json();
-        setAccount(data);
-
-        // Get the account's posts
-        startPostsTransition(async () => {
-          const res = await fetch(`/api/users/${username}/posts`);
-          const data = await res.json();
-          setPosts(data);
-        });
-
-        // Get the account's followers
-        startFollowersTransition(async () => {
-          const res = await fetch(`/api/users/${username}/followers`);
-          const data = await res.json();
-          setFollowers(data);
-        });
+        setPosts(data);
       });
-    };
 
+      // Get the account's followers
+      startFollowersTransition(async () => {
+        const res = await fetch(`/api/users/${username}/followers`);
+        const data = await res.json();
+        setFollowers(data);
+      });
+    });
+  };
+
+  const refreshAccount = async () => {
+    const res = await fetch(`/api/users/${username}`);
+    if (!res.ok) return;
+    setAccount(await res.json());
+  };
+
+  useEffect(() => {
     loadAccount();
 
     // BFCache, look at Web/App.tsx for more details
@@ -61,7 +58,7 @@ export default function App() {
 
     window.addEventListener("pageshow", onPageShow);
     return () => window.removeEventListener("pageshow", onPageShow);
-  }, [username, startAccountTransition, startPostsTransition, startFollowersTransition]);
+  }, [loadAccount]);
 
   if (isAccountPending) return <div>Loading...</div>;
   if (!account) return <div>Account not found</div>;
@@ -112,16 +109,7 @@ export default function App() {
             </div>
             <div className="self-end p-2">
               {isSelf ? (
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button>Edit Profile</Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Edit Profile</DialogTitle>
-                    </DialogHeader>
-                  </DialogContent>
-                </Dialog>
+                <EditProfile onSaved={refreshAccount} />
               ) : (
                 <FollowButton
                   username={account.username}

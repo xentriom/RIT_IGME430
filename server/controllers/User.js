@@ -105,4 +105,28 @@ const getPosts = async (req, res) => {
   }
 };
 
-module.exports = { getAccount, toggleFollow, getAccounts, getFollowers, getPosts };
+const updateAccount = async (req, res) => {
+  const { displayName, bio, isPublic } = req.body;
+  if (!displayName || typeof bio !== "string" || isPublic === undefined) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  const session = req.session;
+  if (!session) return res.status(401).json({ error: "Login required" });
+
+  const account = await models.Account.findById(session.account._id);
+  if (!account) return res.status(404).json({ error: "Account not found" });
+
+  try {
+    account.displayName = displayName.trim();
+    account.bio = bio.trim();
+    account.isPublic = isPublic;
+    await account.save();
+    session.account = models.Account.toAPI(account);
+    return res.json({ account: session.account });
+  } catch {
+    return res.status(500).json({ error: "An error occurred" });
+  }
+};
+
+module.exports = { getAccount, toggleFollow, getAccounts, getFollowers, getPosts, updateAccount };

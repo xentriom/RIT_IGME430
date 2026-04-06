@@ -27,6 +27,7 @@ const router = (app) => {
   app.get("/api/users/:username", mid.requiresSecure, controllers.User.getAccount);
   app.get("/api/users/:username/posts", mid.requiresSecure, controllers.User.getPosts);
   app.get("/api/users/:username/followers", mid.requiresSecure, controllers.User.getFollowers);
+  app.patch("/api/users/me", mid.requiresSecure, mid.requiresLogin, controllers.User.updateAccount);
   app.post(
     "/api/users/:username/follow",
     mid.requiresSecure,
