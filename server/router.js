@@ -57,6 +57,9 @@ const router = (app) => {
     const data = await stories.json();
     return res.json(data);
   });
+
+  // Premium
+  app.post("/api/premium/purchase", mid.requiresSecure, controllers.Premium.purchase);
 };
 
 module.exports = router;

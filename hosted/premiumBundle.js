@@ -4216,7 +4216,7 @@
           return (0, V.jsx)("li", { children: e }, e);
         }
         function cr() {
-          const e = (0, l.c)(52),
+          const e = (0, l.c)(54),
             { isLoggedIn: t } = (0, r.useContext)(vn),
             [n, a] = (0, r.useTransition)(),
             [o, i] = (0, r.useState)("monthly"),
@@ -4225,29 +4225,46 @@
             d = kn[s][o],
             f = c * (1 - d / 100);
           let p;
-          e[0] !== t
+          e[0] !== o || e[1] !== t || e[2] !== s
             ? ((p = () => {
                 a(async () => {
                   t
-                    ? (await new Promise(dr), v.success("Purchase successful"))
+                    ? v.promise(
+                        new Promise((e, t) => {
+                          fetch("/api/premium/purchase", {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                              Credentials: "same-origin",
+                            },
+                            body: JSON.stringify({ plan: s, cycle: o }),
+                          })
+                            .then(pr)
+                            .then((t) => e(t))
+                            .catch((e) => t(e));
+                        }),
+                        { loading: "Purchasing...", success: fr, error: dr },
+                      )
                     : v.error("You must be logged in to purchase a subscription");
                 });
               }),
-              (e[0] = t),
-              (e[1] = p))
-            : (p = e[1]);
+              (e[0] = o),
+              (e[1] = t),
+              (e[2] = s),
+              (e[3] = p))
+            : (p = e[3]);
           const m = p;
           let h, g, b, y, w, k, x, S, E, C, N, z, _, P, T, L, R, O, A, D, F;
           return (
-            e[2] === Symbol.for("react.memo_cache_sentinel")
+            e[4] === Symbol.for("react.memo_cache_sentinel")
               ? ((h = (0, V.jsx)("a", {
                   href: "/",
                   className: "absolute top-4 left-4 rounded-full bg-muted p-2",
                   children: (0, V.jsx)(M, { className: "size-4" }),
                 })),
-                (e[2] = h))
-              : (h = e[2]),
-            e[3] === Symbol.for("react.memo_cache_sentinel")
+                (e[4] = h))
+              : (h = e[4]),
+            e[5] === Symbol.for("react.memo_cache_sentinel")
               ? ((g = (0, V.jsxs)("div", {
                   className: "space-y-4",
                   children: [
@@ -4258,12 +4275,12 @@
                     }),
                   ],
                 })),
-                (e[3] = g))
-              : (g = e[3]),
-            e[4] === Symbol.for("react.memo_cache_sentinel")
-              ? ((b = (e) => i(e)), (e[4] = b))
-              : (b = e[4]),
-            e[5] === Symbol.for("react.memo_cache_sentinel")
+                (e[5] = g))
+              : (g = e[5]),
+            e[6] === Symbol.for("react.memo_cache_sentinel")
+              ? ((b = (e) => i(e)), (e[6] = b))
+              : (b = e[6]),
+            e[7] === Symbol.for("react.memo_cache_sentinel")
               ? ((y = (0, V.jsxs)(mn, {
                   className: "mx-auto",
                   children: [
@@ -4271,20 +4288,20 @@
                     (0, V.jsx)(hn, { value: "monthly", children: "Monthly" }),
                   ],
                 })),
-                (e[5] = y))
-              : (y = e[5]),
-            e[6] !== o
+                (e[7] = y))
+              : (y = e[7]),
+            e[8] !== o
               ? ((w = (0, V.jsx)(fn, { value: o, onValueChange: b, children: y })),
-                (e[6] = o),
-                (e[7] = w))
-              : (w = e[7]),
-            e[8] !== o || e[9] !== s
-              ? ((k = (0, V.jsx)(sr, { cycle: o, model: s, setModel: u })),
                 (e[8] = o),
-                (e[9] = s),
-                (e[10] = k))
-              : (k = e[10]),
-            e[11] !== w || e[12] !== k
+                (e[9] = w))
+              : (w = e[9]),
+            e[10] !== o || e[11] !== s
+              ? ((k = (0, V.jsx)(sr, { cycle: o, model: s, setModel: u })),
+                (e[10] = o),
+                (e[11] = s),
+                (e[12] = k))
+              : (k = e[12]),
+            e[13] !== w || e[14] !== k
               ? ((x = (0, V.jsx)("div", {
                   className: "flex-1 overflow-y-auto pb-48",
                   children: (0, V.jsxs)("div", {
@@ -4298,53 +4315,53 @@
                     ],
                   }),
                 })),
-                (e[11] = w),
-                (e[12] = k),
-                (e[13] = x))
-              : (x = e[13]),
-            e[14] !== s
+                (e[13] = w),
+                (e[14] = k),
+                (e[15] = x))
+              : (x = e[15]),
+            e[16] !== s
               ? ((S = (0, V.jsx)("h2", { className: "text-xl font-bold capitalize", children: s })),
-                (e[14] = s),
-                (e[15] = S))
-              : (S = e[15]),
-            e[16] !== c || e[17] !== d
+                (e[16] = s),
+                (e[17] = S))
+              : (S = e[17]),
+            e[18] !== c || e[19] !== d
               ? ((E =
                   d > 0 &&
                   (0, V.jsxs)("span", {
                     className: "text-muted-foreground line-through",
                     children: ["$", c],
                   })),
-                (e[16] = c),
-                (e[17] = d),
-                (e[18] = E))
-              : (E = e[18]),
-            e[19] !== f
+                (e[18] = c),
+                (e[19] = d),
+                (e[20] = E))
+              : (E = e[20]),
+            e[21] !== f
               ? ((C = (0, V.jsxs)("span", {
                   className: "font-bold text-primary",
                   children: ["$", f],
                 })),
-                (e[19] = f),
-                (e[20] = C))
-              : (C = e[20]),
-            e[21] !== o
+                (e[21] = f),
+                (e[22] = C))
+              : (C = e[22]),
+            e[23] !== o
               ? ((N = (0, V.jsxs)("span", {
                   className: "text-base text-muted-foreground",
                   children: ["/ ", o],
                 })),
-                (e[21] = o),
-                (e[22] = N))
-              : (N = e[22]),
-            e[23] !== C || e[24] !== N || e[25] !== E
+                (e[23] = o),
+                (e[24] = N))
+              : (N = e[24]),
+            e[25] !== C || e[26] !== N || e[27] !== E
               ? ((z = (0, V.jsxs)("div", {
                   className: "flex min-h-11 items-end gap-2 text-3xl tabular-nums",
                   children: [E, C, N],
                 })),
-                (e[23] = C),
-                (e[24] = N),
-                (e[25] = E),
-                (e[26] = z))
-              : (z = e[26]),
-            e[27] !== c || e[28] !== d || e[29] !== o
+                (e[25] = C),
+                (e[26] = N),
+                (e[27] = E),
+                (e[28] = z))
+              : (z = e[28]),
+            e[29] !== c || e[30] !== d || e[31] !== o
               ? ((_ =
                   d > 0
                     ? (0, V.jsxs)("p", {
@@ -4352,89 +4369,95 @@
                         children: ["For first 2 months, then $", c, " billed monthly"],
                       })
                     : (0, V.jsxs)("p", { className: "min-h-5 text-sm", children: ["Billed ", o] })),
-                (e[27] = c),
-                (e[28] = d),
-                (e[29] = o),
-                (e[30] = _))
-              : (_ = e[30]),
-            e[31] !== z || e[32] !== _
+                (e[29] = c),
+                (e[30] = d),
+                (e[31] = o),
+                (e[32] = _))
+              : (_ = e[32]),
+            e[33] !== z || e[34] !== _
               ? ((P = (0, V.jsxs)("div", { children: [z, _] })),
-                (e[31] = z),
-                (e[32] = _),
-                (e[33] = P))
-              : (P = e[33]),
-            e[34] !== P || e[35] !== S
+                (e[33] = z),
+                (e[34] = _),
+                (e[35] = P))
+              : (P = e[35]),
+            e[36] !== P || e[37] !== S
               ? ((T = (0, V.jsxs)("div", { className: "min-w-88 space-y-2", children: [S, P] })),
-                (e[34] = P),
-                (e[35] = S),
-                (e[36] = T))
-              : (T = e[36]),
-            e[37] !== n
+                (e[36] = P),
+                (e[37] = S),
+                (e[38] = T))
+              : (T = e[38]),
+            e[39] !== n
               ? ((L = n && (0, V.jsx)(bn, { "data-icon": "inline-start" })),
-                (e[37] = n),
-                (e[38] = L))
-              : (L = e[38]),
-            e[39] !== m || e[40] !== n || e[41] !== L
+                (e[39] = n),
+                (e[40] = L))
+              : (L = e[40]),
+            e[41] !== m || e[42] !== n || e[43] !== L
               ? ((R = (0, V.jsxs)(ht, {
                   className: "w-full",
                   onClick: m,
                   disabled: n,
                   children: [L, "Subscribe & Pay"],
                 })),
-                (e[39] = m),
-                (e[40] = n),
-                (e[41] = L),
-                (e[42] = R))
-              : (R = e[42]),
-            e[43] === Symbol.for("react.memo_cache_sentinel")
+                (e[41] = m),
+                (e[42] = n),
+                (e[43] = L),
+                (e[44] = R))
+              : (R = e[44]),
+            e[45] === Symbol.for("react.memo_cache_sentinel")
               ? ((O = (0, V.jsx)("p", {
                   className:
                     "rounded-md border border-border p-2 text-xs text-muted-foreground italic",
                   children:
                     "By subscribing, you agree to our Purchaser Terms, and that subscriptions auto-renew until you cancel. Cancel anytime, at least 24 hours prior to renewal to avoid additional charges. Price subject to change. Manage your subscription through the platform you subscribed on.",
                 })),
-                (e[43] = O))
-              : (O = e[43]),
-            e[44] !== R
+                (e[45] = O))
+              : (O = e[45]),
+            e[46] !== R
               ? ((A = (0, V.jsxs)("div", { className: "max-w-md space-y-2", children: [R, O] })),
-                (e[44] = R),
-                (e[45] = A))
-              : (A = e[45]),
-            e[46] !== T || e[47] !== A
+                (e[46] = R),
+                (e[47] = A))
+              : (A = e[47]),
+            e[48] !== T || e[49] !== A
               ? ((D = (0, V.jsxs)("div", {
                   className:
                     "fixed right-0 bottom-0 left-0 flex w-full flex-row items-start justify-center gap-2 bg-background/50 p-8 backdrop-blur-sm",
                   children: [T, A],
                 })),
-                (e[46] = T),
-                (e[47] = A),
-                (e[48] = D))
-              : (D = e[48]),
-            e[49] !== D || e[50] !== x
+                (e[48] = T),
+                (e[49] = A),
+                (e[50] = D))
+              : (D = e[50]),
+            e[51] !== D || e[52] !== x
               ? ((F = (0, V.jsxs)("div", {
                   className: "relative flex h-dvh flex-col",
                   children: [h, x, D],
                 })),
-                (e[49] = D),
-                (e[50] = x),
-                (e[51] = F))
-              : (F = e[51]),
+                (e[51] = D),
+                (e[52] = x),
+                (e[53] = F))
+              : (F = e[53]),
             F
           );
         }
         function dr(e) {
-          return setTimeout(e, 1e3);
+          return e instanceof Error ? e.message : "Purchase failed";
         }
-        const fr = O("circle-check", [
+        function fr(e) {
+          return `Your payment for ${e.plan} ${e.cycle} has been processed.`;
+        }
+        function pr(e) {
+          return e.json();
+        }
+        const mr = O("circle-check", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }],
           ]),
-          pr = O("info", [
+          hr = O("info", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "M12 16v-4", key: "1dtifu" }],
             ["path", { d: "M12 8h.01", key: "e9boi3" }],
           ]),
-          mr = O("triangle-alert", [
+          gr = O("triangle-alert", [
             [
               "path",
               {
@@ -4445,7 +4468,7 @@
             ["path", { d: "M12 9v4", key: "juzpu7" }],
             ["path", { d: "M12 17h.01", key: "p32p05" }],
           ]),
-          hr = O("octagon-x", [
+          br = O("octagon-x", [
             ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
             [
               "path",
@@ -4456,17 +4479,17 @@
             ],
             ["path", { d: "m9 9 6 6", key: "z0biqf" }],
           ]),
-          gr = (e) => {
+          vr = (e) => {
             const t = (0, l.c)(7);
             let n, r, a, o, i;
             return (
               t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
               t[2] === Symbol.for("react.memo_cache_sentinel")
                 ? ((r = {
-                    success: (0, V.jsx)(fr, { className: "size-4" }),
-                    info: (0, V.jsx)(pr, { className: "size-4" }),
-                    warning: (0, V.jsx)(mr, { className: "size-4" }),
-                    error: (0, V.jsx)(hr, { className: "size-4" }),
+                    success: (0, V.jsx)(mr, { className: "size-4" }),
+                    info: (0, V.jsx)(hr, { className: "size-4" }),
+                    warning: (0, V.jsx)(gr, { className: "size-4" }),
+                    error: (0, V.jsx)(br, { className: "size-4" }),
                     loading: (0, V.jsx)(gn, { className: "size-4 animate-spin" }),
                   }),
                   (a = {
@@ -4501,7 +4524,7 @@
             children: (0, V.jsxs)(yn, {
               children: [
                 (0, V.jsx)(cr, {}),
-                (0, V.jsx)(gr, { position: "top-center", richColors: !0 }),
+                (0, V.jsx)(vr, { position: "top-center", richColors: !0 }),
               ],
             }),
           }),

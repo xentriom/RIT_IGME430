@@ -19,7 +19,6 @@ export default function App() {
   const currentDiscount = PremiumDiscount[model][cycle];
   const total = currentCost * (1 - currentDiscount / 100);
 
-  // Temp handler for now
   const handlePurchase = () => {
     startTransition(async () => {
       if (!isLoggedIn) {
@@ -27,8 +26,31 @@ export default function App() {
         return;
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      toast.success("Purchase successful");
+      toast.promise(
+        new Promise<{ plan: SubscriptionPlan; cycle: PaymentCycle }>((resolve, reject) => {
+          fetch("/api/premium/purchase", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Credentials: "same-origin",
+            },
+            body: JSON.stringify({
+              plan: model,
+              cycle,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => resolve(data))
+            .catch((err) => reject(err));
+        }),
+        {
+          loading: "Purchasing...",
+          success: (data: { plan: SubscriptionPlan; cycle: PaymentCycle }) => {
+            return `Your payment for ${data.plan} ${data.cycle} has been processed.`;
+          },
+          error: (err) => (err instanceof Error ? err.message : "Purchase failed"),
+        },
+      );
     });
   };
 
