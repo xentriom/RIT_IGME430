@@ -2,14 +2,15 @@ import { useEffect, useState, useTransition, useContext } from "react";
 import type { Account, Post as PostType } from "../../types";
 import { Sidebar } from "../../components/sidebar";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../../components/ui/input-group";
-import { Search, ArrowLeft, Calendar, BadgeCheck } from "lucide-react";
+import { Search, ArrowLeft, Calendar } from "lucide-react";
 import { YouMightLike } from "./components/you-might-like";
 import { FollowButton } from "../../components/follow-button";
 import { Post } from "../../components/post";
 import { SessionContext } from "../../contexts/session";
 import { EditProfile } from "./components/edit-profile";
 import { Button } from "../../components/ui/button";
-import { ProfileAvatar } from "../../components/avatar";
+import { ProfileAvatar } from "../../components/profile-avatar";
+import { ProfileBadge } from "../../components/profile-badge";
 
 export default function App() {
   const { isLoggedIn, session } = useContext(SessionContext);
@@ -79,7 +80,7 @@ export default function App() {
             <div className="flex flex-col">
               <div className="flex flex-row items-center gap-2">
                 <span className="text-lg font-bold">{account.displayName}</span>
-                {account.plan !== "free" && <BadgeCheck className="size-4 shrink-0 text-primary" />}
+                <ProfileBadge isOrg={account.isOrg} plan={account.plan} />
               </div>
               <span className="text-sm text-muted-foreground">{posts.length} posts</span>
             </div>
@@ -128,9 +129,7 @@ export default function App() {
               <div className="flex flex-col">
                 <div className="flex flex-row items-center gap-2">
                   <h1 className="text-xl font-bold">{account.displayName}</h1>
-                  {account.plan !== "free" && (
-                    <BadgeCheck className="size-4 shrink-0 text-primary" />
-                  )}
+                  <ProfileBadge isOrg={account.isOrg} plan={account.plan} />
                 </div>
                 <h2 className="text-sm text-muted-foreground">@{account.username}</h2>
               </div>

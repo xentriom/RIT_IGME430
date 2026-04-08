@@ -4268,7 +4268,7 @@
               ? ((g = (0, V.jsxs)("div", {
                   className: "space-y-4",
                   children: [
-                    (0, V.jsx)(j, { className: "mx-auto size-30 text-chart-1" }),
+                    (0, V.jsx)(j, { className: "mx-auto size-30 text-primary" }),
                     (0, V.jsxs)("h1", {
                       className: "text-4xl font-bold",
                       children: ["Don't lose your ", kn.premium.monthly, "% discount on Premium"],

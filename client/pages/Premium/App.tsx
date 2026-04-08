@@ -63,7 +63,7 @@ export default function App() {
       <div className="flex-1 overflow-y-auto pb-48">
         <div className="space-y-8 p-8 text-center">
           <div className="space-y-4">
-            <BadgeCheck className="mx-auto size-30 text-chart-1" />
+            <BadgeCheck className="mx-auto size-30 text-primary" />
             <h1 className="text-4xl font-bold">
               Don&apos;t lose your {PremiumDiscount.premium.monthly}% discount on Premium
             </h1>

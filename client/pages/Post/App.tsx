@@ -16,7 +16,7 @@ import type { Post as PostType } from "../../types";
 import { FollowButton } from "../../components/follow-button";
 import { PostSkeleton } from "../../components/post-skeleton";
 import { FocusedPost } from "./components/focused-post";
-import { ProfileAvatar } from "../../components/avatar";
+import { ProfileAvatar } from "../../components/profile-avatar";
 
 export default function App() {
   const postId = window.location.pathname.split("/").pop();

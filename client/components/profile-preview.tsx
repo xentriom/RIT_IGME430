@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState, useTransition } from "react";
 
-import { BadgeCheck } from "lucide-react";
 import { SessionContext } from "../contexts/session";
 import type { Account } from "../types";
 import { FollowButton } from "./follow-button";
 import { Spinner } from "./ui/spinner";
-import { ProfileAvatar } from "./avatar";
+import { ProfileAvatar } from "./profile-avatar";
+import { ProfileBadge } from "./profile-badge";
 
 export function ProfilePreview({ username }: { username: string }) {
   const { isLoggedIn, session } = useContext(SessionContext);
@@ -57,7 +57,7 @@ export function ProfilePreview({ username }: { username: string }) {
       >
         <div className="flex flex-row items-center gap-1">
           <span className="text-lg font-bold">{account.displayName}</span>
-          {account.plan !== "free" && <BadgeCheck className="size-4 text-primary" />}
+          <ProfileBadge isOrg={account.isOrg} plan={account.plan} />
         </div>
         <span className="text-sm text-muted-foreground">@{account.username}</span>
       </a>

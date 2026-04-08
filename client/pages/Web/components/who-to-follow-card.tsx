@@ -2,12 +2,12 @@ import { useContext, useEffect, useState, useTransition } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card";
 import { Account } from "../../../types";
 import { Skeleton } from "../../../components/ui/skeleton";
-import { ProfileAvatar } from "../../../components/avatar";
+import { ProfileAvatar } from "../../../components/profile-avatar";
 import { FollowButton } from "../../../components/follow-button";
-import { BadgeCheck } from "lucide-react";
 import { SessionContext } from "../../../contexts/session";
 import { ProfilePreview } from "../../../components/profile-preview";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../../components/ui/hover-card";
+import { ProfileBadge } from "../../../components/profile-badge";
 
 export function WhoToFollowCard() {
   const { isLoggedIn, session } = useContext(SessionContext);
@@ -79,9 +79,7 @@ export function WhoToFollowCard() {
                             <span className="truncate text-base font-bold hover:underline">
                               {account.displayName}
                             </span>
-                            {account.plan !== "free" && (
-                              <BadgeCheck className="size-4 shrink-0 text-primary" />
-                            )}
+                            <ProfileBadge isOrg={account.isOrg} plan={account.plan} />
                           </div>
                         </HoverCardTrigger>
                         <HoverCardContent>

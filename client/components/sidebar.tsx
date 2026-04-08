@@ -30,7 +30,7 @@ import {
 import { useContext } from "react";
 import { SessionContext } from "../contexts/session";
 import { cn } from "../lib/utils";
-import { ProfileAvatar } from "./avatar";
+import { ProfileAvatar } from "./profile-avatar";
 
 const sidebarItems = [
   {

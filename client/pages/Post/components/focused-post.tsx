@@ -1,11 +1,12 @@
 import { useContext, useTransition, type Dispatch, type SetStateAction } from "react";
-import { BadgeCheck, Heart, MessageCircle, Share2 } from "lucide-react";
-import { ProfileAvatar } from "../../../components/avatar";
+import { Heart, MessageCircle, Share2 } from "lucide-react";
+import { ProfileAvatar } from "../../../components/profile-avatar";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "../../../components/ui/hover-card";
 import { ProfilePreview } from "../../../components/profile-preview";
 import type { Post as PostType } from "../../../types";
 import { ChatInput } from "../../../components/chat-input";
 import { SessionContext } from "../../../contexts/session";
+import { ProfileBadge } from "../../../components/profile-badge";
 
 export function FocusedPost({
   post,
@@ -72,9 +73,7 @@ export function FocusedPost({
                   <span className="text-base leading-tight font-bold hover:underline">
                     {post.owner.displayName}
                   </span>
-                  {post.owner.plan !== "free" && (
-                    <BadgeCheck className="size-4 shrink-0 text-primary" />
-                  )}
+                  <ProfileBadge isOrg={post.owner.isOrg} plan={post.owner.plan} />
                 </div>
                 <span className="text-sm text-muted-foreground">@{post.owner.username}</span>
               </div>

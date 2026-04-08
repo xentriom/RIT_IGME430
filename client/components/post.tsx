@@ -1,18 +1,10 @@
-import {
-  MoreHorizontal,
-  MessageCircle,
-  Share2,
-  Heart,
-  BadgeCheck,
-  LinkIcon,
-  TrashIcon,
-} from "lucide-react";
+import { MoreHorizontal, MessageCircle, Share2, Heart, LinkIcon, TrashIcon } from "lucide-react";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "./ui/hover-card";
 import { ProfilePreview } from "./profile-preview";
 import { useContext, useEffect, useState, useTransition } from "react";
 import { SessionContext } from "../contexts/session";
 import type { Post as PostType } from "../types";
-import { ProfileAvatar } from "./avatar";
+import { ProfileAvatar } from "./profile-avatar";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -20,6 +12,7 @@ import {
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
 import { toast } from "sonner";
+import { ProfileBadge } from "./profile-badge";
 
 function formatDate(date: string) {
   const now = new Date();
@@ -125,9 +118,7 @@ export function Post({ post }: { post: PostType }) {
                   >
                     <span className="font-bold hover:underline">{post.owner.displayName}</span>
                     <span className="text-sm text-muted-foreground">@{post.owner.username}</span>
-                    {post.owner.plan !== "free" && (
-                      <BadgeCheck className="size-4 shrink-0 text-primary" />
-                    )}
+                    <ProfileBadge isOrg={post.owner.isOrg} plan={post.owner.plan} />
                   </a>
                 </HoverCardTrigger>
                 <HoverCardContent>

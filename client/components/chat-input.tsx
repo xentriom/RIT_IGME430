@@ -1,5 +1,5 @@
 import { useContext, useRef, useState, useTransition } from "react";
-import { ProfileAvatar } from "./avatar";
+import { ProfileAvatar } from "./profile-avatar";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import {
