@@ -129,7 +129,7 @@ export function Sidebar() {
           <DropdownMenuTrigger asChild>
             <ProfileAvatar
               isOrg={isLoggedIn ? session.isOrg : false}
-              avatar={isLoggedIn ? session.avatar : ""}
+              avatar={isLoggedIn ? `/api/users/${encodeURIComponent(session.username)}/photo` : ""}
               username={isLoggedIn ? session.username : "G"}
               className="size-8"
             />

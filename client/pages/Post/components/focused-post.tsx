@@ -65,7 +65,7 @@ export function FocusedPost({
               <ProfileAvatar
                 size="lg"
                 isOrg={post.owner.isOrg}
-                avatar={post.owner.avatar}
+                avatar={`/api/users/${encodeURIComponent(post.owner.username)}/photo`}
                 username={post.owner.username}
                 className="shrink-0"
               />

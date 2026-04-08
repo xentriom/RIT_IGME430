@@ -68,7 +68,7 @@ export function WhoToFollowCard() {
                 >
                   <ProfileAvatar
                     isOrg={account.isOrg}
-                    avatar={account.avatar}
+                    avatar={`/api/users/${encodeURIComponent(account.username)}/photo`}
                     username={account.username}
                   />
                   <div className="flex min-w-0 flex-1 flex-row items-center gap-2">

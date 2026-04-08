@@ -69,6 +69,7 @@ const enrichPosts = async (posts, viewerId) => {
         plan: post.owner.plan,
         isOrg: post.owner.isOrg,
         bio: typeof post.owner.bio === "string" ? post.owner.bio : "",
+        avatar: post.owner?.avatar ? post.owner.avatar.toString() : "",
       },
       likeCount: likeMap.get(id) ?? 0,
       replyCount: childMap.get(id) ?? 0,

@@ -139,12 +139,12 @@ const getAvatar = async (req, res) => {
 
   if (!account.avatar) return res.status(404).json({ error: "User has no avatar" });
 
-  const photo = await models.Filestore.findById(account.avatar);
-  if (!photo) return res.status(404).json({ error: "User has no avatar" });
+  const photo = await models.Filestore.findById(account.avatar).exec();
+  if (!photo?.data?.length) return res.status(404).json({ error: "User has no avatar" });
 
   res.set({
-    "Content-Type": photo.contentType,
-    "Content-Length": photo.size,
+    "Content-Type": "image/webp",
+    "Content-Length": photo.data.length,
     "Content-Disposition": `filename="${photo.filename}"`,
   });
 

@@ -14,15 +14,6 @@ const FilestoreSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  contentType: {
-    type: String,
-    required: true,
-  },
-  size: {
-    type: Number,
-    required: true,
-    max: 1024 * 1024 * 10, // 10MB
-  },
   data: {
     type: Buffer,
     required: true,
@@ -33,8 +24,6 @@ FilestoreSchema.statics.toAPI = (doc) => ({
   _id: doc._id,
   account: doc.account,
   filename: doc.filename,
-  contentType: doc.contentType,
-  size: doc.size,
 });
 
 FilestoreSchema.statics.upload = async (accountId, filename, data) => {
@@ -53,8 +42,6 @@ FilestoreSchema.statics.upload = async (accountId, filename, data) => {
   const doc = new FilestoreModel({
     account: accountId,
     filename: sfn,
-    contentType: "image/webp",
-    size: buffer.length,
     data: buffer,
   });
 
@@ -62,10 +49,8 @@ FilestoreSchema.statics.upload = async (accountId, filename, data) => {
   return doc;
 };
 
-FilestoreSchema.statics.findByAccount = (accountId) =>
+FilestoreSchema.statics.findByAccountId = (accountId) =>
   FilestoreModel.find({ account: accountId }).exec();
-
-FilestoreSchema.statics.findById = (id) => FilestoreModel.findById(id).exec();
 
 FilestoreModel = mongoose.model("Filestore", FilestoreSchema);
 module.exports = FilestoreModel;

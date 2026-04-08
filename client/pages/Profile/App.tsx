@@ -103,7 +103,7 @@ export default function App() {
               <div className="absolute bottom-0 left-0 translate-y-1/2 px-4">
                 <ProfileAvatar
                   isOrg={account.isOrg}
-                  avatar={account.avatar}
+                  avatar={`/api/users/${encodeURIComponent(account.username)}/photo`}
                   username={account.username}
                   className="size-22 shrink-0 border-4 border-background"
                 />

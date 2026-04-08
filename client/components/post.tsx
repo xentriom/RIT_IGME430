@@ -105,6 +105,8 @@ export function Post({ post }: { post: PostType }) {
 
   if (isDeleted) return null;
 
+  console.log(post);
+
   return (
     <>
       <HoverCard>
@@ -115,7 +117,7 @@ export function Post({ post }: { post: PostType }) {
           <ProfileAvatar
             size="lg"
             isOrg={post.owner.isOrg}
-            avatar={post.owner.avatar}
+            avatar={`/api/users/${encodeURIComponent(post.owner.username)}/photo`}
             username={post.owner.username}
           />
           <div className="flex min-w-0 flex-1 flex-col gap-1">
