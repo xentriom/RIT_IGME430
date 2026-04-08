@@ -38,10 +38,9 @@ FilestoreSchema.statics.toAPI = (doc) => ({
 
 FilestoreSchema.statics.upload = async (accountId, filename, contentType, size, data) => {
   if (!accountId || !filename || !contentType || !size || !data) return null;
-  
-    const doc = new FilestoreModel({ account: accountId, filename, contentType, size, data });
-    await doc.save();
-    return doc;
+  const doc = new FilestoreModel({ account: accountId, filename, contentType, size, data });
+  await doc.save();
+  return doc;
 };
 
 FilestoreSchema.statics.findByAccount = (accountId) =>
