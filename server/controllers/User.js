@@ -168,6 +168,25 @@ const getAvatar = async (req, res) => {
   return res.send(photo.data);
 };
 
+const getUserAvatar = async (req, res) => {
+  const username = req.params.username;
+  if (!username) return res.status(400).json({ error: "Username is required!" });
+
+  const avatarId = req.params.avatarId;
+  if (!avatarId) return res.status(400).json({ error: "Avatar ID is required!" });
+
+  const photo = await models.Filestore.findById(avatarId);
+  if (!photo?.data?.length) return res.status(404).json({ error: "User has no avatar" });
+
+  res.set({
+    "Content-Type": "image/webp",
+    "Content-Length": photo.data.length,
+    "Content-Disposition": `filename="${photo.filename}"`,
+  });
+
+  return res.send(photo.data);
+};
+
 module.exports = {
   getAccount,
   toggleFollow,
@@ -176,4 +195,5 @@ module.exports = {
   getPosts,
   updateAccount,
   getAvatar,
+  getUserAvatar,
 };

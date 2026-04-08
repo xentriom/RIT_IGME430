@@ -63,6 +63,7 @@ const router = (app) => {
 
   // Get avatar
   app.get("/api/avatar/:id", mid.requiresSecure, controllers.User.getAvatar);
+  app.get("/u/:username/:avatarId", mid.requiresSecure, controllers.User.getUserAvatar);
 
   // Premium
   app.post(
