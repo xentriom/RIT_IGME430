@@ -17,24 +17,40 @@ import {
 } from "../../../components/ui/field";
 import { Input } from "../../../components/ui/input";
 import { Textarea } from "../../../components/ui/textarea";
-import { useContext, useState, useTransition } from "react";
-import type { Session } from "../../../types";
+import { useContext, useState, useTransition, useEffect } from "react";
 import { SessionContext } from "../../../contexts/session";
 import { toast } from "sonner";
 import { Spinner } from "../../../components/ui/spinner";
 import { Checkbox } from "../../../components/ui/checkbox";
+import { AvatarUpload } from "./avatar-upload";
 
 type EditProfileProps = {
   onSaved?: () => void;
 };
 
 export function EditProfile({ onSaved }: EditProfileProps) {
-  const { session, setSession } = useContext(SessionContext);
+  const { isLoggedIn, session } = useContext(SessionContext);
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
   const [displayName, setDisplayName] = useState(session?.displayName || "");
   const [bio, setBio] = useState(session?.bio || "");
   const [isPublic, setIsPublic] = useState(session?.isPublic ?? true);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetch(`/api/users/${encodeURIComponent(session.username)}/photo`, {
+        credentials: "same-origin",
+      })
+        .then((res) => res.blob())
+        .then((blob) => {
+          setAvatarFile(
+            new File([blob], `${session.username}-avatar.webp`, { type: "image/webp" }),
+          );
+        });
+    }
+  }, [isLoggedIn, session]);
+
   if (!session) return null;
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,16 +60,13 @@ export function EditProfile({ onSaved }: EditProfileProps) {
     startTransition(async () => {
       toast.promise(
         new Promise((resolve, reject) => {
-          fetch("/api/users/me", {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            credentials: "same-origin",
-            body: JSON.stringify({
-              displayName,
-              bio,
-              isPublic,
-            }),
-          })
+          const form = new FormData();
+          form.set("displayName", displayName);
+          form.set("bio", bio);
+          form.set("isPublic", String(isPublic));
+          if (avatarFile) form.set("avatar", avatarFile);
+
+          fetch("/api/users/me", { method: "PATCH", credentials: "same-origin", body: form })
             .then((res) => {
               if (!res.ok) reject(res.statusText);
               return res.json();
@@ -87,6 +100,11 @@ export function EditProfile({ onSaved }: EditProfileProps) {
           <DialogTitle className="text-xl font-bold">Edit Profile</DialogTitle>
         </DialogHeader>
         <FieldGroup>
+          <Field>
+            <div className="flex w-full">
+              <AvatarUpload avatarFile={avatarFile} setAvatarFile={setAvatarFile} />
+            </div>
+          </Field>
           <Field>
             <FieldLabel>Display Name</FieldLabel>
             <Input
