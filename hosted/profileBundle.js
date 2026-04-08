@@ -10333,148 +10333,157 @@
           ["path", { d: "m15 5 4 4", key: "1mk7zo" }],
         ]);
         function id(e) {
-          const t = (0, l.c)(27),
-            { avatarFile: n } = e,
-            { session: o } = (0, r.useContext)(qi),
-            a = (0, r.useRef)(null);
-          let i;
+          const t = (0, l.c)(31),
+            { avatarFile: n, setAvatarFile: o } = e,
+            { session: a } = (0, r.useContext)(qi),
+            i = (0, r.useRef)(null);
+          let s;
           t[0] !== n
-            ? ((i = n ? URL.createObjectURL(n) : null), (t[0] = n), (t[1] = i))
-            : (i = t[1]);
-          const s = i;
-          let c, u;
+            ? ((s = n ? URL.createObjectURL(n) : null), (t[0] = n), (t[1] = s))
+            : (s = t[1]);
+          const c = s;
+          let u, d, f;
           if (
-            (t[2] !== s
-              ? ((c = () => () => {
-                  s && URL.revokeObjectURL(s);
+            (t[2] !== c
+              ? ((u = () => () => {
+                  c && URL.revokeObjectURL(c);
                 }),
-                (u = [s]),
-                (t[2] = s),
-                (t[3] = c),
-                (t[4] = u))
-              : ((c = t[3]), (u = t[4])),
-            (0, r.useEffect)(c, u),
-            !o)
+                (d = [c]),
+                (t[2] = c),
+                (t[3] = u),
+                (t[4] = d))
+              : ((u = t[3]), (d = t[4])),
+            (0, r.useEffect)(u, d),
+            !a)
           )
             return null;
-          const d = sd,
-            f = o.isOrg ? "rounded-md" : "rounded-full";
-          let p;
-          t[5] !== f ? ((p = fo(f, "size-16 shrink-0")), (t[5] = f), (t[6] = p)) : (p = t[6]);
-          const m = s ?? `/api/avatar/${o.avatar}`;
-          let h, g, v, y;
-          (t[7] !== m
-            ? ((h = (0, O.jsx)(ds, { src: m, className: "rounded-none" })), (t[7] = m), (t[8] = h))
-            : (h = t[8]),
-            t[9] !== o.username
-              ? ((g = o.username.charAt(0)), (t[9] = o.username), (t[10] = g))
-              : (g = t[10]),
-            t[11] !== g
-              ? ((v = (0, O.jsx)(fs, { className: "rounded-none uppercase", children: g })),
-                (t[11] = g),
-                (t[12] = v))
-              : (v = t[12]),
-            t[13] !== p || t[14] !== h || t[15] !== v
-              ? ((y = (0, O.jsxs)(us, { className: p, children: [h, v] })),
-                (t[13] = p),
-                (t[14] = h),
-                (t[15] = v),
-                (t[16] = y))
-              : (y = t[16]));
-          const b = o.isOrg ? "rounded-md" : "rounded-full";
-          let w, x, k, S, E, C;
+          t[5] !== o
+            ? ((f = (e) => {
+                const t = e.target.files?.[0];
+                ((e.target.value = ""),
+                  t &&
+                    t.type.startsWith("image/") &&
+                    Nc.promise(
+                      (async function (e) {
+                        return new Promise((t, n) => {
+                          const r = new window.Image(),
+                            o = 128;
+                          ((r.onload = () => {
+                            const e = document.createElement("canvas");
+                            ((e.width = o), (e.height = o));
+                            const a = e.getContext("2d");
+                            if (!a) return void n(new Error("Canvas not available"));
+                            const l = r.naturalWidth || r.width,
+                              i = r.naturalHeight || r.height,
+                              s = Math.max(o / l, o / i),
+                              c = Math.max(1, Math.round(l * s)),
+                              u = Math.max(1, Math.round(i * s));
+                            (a.drawImage(r, (o - c) / 2, (o - u) / 2, c, u),
+                              e.toBlob(
+                                (e) => {
+                                  (URL.revokeObjectURL(r.src),
+                                    e
+                                      ? t(new File([e], "avatar.jpeg", { type: "image/jpeg" }))
+                                      : n(new Error("Could not encode image")));
+                                },
+                                "image/jpeg",
+                                0.85,
+                              ));
+                          }),
+                            (r.onerror = (e) => {
+                              (URL.revokeObjectURL(r.src), n(e));
+                            }),
+                            (r.src = URL.createObjectURL(e)));
+                        });
+                      })(t),
+                      {
+                        loading: "Processing image...",
+                        success: (e) => (o(e), "Image processed successfully"),
+                        error: sd,
+                      },
+                    ));
+              }),
+              (t[5] = o),
+              (t[6] = f))
+            : (f = t[6]);
+          const p = f,
+            m = a.isOrg ? "rounded-md" : "rounded-full";
+          let h;
+          t[7] !== m ? ((h = fo(m, "size-16 shrink-0")), (t[7] = m), (t[8] = h)) : (h = t[8]);
+          const g = c ?? `/api/avatar/${a.avatar}`;
+          let v, y, b, w;
+          (t[9] !== g
+            ? ((v = (0, O.jsx)(ds, { src: g, className: "rounded-none" })), (t[9] = g), (t[10] = v))
+            : (v = t[10]),
+            t[11] !== a.username
+              ? ((y = a.username.charAt(0)), (t[11] = a.username), (t[12] = y))
+              : (y = t[12]),
+            t[13] !== y
+              ? ((b = (0, O.jsx)(fs, { className: "rounded-none uppercase", children: y })),
+                (t[13] = y),
+                (t[14] = b))
+              : (b = t[14]),
+            t[15] !== b || t[16] !== h || t[17] !== v
+              ? ((w = (0, O.jsxs)(us, { className: h, children: [v, b] })),
+                (t[15] = b),
+                (t[16] = h),
+                (t[17] = v),
+                (t[18] = w))
+              : (w = t[18]));
+          const x = a.isOrg ? "rounded-md" : "rounded-full";
+          let k, S, E, C, N, _;
           return (
-            t[17] !== b
-              ? ((w = fo(
+            t[19] !== x
+              ? ((k = fo(
                   "absolute inset-0 z-10 flex scale-96 items-center justify-center opacity-0 transition-[transform,opacity]",
                   "group-hover/avatar:scale-100 group-hover/avatar:cursor-pointer group-hover/avatar:bg-background/80 group-hover/avatar:opacity-80",
-                  b,
+                  x,
                 )),
-                (t[17] = b),
-                (t[18] = w))
-              : (w = t[18]),
-            t[19] === Symbol.for("react.memo_cache_sentinel")
-              ? ((x = () => a.current?.click()),
-                (k = (0, O.jsx)(ld, { className: "size-4 text-foreground" })),
                 (t[19] = x),
                 (t[20] = k))
-              : ((x = t[19]), (k = t[20])),
-            t[21] !== w
-              ? ((S = (0, O.jsx)("button", {
+              : (k = t[20]),
+            t[21] === Symbol.for("react.memo_cache_sentinel")
+              ? ((S = () => i.current?.click()),
+                (E = (0, O.jsx)(ld, { className: "size-4 text-foreground" })),
+                (t[21] = S),
+                (t[22] = E))
+              : ((S = t[21]), (E = t[22])),
+            t[23] !== k
+              ? ((C = (0, O.jsx)("button", {
                   type: "button",
-                  className: w,
-                  onClick: x,
-                  children: k,
+                  className: k,
+                  onClick: S,
+                  children: E,
                 })),
-                (t[21] = w),
-                (t[22] = S))
-              : (S = t[22]),
-            t[23] === Symbol.for("react.memo_cache_sentinel")
-              ? ((E = (0, O.jsx)("input", {
-                  ref: a,
+                (t[23] = k),
+                (t[24] = C))
+              : (C = t[24]),
+            t[25] !== p
+              ? ((N = (0, O.jsx)("input", {
+                  ref: i,
                   type: "file",
                   accept: "image/*",
                   className: "sr-only",
-                  onChange: d,
+                  onChange: p,
                 })),
-                (t[23] = E))
-              : (E = t[23]),
-            t[24] !== y || t[25] !== S
-              ? ((C = (0, O.jsxs)("div", {
+                (t[25] = p),
+                (t[26] = N))
+              : (N = t[26]),
+            t[27] !== w || t[28] !== C || t[29] !== N
+              ? ((_ = (0, O.jsxs)("div", {
                   className: "group/avatar relative",
-                  children: [y, S, E],
+                  children: [w, C, N],
                 })),
-                (t[24] = y),
-                (t[25] = S),
-                (t[26] = C))
-              : (C = t[26]),
-            C
+                (t[27] = w),
+                (t[28] = C),
+                (t[29] = N),
+                (t[30] = _))
+              : (_ = t[30]),
+            _
           );
         }
         function sd(e) {
-          const t = e.target.files?.[0];
-          ((e.target.value = ""),
-            t &&
-              t.type.startsWith("image/") &&
-              Nc.promise(
-                (async function (e) {
-                  return new Promise((t, n) => {
-                    const r = new window.Image(),
-                      o = 128;
-                    ((r.onload = () => {
-                      const e = document.createElement("canvas");
-                      ((e.width = o), (e.height = o));
-                      const a = e.getContext("2d");
-                      if (!a) return void n(new Error("Canvas not available"));
-                      const l = r.naturalWidth || r.width,
-                        i = r.naturalHeight || r.height,
-                        s = Math.max(o / l, o / i),
-                        c = Math.max(1, Math.round(l * s)),
-                        u = Math.max(1, Math.round(i * s));
-                      (a.drawImage(r, (o - c) / 2, (o - u) / 2, c, u),
-                        e.toBlob(
-                          (e) => {
-                            (URL.revokeObjectURL(r.src),
-                              e
-                                ? t(new File([e], "avatar.jpeg", { type: "image/jpeg" }))
-                                : n(new Error("Could not encode image")));
-                          },
-                          "image/jpeg",
-                          0.85,
-                        ));
-                    }),
-                      (r.onerror = (e) => {
-                        (URL.revokeObjectURL(r.src), n(e));
-                      }),
-                      (r.src = URL.createObjectURL(e)));
-                  });
-                })(t),
-                {
-                  loading: "Processing image...",
-                  success: "Image processed successfully",
-                  error: "Could not process that image",
-                },
-              ));
+          return e instanceof Error ? e.message : "Could not process that image";
         }
         function cd(e) {
           const t = (0, l.c)(49),

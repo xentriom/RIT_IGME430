@@ -83,8 +83,11 @@ export function AvatarUpload({
 
     toast.promise(convertFile(file), {
       loading: "Processing image...",
-      success: "Image processed successfully",
-      error: "Could not process that image",
+      success: (file) => {
+        setAvatarFile(file);
+        return "Image processed successfully";
+      },
+      error: (error) => (error instanceof Error ? error.message : "Could not process that image"),
     });
   };
 
