@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const sharp = require("sharp");
 
 let FilestoreModel = {};
 
@@ -36,9 +37,27 @@ FilestoreSchema.statics.toAPI = (doc) => ({
   size: doc.size,
 });
 
-FilestoreSchema.statics.upload = async (accountId, filename, contentType, size, data) => {
-  if (!accountId || !filename || !contentType || !size || !data) return null;
-  const doc = new FilestoreModel({ account: accountId, filename, contentType, size, data });
+FilestoreSchema.statics.upload = async (accountId, filename, data) => {
+  if (!accountId || !filename || !data) return null;
+
+  // generate a safe filename
+  const sfn = `${Date.now()}-${filename.toLowerCase().replace(/[^a-z0-9]/g, "")}.webp`;
+
+  // resize image to 128x128
+  // format to webp
+  const buffer = await sharp(data)
+    .resize(128, 128, { fit: "cover" })
+    .webp({ quality: 80, effort: 6 })
+    .toBuffer();
+
+  const doc = new FilestoreModel({
+    account: accountId,
+    filename: sfn,
+    contentType: "image/webp",
+    size: buffer.length,
+    data: buffer,
+  });
+
   await doc.save();
   return doc;
 };
