@@ -9,6 +9,7 @@ const helmet = require("helmet");
 const session = require("express-session");
 const { RedisStore } = require("connect-redis");
 const { createClient } = require("redis");
+const fileUpload = require("express-fileupload");
 
 const router = require("./router.js");
 
@@ -37,7 +38,7 @@ redisClient.connect().then(() => {
   app.use(compression());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-
+  app.use(fileUpload());
   app.use(
     session({
       key: "sessionid",
