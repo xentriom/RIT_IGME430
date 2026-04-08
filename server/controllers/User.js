@@ -130,4 +130,33 @@ const updateAccount = async (req, res) => {
   }
 };
 
-module.exports = { getAccount, toggleFollow, getAccounts, getFollowers, getPosts, updateAccount };
+const getAvatar = async (req, res) => {
+  const username = req.params.username;
+  if (!username) return res.status(400).json({ error: "Username is required!" });
+
+  const account = await models.Account.findByUsername(username);
+  if (!account) return res.status(404).json({ error: "User not found!" });
+
+  if (!account.avatar) return res.status(404).json({ error: "User has no avatar" });
+
+  const photo = await models.Filestore.findById(account.avatar);
+  if (!photo) return res.status(404).json({ error: "User has no avatar" });
+
+  res.set({
+    "Content-Type": photo.contentType,
+    "Content-Length": photo.size,
+    "Content-Disposition": `filename="${photo.filename}"`,
+  });
+
+  return res.send(photo.data);
+};
+
+module.exports = {
+  getAccount,
+  toggleFollow,
+  getAccounts,
+  getFollowers,
+  getPosts,
+  updateAccount,
+  getAvatar,
+};

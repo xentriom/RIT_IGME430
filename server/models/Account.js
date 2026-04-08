@@ -1,7 +1,27 @@
 const mongoose = require("mongoose");
 const { hash, compare } = require("bcrypt");
+const FilestoreModel = require("./Filestore");
+const sharp = require("sharp");
 
 let AccountModel = {};
+
+function randomHexColor() {
+  // https://stackoverflow.com/a/5092872
+  return "#" + "000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16));
+}
+
+async function defaultAvatarWebpBuffer(username) {
+  // https://stackoverflow.com/a/31522006
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+    <rect width="100%" height="100%" fill="${randomHexColor()}"/>
+    <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Arial" font-size="72" font-weight="bold" fill="#ffffff">
+      ${username.charAt(0).toUpperCase()}
+    </text>
+  </svg>`;
+
+  return sharp(Buffer.from(svg)).webp({ quality: 80 }).toBuffer();
+}
 
 const AccountSchema = new mongoose.Schema({
   username: {
@@ -30,7 +50,6 @@ const AccountSchema = new mongoose.Schema({
   avatar: {
     type: mongoose.Schema.ObjectId,
     ref: "Filestore",
-    required: false,
   },
   password: {
     type: String,
@@ -58,6 +77,29 @@ const AccountSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+// generate a default avatar if none is set before saving
+AccountSchema.pre("save", async function () {
+  if (!this.isNew || this.avatar != null) {
+    return;
+  }
+  const username = this.username;
+  if (!username) {
+    return;
+  }
+
+  const buffer = await defaultAvatarWebpBuffer(username);
+  const avatar = new FilestoreModel({
+    account: this._id,
+    filename: `${Date.now()}-default-${this._id.toString().slice(0, 8)}.webp`,
+    contentType: "image/webp",
+    size: buffer.length,
+    data: buffer,
+  });
+
+  await avatar.save();
+  this.avatar = avatar._id;
 });
 
 AccountSchema.statics.toAPI = (doc) => ({
