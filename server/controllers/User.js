@@ -107,9 +107,16 @@ const getPosts = async (req, res) => {
 
 const updateAccount = async (req, res) => {
   const { displayName, bio, isPublic } = req.body;
-  if (!displayName || typeof bio !== "string" || isPublic === undefined) {
+  if (
+    typeof displayName !== "string" ||
+    !displayName.trim() ||
+    typeof bio !== "string" ||
+    isPublic === undefined
+  ) {
     return res.status(400).json({ error: "All fields are required" });
   }
+
+  const avatar = req.files?.avatar;
 
   const session = req.session;
   if (!session) return res.status(401).json({ error: "Login required" });
@@ -119,8 +126,23 @@ const updateAccount = async (req, res) => {
 
   try {
     account.displayName = displayName.trim();
-    account.bio = bio.trim();
-    account.isPublic = isPublic;
+    account.bio = bio.trim(); // allow empty bio
+    account.isPublic = isPublic === true || isPublic === "true";
+
+    if (avatar) {
+      // so we can delete the old one
+      const previousAvatarId = account.avatar;
+
+      const photo = await models.Filestore.upload(account._id, avatar.name, avatar.data);
+      if (!photo) return res.status(400).json({ error: "Failed to upload avatar" });
+
+      // uploaded, so set and delete the old one if exists
+      account.avatar = photo._id;
+      if (previousAvatarId) {
+        await models.Filestore.deleteOne({ _id: previousAvatarId });
+      }
+    }
+
     await account.save();
     session.account = models.Account.toAPI(account);
     return res.json({ account: session.account });
@@ -131,15 +153,10 @@ const updateAccount = async (req, res) => {
 };
 
 const getAvatar = async (req, res) => {
-  const username = req.params.username;
-  if (!username) return res.status(400).json({ error: "Username is required!" });
+  const id = req.params.id;
+  if (!id) return res.status(400).json({ error: "ID is required!" });
 
-  const account = await models.Account.findByUsername(username);
-  if (!account) return res.status(404).json({ error: "User not found!" });
-
-  if (!account.avatar) return res.status(404).json({ error: "User has no avatar" });
-
-  const photo = await models.Filestore.findById(account.avatar).exec();
+  const photo = await models.Filestore.findById(id).exec();
   if (!photo?.data?.length) return res.status(404).json({ error: "User has no avatar" });
 
   res.set({

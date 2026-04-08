@@ -32,7 +32,16 @@ const redisStore = new RedisStore({
 redisClient.connect().then(() => {
   const app = express();
 
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          "img-src": ["'self'", "data:", "blob:"],
+        },
+      },
+    }),
+  );
   app.use("/assets", express.static(resolve(`${__dirname}/../hosted`)));
   app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
   app.use(compression());

@@ -48,6 +48,8 @@ export default function App() {
     const res = await fetch(`/api/users/${username}`);
     if (!res.ok) return;
     setAccount(await res.json());
+    const postsRes = await fetch(`/api/users/${username}/posts`);
+    if (postsRes.ok) setPosts(await postsRes.json());
   };
 
   useEffect(() => {
@@ -103,7 +105,7 @@ export default function App() {
               <div className="absolute bottom-0 left-0 translate-y-1/2 px-4">
                 <ProfileAvatar
                   isOrg={account.isOrg}
-                  avatar={`/api/users/${encodeURIComponent(account.username)}/photo`}
+                  avatar={`/api/avatar/${account.avatar}`}
                   username={account.username}
                   className="size-22 shrink-0 border-4 border-background"
                 />

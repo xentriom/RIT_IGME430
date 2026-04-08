@@ -29,7 +29,7 @@ type EditProfileProps = {
 };
 
 export function EditProfile({ onSaved }: EditProfileProps) {
-  const { isLoggedIn, session } = useContext(SessionContext);
+  const { isLoggedIn, session, setSession } = useContext(SessionContext);
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
   const [displayName, setDisplayName] = useState(session?.displayName || "");
@@ -39,7 +39,7 @@ export function EditProfile({ onSaved }: EditProfileProps) {
 
   useEffect(() => {
     if (isLoggedIn) {
-      fetch(`/api/users/${encodeURIComponent(session.username)}/photo`, {
+      fetch(`/api/avatar/${session.avatar}`, {
         credentials: "same-origin",
       })
         .then((res) => res.blob())
@@ -72,6 +72,7 @@ export function EditProfile({ onSaved }: EditProfileProps) {
               return res.json();
             })
             .then((data) => {
+              if (data?.account) setSession(data.account);
               onSaved?.();
               setOpen(false);
               resolve(data);

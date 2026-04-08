@@ -93,7 +93,7 @@ export function ChatInput({
       <ProfileAvatar
         size="lg"
         isOrg={isLoggedIn ? session.isOrg : false}
-        avatar={isLoggedIn ? `/api/users/${encodeURIComponent(session.username)}/photo` : ""}
+        avatar={isLoggedIn ? `/api/avatar/${session.avatar}` : undefined}
         username={isLoggedIn ? session.username : "G"}
         className="hidden sm:block"
       />

@@ -39,7 +39,7 @@ export function ProfilePreview({ username }: { username: string }) {
       <div className="flex flex-row justify-between">
         <ProfileAvatar
           isOrg={account.isOrg}
-          avatar={`/api/users/${encodeURIComponent(account.username)}/photo`}
+          avatar={`/api/avatar/${account.avatar}`}
           username={account.username}
           className="size-20 shrink-0"
         />

@@ -76,6 +76,24 @@ export default function App() {
     };
   }, [post, isLoggedIn, session]);
 
+  const sessionUser = isLoggedIn ? session : null;
+  const postOwnerUi =
+    post && sessionUser && post.owner.username === sessionUser.username
+      ? {
+          displayName: sessionUser.displayName,
+          avatar: sessionUser.avatar,
+          isOrg: sessionUser.isOrg,
+          bio: sessionUser.bio,
+        }
+      : post
+        ? {
+            displayName: post.owner.displayName,
+            avatar: post.owner.avatar,
+            isOrg: post.owner.isOrg,
+            bio: post.owner.bio,
+          }
+        : null;
+
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
       <div className="mx-auto flex h-full w-full max-w-5xl flex-col-reverse border-border sm:flex-row sm:border-x">
@@ -121,7 +139,7 @@ export default function App() {
             )}
           </div>
         </div>
-        {post && (
+        {post && postOwnerUi && (
           <div className="hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm">
             <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm">
               <InputGroup>
@@ -143,18 +161,18 @@ export default function App() {
                     <div className="flex flex-row gap-2">
                       <ProfileAvatar
                         size="lg"
-                        isOrg={post.owner.isOrg}
-                        avatar={`/api/users/${encodeURIComponent(post.owner.username)}/photo`}
+                        isOrg={postOwnerUi.isOrg}
+                        avatar={`/api/avatar/${postOwnerUi.avatar}`}
                         username={post.owner.username}
                         className="shrink-0"
                       />
                       <div className="flex flex-1 flex-col">
-                        <span className="text-base font-bold">{post.owner.displayName}</span>
+                        <span className="text-base font-bold">{postOwnerUi.displayName}</span>
                         <span className="text-sm text-muted-foreground">
                           @{post.owner.username}
                         </span>
                         <p className="line-clamp-2 pt-1">
-                          {post.owner.bio?.trim() ? post.owner.bio : "No bio yet"}
+                          {postOwnerUi.bio?.trim() ? postOwnerUi.bio : "No bio yet"}
                         </p>
                       </div>
                       <FollowButton

@@ -47,7 +47,24 @@ export function Post({ post }: { post: PostType }) {
     setLikedByMe(!!post.likedByMe);
   }, [post._id, post.likeCount, post.likedByMe]);
 
-  const isOwner = isLoggedIn && post.owner.username === session.username;
+  const sessionUser = isLoggedIn ? session : null;
+  const isOwner = Boolean(sessionUser && post.owner.username === sessionUser.username);
+
+  // Use session data for own posts (so it updates after profile edits)
+  const ownerUi =
+    isOwner && sessionUser
+      ? {
+          displayName: sessionUser.displayName,
+          avatar: sessionUser.avatar,
+          isOrg: sessionUser.isOrg,
+          plan: sessionUser.plan,
+        }
+      : {
+          displayName: post.owner.displayName,
+          avatar: post.owner.avatar,
+          isOrg: post.owner.isOrg,
+          plan: post.owner.plan,
+        };
 
   const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -105,8 +122,6 @@ export function Post({ post }: { post: PostType }) {
 
   if (isDeleted) return null;
 
-  console.log(post);
-
   return (
     <>
       <HoverCard>
@@ -116,8 +131,8 @@ export function Post({ post }: { post: PostType }) {
         >
           <ProfileAvatar
             size="lg"
-            isOrg={post.owner.isOrg}
-            avatar={`/api/users/${encodeURIComponent(post.owner.username)}/photo`}
+            isOrg={ownerUi.isOrg}
+            avatar={`/api/avatar/${ownerUi.avatar}`}
             username={post.owner.username}
           />
           <div className="flex min-w-0 flex-1 flex-col gap-1">
@@ -129,7 +144,7 @@ export function Post({ post }: { post: PostType }) {
                     className="flex min-w-0 flex-1 cursor-pointer items-center gap-1"
                   >
                     <div className="min-w-0 truncate">
-                      <span className="font-bold hover:underline">{post.owner.displayName}</span>{" "}
+                      <span className="font-bold hover:underline">{ownerUi.displayName}</span>{" "}
                       <span className="text-sm text-muted-foreground">@{post.owner.username}</span>
                     </div>
                   </a>
@@ -140,7 +155,7 @@ export function Post({ post }: { post: PostType }) {
                   </div>
                 </HoverCardContent>
                 <span className="shrink-0">
-                  <ProfileBadge isOrg={post.owner.isOrg} plan={post.owner.plan} />
+                  <ProfileBadge isOrg={ownerUi.isOrg} plan={ownerUi.plan} />
                 </span>
                 <span className="shrink-0 text-sm text-muted-foreground">•</span>
                 <span className="shrink-0 text-sm whitespace-nowrap text-muted-foreground">

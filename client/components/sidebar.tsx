@@ -129,7 +129,7 @@ export function Sidebar() {
           <DropdownMenuTrigger asChild>
             <ProfileAvatar
               isOrg={isLoggedIn ? session.isOrg : false}
-              avatar={isLoggedIn ? `/api/users/${encodeURIComponent(session.username)}/photo` : ""}
+              avatar={isLoggedIn ? `/api/avatar/${session.avatar}` : undefined}
               username={isLoggedIn ? session.username : "G"}
               className="size-8"
             />
@@ -144,7 +144,7 @@ export function Sidebar() {
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <ProfileAvatar
                   isOrg={isLoggedIn ? session.isOrg : false}
-                  avatar={isLoggedIn ? session.avatar : ""}
+                  avatar={isLoggedIn ? `/api/avatar/${session.avatar}` : undefined}
                   username={isLoggedIn ? session.username : "G"}
                   className="size-8"
                 />

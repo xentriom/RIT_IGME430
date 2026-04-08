@@ -18,8 +18,25 @@ export function FocusedPost({
   setPost: Dispatch<SetStateAction<PostType | null>>;
   setReplies: Dispatch<SetStateAction<PostType[]>>;
 }) {
-  const { isLoggedIn } = useContext(SessionContext);
+  const { isLoggedIn, session } = useContext(SessionContext);
   const [isLikePending, startLikeTransition] = useTransition();
+
+  const sessionUser = isLoggedIn ? session : null;
+  const isSelfPost = Boolean(sessionUser && post.owner.username === sessionUser.username);
+  const ownerUi =
+    isSelfPost && sessionUser
+      ? {
+          displayName: sessionUser.displayName,
+          avatar: sessionUser.avatar,
+          isOrg: sessionUser.isOrg,
+          plan: sessionUser.plan,
+        }
+      : {
+          displayName: post.owner.displayName,
+          avatar: post.owner.avatar,
+          isOrg: post.owner.isOrg,
+          plan: post.owner.plan,
+        };
 
   const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -64,17 +81,17 @@ export function FocusedPost({
             >
               <ProfileAvatar
                 size="lg"
-                isOrg={post.owner.isOrg}
-                avatar={`/api/users/${encodeURIComponent(post.owner.username)}/photo`}
+                isOrg={ownerUi.isOrg}
+                avatar={`/api/avatar/${ownerUi.avatar}`}
                 username={post.owner.username}
                 className="shrink-0"
               />
               <div className="flex min-w-0 flex-col gap-0.5 pt-0.5">
                 <div className="flex flex-row flex-wrap items-center gap-x-1.5 gap-y-0">
                   <span className="text-base leading-tight font-bold hover:underline">
-                    {post.owner.displayName}
+                    {ownerUi.displayName}
                   </span>
-                  <ProfileBadge isOrg={post.owner.isOrg} plan={post.owner.plan} />
+                  <ProfileBadge isOrg={ownerUi.isOrg} plan={ownerUi.plan} />
                 </div>
                 <span className="text-sm text-muted-foreground">@{post.owner.username}</span>
               </div>
