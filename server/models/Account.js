@@ -30,7 +30,8 @@ const AccountSchema = new mongoose.Schema({
   avatar: {
     type: mongoose.Schema.ObjectId,
     ref: "Filestore",
-    default: "",
+    required: false,
+    set: (v) => (v === "" ? undefined : v),
   },
   password: {
     type: String,

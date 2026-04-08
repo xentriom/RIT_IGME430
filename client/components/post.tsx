@@ -1,4 +1,14 @@
-import { MoreHorizontal, MessageCircle, Share2, Heart, LinkIcon, TrashIcon } from "lucide-react";
+import {
+  MoreHorizontal,
+  MessageCircle,
+  ShareIcon,
+  HeartIcon,
+  TrashIcon,
+  FlagIcon,
+  ChartColumnIcon,
+  BotIcon,
+  MegaphoneIcon,
+} from "lucide-react";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "./ui/hover-card";
 import { ProfilePreview } from "./profile-preview";
 import { useContext, useEffect, useState, useTransition } from "react";
@@ -109,16 +119,17 @@ export function Post({ post }: { post: PostType }) {
             username={post.owner.username}
           />
           <div className="flex min-w-0 flex-1 flex-col gap-1">
-            <div className="flex justify-between">
-              <div className="flex flex-row items-center gap-1">
+            <div className="flex justify-between gap-2">
+              <div className="flex min-w-0 flex-row items-center gap-1">
                 <HoverCardTrigger asChild>
                   <a
                     href={`/u/${post.owner.username}`}
-                    className="inline-flex cursor-pointer items-center gap-1"
+                    className="flex min-w-0 flex-1 cursor-pointer items-center gap-1"
                   >
-                    <span className="font-bold hover:underline">{post.owner.displayName}</span>
-                    <span className="text-sm text-muted-foreground">@{post.owner.username}</span>
-                    <ProfileBadge isOrg={post.owner.isOrg} plan={post.owner.plan} />
+                    <div className="min-w-0 truncate">
+                      <span className="font-bold hover:underline">{post.owner.displayName}</span>{" "}
+                      <span className="text-sm text-muted-foreground">@{post.owner.username}</span>
+                    </div>
                   </a>
                 </HoverCardTrigger>
                 <HoverCardContent>
@@ -126,8 +137,11 @@ export function Post({ post }: { post: PostType }) {
                     <ProfilePreview username={post.owner.username} />
                   </div>
                 </HoverCardContent>
-                <span className="text-sm text-muted-foreground">•</span>
-                <span className="text-sm text-muted-foreground">
+                <span className="shrink-0">
+                  <ProfileBadge isOrg={post.owner.isOrg} plan={post.owner.plan} />
+                </span>
+                <span className="shrink-0 text-sm text-muted-foreground">•</span>
+                <span className="shrink-0 text-sm whitespace-nowrap text-muted-foreground">
                   {formatDate(post.createdDate)}
                 </span>
               </div>
@@ -137,23 +151,36 @@ export function Post({ post }: { post: PostType }) {
                     <MoreHorizontal className="size-4" />
                   </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent className="w-40">
                   <DropdownMenuItem asChild>
-                    <div
-                      className="flex flex-row items-center gap-2"
-                      onClick={() => {
-                        navigator.clipboard.writeText(`${window.location.origin}/p/${post._id}`);
-                      }}
-                    >
-                      <LinkIcon className="size-4" />
-                      Copy link
+                    <div className="flex flex-row items-center gap-2">
+                      <ChartColumnIcon className="size-4" />
+                      View Chirp Interactions
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <div className="flex flex-row items-center gap-2">
+                      <FlagIcon className="size-4" />
+                      Report Chirp
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <div className="flex flex-row items-center gap-2">
+                      <BotIcon className="size-4" />
+                      Mark as Spam
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <div className="flex flex-row items-center gap-2">
+                      <MegaphoneIcon className="size-4" />
+                      Request Community Note
                     </div>
                   </DropdownMenuItem>
                   {isOwner && (
                     <DropdownMenuItem asChild>
                       <div className="flex flex-row items-center gap-2" onClick={deletePost}>
                         <TrashIcon className="size-4" />
-                        Delete
+                        Delete Chirp
                       </div>
                     </DropdownMenuItem>
                   )}
@@ -178,10 +205,21 @@ export function Post({ post }: { post: PostType }) {
                 disabled={!isLoggedIn || isPending}
                 onClick={toggleLike}
               >
-                <Heart className={`size-4 ${likedByMe ? "fill-current" : ""}`} />
+                <HeartIcon className={`size-4 ${likedByMe ? "fill-current" : ""}`} />
                 <span className="tabular-nums">{likeCount}</span>
               </button>
-              <Share2 className="size-4" />
+              <button
+                type="button"
+                className="cursor-pointer hover:text-foreground/80"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  navigator.clipboard.writeText(`${window.location.origin}/p/${post._id}`);
+                  toast.success("Link copied to clipboard");
+                }}
+              >
+                <ShareIcon className="size-4" />
+              </button>
             </div>
           </div>
         </a>

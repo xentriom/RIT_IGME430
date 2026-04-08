@@ -99,7 +99,7 @@ export function Sidebar() {
   const { isLoggedIn, session } = useContext(SessionContext);
 
   return (
-    <div className="flex flex-row items-center overflow-y-hidden border-border px-2 py-4 max-sm:border-t sm:flex-col">
+    <div className="flex shrink-0 flex-row items-center overflow-y-hidden border-border px-2 py-4 max-sm:border-t sm:flex-col">
       <div className="flex flex-row gap-4 max-sm:flex-1 sm:flex-col">
         <div className="hidden size-9 shrink-0 items-center justify-center rounded-lg bg-primary select-none sm:inline-flex">
           C

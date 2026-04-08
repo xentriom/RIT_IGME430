@@ -22,10 +22,8 @@ export function ProfileAvatar({
       className={cn(isOrg ? "rounded-md" : "rounded-full", className)}
       {...props}
     >
-      <AvatarImage src={avatar} className={isOrg ? "rounded-md" : "rounded-full"} />
-      <AvatarFallback className={`uppercase ${isOrg ? "rounded-md" : "rounded-full"}`}>
-        {username.charAt(0)}
-      </AvatarFallback>
+      <AvatarImage src={avatar} className="rounded-none" />
+      <AvatarFallback className="rounded-none uppercase">{username.charAt(0)}</AvatarFallback>
     </AvatarPrimitive>
   );
 }

@@ -63,7 +63,10 @@ export function EditProfile({ onSaved }: EditProfileProps) {
               setOpen(false);
               resolve(data);
             })
-            .catch((err) => reject(err));
+            .catch((err) => {
+              console.error(err);
+              reject(err);
+            });
         }),
         {
           loading: "Saving...",

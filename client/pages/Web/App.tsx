@@ -73,7 +73,7 @@ export default function App() {
             )}
           </div>
         </div>
-        <div className="hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm">
+        <div className="hidden h-full w-full max-w-xs shrink-0 flex-col gap-4 p-4 sm:flex md:max-w-sm">
           <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm">
             <InputGroup>
               <InputGroupInput placeholder="Search..." />

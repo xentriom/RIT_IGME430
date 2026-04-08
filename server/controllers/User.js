@@ -124,7 +124,8 @@ const updateAccount = async (req, res) => {
     await account.save();
     session.account = models.Account.toAPI(account);
     return res.json({ account: session.account });
-  } catch {
+  } catch (err) {
+    console.error(err);
     return res.status(500).json({ error: "An error occurred" });
   }
 };
