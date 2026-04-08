@@ -1,5 +1,5 @@
 import { useContext, useTransition, type Dispatch, type SetStateAction } from "react";
-import { Heart, MessageCircle, Share2 } from "lucide-react";
+import { HeartIcon, MessageCircleIcon, ShareIcon } from "lucide-react";
 import { ProfileAvatar } from "../../../components/profile-avatar";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "../../../components/ui/hover-card";
 import { ProfilePreview } from "../../../components/profile-preview";
@@ -7,6 +7,7 @@ import type { Post as PostType } from "../../../types";
 import { ChatInput } from "../../../components/chat-input";
 import { SessionContext } from "../../../contexts/session";
 import { ProfileBadge } from "../../../components/profile-badge";
+import { toast } from "sonner";
 
 export function FocusedPost({
   post,
@@ -95,7 +96,7 @@ export function FocusedPost({
             type="button"
             className="flex flex-row items-center gap-1 rounded-md py-1 hover:text-foreground"
           >
-            <MessageCircle className="size-4" />
+            <MessageCircleIcon className="size-4" />
             <span className="tabular-nums">{post.replyCount ?? 0}</span>
           </button>
           <button
@@ -106,14 +107,20 @@ export function FocusedPost({
             disabled={!isLoggedIn || isLikePending}
             onClick={toggleLike}
           >
-            <Heart className={`size-4 ${post.likedByMe ? "fill-current" : ""}`} />
+            <HeartIcon className={`size-4 ${post.likedByMe ? "fill-current" : ""}`} />
             <span className="tabular-nums">{post.likeCount ?? 0}</span>
           </button>
           <button
             type="button"
-            className="flex flex-row items-center gap-1 rounded-md py-1 hover:text-foreground"
+            className="rounded-md py-1 hover:text-foreground"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              navigator.clipboard.writeText(`${window.location.origin}/p/${post._id}`);
+              toast.success("Link copied to clipboard");
+            }}
           >
-            <Share2 className="size-4" />
+            <ShareIcon className="size-4" />
           </button>
         </div>
       </div>

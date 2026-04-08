@@ -5,7 +5,7 @@
     t,
     n,
     r = {
-      455(e, t, n) {
+      58(e, t, n) {
         var r = n(540),
           a = n.t(r, 2),
           o = n(338),
@@ -9643,14 +9643,7 @@
             o
           );
         }
-        const Xu = p("share-2", [
-            ["circle", { cx: "18", cy: "5", r: "3", key: "gq8acd" }],
-            ["circle", { cx: "6", cy: "12", r: "3", key: "w7nqdw" }],
-            ["circle", { cx: "18", cy: "19", r: "3", key: "1xt0gg" }],
-            ["line", { x1: "8.59", x2: "15.42", y1: "13.51", y2: "17.49", key: "47mynk" }],
-            ["line", { x1: "15.41", x2: "8.59", y1: "6.51", y2: "10.49", key: "1n3mei" }],
-          ]),
-          Zu = p("image", [
+        const Xu = p("image", [
             [
               "rect",
               { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" },
@@ -9658,7 +9651,7 @@
             ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
             ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }],
           ]),
-          Ju = p("image-play", [
+          Zu = p("image-play", [
             [
               "path",
               {
@@ -9673,19 +9666,19 @@
             ["path", { d: "m6 21 5-5", key: "1wyjai" }],
             ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
           ]),
-          ec = p("smile", [
+          Ju = p("smile", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "M8 14s1.5 2 4 2 4-2 4-2", key: "1y1vjs" }],
             ["line", { x1: "9", x2: "9.01", y1: "9", y2: "9", key: "yxxnd0" }],
             ["line", { x1: "15", x2: "15.01", y1: "9", y2: "9", key: "1p4y9e" }],
           ]),
-          tc = p("calendar", [
+          ec = p("calendar", [
             ["path", { d: "M8 2v4", key: "1cmpym" }],
             ["path", { d: "M16 2v4", key: "4m81vk" }],
             ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
             ["path", { d: "M3 10h18", key: "8toen8" }],
           ]),
-          nc = p("map-pin", [
+          tc = p("map-pin", [
             [
               "path",
               {
@@ -9695,7 +9688,7 @@
             ],
             ["circle", { cx: "12", cy: "10", r: "3", key: "ilqhr7" }],
           ]),
-          rc = p("earth", [
+          nc = p("earth", [
             ["path", { d: "M21.54 15H17a2 2 0 0 0-2 2v4.54", key: "1djwo0" }],
             [
               "path",
@@ -9713,25 +9706,25 @@
             ],
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
           ]),
-          ac = p("user-round-check", [
+          rc = p("user-round-check", [
             ["path", { d: "M2 21a8 8 0 0 1 13.292-6", key: "bjp14o" }],
             ["circle", { cx: "10", cy: "8", r: "5", key: "o932ke" }],
             ["path", { d: "m16 19 2 2 4-4", key: "1b14m6" }],
           ]),
-          oc = p("user-round-x", [
+          ac = p("user-round-x", [
             ["path", { d: "M2 21a8 8 0 0 1 11.873-7", key: "74fkxq" }],
             ["circle", { cx: "10", cy: "8", r: "5", key: "o932ke" }],
             ["path", { d: "m17 17 5 5", key: "p7ous7" }],
             ["path", { d: "m22 17-5 5", key: "gqnmv0" }],
           ]),
-          lc = { free: 128, basic: 256, premium: 512, "premium+": 1024 },
-          ic = {
-            everyone: { icon: rc, label: "Everyone" },
-            followers: { icon: ac, label: "Accounts you follow" },
+          oc = { free: 128, basic: 256, premium: 512, "premium+": 1024 },
+          lc = {
+            everyone: { icon: nc, label: "Everyone" },
+            followers: { icon: rc, label: "Accounts you follow" },
             verified: { icon: yu, label: "Verified accounts" },
-            none: { icon: oc, label: "Only you" },
+            none: { icon: ac, label: "Only you" },
           };
-        function sc(e) {
+        function ic(e) {
           const t = (0, l.c)(81),
             { parentId: n, allowReplyOption: a, onPosted: o } = e,
             i = void 0 === a || a,
@@ -9766,18 +9759,18 @@
                           },
                           body: JSON.stringify({ body: e, audience: f, parent: n }),
                         })
-                          .then(dc)
+                          .then(cc)
                           .then((e) => {
                             (o?.(e), h(""), t(e));
                           })
                           .catch((e) => r(e));
                       }),
-                      { loading: "Chirping...", success: "Chirped", error: cc },
+                      { loading: "Chirping...", success: "Chirped", error: uc },
                     );
                   });
               }),
-              (v = ic[f]),
-              (x = s ? lc[u.plan] : lc.free),
+              (v = lc[f]),
+              (x = s ? oc[u.plan] : oc.free),
               (w = s ? ("free" === u.plan || "basic" === u.plan ? "premium" : "premium+") : null),
               (b = m.slice(0, x)),
               (k = m.slice(x)),
@@ -9954,7 +9947,7 @@
                         children: (0, Ve.jsx)(is, {
                           value: f,
                           onValueChange: (e) => p(e),
-                          children: Object.entries(ic).map(uc),
+                          children: Object.entries(lc).map(sc),
                         }),
                       }),
                     ],
@@ -9996,7 +9989,7 @@
               ? ((U = (0, Ve.jsx)("div", {
                   title: "Media",
                   className: "rounded-full p-2 hover:bg-muted",
-                  children: (0, Ve.jsx)(Zu, { className: "size-4" }),
+                  children: (0, Ve.jsx)(Xu, { className: "size-4" }),
                 })),
                 (t[55] = U))
               : (U = t[55]),
@@ -10004,7 +9997,7 @@
               ? ((V = (0, Ve.jsx)("div", {
                   title: "GIF",
                   className: "rounded-full p-2 hover:bg-muted",
-                  children: (0, Ve.jsx)(Ju, { className: "size-4" }),
+                  children: (0, Ve.jsx)(Zu, { className: "size-4" }),
                 })),
                 (t[56] = V))
               : (V = t[56]),
@@ -10012,7 +10005,7 @@
               ? ((W = (0, Ve.jsx)("div", {
                   title: "Emoji",
                   className: "rounded-full p-2 hover:bg-muted",
-                  children: (0, Ve.jsx)(ec, { className: "size-4" }),
+                  children: (0, Ve.jsx)(Ju, { className: "size-4" }),
                 })),
                 (t[57] = W))
               : (W = t[57]),
@@ -10020,7 +10013,7 @@
               ? ((q = (0, Ve.jsx)("div", {
                   title: "Schedule",
                   className: "rounded-full p-2 hover:bg-muted",
-                  children: (0, Ve.jsx)(tc, { className: "size-4" }),
+                  children: (0, Ve.jsx)(ec, { className: "size-4" }),
                 })),
                 (t[58] = q))
               : (q = t[58]),
@@ -10028,7 +10021,7 @@
               ? ((K = (0, Ve.jsx)("div", {
                   title: "Location",
                   className: "rounded-full p-2 hover:bg-muted",
-                  children: (0, Ve.jsx)(nc, { className: "size-4" }),
+                  children: (0, Ve.jsx)(tc, { className: "size-4" }),
                 })),
                 (t[59] = K))
               : (K = t[59]),
@@ -10100,7 +10093,7 @@
             J
           );
         }
-        function uc(e) {
+        function sc(e) {
           const [t, n] = e;
           return (0, Ve.jsxs)(
             ss,
@@ -10108,14 +10101,14 @@
             t,
           );
         }
-        function cc(e) {
+        function uc(e) {
           return e instanceof Error ? e.message : "Failed to Chirp";
         }
-        function dc(e) {
+        function cc(e) {
           return e.json();
         }
-        function fc(e) {
-          const t = (0, l.c)(67),
+        function dc(e) {
+          const t = (0, l.c)(72),
             { post: n, setPost: a, setReplies: o } = e,
             { isLoggedIn: i } = (0, r.useContext)(ds),
             [s, u] = (0, r.useTransition)();
@@ -10278,7 +10271,7 @@
             ? ((M = (0, Ve.jsx)($s, { className: T })), (t[39] = T), (t[40] = M))
             : (M = t[40]);
           const O = n.likeCount ?? 0;
-          let R, L, D, A, F, I, H, B;
+          let R, L, D, A, F, I, H, B, $, U;
           return (
             t[41] !== O
               ? ((R = (0, Ve.jsx)("span", { className: "tabular-nums", children: O })),
@@ -10300,69 +10293,84 @@
                 (t[47] = d),
                 (t[48] = L))
               : (L = t[48]),
-            t[49] === Symbol.for("react.memo_cache_sentinel")
-              ? ((D = (0, Ve.jsx)("button", {
+            t[49] !== n._id
+              ? ((D = (e) => {
+                  (e.preventDefault(),
+                    e.stopPropagation(),
+                    navigator.clipboard.writeText(`${window.location.origin}/p/${n._id}`),
+                    Tu.success("Link copied to clipboard"));
+                }),
+                (t[49] = n._id),
+                (t[50] = D))
+              : (D = t[50]),
+            t[51] === Symbol.for("react.memo_cache_sentinel")
+              ? ((A = (0, Ve.jsx)(Us, { className: "size-4" })), (t[51] = A))
+              : (A = t[51]),
+            t[52] !== D
+              ? ((F = (0, Ve.jsx)("button", {
                   type: "button",
-                  className:
-                    "flex flex-row items-center gap-1 rounded-md py-1 hover:text-foreground",
-                  children: (0, Ve.jsx)(Xu, { className: "size-4" }),
+                  className: "rounded-md py-1 hover:text-foreground",
+                  onClick: D,
+                  children: A,
                 })),
-                (t[49] = D))
-              : (D = t[49]),
-            t[50] !== _ || t[51] !== L
-              ? ((A = (0, Ve.jsxs)("div", {
+                (t[52] = D),
+                (t[53] = F))
+              : (F = t[53]),
+            t[54] !== _ || t[55] !== L || t[56] !== F
+              ? ((I = (0, Ve.jsxs)("div", {
                   className:
                     "flex flex-row items-center gap-6 border-y border-border py-2 text-muted-foreground",
-                  children: [_, L, D],
+                  children: [_, L, F],
                 })),
-                (t[50] = _),
-                (t[51] = L),
-                (t[52] = A))
-              : (A = t[52]),
-            t[53] !== k || t[54] !== S || t[55] !== C || t[56] !== A
-              ? ((F = (0, Ve.jsxs)("div", {
+                (t[54] = _),
+                (t[55] = L),
+                (t[56] = F),
+                (t[57] = I))
+              : (I = t[57]),
+            t[58] !== k || t[59] !== S || t[60] !== C || t[61] !== I
+              ? ((H = (0, Ve.jsxs)("div", {
                   className: "flex flex-col gap-3 p-4 pb-4",
-                  children: [k, S, C, A],
+                  children: [k, S, C, I],
                 })),
-                (t[53] = k),
-                (t[54] = S),
-                (t[55] = C),
-                (t[56] = A),
-                (t[57] = F))
-              : (F = t[57]),
-            t[58] !== a || t[59] !== o
-              ? ((I = (e) => {
-                  (o((t) => [e, ...t]), a(pc));
+                (t[58] = k),
+                (t[59] = S),
+                (t[60] = C),
+                (t[61] = I),
+                (t[62] = H))
+              : (H = t[62]),
+            t[63] !== a || t[64] !== o
+              ? ((B = (e) => {
+                  (o((t) => [e, ...t]), a(fc));
                 }),
-                (t[58] = a),
-                (t[59] = o),
-                (t[60] = I))
-              : (I = t[60]),
-            t[61] !== n._id || t[62] !== I
-              ? ((H = (0, Ve.jsx)("div", {
+                (t[63] = a),
+                (t[64] = o),
+                (t[65] = B))
+              : (B = t[65]),
+            t[66] !== n._id || t[67] !== B
+              ? (($ = (0, Ve.jsx)("div", {
                   id: "reply-composer",
-                  children: (0, Ve.jsx)(sc, { parentId: n._id, allowReplyOption: !1, onPosted: I }),
+                  children: (0, Ve.jsx)(ic, { parentId: n._id, allowReplyOption: !1, onPosted: B }),
                 })),
-                (t[61] = n._id),
-                (t[62] = I),
-                (t[63] = H))
-              : (H = t[63]),
-            t[64] !== F || t[65] !== H
-              ? ((B = (0, Ve.jsxs)("div", {
+                (t[66] = n._id),
+                (t[67] = B),
+                (t[68] = $))
+              : ($ = t[68]),
+            t[69] !== H || t[70] !== $
+              ? ((U = (0, Ve.jsxs)("div", {
                   className: "border-b border-border",
-                  children: [F, H],
+                  children: [H, $],
                 })),
-                (t[64] = F),
-                (t[65] = H),
-                (t[66] = B))
-              : (B = t[66]),
-            B
+                (t[69] = H),
+                (t[70] = $),
+                (t[71] = U))
+              : (U = t[71]),
+            U
           );
         }
-        function pc(e) {
+        function fc(e) {
           return e ? { ...e, replyCount: (e.replyCount ?? 0) + 1 } : e;
         }
-        function mc() {
+        function pc() {
           const e = (0, l.c)(23);
           let t;
           e[0] === Symbol.for("react.memo_cache_sentinel")
@@ -10413,7 +10421,7 @@
                   let e = !1;
                   return (
                     fetch(`/api/users/${c.owner.username}`, { credentials: "same-origin" })
-                      .then(vc)
+                      .then(gc)
                       .then((t) => {
                         !e && t && b(Boolean(t.isFollowing));
                       }),
@@ -10437,7 +10445,7 @@
               ? ((C = (0, Ve.jsxs)("div", {
                   className:
                     "flex cursor-pointer flex-row items-center gap-4 p-4 pb-0 text-lg font-bold",
-                  onClick: gc,
+                  onClick: hc,
                   children: [(0, Ve.jsx)(m, { className: "size-4" }), "Post"],
                 })),
                 (e[10] = C))
@@ -10447,13 +10455,13 @@
                   c &&
                   (0, Ve.jsxs)(Ve.Fragment, {
                     children: [
-                      (0, Ve.jsx)(fc, { post: c, setPost: d, setReplies: v }),
+                      (0, Ve.jsx)(dc, { post: c, setPost: d, setReplies: v }),
                       s
                         ? (0, Ve.jsx)(Gu, {})
                         : (0, Ve.jsx)(Ve.Fragment, {
                             children:
                               p.length > 0
-                                ? (0, Ve.jsx)(Ve.Fragment, { children: p.map(hc) })
+                                ? (0, Ve.jsx)(Ve.Fragment, { children: p.map(mc) })
                                 : (0, Ve.jsx)("div", {
                                     className: "flex flex-col items-center py-8",
                                     children: (0, Ve.jsx)(Uu, {
@@ -10629,25 +10637,25 @@
             z
           );
         }
-        function hc(e) {
+        function mc(e) {
           return (0, Ve.jsx)(Hu, { post: e }, e._id);
         }
-        function gc() {
+        function hc() {
           return history.back();
         }
-        function vc(e) {
+        function gc(e) {
           return e.ok ? e.json() : null;
         }
-        const yc = p("circle-check", [
+        const vc = p("circle-check", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }],
           ]),
-          bc = p("info", [
+          yc = p("info", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "M12 16v-4", key: "1dtifu" }],
             ["path", { d: "M12 8h.01", key: "e9boi3" }],
           ]),
-          wc = p("triangle-alert", [
+          bc = p("triangle-alert", [
             [
               "path",
               {
@@ -10658,7 +10666,7 @@
             ["path", { d: "M12 9v4", key: "juzpu7" }],
             ["path", { d: "M12 17h.01", key: "p32p05" }],
           ]),
-          xc = p("octagon-x", [
+          wc = p("octagon-x", [
             ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
             [
               "path",
@@ -10669,17 +10677,17 @@
             ],
             ["path", { d: "m9 9 6 6", key: "z0biqf" }],
           ]),
-          kc = (e) => {
+          xc = (e) => {
             const t = (0, l.c)(7);
             let n, r, a, o, i;
             return (
               t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
               t[2] === Symbol.for("react.memo_cache_sentinel")
                 ? ((r = {
-                    success: (0, Ve.jsx)(yc, { className: "size-4" }),
-                    info: (0, Ve.jsx)(bc, { className: "size-4" }),
-                    warning: (0, Ve.jsx)(wc, { className: "size-4" }),
-                    error: (0, Ve.jsx)(xc, { className: "size-4" }),
+                    success: (0, Ve.jsx)(vc, { className: "size-4" }),
+                    info: (0, Ve.jsx)(yc, { className: "size-4" }),
+                    warning: (0, Ve.jsx)(bc, { className: "size-4" }),
+                    error: (0, Ve.jsx)(wc, { className: "size-4" }),
                     loading: (0, Ve.jsx)(gu, { className: "size-4 animate-spin" }),
                   }),
                   (a = {
@@ -10714,8 +10722,8 @@
             children: (0, Ve.jsx)(fs, {
               children: (0, Ve.jsxs)(_a, {
                 children: [
-                  (0, Ve.jsx)(mc, {}),
-                  (0, Ve.jsx)(kc, { position: "top-center", richColors: !0 }),
+                  (0, Ve.jsx)(pc, {}),
+                  (0, Ve.jsx)(xc, { position: "top-center", richColors: !0 }),
                 ],
               }),
             }),
@@ -22280,6 +22288,6 @@
       (n.forEach(t.bind(null, 0)), (n.push = t.bind(null, n.push.bind(n))));
     })(),
     (o.nc = void 0));
-  var l = o.O(void 0, [869], () => o(455));
+  var l = o.O(void 0, [869], () => o(58));
   l = o.O(l);
 })();
