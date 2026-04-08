@@ -22,8 +22,6 @@ const parseRequiredOidParam = (req, key) => {
   return String(id);
 };
 
-const isPaidPlan = (plan) => typeof plan === "string" && plan !== "free";
-
 const canViewPrivateAuthor = async (owner, viewerId) => {
   if (!owner || owner.isPublic !== false) return true;
   if (!viewerId) return false;
@@ -68,7 +66,8 @@ const enrichPosts = async (posts, viewerId) => {
       owner: {
         username: post.owner.username,
         displayName: post.owner.displayName,
-        isPremium: isPaidPlan(post.owner.plan),
+        plan: post.owner.plan,
+        isOrg: post.owner.isOrg,
         bio: typeof post.owner.bio === "string" ? post.owner.bio : "",
       },
       likeCount: likeMap.get(id) ?? 0,

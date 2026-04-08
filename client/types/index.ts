@@ -8,6 +8,8 @@ export type Session = {
   isPublic: boolean;
   bio: string;
   plan: SubscriptionPlan;
+  isOrg: boolean;
+  avatar: string;
   createdDate: string;
   [key: string]: unknown;
 };
@@ -17,6 +19,8 @@ export type Account = {
   isPublic: boolean;
   bio: string;
   plan: SubscriptionPlan;
+  isOrg: boolean;
+  avatar: string;
   createdDate: string;
   isFollowing: boolean;
   followingCount: number;
@@ -27,8 +31,10 @@ export type Post = {
   owner: {
     username: string;
     displayName: string;
-    isPremium: boolean;
-    bio?: string;
+    avatar: string;
+    plan: SubscriptionPlan;
+    bio: string;
+    isOrg: boolean;
   };
   body: string;
   parent: string | null;

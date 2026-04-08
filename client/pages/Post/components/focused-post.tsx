@@ -1,6 +1,6 @@
 import { useContext, useTransition, type Dispatch, type SetStateAction } from "react";
 import { BadgeCheck, Heart, MessageCircle, Share2 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
+import { ProfileAvatar } from "../../../components/avatar";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "../../../components/ui/hover-card";
 import { ProfilePreview } from "../../../components/profile-preview";
 import type { Post as PostType } from "../../../types";
@@ -60,18 +60,21 @@ export function FocusedPost({
               href={`/u/${post.owner.username}`}
               className="flex min-w-0 flex-row items-start gap-3"
             >
-              <Avatar size="lg" className="shrink-0">
-                <AvatarImage src="https://placehold.co/40" />
-                <AvatarFallback className="uppercase">
-                  {post.owner.username.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
+              <ProfileAvatar
+                size="lg"
+                isOrg={post.owner.isOrg}
+                avatar={post.owner.avatar}
+                username={post.owner.username}
+                className="shrink-0"
+              />
               <div className="flex min-w-0 flex-col gap-0.5 pt-0.5">
                 <div className="flex flex-row flex-wrap items-center gap-x-1.5 gap-y-0">
                   <span className="text-base leading-tight font-bold hover:underline">
                     {post.owner.displayName}
                   </span>
-                  {post.owner.isPremium && <BadgeCheck className="size-4 shrink-0 text-primary" />}
+                  {post.owner.plan !== "free" && (
+                    <BadgeCheck className="size-4 shrink-0 text-primary" />
+                  )}
                 </div>
                 <span className="text-sm text-muted-foreground">@{post.owner.username}</span>
               </div>

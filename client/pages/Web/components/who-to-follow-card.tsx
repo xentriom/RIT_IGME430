@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useTransition } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card";
 import { Account } from "../../../types";
 import { Skeleton } from "../../../components/ui/skeleton";
-import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
+import { ProfileAvatar } from "../../../components/avatar";
 import { FollowButton } from "../../../components/follow-button";
 import { BadgeCheck } from "lucide-react";
 import { SessionContext } from "../../../contexts/session";
@@ -66,12 +66,11 @@ export function WhoToFollowCard() {
                   href={`/u/${account.username}`}
                   className="flex flex-row items-center gap-2"
                 >
-                  <Avatar>
-                    <AvatarImage src="https://placehold.co/40" />
-                    <AvatarFallback className="uppercase">
-                      {account.username.charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
+                  <ProfileAvatar
+                    isOrg={account.isOrg}
+                    avatar={account.avatar}
+                    username={account.username}
+                  />
                   <div className="flex w-full flex-row items-center gap-2">
                     <div className="flex flex-1 flex-col">
                       <HoverCard>

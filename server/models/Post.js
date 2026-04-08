@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 let PostModel = {};
 
-const ownerPopulateFields = "username plan displayName bio isPublic";
+const ownerPopulateFields = "username plan displayName bio isPublic isOrg avatar";
 
 const PostSchema = new mongoose.Schema({
   owner: {
@@ -131,6 +131,8 @@ PostSchema.statics.findRecentFeedForViewer = async (viewerId, followingIds, limi
           displayName: "$ownerArr.displayName",
           bio: "$ownerArr.bio",
           isPublic: "$ownerArr.isPublic",
+          isOrg: "$ownerArr.isOrg",
+          avatar: "$ownerArr.avatar",
         },
       },
     },

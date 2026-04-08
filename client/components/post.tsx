@@ -12,7 +12,7 @@ import { ProfilePreview } from "./profile-preview";
 import { useContext, useEffect, useState, useTransition } from "react";
 import { SessionContext } from "../contexts/session";
 import type { Post as PostType } from "../types";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import { ProfileAvatar } from "./avatar";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -109,10 +109,12 @@ export function Post({ post }: { post: PostType }) {
           href={`/p/${post._id}`}
           className="group/post flex w-full flex-row gap-2 border-b border-border p-4 hover:bg-muted/50"
         >
-          <Avatar size="lg">
-            <AvatarImage src="https://placehold.co/40" />
-            <AvatarFallback className="uppercase">{post.owner.username.charAt(0)}</AvatarFallback>
-          </Avatar>
+          <ProfileAvatar
+            size="lg"
+            isOrg={post.owner.isOrg}
+            avatar={post.owner.avatar}
+            username={post.owner.username}
+          />
           <div className="flex min-w-0 flex-1 flex-col gap-1">
             <div className="flex justify-between">
               <div className="flex flex-row items-center gap-1">
@@ -123,7 +125,9 @@ export function Post({ post }: { post: PostType }) {
                   >
                     <span className="font-bold hover:underline">{post.owner.displayName}</span>
                     <span className="text-sm text-muted-foreground">@{post.owner.username}</span>
-                    {post.owner.isPremium && <BadgeCheck className="size-4 text-primary" />}
+                    {post.owner.plan !== "free" && (
+                      <BadgeCheck className="size-4 shrink-0 text-primary" />
+                    )}
                   </a>
                 </HoverCardTrigger>
                 <HoverCardContent>

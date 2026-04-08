@@ -3,9 +3,9 @@ import { useContext, useEffect, useState, useTransition } from "react";
 import { BadgeCheck } from "lucide-react";
 import { SessionContext } from "../contexts/session";
 import type { Account } from "../types";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { FollowButton } from "./follow-button";
 import { Spinner } from "./ui/spinner";
+import { ProfileAvatar } from "./avatar";
 
 export function ProfilePreview({ username }: { username: string }) {
   const { isLoggedIn, session } = useContext(SessionContext);
@@ -37,10 +37,12 @@ export function ProfilePreview({ username }: { username: string }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row justify-between">
-        <Avatar className="size-20 shrink-0">
-          <AvatarImage src="https://placehold.co/40" />
-          <AvatarFallback className="uppercase">{account.username.charAt(0)}</AvatarFallback>
-        </Avatar>
+        <ProfileAvatar
+          isOrg={account.isOrg}
+          avatar={account.avatar}
+          username={account.username}
+          className="size-20 shrink-0"
+        />
         {showFollow && (
           <FollowButton
             username={username}

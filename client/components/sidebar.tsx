@@ -30,6 +30,7 @@ import {
 import { useContext } from "react";
 import { SessionContext } from "../contexts/session";
 import { cn } from "../lib/utils";
+import { ProfileAvatar } from "./avatar";
 
 const sidebarItems = [
   {
@@ -126,12 +127,12 @@ export function Sidebar() {
       <div className="ml-auto sm:mt-auto">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Avatar>
-              <AvatarImage src="https://placehold.co/40" />
-              <AvatarFallback className="uppercase">
-                {isLoggedIn ? session.username.charAt(0) : "G"}
-              </AvatarFallback>
-            </Avatar>
+            <ProfileAvatar
+              isOrg={isLoggedIn ? session.isOrg : false}
+              avatar={isLoggedIn ? session.avatar : ""}
+              username={isLoggedIn ? session.username : "G"}
+              className="size-8"
+            />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
@@ -141,12 +142,12 @@ export function Sidebar() {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="size-8 rounded-lg">
-                  <AvatarImage src="https://placehold.co/40" />
-                  <AvatarFallback className="rounded-lg">
-                    {isLoggedIn ? session.displayName.charAt(0) : "G"}
-                  </AvatarFallback>
-                </Avatar>
+                <ProfileAvatar
+                  isOrg={isLoggedIn ? session.isOrg : false}
+                  avatar={isLoggedIn ? session.avatar : ""}
+                  username={isLoggedIn ? session.username : "G"}
+                  className="size-8"
+                />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">
                     {isLoggedIn ? session.displayName : "Guest User"}

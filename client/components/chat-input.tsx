@@ -1,5 +1,5 @@
 import { useContext, useRef, useState, useTransition } from "react";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import { ProfileAvatar } from "./avatar";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import {
@@ -90,12 +90,13 @@ export function ChatInput({
 
   return (
     <div className="flex flex-row gap-2 border-b border-border p-4">
-      <Avatar className="hidden sm:block">
-        <AvatarImage src="https://placehold.co/40" />
-        <AvatarFallback className="uppercase">
-          {isLoggedIn ? session.username.charAt(0) : "G"}
-        </AvatarFallback>
-      </Avatar>
+      <ProfileAvatar
+        size="lg"
+        isOrg={isLoggedIn ? session.isOrg : false}
+        avatar={isLoggedIn ? session.avatar : ""}
+        username={isLoggedIn ? session.username : "G"}
+        className="hidden sm:block"
+      />
       <div className="flex flex-1 flex-col gap-1">
         <div className="relative">
           {/** This was inspired by https://stackoverflow.com/a/77833688, and simplified a LOT */}

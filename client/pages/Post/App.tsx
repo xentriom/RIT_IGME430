@@ -4,7 +4,6 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "../../components/u
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Sidebar } from "../../components/sidebar";
 import { Post } from "../../components/post";
-import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import {
   Empty,
   EmptyDescription,
@@ -17,6 +16,7 @@ import type { Post as PostType } from "../../types";
 import { FollowButton } from "../../components/follow-button";
 import { PostSkeleton } from "../../components/post-skeleton";
 import { FocusedPost } from "./components/focused-post";
+import { ProfileAvatar } from "../../components/avatar";
 
 export default function App() {
   const postId = window.location.pathname.split("/").pop();
@@ -141,12 +141,13 @@ export default function App() {
                 <CardContent>
                   <div className="flex flex-col gap-2">
                     <div className="flex flex-row gap-2">
-                      <Avatar size="lg" className="shrink-0">
-                        <AvatarImage src="https://placehold.co/40" />
-                        <AvatarFallback className="uppercase">
-                          {post.owner.username.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
+                      <ProfileAvatar
+                        size="lg"
+                        isOrg={post.owner.isOrg}
+                        avatar={post.owner.avatar}
+                        username={post.owner.username}
+                        className="shrink-0"
+                      />
                       <div className="flex flex-1 flex-col">
                         <span className="text-base font-bold">{post.owner.displayName}</span>
                         <span className="text-sm text-muted-foreground">

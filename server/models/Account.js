@@ -27,6 +27,11 @@ const AccountSchema = new mongoose.Schema({
       return this.username;
     },
   },
+  avatar: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Filestore",
+    default: "",
+  },
   password: {
     type: String,
     required: true,
@@ -45,6 +50,10 @@ const AccountSchema = new mongoose.Schema({
     enum: ["free", "basic", "premium", "premium+"],
     default: "free",
   },
+  isOrg: {
+    type: Boolean,
+    default: false,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
@@ -55,9 +64,11 @@ AccountSchema.statics.toAPI = (doc) => ({
   _id: doc._id,
   username: doc.username,
   displayName: doc.displayName,
+  avatar: doc.avatar,
   isPublic: doc.isPublic,
   bio: doc.bio,
   plan: doc.plan,
+  isOrg: doc.isOrg,
   createdDate: doc.createdDate,
 });
 
