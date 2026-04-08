@@ -31,7 +31,6 @@ const AccountSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Filestore",
     required: false,
-    set: (v) => (v === "" ? undefined : v),
   },
   password: {
     type: String,

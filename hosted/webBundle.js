@@ -10195,21 +10195,23 @@
                                         username: e.username,
                                       }),
                                       (0, Ue.jsxs)("div", {
-                                        className: "flex w-full flex-row items-center gap-2",
+                                        className:
+                                          "flex min-w-0 flex-1 flex-row items-center gap-2",
                                         children: [
                                           (0, Ue.jsxs)("div", {
-                                            className: "flex flex-1 flex-col",
+                                            className: "flex min-w-0 flex-1 flex-col",
                                             children: [
                                               (0, Ue.jsxs)(Zc, {
                                                 children: [
                                                   (0, Ue.jsx)(Jc, {
                                                     asChild: !0,
                                                     children: (0, Ue.jsxs)("div", {
-                                                      className: "flex flex-row items-center gap-1",
+                                                      className:
+                                                        "flex min-w-0 flex-row items-center gap-1",
                                                       children: [
                                                         (0, Ue.jsx)("span", {
                                                           className:
-                                                            "truncate text-base font-bold hover:underline",
+                                                            "block min-w-0 flex-1 truncate text-base font-bold hover:underline",
                                                           children: e.displayName,
                                                         }),
                                                         (0, Ue.jsx)(nu, {
@@ -10272,7 +10274,7 @@
               children: [
                 (0, Ue.jsx)(iu, { className: "size-8 shrink-0" }),
                 (0, Ue.jsxs)("div", {
-                  className: "flex w-full flex-row items-center gap-0.5",
+                  className: "flex min-w-0 flex-1 flex-row items-center gap-0.5",
                   children: [
                     (0, Ue.jsxs)("div", {
                       className: "flex flex-1 flex-col gap-0.5",

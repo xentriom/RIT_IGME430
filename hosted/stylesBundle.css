@@ -873,9 +873,6 @@
   .max-w-7xl {
     max-width: var(--container-7xl);
   }
-  .max-w-\[10ch\] {
-    max-width: 10ch;
-  }
   .max-w-\[35\%\] {
     max-width: 35%;
   }
@@ -943,9 +940,6 @@
     flex-shrink: 0;
   }
   .shrink-3 {
-    flex-shrink: 3;
-  }
-  .shrink-\[3\] {
     flex-shrink: 3;
   }
   .flex-grow {

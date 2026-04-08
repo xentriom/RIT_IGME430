@@ -46,7 +46,7 @@ export function WhoToFollowCard() {
               {Array.from({ length: 3 }).map((_, index) => (
                 <div key={index} className="flex flex-row items-center gap-2">
                   <Skeleton className="size-8 shrink-0" />
-                  <div className="flex w-full flex-row items-center gap-0.5">
+                  <div className="flex min-w-0 flex-1 flex-row items-center gap-0.5">
                     <div className="flex flex-1 flex-col gap-0.5">
                       <Skeleton className="h-6.5 w-1/2" />
                       <Skeleton className="h-4.5 w-1/3" />
@@ -71,12 +71,12 @@ export function WhoToFollowCard() {
                     avatar={account.avatar}
                     username={account.username}
                   />
-                  <div className="flex w-full flex-row items-center gap-2">
-                    <div className="flex flex-1 flex-col">
+                  <div className="flex min-w-0 flex-1 flex-row items-center gap-2">
+                    <div className="flex min-w-0 flex-1 flex-col">
                       <HoverCard>
                         <HoverCardTrigger asChild>
-                          <div className="flex flex-row items-center gap-1">
-                            <span className="truncate text-base font-bold hover:underline">
+                          <div className="flex min-w-0 flex-row items-center gap-1">
+                            <span className="block min-w-0 flex-1 truncate text-base font-bold hover:underline">
                               {account.displayName}
                             </span>
                             <ProfileBadge isOrg={account.isOrg} plan={account.plan} />
