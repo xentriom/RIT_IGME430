@@ -65,7 +65,6 @@ const getAccounts = async (req, res) => {
   const limit = req.query.limit ?? 10;
   const accounts = await models.Account.find({})
     .select("_id username displayName avatar isPublic bio plan isOrg createdDate")
-    .populate("avatar", "data filename contentType size")
     .exec();
 
   const randomAccounts = shuffleToNew(accounts).slice(0, limit);
