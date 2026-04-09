@@ -112,20 +112,11 @@ export default function App() {
               </div>
             </div>
             <div className="self-end p-2">
-              {isLoggedIn ? (
-                isSelf ? (
-                  <EditProfile onSaved={refreshAccount} />
-                ) : (
-                  <FollowButton
-                    username={account.username}
-                    isFollowing={account.isFollowing}
-                    onFollowStateChange={() => {}}
-                  />
-                )
-              ) : (
-                // Disabled button bc layout reasons
-                <Button disabled>Follow</Button>
-              )}
+              <FollowButton
+                username={account.username}
+                isFollowing={account.isFollowing}
+                onFollowStateChange={() => {}}
+              />
             </div>
             <div className="flex flex-col gap-3 border-b border-border p-4">
               <div className="flex flex-col">

@@ -30,7 +30,13 @@ export function FollowButton({
   }, [username, isFollowing]);
 
   const isSelf = Boolean(isLoggedIn && session.username === username);
-  if (!isLoggedIn || isSelf) return null;
+  if (!isLoggedIn || isSelf) {
+    return (
+      <Button className={className} disabled={true}>
+        Follow
+      </Button>
+    );
+  }
 
   const toggleFollow = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

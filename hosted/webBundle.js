@@ -9355,7 +9355,7 @@
           );
         }
         function tu(e) {
-          const t = (0, l.c)(13),
+          const t = (0, l.c)(15),
             { username: n, isFollowing: a, onFollowStateChange: o, className: i } = e,
             { isLoggedIn: s, session: c } = (0, r.useContext)(Ut),
             [u, d] = (0, r.useTransition)(),
@@ -9373,9 +9373,19 @@
               : (h = t[4]),
             (0, r.useEffect)(m, h));
           const g = Boolean(s && c.username === n);
-          if (!s || g) return null;
+          if (!s || g) {
+            let e;
+            return (
+              t[5] !== i
+                ? ((e = (0, Ue.jsx)(Ye, { className: i, disabled: !0, children: "Follow" })),
+                  (t[5] = i),
+                  (t[6] = e))
+                : (e = t[6]),
+              e
+            );
+          }
           let v;
-          t[5] !== o || t[6] !== n
+          t[7] !== o || t[8] !== n
             ? ((v = (e) => {
                 (e.preventDefault(),
                   e.stopPropagation(),
@@ -9389,15 +9399,15 @@
                     (p(t.isFollowing), o?.(t));
                   }));
               }),
-              (t[5] = o),
-              (t[6] = n),
-              (t[7] = v))
-            : (v = t[7]);
+              (t[7] = o),
+              (t[8] = n),
+              (t[9] = v))
+            : (v = t[9]);
           const y = v,
             b = f ? "Unfollow" : "Follow";
           let w;
           return (
-            t[8] !== i || t[9] !== u || t[10] !== b || t[11] !== y
+            t[10] !== i || t[11] !== u || t[12] !== b || t[13] !== y
               ? ((w = (0, Ue.jsx)(Ye, {
                   type: "button",
                   className: i,
@@ -9405,12 +9415,12 @@
                   disabled: u,
                   children: b,
                 })),
-                (t[8] = i),
-                (t[9] = u),
-                (t[10] = b),
-                (t[11] = y),
-                (t[12] = w))
-              : (w = t[12]),
+                (t[10] = i),
+                (t[11] = u),
+                (t[12] = b),
+                (t[13] = y),
+                (t[14] = w))
+              : (w = t[14]),
             w
           );
         }
