@@ -72,6 +72,10 @@ const router = (app) => {
     mid.requiresLogin,
     controllers.Premium.purchase,
   );
+
+  // Dawg express changed the syntax from "*" to "/*{name}"
+  // The name is useless as far as I can tell so have womp
+  app.get("/*womp", controllers.Pages.notFoundPage);
 };
 
 module.exports = router;

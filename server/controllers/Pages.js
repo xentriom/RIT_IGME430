@@ -48,10 +48,15 @@ const postPage = async (req, res) => {
   });
 };
 
+const notFoundPage = (req, res) => {
+  res.status(404).render("not-found");
+};
+
 module.exports = {
   webPage,
   profilePage,
   authPage,
   premiumPage,
   postPage,
+  notFoundPage,
 };
