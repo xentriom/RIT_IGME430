@@ -1,5 +1,6 @@
 const models = require("../models");
 const { enrichPosts, canViewPrivateAuthor, parseLimit } = require("./Post");
+const mongoose = require("mongoose");
 
 const getAccount = async (req, res) => {
   const username = req.params.username;
@@ -155,7 +156,8 @@ const getAvatar = async (req, res) => {
   const id = req.params.id;
   if (!id) return res.status(400).json({ error: "ID is required!" });
 
-  const photo = await models.Filestore.findById(id).exec();
+  const oid = new mongoose.Types.ObjectId(id);
+  const photo = await models.Filestore.findById(oid).exec();
   if (!photo?.data?.length) return res.status(404).json({ error: "User has no avatar" });
 
   res.set({
@@ -174,7 +176,8 @@ const getUserAvatar = async (req, res) => {
   const avatarId = req.params.avatarId;
   if (!avatarId) return res.status(400).json({ error: "Avatar ID is required!" });
 
-  const photo = await models.Filestore.findById(avatarId);
+  const oid = new mongoose.Types.ObjectId(avatarId);
+  const photo = await models.Filestore.findById(oid).exec();
   if (!photo?.data?.length) return res.status(404).json({ error: "User has no avatar" });
 
   res.set({

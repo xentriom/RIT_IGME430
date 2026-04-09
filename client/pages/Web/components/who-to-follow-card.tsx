@@ -76,7 +76,7 @@ export function WhoToFollowCard() {
                       <HoverCard>
                         <HoverCardTrigger asChild>
                           <div className="flex min-w-0 flex-row items-center gap-1">
-                            <span className="block min-w-0 flex-1 truncate text-base font-bold hover:underline">
+                            <span className="block min-w-0 truncate text-base font-bold hover:underline">
                               {account.displayName}
                             </span>
                             <ProfileBadge isOrg={account.isOrg} plan={account.plan} />

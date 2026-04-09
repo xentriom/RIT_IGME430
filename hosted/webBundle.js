@@ -10241,7 +10241,7 @@
                                                       children: [
                                                         (0, Ue.jsx)("span", {
                                                           className:
-                                                            "block min-w-0 flex-1 truncate text-base font-bold hover:underline",
+                                                            "block min-w-0 truncate text-base font-bold hover:underline",
                                                           children: e.displayName,
                                                         }),
                                                         (0, Ue.jsx)(nu, {
