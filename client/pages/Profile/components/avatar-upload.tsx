@@ -93,7 +93,7 @@ export function AvatarUpload({
 
   return (
     <div className="group/avatar relative">
-      <Avatar className={cn(session.isOrg ? "rounded-md" : "rounded-full", "size-16 shrink-0")}>
+      <Avatar className={cn(session.isOrg ? "rounded-sm" : "rounded-full", "size-16 shrink-0")}>
         <AvatarImage src={objectUrl ?? `/api/avatar/${session.avatar}`} className="rounded-none" />
         <AvatarFallback className="rounded-none uppercase">
           {session.username.charAt(0)}
@@ -104,7 +104,7 @@ export function AvatarUpload({
         className={cn(
           "absolute inset-0 z-10 flex scale-96 items-center justify-center opacity-0 transition-[transform,opacity]",
           "group-hover/avatar:scale-100 group-hover/avatar:cursor-pointer group-hover/avatar:bg-background/80 group-hover/avatar:opacity-80",
-          session.isOrg ? "rounded-md" : "rounded-full",
+          session.isOrg ? "rounded-sm" : "rounded-full",
         )}
         onClick={() => inputRef.current?.click()}
       >

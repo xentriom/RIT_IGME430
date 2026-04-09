@@ -19,7 +19,7 @@ export function ProfileAvatar({
   return (
     <AvatarPrimitive
       size={size}
-      className={cn(isOrg ? "rounded-md" : "rounded-full", className)}
+      className={cn(isOrg ? "rounded-sm" : "rounded-full", className)}
       {...props}
     >
       <AvatarImage src={avatar} className="rounded-none" />

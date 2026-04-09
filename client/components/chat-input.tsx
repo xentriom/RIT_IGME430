@@ -137,7 +137,7 @@ export function ChatInput({
           />
         </div>
         {!isLoggedIn && draft.length > 0 && (
-          <div className="my-2 flex flex-col gap-2 rounded-md bg-sidebar-primary/25 p-4 text-sm">
+          <div className="my-2 flex flex-col gap-2 rounded-lg bg-sidebar-primary/25 p-4 text-sm">
             <p>
               <a href="/auth/login" className="underline">
                 Log in
@@ -147,7 +147,7 @@ export function ChatInput({
           </div>
         )}
         {isLoggedIn && session.plan !== "premium+" && draft.length > planLimit && (
-          <div className="my-2 flex flex-col gap-2 rounded-md bg-sidebar-primary/25 p-4 text-sm">
+          <div className="my-2 flex flex-col gap-2 rounded-lg bg-sidebar-primary/25 p-4 text-sm">
             <p>
               Upgrade to <span className="capitalize">{nextPlanTier}</span> to write longer posts
               and Articles.
