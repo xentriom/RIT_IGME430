@@ -2,7 +2,14 @@ import { useEffect, useState, useTransition, useContext } from "react";
 import type { Account, Post as PostType } from "../../types";
 import { Sidebar } from "../../components/sidebar";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../../components/ui/input-group";
-import { Search, ArrowLeft, Calendar } from "lucide-react";
+import {
+  Search,
+  ArrowLeft,
+  Calendar,
+  MessageCircleIcon,
+  LockIcon,
+  ArrowUpRightIcon,
+} from "lucide-react";
 import { YouMightLike } from "./components/you-might-like";
 import { FollowButton } from "../../components/follow-button";
 import { Post } from "../../components/post";
@@ -11,6 +18,14 @@ import { EditProfile } from "./components/edit-profile";
 import { Button } from "../../components/ui/button";
 import { ProfileAvatar } from "../../components/profile-avatar";
 import { ProfileBadge } from "../../components/profile-badge";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "../../components/ui/empty";
 
 export default function App() {
   const { isLoggedIn, session } = useContext(SessionContext);
@@ -68,6 +83,8 @@ export default function App() {
   if (!account) return <div>Account not found</div>;
 
   const isSelf = Boolean(isLoggedIn && session.username === account.username);
+  // Matches server `canViewPrivateAuthor`: public, self, or follower can see posts.
+  const canViewPosts = account.isPublic || isSelf || account.isFollowing;
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
@@ -148,14 +165,39 @@ export default function App() {
                 </div>
               </div>
             </div>
-            {posts.length > 0 ? (
-              <div>
-                {posts.map((post) => (
-                  <Post key={post._id} post={post} />
-                ))}
-              </div>
+            {canViewPosts ? (
+              posts.length > 0 ? (
+                <>
+                  {posts.map((post) => (
+                    <Post key={post._id} post={post} />
+                  ))}
+                </>
+              ) : (
+                <Empty>
+                  <EmptyHeader>
+                    <EmptyMedia variant="icon">
+                      <MessageCircleIcon />
+                    </EmptyMedia>
+                    <EmptyTitle>No Chirps Yet</EmptyTitle>
+                    <EmptyDescription>The author has not chirped yet</EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
+              )
             ) : (
-              <div>No posts yet</div>
+              <Empty>
+                <EmptyHeader>
+                  <EmptyMedia variant="icon">
+                    <LockIcon />
+                  </EmptyMedia>
+                  <EmptyTitle>This profile is private</EmptyTitle>
+                  <EmptyDescription>Follow to see their posts</EmptyDescription>
+                </EmptyHeader>
+                <Button variant="link" asChild className="text-muted-foreground" size="sm">
+                  <a href="#">
+                    Learn More <ArrowUpRightIcon />
+                  </a>
+                </Button>
+              </Empty>
             )}
           </div>
         </div>

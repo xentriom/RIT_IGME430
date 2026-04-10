@@ -102,17 +102,15 @@ export default function App() {
                         ))}
                       </>
                     ) : (
-                      <div className="flex flex-col items-center py-8">
-                        <Empty className="flex-none">
-                          <EmptyHeader>
-                            <EmptyMedia variant="icon">
-                              <MessageCircleIcon />
-                            </EmptyMedia>
-                            <EmptyTitle>No replies yet</EmptyTitle>
-                            <EmptyDescription>Be the first to reply to this post</EmptyDescription>
-                          </EmptyHeader>
-                        </Empty>
-                      </div>
+                      <Empty>
+                        <EmptyHeader>
+                          <EmptyMedia variant="icon">
+                            <MessageCircleIcon />
+                          </EmptyMedia>
+                          <EmptyTitle>No Replies Yet</EmptyTitle>
+                          <EmptyDescription>Be the first to reply to this Chirp</EmptyDescription>
+                        </EmptyHeader>
+                      </Empty>
                     )}
                   </>
                 )}

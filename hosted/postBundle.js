@@ -10518,22 +10518,18 @@
                             children:
                               p.length > 0
                                 ? (0, Ve.jsx)(Ve.Fragment, { children: p.map(mc) })
-                                : (0, Ve.jsx)("div", {
-                                    className: "flex flex-col items-center py-8",
-                                    children: (0, Ve.jsx)(Uu, {
-                                      className: "flex-none",
-                                      children: (0, Ve.jsxs)(Vu, {
-                                        children: [
-                                          (0, Ve.jsx)(qu, {
-                                            variant: "icon",
-                                            children: (0, Ve.jsx)(h, {}),
-                                          }),
-                                          (0, Ve.jsx)(Ku, { children: "No replies yet" }),
-                                          (0, Ve.jsx)(Qu, {
-                                            children: "Be the first to reply to this post",
-                                          }),
-                                        ],
-                                      }),
+                                : (0, Ve.jsx)(Uu, {
+                                    children: (0, Ve.jsxs)(Vu, {
+                                      children: [
+                                        (0, Ve.jsx)(qu, {
+                                          variant: "icon",
+                                          children: (0, Ve.jsx)(h, {}),
+                                        }),
+                                        (0, Ve.jsx)(Ku, { children: "No Replies Yet" }),
+                                        (0, Ve.jsx)(Qu, {
+                                          children: "Be the first to reply to this Chirp",
+                                        }),
+                                      ],
                                     }),
                                   }),
                           }),

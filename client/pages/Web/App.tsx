@@ -59,17 +59,15 @@ export default function App() {
             ) : posts.length > 0 ? (
               posts.map((post) => <Post key={post._id} post={post} />)
             ) : (
-              <div className="flex flex-col items-center py-8">
-                <Empty className="flex-none">
-                  <EmptyHeader>
-                    <EmptyMedia variant="icon">
-                      <MessageCircleIcon />
-                    </EmptyMedia>
-                    <EmptyTitle>No posts yet</EmptyTitle>
-                    <EmptyDescription>Be the first to post</EmptyDescription>
-                  </EmptyHeader>
-                </Empty>
-              </div>
+              <Empty>
+                <EmptyHeader>
+                  <EmptyMedia variant="icon">
+                    <MessageCircleIcon />
+                  </EmptyMedia>
+                  <EmptyTitle>No Chirps Yet</EmptyTitle>
+                  <EmptyDescription>Be the first to chirp</EmptyDescription>
+                </EmptyHeader>
+              </Empty>
             )}
           </div>
         </div>
