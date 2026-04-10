@@ -50,7 +50,7 @@ redisClient.connect().then(() => {
   });
 
   app.use("/assets", express.static(resolve(`${__dirname}/../public`)));
-  app.use(favicon(`${__dirname}/../public/favicon.ico`));
+  app.use(favicon(`${__dirname}/../public/icons/favicon.ico`));
   app.use(compression());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
