@@ -3556,7 +3556,7 @@
             ],
             premium: [
               "Verified Checkmark",
-              "Enhanced Hork access",
+              "Enhanced Myna access",
               "Advanced analytics",
               "Less ads in your feeds",
               "Boosted replies",
@@ -3566,7 +3566,7 @@
             ],
             "premium+": [
               "Fully ad-free",
-              "SuperHork",
+              "SuperMyna",
               "Handle Marketplace",
               "Highest reply boost",
               "Radar Advanced Search",

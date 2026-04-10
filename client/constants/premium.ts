@@ -53,7 +53,7 @@ export const PremiumBenefits: Record<SubscriptionPlan, string[]> = {
   ],
   premium: [
     "Verified Checkmark",
-    "Enhanced Hork access",
+    "Enhanced Myna access",
     "Advanced analytics",
     "Less ads in your feeds",
     "Boosted replies",
@@ -63,7 +63,7 @@ export const PremiumBenefits: Record<SubscriptionPlan, string[]> = {
   ],
   "premium+": [
     "Fully ad-free",
-    "SuperHork",
+    "SuperMyna",
     "Handle Marketplace",
     "Highest reply boost",
     "Radar Advanced Search",
