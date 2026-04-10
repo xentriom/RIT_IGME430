@@ -9431,7 +9431,9 @@
             let e;
             return (
               t[0] === Symbol.for("react.memo_cache_sentinel")
-                ? ((e = (0, Ue.jsx)(It, { className: "size-4 shrink-0 text-yellow-300" })),
+                ? ((e = (0, Ue.jsx)(It, {
+                    className: "size-5 shrink-0 fill-yellow-300 text-background",
+                  })),
                   (t[0] = e))
                 : (e = t[0]),
               e
@@ -9441,7 +9443,10 @@
           let a;
           return (
             t[1] === Symbol.for("react.memo_cache_sentinel")
-              ? ((a = (0, Ue.jsx)(It, { className: "size-4 shrink-0 text-primary" })), (t[1] = a))
+              ? ((a = (0, Ue.jsx)(It, {
+                  className: "size-5 shrink-0 fill-blue-500 text-background",
+                })),
+                (t[1] = a))
               : (a = t[1]),
             a
           );
@@ -9525,7 +9530,7 @@
           let w, x, k, S, E;
           (t[15] !== c.displayName
             ? ((w = (0, Ue.jsx)("span", {
-                className: "text-lg font-bold",
+                className: "text-lg font-bold truncate",
                 children: c.displayName,
               })),
               (t[15] = c.displayName),

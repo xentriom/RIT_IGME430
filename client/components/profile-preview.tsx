@@ -56,7 +56,7 @@ export function ProfilePreview({ username }: { username: string }) {
         className="inline-flex cursor-pointer flex-col underline-offset-4 hover:underline"
       >
         <div className="flex flex-row items-center gap-1">
-          <span className="text-lg font-bold">{account.displayName}</span>
+          <span className="truncate text-lg font-bold">{account.displayName}</span>
           <ProfileBadge isOrg={account.isOrg} plan={account.plan} />
         </div>
         <span className="text-sm text-muted-foreground">@{account.username}</span>
