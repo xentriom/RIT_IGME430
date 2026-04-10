@@ -9530,7 +9530,7 @@
           let w, x, k, S, E;
           (t[15] !== c.displayName
             ? ((w = (0, Ue.jsx)("span", {
-                className: "text-lg font-bold truncate",
+                className: "truncate text-lg font-bold",
                 children: c.displayName,
               })),
               (t[15] = c.displayName),
@@ -9788,10 +9788,7 @@
                 (t[35] = R))
               : (R = t[35]),
             t[36] !== x.isOrg || t[37] !== x.plan
-              ? ((L = (0, Ue.jsx)("span", {
-                  className: "shrink-0",
-                  children: (0, Ue.jsx)(nu, { isOrg: x.isOrg, plan: x.plan }),
-                })),
+              ? ((L = (0, Ue.jsx)(nu, { isOrg: x.isOrg, plan: x.plan })),
                 (t[36] = x.isOrg),
                 (t[37] = x.plan),
                 (t[38] = L))

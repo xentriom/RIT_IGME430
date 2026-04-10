@@ -154,9 +154,7 @@ export function Post({ post }: { post: PostType }) {
                     <ProfilePreview username={post.owner.username} />
                   </div>
                 </HoverCardContent>
-                <span className="shrink-0">
-                  <ProfileBadge isOrg={ownerUi.isOrg} plan={ownerUi.plan} />
-                </span>
+                <ProfileBadge isOrg={ownerUi.isOrg} plan={ownerUi.plan} />
                 <span className="shrink-0 text-sm text-muted-foreground">•</span>
                 <span className="shrink-0 text-sm whitespace-nowrap text-muted-foreground">
                   {formatDate(post.createdDate)}
