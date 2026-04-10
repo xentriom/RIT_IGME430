@@ -14,5 +14,5 @@
     "noEmit": true
   },
   "include": ["client/**/*.tsx", "client/**/*.ts", "client/pages/Web/components"],
-  "exclude": ["node_modules", "hosted", "server"]
+  "exclude": ["node_modules", "public", "server"]
 }

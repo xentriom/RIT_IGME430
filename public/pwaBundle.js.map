@@ -1,0 +1,1 @@
+{"version":3,"file":"pwaBundle.js","mappings":"AAAA","sources":["webpack://rit_igme430/./client/pwa/register.ts"],"sourcesContent":["if (\"serviceWorker\" in navigator) {\n  window.addEventListener(\"load\", () => {\n    void navigator.serviceWorker.register(\"/sw.js\");\n  });\n}\n"],"names":[],"sourceRoot":""}

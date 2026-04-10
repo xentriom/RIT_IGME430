@@ -1,4 +1,5 @@
 const { resolve } = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -8,12 +9,19 @@ module.exports = {
     profile: "./client/pages/Profile/main.tsx",
     auth: "./client/pages/Auth/main.tsx",
     post: "./client/pages/Post/main.tsx",
+    pwa: "./client/pwa/register.ts",
   },
   devtool: "cheap-module-source-map",
   mode: "production",
   plugins: [
     new MiniCssExtractPlugin({
       filename: "[name]Bundle.css",
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "client/pwa/manifest.json", to: "manifest.json" },
+        { from: "client/pwa/sw.js", to: "sw.js" },
+      ],
     }),
   ],
   module: {
@@ -45,7 +53,7 @@ module.exports = {
     },
   },
   output: {
-    path: resolve(__dirname, "hosted"),
+    path: resolve(__dirname, "public"),
     filename: "[name]Bundle.js",
   },
   resolve: {

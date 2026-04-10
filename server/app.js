@@ -38,12 +38,19 @@ redisClient.connect().then(() => {
         directives: {
           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
           "img-src": ["'self'", "data:", "blob:"],
+          "worker-src": ["'self'"],
         },
       },
     }),
   );
-  app.use("/assets", express.static(resolve(`${__dirname}/../hosted`)));
-  app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
+
+  app.get("/sw.js", (req, res) => {
+    res.type("application/javascript");
+    res.sendFile(resolve(`${__dirname}/../public/sw.js`));
+  });
+
+  app.use("/assets", express.static(resolve(`${__dirname}/../public`)));
+  app.use(favicon(`${__dirname}/../public/favicon.ico`));
   app.use(compression());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
@@ -58,7 +65,10 @@ redisClient.connect().then(() => {
     }),
   );
 
-  app.engine("handlebars", engine({ defaultLayout: "" }));
+  app.engine(
+    "handlebars",
+    engine({ defaultLayout: "", partialsDir: resolve(__dirname, "views/partials") }),
+  );
   app.set("view engine", "handlebars");
   app.set("views", resolve(__dirname, "views"));
 
