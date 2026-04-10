@@ -7225,12 +7225,12 @@
             : (a = e[0]),
             e[1] === Symbol.for("react.memo_cache_sentinel")
               ? ((o = (0, Ve.jsxs)("div", {
-                  className: "flex flex-row gap-4 max-sm:flex-1 sm:flex-col",
+                  className: "flex min-w-0 flex-row gap-4 max-sm:flex-1 sm:flex-col",
                   children: [
                     a,
                     (0, Ve.jsx)("div", {
                       className:
-                        "flex flex-row items-center gap-0.5 max-sm:w-full max-sm:justify-evenly sm:flex-col",
+                        "flex min-w-0 flex-row items-center gap-0.5 max-sm:w-full max-sm:justify-between max-sm:px-1 sm:flex-col sm:justify-start sm:px-0",
                       children: Os.map(Ls),
                     }),
                   ],
@@ -7380,7 +7380,7 @@
             e[34] !== _ || e[35] !== c
               ? ((z = (0, Ve.jsxs)("div", {
                   className:
-                    "flex shrink-0 flex-row items-center overflow-y-hidden border-border px-2 py-4 max-sm:border-t sm:flex-col",
+                    "flex shrink-0 flex-row items-center gap-4 overflow-y-hidden border-border p-4 max-sm:border-t sm:flex-col sm:px-2",
                   children: [
                     o,
                     (0, Ve.jsx)("div", {
