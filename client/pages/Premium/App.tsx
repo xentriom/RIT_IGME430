@@ -60,11 +60,11 @@ export default function App() {
         <X className="size-4" />
       </a>
 
-      <div className="flex-1 overflow-y-auto pb-48">
-        <div className="space-y-8 p-8 text-center">
+      <div className="flex-1 overflow-y-auto pb-64 md:pb-48">
+        <div className="space-y-4 p-4 text-center md:space-y-8 md:p-8">
           <div className="space-y-4">
-            <BadgeCheck className="mx-auto size-30 text-primary" />
-            <h1 className="text-4xl font-bold">
+            <BadgeCheck className="mx-auto size-20 text-primary md:size-30" />
+            <h1 className="text-2xl font-bold md:text-4xl">
               Don&apos;t lose your {PremiumDiscount.premium.monthly}% discount on Premium
             </h1>
           </div>
@@ -80,8 +80,8 @@ export default function App() {
         </div>
       </div>
 
-      <div className="fixed right-0 bottom-0 left-0 flex w-full flex-row items-start justify-center gap-2 bg-background/50 p-8 backdrop-blur-sm">
-        <div className="min-w-88 space-y-2">
+      <div className="fixed right-0 bottom-0 left-0 flex w-full flex-col items-start justify-center gap-2 bg-background/50 p-4 backdrop-blur-sm md:flex-row md:p-8">
+        <div className="min-w-88 md:space-y-2">
           <h2 className="text-xl font-bold capitalize">{model}</h2>
           <div>
             <div className="flex min-h-11 items-end gap-2 text-3xl tabular-nums">

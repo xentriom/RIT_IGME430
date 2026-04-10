@@ -4201,7 +4201,7 @@
               ? ((c = (0, V.jsx)(Yn, {
                   value: r,
                   onValueChange: s,
-                  className: "flex flex-row items-start justify-center gap-2",
+                  className: "flex flex-col items-start justify-center gap-2 md:flex-row",
                   children: u,
                 })),
                 (t[5] = r),
@@ -4268,9 +4268,9 @@
               ? ((g = (0, V.jsxs)("div", {
                   className: "space-y-4",
                   children: [
-                    (0, V.jsx)(j, { className: "mx-auto size-30 text-primary" }),
+                    (0, V.jsx)(j, { className: "mx-auto size-20 text-primary md:size-30" }),
                     (0, V.jsxs)("h1", {
-                      className: "text-4xl font-bold",
+                      className: "text-2xl font-bold md:text-4xl",
                       children: ["Don't lose your ", kn.premium.monthly, "% discount on Premium"],
                     }),
                   ],
@@ -4303,9 +4303,9 @@
               : (k = e[12]),
             e[13] !== w || e[14] !== k
               ? ((x = (0, V.jsx)("div", {
-                  className: "flex-1 overflow-y-auto pb-48",
+                  className: "flex-1 overflow-y-auto pb-64 md:pb-48",
                   children: (0, V.jsxs)("div", {
-                    className: "space-y-8 p-8 text-center",
+                    className: "space-y-4 p-4 text-center md:space-y-8 md:p-8",
                     children: [
                       g,
                       (0, V.jsxs)("div", {
@@ -4381,7 +4381,7 @@
                 (e[35] = P))
               : (P = e[35]),
             e[36] !== P || e[37] !== S
-              ? ((T = (0, V.jsxs)("div", { className: "min-w-88 space-y-2", children: [S, P] })),
+              ? ((T = (0, V.jsxs)("div", { className: "min-w-88 md:space-y-2", children: [S, P] })),
                 (e[36] = P),
                 (e[37] = S),
                 (e[38] = T))
@@ -4420,7 +4420,7 @@
             e[48] !== T || e[49] !== A
               ? ((D = (0, V.jsxs)("div", {
                   className:
-                    "fixed right-0 bottom-0 left-0 flex w-full flex-row items-start justify-center gap-2 bg-background/50 p-8 backdrop-blur-sm",
+                    "fixed right-0 bottom-0 left-0 flex w-full flex-col items-start justify-center gap-2 bg-background/50 p-4 backdrop-blur-sm md:flex-row md:p-8",
                   children: [T, A],
                 })),
                 (e[48] = T),

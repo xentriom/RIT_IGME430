@@ -28,7 +28,7 @@ export function Plans({ cycle, model, setModel }: PlansProps) {
     <RadioGroup
       value={model}
       onValueChange={(value) => setModel(value as SubscriptionPlan)}
-      className="flex flex-row items-start justify-center gap-2"
+      className="flex flex-col items-start justify-center gap-2 md:flex-row"
     >
       {plans.map((plan) => {
         const planCost = PremiumCost[plan][cycle];
