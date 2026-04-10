@@ -17,6 +17,9 @@ import { FollowButton } from "../../components/follow-button";
 import { PostSkeleton } from "../../components/post-skeleton";
 import { FocusedPost } from "./components/focused-post";
 import { ProfileAvatar } from "../../components/profile-avatar";
+import { ProfileBadge } from "../../components/profile-badge";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "../../components/ui/hover-card";
+import { ProfilePreview } from "../../components/profile-preview";
 
 export default function App() {
   const postId = window.location.pathname.split("/").pop();
@@ -28,9 +31,7 @@ export default function App() {
   const [ownerIsFollowing, setOwnerIsFollowing] = useState(false);
 
   useEffect(() => {
-    if (!postId) {
-      return;
-    }
+    if (!postId) return;
 
     startPostTransition(async () => {
       const res = await fetch(`/posts/${postId}`, {
@@ -52,10 +53,12 @@ export default function App() {
           credentials: "same-origin",
           headers: { Accept: "application/json" },
         });
+
         if (!repliesRes.ok) {
           setReplies([]);
           return;
         }
+
         const repliesData = (await repliesRes.json()) as PostType[];
         setReplies(repliesData);
       });
@@ -65,34 +68,12 @@ export default function App() {
   useEffect(() => {
     if (!post || !isLoggedIn || !session) return;
     if (session.username === post.owner.username) return;
-    let ignore = false;
     fetch(`/api/users/${post.owner.username}`, { credentials: "same-origin" })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
-        if (!ignore && data) setOwnerIsFollowing(Boolean(data.isFollowing));
+        if (data) setOwnerIsFollowing(Boolean(data.isFollowing));
       });
-    return () => {
-      ignore = true;
-    };
   }, [post, isLoggedIn, session]);
-
-  const sessionUser = isLoggedIn ? session : null;
-  const postOwnerUi =
-    post && sessionUser && post.owner.username === sessionUser.username
-      ? {
-          displayName: sessionUser.displayName,
-          avatar: sessionUser.avatar,
-          isOrg: sessionUser.isOrg,
-          bio: sessionUser.bio,
-        }
-      : post
-        ? {
-            displayName: post.owner.displayName,
-            avatar: post.owner.avatar,
-            isOrg: post.owner.isOrg,
-            bio: post.owner.bio,
-          }
-        : null;
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
@@ -139,7 +120,7 @@ export default function App() {
             )}
           </div>
         </div>
-        {post && postOwnerUi && (
+        {post && (
           <div className="hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm">
             <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm">
               <InputGroup>
@@ -157,29 +138,41 @@ export default function App() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex flex-row gap-2">
+                  <div className="flex min-w-0 flex-col gap-2">
+                    <div className="flex min-w-0 flex-row gap-2">
                       <ProfileAvatar
                         size="lg"
-                        isOrg={postOwnerUi.isOrg}
-                        avatar={`/api/avatar/${postOwnerUi.avatar}`}
+                        isOrg={post.owner.isOrg}
+                        avatar={`/api/avatar/${post.owner.avatar}`}
                         username={post.owner.username}
                         className="shrink-0"
                       />
-                      <div className="flex flex-1 flex-col">
-                        <span className="text-base font-bold">{postOwnerUi.displayName}</span>
+                      <div className="flex min-w-0 flex-1 flex-col">
+                        <HoverCard>
+                          <HoverCardTrigger asChild>
+                            <div className="flex min-w-0 flex-1 flex-row items-center gap-1">
+                              <span className="block min-w-0 truncate text-base font-bold hover:underline">
+                                {post.owner.displayName}
+                              </span>
+                              <ProfileBadge isOrg={post.owner.isOrg} plan={post.owner.plan} />
+                            </div>
+                          </HoverCardTrigger>
+                          <HoverCardContent>
+                            <ProfilePreview username={post.owner.username} />
+                          </HoverCardContent>
+                        </HoverCard>
                         <span className="text-sm text-muted-foreground">
                           @{post.owner.username}
                         </span>
                         <p className="line-clamp-2 pt-1">
-                          {postOwnerUi.bio?.trim() ? postOwnerUi.bio : "No bio yet"}
+                          {post.owner.bio?.trim() ? post.owner.bio : "No bio yet"}
                         </p>
                       </div>
                       <FollowButton
                         username={post.owner.username}
                         isFollowing={ownerIsFollowing}
                         onFollowStateChange={(s) => setOwnerIsFollowing(s.isFollowing)}
-                        className="shrink-0"
+                        className="shrink-0 self-start"
                       />
                     </div>
                   </div>
