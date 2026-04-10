@@ -386,6 +386,9 @@
   .top-2 {
     top: calc(var(--spacing) * 2);
   }
+  .top-3 {
+    top: calc(var(--spacing) * 3);
+  }
   .top-4 {
     top: calc(var(--spacing) * 4);
   }
@@ -1031,6 +1034,10 @@
   .cursor-text {
     cursor: text;
   }
+  .touch-pan-y {
+    --tw-pan-y: pan-y;
+    touch-action: var(--tw-pan-x,) var(--tw-pan-y,) var(--tw-pinch-zoom,);
+  }
   .touch-pinch-zoom {
     --tw-pinch-zoom: pinch-zoom;
     touch-action: var(--tw-pan-x,) var(--tw-pan-y,) var(--tw-pinch-zoom,);
@@ -1240,6 +1247,9 @@
   }
   .overflow-y-hidden {
     overflow-y: hidden;
+  }
+  .overscroll-y-contain {
+    overscroll-behavior-y: contain;
   }
   .rounded {
     border-radius: 0.25rem;
@@ -3407,11 +3417,6 @@
       padding-inline: calc(var(--spacing) * 2);
     }
   }
-  .md\:flex {
-    @media (width >= 48rem) {
-      display: flex;
-    }
-  }
   .md\:size-30 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 30);
@@ -3421,11 +3426,6 @@
   .md\:max-w-sm {
     @media (width >= 48rem) {
       max-width: var(--container-sm);
-    }
-  }
-  .md\:flex-col {
-    @media (width >= 48rem) {
-      flex-direction: column;
     }
   }
   .md\:flex-row {

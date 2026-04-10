@@ -120,9 +120,6 @@ export function ChatInput({
             placeholder="What's on your mind?"
             rows={3}
             maxLength={5000}
-            autoCorrect="off"
-            autoCapitalize="off"
-            autoComplete="off"
             className={cn(
               "no-scrollbar max-h-32 w-full resize-none overflow-y-auto text-wrap wrap-anywhere",
               draft.length > 0 && "bg-transparent text-transparent caret-foreground",
