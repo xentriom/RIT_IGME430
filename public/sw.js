@@ -1,10 +1,10 @@
-const cacheKey = "Chitter_v1";
-(self.addEventListener("install", (e) => {
-  e.waitUntil(
+const cacheKey = "Chitter_v3";
+(self.addEventListener("install", (s) => {
+  s.waitUntil(
     caches
       .open(cacheKey)
-      .then((e) =>
-        e.addAll([
+      .then((s) =>
+        s.addAll([
           "/assets/icons/android-icon-192x192.png",
           "/assets/icons/android-icon-512x512.png",
           "/assets/icons/apple-icon-180x180.png",
@@ -16,28 +16,15 @@ const cacheKey = "Chitter_v1";
       ),
   );
 }),
-  self.addEventListener("activate", (e) => {
-    const n = [cacheKey];
-    e.waitUntil(
-      caches.keys().then((e) =>
+  self.addEventListener("activate", (s) => {
+    const e = [cacheKey];
+    s.waitUntil(
+      caches.keys().then((s) =>
         Promise.all(
-          e.map((e) => {
-            if (!n.includes(e)) return caches.delete(e);
+          s.map((s) => {
+            if (!e.includes(s)) return caches.delete(s);
           }),
         ),
       ),
     );
-  }),
-  self.addEventListener("fetch", (e) => {
-    const { request: n } = e;
-    "GET" === n.method &&
-      new URL(n.url).origin === self.location.origin &&
-      e.respondWith(
-        caches.open(cacheKey).then(async (e) =>
-          e.match(n).then((s) => {
-            const t = fetch(n).then((s) => (e.put(n, s.clone()), s));
-            return s || t;
-          }),
-        ),
-      );
   }));

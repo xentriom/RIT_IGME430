@@ -1,5 +1,5 @@
 https://developer.chrome.com/docs/workbox/service-worker-lifecycle#the_lifecycle_of_a_new_service_worker
-const cacheKey = "Chitter_v1";
+const cacheKey = "Chitter_v3";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -32,30 +32,6 @@ self.addEventListener("activate", (event) => {
           }
         }),
       );
-    }),
-  );
-});
-
-/**
- * https://developer.chrome.com/docs/workbox/caching-strategies-overview#stale-while-revalidate
- * Does not cache non-GET reqs or non-origin requests
- */
-self.addEventListener("fetch", (event) => {
-  const { request } = event;
-  if (request.method !== "GET") return;
-
-  const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
-
-  event.respondWith(
-    caches.open(cacheKey).then(async (cache) => {
-      return cache.match(request).then((cachedResponse) => {
-        const fetchResponse = fetch(request).then((networkResponse) => {
-          cache.put(request, networkResponse.clone());
-          return networkResponse;
-        });
-        return cachedResponse || fetchResponse;
-      });
     }),
   );
 });

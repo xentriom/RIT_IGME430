@@ -153,8 +153,11 @@ const updateAccount = async (req, res) => {
 };
 
 const getAvatar = async (req, res) => {
-  const id = req.params.id;
+  const id = String(req.params.id ?? "").trim();
+
   if (!id) return res.status(400).json({ error: "ID is required!" });
+  if (typeof id !== "string") return res.status(400).json({ error: "ID must be a string!" });
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ error: "Invalid ID!" });
 
   const oid = new mongoose.Types.ObjectId(id);
   const photo = await models.Filestore.findById(oid).exec();
