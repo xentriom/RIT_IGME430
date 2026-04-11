@@ -66,7 +66,7 @@ const sidebarItems = [
   {
     icon: SparklesIcon,
     label: "Myna",
-    href: "/",
+    href: "/myna",
     showOnMobile: true,
   },
   {

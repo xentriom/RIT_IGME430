@@ -30,9 +30,7 @@ const authPage = (req, res) => {
 };
 
 const premiumPage = (req, res) => {
-  res.render("premium", {
-    title: "Premium",
-  });
+  res.render("premium");
 };
 
 const postPage = async (req, res) => {
@@ -42,10 +40,17 @@ const postPage = async (req, res) => {
   const post = await models.Post.findById(postId);
   if (!post) return res.redirect("/");
 
+  const account = await models.Account.findById(post.owner);
+
   res.render("post", {
-    username: "Demo",
+    username: account.displayName,
+    title: post.body.slice(0, 50) + (post.body.length > 50 ? "..." : ""),
     post: post,
   });
+};
+
+const mynaPage = (req, res) => {
+  res.render("myna");
 };
 
 const notFoundPage = (req, res) => {
@@ -58,5 +63,6 @@ module.exports = {
   authPage,
   premiumPage,
   postPage,
+  mynaPage,
   notFoundPage,
 };

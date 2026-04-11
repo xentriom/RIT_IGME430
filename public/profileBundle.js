@@ -6863,7 +6863,7 @@
           { icon: g, label: "Notifications", href: "/", showOnMobile: !1 },
           { icon: v, label: "Follow", href: "/", showOnMobile: !1 },
           { icon: y, label: "Chat", href: "/", showOnMobile: !0 },
-          { icon: b, label: "Myna", href: "/", showOnMobile: !0 },
+          { icon: b, label: "Myna", href: "/myna", showOnMobile: !0 },
           { icon: w, label: "Bookmarks", href: "/", showOnMobile: !1 },
           { icon: x, label: "Creator Studio", href: "/", showOnMobile: !1 },
           { icon: k, label: "Premium", href: "/premium", showOnMobile: !0 },

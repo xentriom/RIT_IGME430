@@ -7205,7 +7205,7 @@
           { icon: ct, label: "Notifications", href: "/", showOnMobile: !1 },
           { icon: dt, label: "Follow", href: "/", showOnMobile: !1 },
           { icon: h, label: "Chat", href: "/", showOnMobile: !0 },
-          { icon: ft, label: "Myna", href: "/", showOnMobile: !0 },
+          { icon: ft, label: "Myna", href: "/myna", showOnMobile: !0 },
           { icon: pt, label: "Bookmarks", href: "/", showOnMobile: !1 },
           { icon: mt, label: "Creator Studio", href: "/", showOnMobile: !1 },
           { icon: ht, label: "Premium", href: "/premium", showOnMobile: !0 },

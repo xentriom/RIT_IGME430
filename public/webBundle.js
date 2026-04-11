@@ -8806,7 +8806,7 @@
           { icon: xs, label: "Notifications", href: "/", showOnMobile: !1 },
           { icon: ks, label: "Follow", href: "/", showOnMobile: !1 },
           { icon: m, label: "Chat", href: "/", showOnMobile: !0 },
-          { icon: Ss, label: "Myna", href: "/", showOnMobile: !0 },
+          { icon: Ss, label: "Myna", href: "/myna", showOnMobile: !0 },
           { icon: Es, label: "Bookmarks", href: "/", showOnMobile: !1 },
           { icon: Cs, label: "Creator Studio", href: "/", showOnMobile: !1 },
           { icon: Ns, label: "Premium", href: "/premium", showOnMobile: !0 },
