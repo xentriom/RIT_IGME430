@@ -169,7 +169,8 @@ export default function App() {
                 !isSelf &&
                 !account.isOrg &&
                 (account.plan === "premium" || account.plan === "premium+") &&
-                (!session.isOrg || session.plan === "free" || session.plan === "basic") && (
+                !session.isOrg &&
+                (session.plan === "free" || session.plan === "basic") && (
                   <div className="flex flex-col gap-2 rounded-lg bg-sidebar-primary/25 p-4 text-sm">
                     <span className="text-lg font-bold">
                       @{session.username}, you aren&apos;t verified yet

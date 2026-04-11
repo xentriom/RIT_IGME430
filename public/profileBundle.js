@@ -11162,7 +11162,8 @@
                   !C &&
                   !i.isOrg &&
                   ("premium" === i.plan || "premium+" === i.plan) &&
-                  (!n.isOrg || "free" === n.plan || "basic" === n.plan) &&
+                  !n.isOrg &&
+                  ("free" === n.plan || "basic" === n.plan) &&
                   (0, O.jsxs)("div", {
                     className: "flex flex-col gap-2 rounded-lg bg-sidebar-primary/25 p-4 text-sm",
                     children: [
