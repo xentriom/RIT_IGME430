@@ -55,7 +55,7 @@ export function Composer() {
         <Textarea
           rows={2}
           placeholder="Ask anything"
-          className="max-w-[80%] resize-none"
+          className="max-w-full resize-none md:max-w-[80%]"
           disabled={!isLoggedIn}
           value={draft}
           maxLength={4096}
@@ -68,7 +68,7 @@ export function Composer() {
             }
           }}
         />
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row flex-wrap gap-2">
           <Button variant="outline" type="button">
             <ImageIcon className="size-4" />
             Generate Images
@@ -83,7 +83,6 @@ export function Composer() {
           </Button>
         </div>
       </div>
-
       {!isLoggedIn && (
         <div className="mx-auto w-full max-w-[80%] shrink-0 border-t border-border">
           <p className="p-3 text-center text-sm text-muted-foreground">

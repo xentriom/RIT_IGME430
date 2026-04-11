@@ -3440,6 +3440,11 @@
       height: calc(var(--spacing) * 30);
     }
   }
+  .md\:max-w-\[80\%\] {
+    @media (width >= 48rem) {
+      max-width: 80%;
+    }
+  }
   .md\:max-w-sm {
     @media (width >= 48rem) {
       max-width: var(--container-sm);

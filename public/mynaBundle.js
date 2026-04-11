@@ -7248,7 +7248,7 @@
               ? ((h = (0, R.jsx)(hs, {
                   rows: 2,
                   placeholder: "Ask anything",
-                  className: "max-w-[80%] resize-none",
+                  className: "max-w-full md:max-w-[80%] resize-none",
                   disabled: f,
                   value: n,
                   maxLength: 4096,
@@ -7278,7 +7278,7 @@
               : (v = e[16]),
             e[17] === Symbol.for("react.memo_cache_sentinel")
               ? ((y = (0, R.jsxs)("div", {
-                  className: "flex flex-row gap-2",
+                  className: "flex flex-row gap-2 flex-wrap",
                   children: [
                     g,
                     v,
@@ -7387,7 +7387,7 @@
               ? ((p = (0, R.jsx)("div", {
                   ref: i,
                   className:
-                    "mx-auto no-scrollbar min-h-0 w-full max-w-[80%] flex-1 space-y-4 overflow-y-auto px-4 py-4",
+                    "mx-auto no-scrollbar min-h-0 w-full max-w-full md:max-w-[80%] flex-1 space-y-4 overflow-y-auto",
                   children: f,
                 })),
                 (t[6] = i),
@@ -7396,7 +7396,8 @@
               : (p = t[8]),
             t[9] !== r || t[10] !== d || t[11] !== c || t[12] !== a || t[13] !== o
               ? ((m = (0, R.jsx)("div", {
-                  className: "mx-auto w-full max-w-[80%] shrink-0 border-t border-border",
+                  className:
+                    "mx-auto w-full max-w-full md:max-w-[80%] shrink-0 border-t border-border",
                   children: c
                     ? (0, R.jsxs)("p", {
                         className: "p-3 text-center text-sm text-muted-foreground",
@@ -8868,7 +8869,7 @@
                       r,
                       (0, R.jsx)("div", {
                         className:
-                          "flex min-h-0 flex-1 flex-col overflow-hidden border-border p-4 sm:border-x",
+                          "flex min-h-0 flex-1 flex-col overflow-hidden border-border p-4 sm:border-x gap-4",
                         children: n ? (0, R.jsx)(eu, { conversationId: n }) : (0, R.jsx)(ks, {}),
                       }),
                     ],

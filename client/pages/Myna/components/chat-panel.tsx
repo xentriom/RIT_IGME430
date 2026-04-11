@@ -33,7 +33,7 @@ export function ChatPanel({
     <>
       <div
         ref={listRef}
-        className="mx-auto no-scrollbar min-h-0 w-full max-w-[80%] flex-1 space-y-4 overflow-y-auto px-4 py-4"
+        className="mx-auto no-scrollbar min-h-0 w-full max-w-full flex-1 space-y-4 overflow-y-auto md:max-w-[80%]"
       >
         {messages.map((m, i) => {
           const showCaret = m.role === "assistant" && isStreaming && i === messages.length - 1;
@@ -55,7 +55,7 @@ export function ChatPanel({
           );
         })}
       </div>
-      <div className="mx-auto w-full max-w-[80%] shrink-0 border-t border-border">
+      <div className="mx-auto w-full max-w-full shrink-0 border-t border-border md:max-w-[80%]">
         {readOnly ? (
           <p className="p-3 text-center text-sm text-muted-foreground">
             <a href="/auth/login" className="underline-offset-4 hover:underline">
