@@ -7159,12 +7159,13 @@
             ["rect", { width: "8", height: "4", x: "10", y: "6", rx: "1", key: "aywv1n" }],
           ]);
         function ks() {
-          const e = (0, l.c)(25),
+          const e = (0, l.c)(33),
             { isLoggedIn: t } = (0, r.useContext)(Vi),
-            [n, o] = (0, r.useState)("");
-          let a;
+            [n, o] = (0, r.useState)(""),
+            [a, i] = (0, r.useState)(!1);
+          let s;
           e[0] !== n || e[1] !== t
-            ? ((a = async function () {
+            ? ((s = async function () {
                 if (!t) return;
                 const e = n.trim();
                 if (!e) return;
@@ -7179,43 +7180,54 @@
               }),
               (e[0] = n),
               (e[1] = t),
-              (e[2] = a))
-            : (a = e[2]);
-          const i = a;
-          let s, u, c, d;
+              (e[2] = s))
+            : (s = e[2]);
+          const u = s;
+          let c, d, f;
           (e[3] === Symbol.for("react.memo_cache_sentinel")
-            ? ((s = (0, R.jsx)(gs, { className: "size-4" })), (e[3] = s))
-            : (s = e[3]),
+            ? ((c = (0, R.jsx)(gs, { className: "size-4" })), (e[3] = c))
+            : (c = e[3]),
             e[4] === Symbol.for("react.memo_cache_sentinel")
-              ? ((u = (0, R.jsxs)(wo, {
+              ? ((d = (0, R.jsxs)(wo, {
                   variant: "ghost",
                   type: "button",
                   children: [(0, R.jsx)(vs, { className: "size-4" }), "History"],
                 })),
-                (e[4] = u))
-              : (u = e[4]),
-            e[5] === Symbol.for("react.memo_cache_sentinel")
-              ? ((c = (0, R.jsxs)("div", {
+                (e[4] = d))
+              : (d = e[4]),
+            e[5] !== a ? ((f = () => i(!a)), (e[5] = a), (e[6] = f)) : (f = e[6]));
+          const p = a && "text-primary hover:text-primary";
+          let m, h, g, v;
+          (e[7] !== p ? ((m = co(p)), (e[7] = p), (e[8] = m)) : (m = e[8]),
+            e[9] === Symbol.for("react.memo_cache_sentinel")
+              ? ((h = (0, R.jsx)(ys, { className: "size-4" })), (e[9] = h))
+              : (h = e[9]),
+            e[10] !== f || e[11] !== m
+              ? ((g = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center justify-between",
                   children: [
-                    s,
+                    c,
                     (0, R.jsxs)("div", {
                       className: "flex flex-row items-center gap-2",
                       children: [
-                        u,
+                        d,
                         (0, R.jsxs)(wo, {
                           variant: "ghost",
                           type: "button",
-                          children: [(0, R.jsx)(ys, { className: "size-4" }), "Private"],
+                          onClick: f,
+                          className: m,
+                          children: [h, "Private"],
                         }),
                       ],
                     }),
                   ],
                 })),
-                (e[5] = c))
-              : (c = e[5]),
-            e[6] === Symbol.for("react.memo_cache_sentinel")
-              ? ((d = (0, R.jsxs)("div", {
+                (e[10] = f),
+                (e[11] = m),
+                (e[12] = g))
+              : (g = e[12]),
+            e[13] === Symbol.for("react.memo_cache_sentinel")
+              ? ((v = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center gap-2",
                   children: [
                     (0, R.jsx)(b, { className: "size-8" }),
@@ -7225,82 +7237,82 @@
                     }),
                   ],
                 })),
-                (e[6] = d))
-              : (d = e[6]));
-          const f = !t;
-          let p, m, h, g, v, y, w, x, k;
+                (e[13] = v))
+              : (v = e[13]));
+          const y = !t;
+          let w, x, k, S, E, C, N;
           return (
-            e[7] === Symbol.for("react.memo_cache_sentinel")
-              ? ((p = (e) => o(e.target.value)), (e[7] = p))
-              : (p = e[7]),
-            e[8] !== t || e[9] !== i
-              ? ((m = (e) => {
+            e[14] === Symbol.for("react.memo_cache_sentinel")
+              ? ((w = (e) => o(e.target.value)), (e[14] = w))
+              : (w = e[14]),
+            e[15] !== t || e[16] !== u
+              ? ((x = (e) => {
                   if ("Enter" === e.key && !e.shiftKey) {
                     if ((e.preventDefault(), !t)) return;
-                    i();
+                    u();
                   }
                 }),
-                (e[8] = t),
-                (e[9] = i),
-                (e[10] = m))
-              : (m = e[10]),
-            e[11] !== n || e[12] !== f || e[13] !== m
-              ? ((h = (0, R.jsx)(hs, {
+                (e[15] = t),
+                (e[16] = u),
+                (e[17] = x))
+              : (x = e[17]),
+            e[18] !== n || e[19] !== x || e[20] !== y
+              ? ((k = (0, R.jsx)(hs, {
                   rows: 2,
                   placeholder: "Ask anything",
-                  className: "max-w-full md:max-w-[80%] resize-none",
-                  disabled: f,
+                  className: "max-w-full resize-none md:max-w-[80%]",
+                  disabled: y,
                   value: n,
                   maxLength: 4096,
-                  onChange: p,
-                  onKeyDown: m,
+                  onChange: w,
+                  onKeyDown: x,
                 })),
-                (e[11] = n),
-                (e[12] = f),
-                (e[13] = m),
-                (e[14] = h))
-              : (h = e[14]),
-            e[15] === Symbol.for("react.memo_cache_sentinel")
-              ? ((g = (0, R.jsxs)(wo, {
-                  variant: "outline",
-                  type: "button",
-                  children: [(0, R.jsx)(bs, { className: "size-4" }), "Generate Images"],
-                })),
-                (e[15] = g))
-              : (g = e[15]),
-            e[16] === Symbol.for("react.memo_cache_sentinel")
-              ? ((v = (0, R.jsxs)(wo, {
-                  variant: "outline",
-                  type: "button",
-                  children: [(0, R.jsx)(ws, { className: "size-4" }), "Edit Image"],
-                })),
-                (e[16] = v))
-              : (v = e[16]),
-            e[17] === Symbol.for("react.memo_cache_sentinel")
-              ? ((y = (0, R.jsxs)("div", {
-                  className: "flex flex-row gap-2 flex-wrap",
-                  children: [
-                    g,
-                    v,
-                    (0, R.jsxs)(wo, {
-                      variant: "outline",
-                      type: "button",
-                      children: [(0, R.jsx)(xs, { className: "size-4" }), "Latest News"],
-                    }),
-                  ],
-                })),
-                (e[17] = y))
-              : (y = e[17]),
-            e[18] !== h
-              ? ((w = (0, R.jsxs)("div", {
+                (e[18] = n),
+                (e[19] = x),
+                (e[20] = y),
+                (e[21] = k))
+              : (k = e[21]),
+            e[22] !== a
+              ? ((S = a
+                  ? (0, R.jsx)("p", {
+                      className: "text-sm wrap-break-word text-muted-foreground",
+                      children:
+                        "This chat won't appear for other users and will not be used to train models.",
+                    })
+                  : (0, R.jsxs)("div", {
+                      className: "flex flex-row flex-wrap gap-2",
+                      children: [
+                        (0, R.jsxs)(wo, {
+                          variant: "outline",
+                          type: "button",
+                          children: [(0, R.jsx)(bs, { className: "size-4" }), "Generate Images"],
+                        }),
+                        (0, R.jsxs)(wo, {
+                          variant: "outline",
+                          type: "button",
+                          children: [(0, R.jsx)(ws, { className: "size-4" }), "Edit Image"],
+                        }),
+                        (0, R.jsxs)(wo, {
+                          variant: "outline",
+                          type: "button",
+                          children: [(0, R.jsx)(xs, { className: "size-4" }), "Latest News"],
+                        }),
+                      ],
+                    })),
+                (e[22] = a),
+                (e[23] = S))
+              : (S = e[23]),
+            e[24] !== k || e[25] !== S
+              ? ((E = (0, R.jsxs)("div", {
                   className: "flex flex-1 flex-col items-center justify-center gap-4",
-                  children: [d, h, y],
+                  children: [v, k, S],
                 })),
-                (e[18] = h),
-                (e[19] = w))
-              : (w = e[19]),
-            e[20] !== t
-              ? ((x =
+                (e[24] = k),
+                (e[25] = S),
+                (e[26] = E))
+              : (E = e[26]),
+            e[27] !== t
+              ? ((C =
                   !t &&
                   (0, R.jsx)("div", {
                     className: "mx-auto w-full max-w-[80%] shrink-0 border-t border-border",
@@ -7317,16 +7329,17 @@
                       ],
                     }),
                   })),
-                (e[20] = t),
-                (e[21] = x))
-              : (x = e[21]),
-            e[22] !== w || e[23] !== x
-              ? ((k = (0, R.jsxs)(R.Fragment, { children: [c, w, x] })),
-                (e[22] = w),
-                (e[23] = x),
-                (e[24] = k))
-              : (k = e[24]),
-            k
+                (e[27] = t),
+                (e[28] = C))
+              : (C = e[28]),
+            e[29] !== E || e[30] !== C || e[31] !== g
+              ? ((N = (0, R.jsxs)(R.Fragment, { children: [g, E, C] })),
+                (e[29] = E),
+                (e[30] = C),
+                (e[31] = g),
+                (e[32] = N))
+              : (N = e[32]),
+            N
           );
         }
         function Ss(e) {
@@ -7387,7 +7400,7 @@
               ? ((p = (0, R.jsx)("div", {
                   ref: i,
                   className:
-                    "mx-auto no-scrollbar min-h-0 w-full max-w-full md:max-w-[80%] flex-1 space-y-4 overflow-y-auto",
+                    "mx-auto no-scrollbar min-h-0 w-full max-w-full flex-1 space-y-4 overflow-y-auto md:max-w-[80%]",
                   children: f,
                 })),
                 (t[6] = i),
@@ -7397,7 +7410,7 @@
             t[9] !== r || t[10] !== d || t[11] !== c || t[12] !== a || t[13] !== o
               ? ((m = (0, R.jsx)("div", {
                   className:
-                    "mx-auto w-full max-w-full md:max-w-[80%] shrink-0 border-t border-border",
+                    "mx-auto w-full max-w-full shrink-0 border-t border-border md:max-w-[80%]",
                   children: c
                     ? (0, R.jsxs)("p", {
                         className: "p-3 text-center text-sm text-muted-foreground",
@@ -8869,7 +8882,7 @@
                       r,
                       (0, R.jsx)("div", {
                         className:
-                          "flex min-h-0 flex-1 flex-col overflow-hidden border-border p-4 sm:border-x gap-4",
+                          "flex min-h-0 flex-1 flex-col gap-4 overflow-hidden border-border p-4 sm:border-x",
                         children: n ? (0, R.jsx)(eu, { conversationId: n }) : (0, R.jsx)(ks, {}),
                       }),
                     ],

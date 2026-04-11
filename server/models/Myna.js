@@ -85,7 +85,7 @@ MynaSchema.statics.getChatByIdForAccount = (id, accountId) =>
     .lean()
     .exec();
 
-MynaSchema.statics.startChat = (accountId, content, messageId) => {
+MynaSchema.statics.startChat = (accountId, content, messageId, isPublic = true) => {
   const trimmed = typeof content === "string" ? content.trim() : "";
   if (!trimmed) {
     return Promise.reject(new Error("Message content is required"));
@@ -93,6 +93,7 @@ MynaSchema.statics.startChat = (accountId, content, messageId) => {
   const userId = messageId || crypto.randomUUID();
   return MynaModel.create({
     account: accountId,
+    isPublic: Boolean(isPublic),
     messages: [
       { id: userId, role: "user", content: trimmed },
       { id: crypto.randomUUID(), role: "assistant", content: trimmed },

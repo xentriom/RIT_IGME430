@@ -67,9 +67,10 @@ const createChat = async (req, res) => {
     typeof req.body?.messageId === "string" && req.body.messageId.trim()
       ? req.body.messageId.trim()
       : undefined;
+  const isPublic = req.body?.isPublic === undefined ? true : Boolean(req.body.isPublic);
 
   try {
-    const doc = await Myna.startChat(accountId, content, messageId);
+    const doc = await Myna.startChat(accountId, content, messageId, isPublic);
     const hydrated = await Myna.getChatById(doc._id);
     return res.status(201).json(hydrated);
   } catch (err) {

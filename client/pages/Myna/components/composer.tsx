@@ -11,10 +11,12 @@ import {
   SparklesIcon,
 } from "lucide-react";
 import { SessionContext } from "../../../contexts/session";
+import { cn } from "../../../lib/utils";
 
 export function Composer() {
   const { isLoggedIn } = useContext(SessionContext);
   const [draft, setDraft] = useState("");
+  const [privateChat, setPrivateChat] = useState(false);
 
   async function startChat() {
     if (!isLoggedIn) return;
@@ -24,7 +26,11 @@ export function Composer() {
     const res = await fetch("/api/myna/chats", {
       method: "POST",
       headers: { "Content-Type": "application/json", Credentials: "same-origin" },
-      body: JSON.stringify({ content: text, messageId: crypto.randomUUID() }),
+      body: JSON.stringify({
+        isPublic: !privateChat,
+        content: text,
+        messageId: crypto.randomUUID(),
+      }),
     });
     if (!res.ok) return;
 
@@ -41,7 +47,12 @@ export function Composer() {
             <HistoryIcon className="size-4" />
             History
           </Button>
-          <Button variant="ghost" type="button">
+          <Button
+            variant="ghost"
+            type="button"
+            onClick={() => setPrivateChat(!privateChat)}
+            className={cn(privateChat && "text-primary hover:text-primary")}
+          >
             <GhostIcon className="size-4" />
             Private
           </Button>
@@ -68,20 +79,26 @@ export function Composer() {
             }
           }}
         />
-        <div className="flex flex-row flex-wrap gap-2">
-          <Button variant="outline" type="button">
-            <ImageIcon className="size-4" />
-            Generate Images
-          </Button>
-          <Button variant="outline" type="button">
-            <PaintbrushIcon className="size-4" />
-            Edit Image
-          </Button>
-          <Button variant="outline" type="button">
-            <NewspaperIcon className="size-4" />
-            Latest News
-          </Button>
-        </div>
+        {privateChat ? (
+          <p className="text-sm wrap-break-word text-muted-foreground">
+            This chat won&apos;t appear for other users and will not be used to train models.
+          </p>
+        ) : (
+          <div className="flex flex-row flex-wrap gap-2">
+            <Button variant="outline" type="button">
+              <ImageIcon className="size-4" />
+              Generate Images
+            </Button>
+            <Button variant="outline" type="button">
+              <PaintbrushIcon className="size-4" />
+              Edit Image
+            </Button>
+            <Button variant="outline" type="button">
+              <NewspaperIcon className="size-4" />
+              Latest News
+            </Button>
+          </div>
+        )}
       </div>
       {!isLoggedIn && (
         <div className="mx-auto w-full max-w-[80%] shrink-0 border-t border-border">

@@ -2667,6 +2667,13 @@
       }
     }
   }
+  .hover\:text-primary {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--primary);
+      }
+    }
+  }
   .hover\:text-rose-400 {
     &:hover {
       @media (hover: hover) {
