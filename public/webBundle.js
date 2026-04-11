@@ -10117,10 +10117,7 @@
               target: "_blank",
               rel: "noopener noreferrer",
               children: [
-                (0, Ue.jsx)("span", {
-                  className: "font-bold wrap-break-word whitespace-pre-wrap",
-                  children: e.title,
-                }),
+                (0, Ue.jsx)("span", { className: "line-clamp-2 font-bold", children: e.title }),
                 (0, Ue.jsxs)("div", {
                   className: "flex flex-row items-center gap-2 text-sm text-muted-foreground",
                   children: [

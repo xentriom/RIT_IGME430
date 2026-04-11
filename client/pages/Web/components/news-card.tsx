@@ -42,9 +42,7 @@ export function NewsCard() {
             <>
               {news.map((story) => (
                 <a key={story.id} href={story.sourceUrl} target="_blank" rel="noopener noreferrer">
-                  <span className="font-bold wrap-break-word whitespace-pre-wrap">
-                    {story.title}
-                  </span>
+                  <span className="line-clamp-2 font-bold">{story.title}</span>
                   <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
                     <span>{new Date(story.datePublished).toLocaleDateString()}</span>
                     <span>•</span>
