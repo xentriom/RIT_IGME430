@@ -7857,7 +7857,7 @@
               e
             );
           }
-          if ("free" === r) return null;
+          if ("free" === r || "basic" === r) return null;
           let a;
           return (
             t[1] === Symbol.for("react.memo_cache_sentinel")
