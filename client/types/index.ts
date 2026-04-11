@@ -44,3 +44,29 @@ export type Post = {
   replyCount: number;
   likedByMe: boolean;
 };
+export type ChatMessage = {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  createdDate: string;
+};
+export type MynaChatAccount = {
+  _id: string;
+  username: string;
+};
+export type MynaChat = {
+  _id: string;
+  account: MynaChatAccount;
+  isPublic: boolean;
+  messages: ChatMessage[];
+  createdAt: string;
+  updatedAt: string;
+};
+export type MynaChatSummary = {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  isPublic: boolean;
+  messageCount: number;
+  lastMessage: ChatMessage | null;
+};

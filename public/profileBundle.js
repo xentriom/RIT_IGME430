@@ -7873,17 +7873,17 @@
           const t = (0, l.c)(43),
             { username: n } = e,
             { isLoggedIn: a, session: o } = (0, r.useContext)(qi),
-            [i, s] = (0, r.useTransition)(),
-            [c, u] = (0, r.useState)(null);
+            [i, s] = (0, r.useState)(null),
+            [c, u] = (0, r.useState)(!0);
           let d, f;
           if (
             (t[0] !== n
               ? ((d = () => {
-                  s(async () => {
+                  !(async function () {
                     const e = await fetch(`/api/users/${n}`),
                       t = await e.json();
-                    u(t);
-                  });
+                    (s(t), u(!1));
+                  })();
                 }),
                 (f = [n]),
                 (t[0] = n),
@@ -7891,7 +7891,7 @@
                 (t[2] = f))
               : ((d = t[1]), (f = t[2])),
             (0, r.useEffect)(d, f),
-            i)
+            c)
           ) {
             let e;
             return (
@@ -7905,32 +7905,32 @@
               e
             );
           }
-          if (!c) return null;
-          const p = Boolean(a && o.username === c.username),
+          if (!i) return null;
+          const p = Boolean(a && o.username === i.username),
             m = a && !p,
-            h = `/api/avatar/${c.avatar}`;
+            h = `/api/avatar/${i.avatar}`;
           let g, v, y;
-          (t[4] !== c.isOrg || t[5] !== c.username || t[6] !== h
+          (t[4] !== i.isOrg || t[5] !== i.username || t[6] !== h
             ? ((g = (0, O.jsx)(ps, {
-                isOrg: c.isOrg,
+                isOrg: i.isOrg,
                 avatar: h,
-                username: c.username,
+                username: i.username,
                 className: "size-20 shrink-0",
               })),
-              (t[4] = c.isOrg),
-              (t[5] = c.username),
+              (t[4] = i.isOrg),
+              (t[5] = i.username),
               (t[6] = h),
               (t[7] = g))
             : (g = t[7]),
-            t[8] !== c.isFollowing || t[9] !== m || t[10] !== n
+            t[8] !== i.isFollowing || t[9] !== m || t[10] !== n
               ? ((v =
                   m &&
                   (0, O.jsx)(Os, {
                     username: n,
-                    isFollowing: c.isFollowing,
-                    onFollowStateChange: (e) => u((t) => (t ? { ...t, ...e } : null)),
+                    isFollowing: i.isFollowing,
+                    onFollowStateChange: (e) => s((t) => (t ? { ...t, ...e } : null)),
                   })),
-                (t[8] = c.isFollowing),
+                (t[8] = i.isFollowing),
                 (t[9] = m),
                 (t[10] = n),
                 (t[11] = v))
@@ -7944,20 +7944,20 @@
                 (t[13] = v),
                 (t[14] = y))
               : (y = t[14]));
-          const b = `/u/${c.username}`;
+          const b = `/u/${i.username}`;
           let w, x, k, S, E;
-          (t[15] !== c.displayName
+          (t[15] !== i.displayName
             ? ((w = (0, O.jsx)("span", {
                 className: "truncate text-lg font-bold",
-                children: c.displayName,
+                children: i.displayName,
               })),
-              (t[15] = c.displayName),
+              (t[15] = i.displayName),
               (t[16] = w))
             : (w = t[16]),
-            t[17] !== c.isOrg || t[18] !== c.plan
-              ? ((x = (0, O.jsx)(gc, { isOrg: c.isOrg, plan: c.plan })),
-                (t[17] = c.isOrg),
-                (t[18] = c.plan),
+            t[17] !== i.isOrg || t[18] !== i.plan
+              ? ((x = (0, O.jsx)(gc, { isOrg: i.isOrg, plan: i.plan })),
+                (t[17] = i.isOrg),
+                (t[18] = i.plan),
                 (t[19] = x))
               : (x = t[19]),
             t[20] !== w || t[21] !== x
@@ -7969,12 +7969,12 @@
                 (t[21] = x),
                 (t[22] = k))
               : (k = t[22]),
-            t[23] !== c.username
+            t[23] !== i.username
               ? ((S = (0, O.jsxs)("span", {
                   className: "text-sm text-muted-foreground",
-                  children: ["@", c.username],
+                  children: ["@", i.username],
                 })),
-                (t[23] = c.username),
+                (t[23] = i.username),
                 (t[24] = S))
               : (S = t[24]),
             t[25] !== k || t[26] !== S || t[27] !== b
@@ -7989,7 +7989,7 @@
                 (t[27] = b),
                 (t[28] = E))
               : (E = t[28]));
-          const C = c.bio || "No bio yet";
+          const C = i.bio || "No bio yet";
           let N, _, j, P, z;
           return (
             t[29] !== C
@@ -7997,26 +7997,26 @@
                 (t[29] = C),
                 (t[30] = N))
               : (N = t[30]),
-            t[31] !== c.followingCount
+            t[31] !== i.followingCount
               ? ((_ = (0, O.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
-                    (0, O.jsx)("span", { className: "font-bold", children: c.followingCount }),
+                    (0, O.jsx)("span", { className: "font-bold", children: i.followingCount }),
                     "Following",
                   ],
                 })),
-                (t[31] = c.followingCount),
+                (t[31] = i.followingCount),
                 (t[32] = _))
               : (_ = t[32]),
-            t[33] !== c.followersCount
+            t[33] !== i.followersCount
               ? ((j = (0, O.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
-                    (0, O.jsx)("span", { className: "font-bold", children: c.followersCount }),
+                    (0, O.jsx)("span", { className: "font-bold", children: i.followersCount }),
                     "Followers",
                   ],
                 })),
-                (t[33] = c.followersCount),
+                (t[33] = i.followersCount),
                 (t[34] = j))
               : (j = t[34]),
             t[35] !== _ || t[36] !== j
@@ -10877,459 +10877,454 @@
             ? ((a = window.location.pathname.split("/").pop()), (e[0] = a))
             : (a = e[0]);
           const o = a,
-            [i, s] = (0, r.useTransition)(),
-            [, c] = (0, r.useTransition)(),
-            [, u] = (0, r.useTransition)(),
-            [d, f] = (0, r.useState)(null);
-          let p;
-          e[1] === Symbol.for("react.memo_cache_sentinel") ? ((p = []), (e[1] = p)) : (p = e[1]);
-          const [m, g] = (0, r.useState)(p);
-          let v;
-          e[2] === Symbol.for("react.memo_cache_sentinel") ? ((v = []), (e[2] = v)) : (v = e[2]);
-          const [b, w] = (0, r.useState)(v);
+            [i, s] = (0, r.useState)(null);
+          let c;
+          e[1] === Symbol.for("react.memo_cache_sentinel") ? ((c = []), (e[1] = c)) : (c = e[1]);
+          const [u, d] = (0, r.useState)(c);
+          let f;
+          e[2] === Symbol.for("react.memo_cache_sentinel") ? ((f = []), (e[2] = f)) : (f = e[2]);
+          const [p, m] = (0, r.useState)(f),
+            [g, v] = (0, r.useTransition)(),
+            [b, w] = (0, r.useState)(!0);
           let x;
           e[3] === Symbol.for("react.memo_cache_sentinel")
-            ? ((x = () => {
-                s(async () => {
-                  const e = await fetch(`/api/users/${o}`),
-                    t = await e.json();
-                  (f(t),
-                    c(async () => {
-                      const e = await fetch(`/api/users/${o}/posts`),
-                        t = await e.json();
-                      g(t);
-                    }),
-                    u(async () => {
-                      const e = await fetch(`/api/users/${o}/followers`),
-                        t = await e.json();
-                      w(t);
-                    }));
-                });
+            ? ((x = async () => {
+                const e = await fetch(`/api/users/${o}`);
+                if (!e.ok) return;
+                s(await e.json());
+                const t = await fetch(`/api/users/${o}/posts`);
+                t.ok && d(await t.json());
               }),
               (e[3] = x))
             : (x = e[3]);
           const k = x;
-          let S;
-          e[4] === Symbol.for("react.memo_cache_sentinel")
-            ? ((S = async () => {
-                const e = await fetch(`/api/users/${o}`);
-                if (!e.ok) return;
-                f(await e.json());
-                const t = await fetch(`/api/users/${o}/posts`);
-                t.ok && g(await t.json());
-              }),
-              (e[4] = S))
-            : (S = e[4]);
-          const E = S;
-          let C, N;
+          let S, E;
           if (
-            (e[5] === Symbol.for("react.memo_cache_sentinel")
-              ? ((C = () => {
-                  k();
-                  const e = (e) => {
-                    e.persisted && k();
+            (e[4] === Symbol.for("react.memo_cache_sentinel")
+              ? ((S = () => {
+                  const e = async function () {
+                    w(!0);
+                    const e = await fetch(`/api/users/${o}`),
+                      t = await e.json();
+                    s(t);
+                    const n = await fetch(`/api/users/${o}/followers`),
+                      r = await n.json();
+                    (m(r),
+                      w(!1),
+                      v(async () => {
+                        const e = await fetch(`/api/users/${o}/posts`),
+                          t = await e.json();
+                        d(t);
+                      }));
+                  };
+                  e();
+                  const t = (t) => {
+                    t.persisted && e();
                   };
                   return (
-                    window.addEventListener("pageshow", e),
-                    () => window.removeEventListener("pageshow", e)
+                    window.addEventListener("pageshow", t),
+                    () => window.removeEventListener("pageshow", t)
                   );
                 }),
-                (N = [k]),
-                (e[5] = C),
-                (e[6] = N))
-              : ((C = e[5]), (N = e[6])),
-            (0, r.useEffect)(C, N),
-            i)
+                (E = [o]),
+                (e[4] = S),
+                (e[5] = E))
+              : ((S = e[4]), (E = e[5])),
+            (0, r.useEffect)(S, E),
+            b)
           ) {
             let t;
             return (
+              e[6] === Symbol.for("react.memo_cache_sentinel")
+                ? ((t = (0, O.jsx)("div", { children: "Loading..." })), (e[6] = t))
+                : (t = e[6]),
+              t
+            );
+          }
+          if (!i) {
+            let t;
+            return (
               e[7] === Symbol.for("react.memo_cache_sentinel")
-                ? ((t = (0, O.jsx)("div", { children: "Loading..." })), (e[7] = t))
+                ? ((t = (0, O.jsx)("div", { children: "Account not found" })), (e[7] = t))
                 : (t = e[7]),
               t
             );
           }
-          if (!d) {
-            let t;
-            return (
-              e[8] === Symbol.for("react.memo_cache_sentinel")
-                ? ((t = (0, O.jsx)("div", { children: "Account not found" })), (e[8] = t))
-                : (t = e[8]),
-              t
-            );
-          }
-          const _ = Boolean(t && n.username === d.username),
-            j = d.isPublic || _ || d.isFollowing;
-          let P, z, T, M, R, L, D, A;
-          (e[9] === Symbol.for("react.memo_cache_sentinel")
-            ? ((P = (0, O.jsx)(hs, {})), (e[9] = P))
-            : (P = e[9]),
-            e[10] === Symbol.for("react.memo_cache_sentinel")
-              ? ((z = (0, O.jsx)(Es, { className: "size-6" })), (e[10] = z))
-              : (z = e[10]),
-            e[11] !== d.displayName
-              ? ((T = (0, O.jsx)("span", {
+          const C = Boolean(t && n.username === i.username),
+            N = i.isPublic || C || i.isFollowing;
+          let _, j, P, z, T, M, R, L;
+          (e[8] === Symbol.for("react.memo_cache_sentinel")
+            ? ((_ = (0, O.jsx)(hs, {})), (e[8] = _))
+            : (_ = e[8]),
+            e[9] === Symbol.for("react.memo_cache_sentinel")
+              ? ((j = (0, O.jsx)(Es, { className: "size-6" })), (e[9] = j))
+              : (j = e[9]),
+            e[10] !== i.displayName
+              ? ((P = (0, O.jsx)("span", {
                   className: "text-lg font-bold",
-                  children: d.displayName,
+                  children: i.displayName,
                 })),
-                (e[11] = d.displayName),
-                (e[12] = T))
-              : (T = e[12]),
-            e[13] !== d.isOrg || e[14] !== d.plan
-              ? ((M = (0, O.jsx)(gc, { isOrg: d.isOrg, plan: d.plan })),
-                (e[13] = d.isOrg),
-                (e[14] = d.plan),
-                (e[15] = M))
-              : (M = e[15]),
-            e[16] !== M || e[17] !== T
-              ? ((R = (0, O.jsxs)("div", {
+                (e[10] = i.displayName),
+                (e[11] = P))
+              : (P = e[11]),
+            e[12] !== i.isOrg || e[13] !== i.plan
+              ? ((z = (0, O.jsx)(gc, { isOrg: i.isOrg, plan: i.plan })),
+                (e[12] = i.isOrg),
+                (e[13] = i.plan),
+                (e[14] = z))
+              : (z = e[14]),
+            e[15] !== P || e[16] !== z
+              ? ((T = (0, O.jsxs)("div", {
                   className: "flex flex-row items-center gap-2",
-                  children: [T, M],
+                  children: [P, z],
                 })),
-                (e[16] = M),
-                (e[17] = T),
-                (e[18] = R))
-              : (R = e[18]),
-            e[19] !== m.length
-              ? ((L = (0, O.jsxs)("span", {
+                (e[15] = P),
+                (e[16] = z),
+                (e[17] = T))
+              : (T = e[17]),
+            e[18] !== u.length
+              ? ((M = (0, O.jsxs)("span", {
                   className: "text-sm text-muted-foreground",
-                  children: [m.length, " posts"],
+                  children: [u.length, " posts"],
                 })),
-                (e[19] = m.length),
-                (e[20] = L))
-              : (L = e[20]),
-            e[21] !== R || e[22] !== L
-              ? ((D = (0, O.jsxs)("div", {
+                (e[18] = u.length),
+                (e[19] = M))
+              : (M = e[19]),
+            e[20] !== T || e[21] !== M
+              ? ((R = (0, O.jsxs)("div", {
                   className:
                     "sticky top-0 z-10 flex cursor-pointer flex-row items-center gap-8 bg-background/80 p-4 pb-2 backdrop-blur-sm",
                   onClick: kd,
                   children: [
-                    z,
-                    (0, O.jsxs)("div", { className: "flex flex-col", children: [R, L] }),
+                    j,
+                    (0, O.jsxs)("div", { className: "flex flex-col", children: [T, M] }),
                   ],
                 })),
-                (e[21] = R),
-                (e[22] = L),
-                (e[23] = D))
-              : (D = e[23]),
-            e[24] === Symbol.for("react.memo_cache_sentinel")
-              ? ((A = (0, O.jsx)("div", {
+                (e[20] = T),
+                (e[21] = M),
+                (e[22] = R))
+              : (R = e[22]),
+            e[23] === Symbol.for("react.memo_cache_sentinel")
+              ? ((L = (0, O.jsx)("div", {
                   className: "absolute inset-0 z-0",
                   style: {
                     backgroundImage:
                       "\n                    radial-gradient(ellipse at 20% 30%, rgba(56, 189, 248, 0.4) 0%, transparent 60%),\n                    radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 70%),\n                    radial-gradient(ellipse at 60% 20%, rgba(236, 72, 153, 0.25) 0%, transparent 50%),\n                    radial-gradient(ellipse at 40% 80%, rgba(34, 197, 94, 0.2) 0%, transparent 65%)\n                  ",
                   },
                 })),
-                (e[24] = A))
-              : (A = e[24]));
-          const F = `/api/avatar/${d.avatar}`;
-          let I, $, B, H, U, W, V;
-          (e[25] !== d.isOrg || e[26] !== d.username || e[27] !== F
-            ? ((I = (0, O.jsxs)("div", {
+                (e[23] = L))
+              : (L = e[23]));
+          const D = `/api/avatar/${i.avatar}`;
+          let A, F, I, $, B, H, U;
+          (e[24] !== i.isOrg || e[25] !== i.username || e[26] !== D
+            ? ((A = (0, O.jsxs)("div", {
                 className: "relative h-full max-h-32 w-full shrink-0 bg-black",
                 children: [
-                  A,
+                  L,
                   (0, O.jsx)("div", {
                     className: "absolute bottom-0 left-0 translate-y-1/2 px-4",
                     children: (0, O.jsx)(ps, {
-                      isOrg: d.isOrg,
-                      avatar: F,
-                      username: d.username,
+                      isOrg: i.isOrg,
+                      avatar: D,
+                      username: i.username,
                       className: "size-22 shrink-0 border-4 border-background",
                     }),
                   }),
                 ],
               })),
-              (e[25] = d.isOrg),
-              (e[26] = d.username),
-              (e[27] = F),
-              (e[28] = I))
-            : (I = e[28]),
-            e[29] !== d.isFollowing || e[30] !== d.username || e[31] !== _
-              ? (($ = (0, O.jsx)("div", {
+              (e[24] = i.isOrg),
+              (e[25] = i.username),
+              (e[26] = D),
+              (e[27] = A))
+            : (A = e[27]),
+            e[28] !== i.isFollowing || e[29] !== i.username || e[30] !== C
+              ? ((F = (0, O.jsx)("div", {
                   className: "self-end p-2",
-                  children: _
-                    ? (0, O.jsx)(dd, { onSaved: E })
+                  children: C
+                    ? (0, O.jsx)(dd, { onSaved: k })
                     : (0, O.jsx)(Os, {
-                        username: d.username,
-                        isFollowing: d.isFollowing,
-                        onFollowStateChange: E,
+                        username: i.username,
+                        isFollowing: i.isFollowing,
+                        onFollowStateChange: k,
                       }),
                 })),
-                (e[29] = d.isFollowing),
-                (e[30] = d.username),
-                (e[31] = _),
-                (e[32] = $))
-              : ($ = e[32]),
-            e[33] !== d.displayName
-              ? ((B = (0, O.jsx)("h1", {
+                (e[28] = i.isFollowing),
+                (e[29] = i.username),
+                (e[30] = C),
+                (e[31] = F))
+              : (F = e[31]),
+            e[32] !== i.displayName
+              ? ((I = (0, O.jsx)("h1", {
                   className: "text-xl font-bold",
-                  children: d.displayName,
+                  children: i.displayName,
                 })),
-                (e[33] = d.displayName),
-                (e[34] = B))
-              : (B = e[34]),
-            e[35] !== d.isOrg || e[36] !== d.plan
-              ? ((H = (0, O.jsx)(gc, { isOrg: d.isOrg, plan: d.plan })),
-                (e[35] = d.isOrg),
-                (e[36] = d.plan),
-                (e[37] = H))
-              : (H = e[37]),
-            e[38] !== B || e[39] !== H
-              ? ((U = (0, O.jsxs)("div", {
+                (e[32] = i.displayName),
+                (e[33] = I))
+              : (I = e[33]),
+            e[34] !== i.isOrg || e[35] !== i.plan
+              ? (($ = (0, O.jsx)(gc, { isOrg: i.isOrg, plan: i.plan })),
+                (e[34] = i.isOrg),
+                (e[35] = i.plan),
+                (e[36] = $))
+              : ($ = e[36]),
+            e[37] !== I || e[38] !== $
+              ? ((B = (0, O.jsxs)("div", {
                   className: "flex flex-row items-center gap-2",
-                  children: [B, H],
+                  children: [I, $],
                 })),
-                (e[38] = B),
-                (e[39] = H),
-                (e[40] = U))
-              : (U = e[40]),
-            e[41] !== d.username
-              ? ((W = (0, O.jsxs)("h2", {
+                (e[37] = I),
+                (e[38] = $),
+                (e[39] = B))
+              : (B = e[39]),
+            e[40] !== i.username
+              ? ((H = (0, O.jsxs)("h2", {
                   className: "text-sm text-muted-foreground",
-                  children: ["@", d.username],
+                  children: ["@", i.username],
                 })),
-                (e[41] = d.username),
-                (e[42] = W))
-              : (W = e[42]),
-            e[43] !== U || e[44] !== W
-              ? ((V = (0, O.jsxs)("div", { className: "flex flex-col", children: [U, W] })),
-                (e[43] = U),
-                (e[44] = W),
-                (e[45] = V))
-              : (V = e[45]));
-          const q = d.bio || "No bio yet";
-          let K, Q, Y, G, X, Z, J, ee, te, ne, re, ae, oe, le, ie, se, ce, ue, de, fe, pe, me, he;
+                (e[40] = i.username),
+                (e[41] = H))
+              : (H = e[41]),
+            e[42] !== B || e[43] !== H
+              ? ((U = (0, O.jsxs)("div", { className: "flex flex-col", children: [B, H] })),
+                (e[42] = B),
+                (e[43] = H),
+                (e[44] = U))
+              : (U = e[44]));
+          const W = i.bio || "No bio yet";
+          let V, q, K, Q, Y, G, X, Z, J, ee, te, ne, re, ae, oe, le, ie, se, ce, ue, de, fe, pe;
           return (
-            e[46] !== q
-              ? ((K = (0, O.jsx)("p", { className: "text-sm", children: q })),
-                (e[46] = q),
-                (e[47] = K))
-              : (K = e[47]),
-            e[48] === Symbol.for("react.memo_cache_sentinel")
-              ? ((Q = (0, O.jsx)(Cs, { className: "size-4" })), (e[48] = Q))
-              : (Q = e[48]),
-            e[49] !== d.createdDate
-              ? ((Y = new Date(d.createdDate).toLocaleString()),
-                (e[49] = d.createdDate),
-                (e[50] = Y))
-              : (Y = e[50]),
-            e[51] !== Y
-              ? ((G = (0, O.jsxs)("div", {
+            e[45] !== W
+              ? ((V = (0, O.jsx)("p", { className: "text-sm", children: W })),
+                (e[45] = W),
+                (e[46] = V))
+              : (V = e[46]),
+            e[47] === Symbol.for("react.memo_cache_sentinel")
+              ? ((q = (0, O.jsx)(Cs, { className: "size-4" })), (e[47] = q))
+              : (q = e[47]),
+            e[48] !== i.createdDate
+              ? ((K = new Date(i.createdDate).toLocaleString()),
+                (e[48] = i.createdDate),
+                (e[49] = K))
+              : (K = e[49]),
+            e[50] !== K
+              ? ((Q = (0, O.jsxs)("div", {
                   className: "flex flex-row items-center gap-2",
                   children: [
-                    Q,
+                    q,
                     (0, O.jsxs)("span", {
                       className: "text-sm text-muted-foreground",
-                      children: ["Joined ", Y],
+                      children: ["Joined ", K],
                     }),
                   ],
                 })),
-                (e[51] = Y),
-                (e[52] = G))
-              : (G = e[52]),
-            e[53] !== d.followingCount
-              ? ((X = (0, O.jsxs)("div", {
+                (e[50] = K),
+                (e[51] = Q))
+              : (Q = e[51]),
+            e[52] !== i.followingCount
+              ? ((Y = (0, O.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
-                    (0, O.jsx)("span", { className: "font-bold", children: d.followingCount }),
+                    (0, O.jsx)("span", { className: "font-bold", children: i.followingCount }),
                     "Following",
                   ],
                 })),
-                (e[53] = d.followingCount),
-                (e[54] = X))
-              : (X = e[54]),
-            e[55] !== d.followersCount
-              ? ((Z = (0, O.jsxs)("div", {
+                (e[52] = i.followingCount),
+                (e[53] = Y))
+              : (Y = e[53]),
+            e[54] !== i.followersCount
+              ? ((G = (0, O.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
-                    (0, O.jsx)("span", { className: "font-bold", children: d.followersCount }),
+                    (0, O.jsx)("span", { className: "font-bold", children: i.followersCount }),
                     "Followers",
                   ],
                 })),
-                (e[55] = d.followersCount),
-                (e[56] = Z))
-              : (Z = e[56]),
-            e[57] !== X || e[58] !== Z
-              ? ((J = (0, O.jsxs)("div", {
+                (e[54] = i.followersCount),
+                (e[55] = G))
+              : (G = e[55]),
+            e[56] !== Y || e[57] !== G
+              ? ((X = (0, O.jsxs)("div", {
                   className: "flex flex-row items-center gap-6",
-                  children: [X, Z],
+                  children: [Y, G],
                 })),
-                (e[57] = X),
-                (e[58] = Z),
-                (e[59] = J))
-              : (J = e[59]),
-            e[60] !== V || e[61] !== K || e[62] !== G || e[63] !== J
-              ? ((ee = (0, O.jsxs)("div", {
+                (e[56] = Y),
+                (e[57] = G),
+                (e[58] = X))
+              : (X = e[58]),
+            e[59] !== U || e[60] !== V || e[61] !== Q || e[62] !== X
+              ? ((Z = (0, O.jsxs)("div", {
                   className: "flex flex-col gap-3 border-b border-border p-4",
-                  children: [V, K, G, J],
+                  children: [U, V, Q, X],
                 })),
+                (e[59] = U),
                 (e[60] = V),
-                (e[61] = K),
-                (e[62] = G),
-                (e[63] = J),
-                (e[64] = ee))
-              : (ee = e[64]),
-            e[65] !== j || e[66] !== m
-              ? ((te = j
-                  ? m.length > 0
-                    ? (0, O.jsx)(O.Fragment, { children: m.map(xd) })
-                    : (0, O.jsx)(md, {
-                        children: (0, O.jsxs)(hd, {
-                          children: [
-                            (0, O.jsx)(vd, { variant: "icon", children: (0, O.jsx)(y, {}) }),
-                            (0, O.jsx)(yd, { children: "No Chirps Yet" }),
-                            (0, O.jsx)(bd, { children: "The author has not chirped yet" }),
-                          ],
-                        }),
-                      })
-                  : (0, O.jsxs)(md, {
-                      children: [
-                        (0, O.jsxs)(hd, {
-                          children: [
-                            (0, O.jsx)(vd, { variant: "icon", children: (0, O.jsx)(Ns, {}) }),
-                            (0, O.jsx)(yd, { children: "This profile is private" }),
-                            (0, O.jsx)(bd, { children: "Follow to see their posts" }),
-                          ],
-                        }),
-                        (0, O.jsx)(wa, {
-                          variant: "link",
-                          asChild: !0,
-                          className: "text-muted-foreground",
-                          size: "sm",
-                          children: (0, O.jsxs)("a", {
-                            href: "#",
-                            children: ["Learn More ", (0, O.jsx)(_s, {})],
+                (e[61] = Q),
+                (e[62] = X),
+                (e[63] = Z))
+              : (Z = e[63]),
+            e[64] !== N || e[65] !== g || e[66] !== u
+              ? ((J = g
+                  ? null
+                  : N
+                    ? u.length > 0
+                      ? (0, O.jsx)(O.Fragment, { children: u.map(xd) })
+                      : (0, O.jsx)(md, {
+                          children: (0, O.jsxs)(hd, {
+                            children: [
+                              (0, O.jsx)(vd, { variant: "icon", children: (0, O.jsx)(y, {}) }),
+                              (0, O.jsx)(yd, { children: "No Chirps Yet" }),
+                              (0, O.jsx)(bd, { children: "The author has not chirped yet" }),
+                            ],
                           }),
-                        }),
-                      ],
-                    })),
-                (e[65] = j),
-                (e[66] = m),
-                (e[67] = te))
-              : (te = e[67]),
-            e[68] !== I || e[69] !== $ || e[70] !== ee || e[71] !== te
-              ? ((ne = (0, O.jsxs)("div", {
+                        })
+                    : (0, O.jsxs)(md, {
+                        children: [
+                          (0, O.jsxs)(hd, {
+                            children: [
+                              (0, O.jsx)(vd, { variant: "icon", children: (0, O.jsx)(Ns, {}) }),
+                              (0, O.jsx)(yd, { children: "This profile is private" }),
+                              (0, O.jsx)(bd, { children: "Follow to see their posts" }),
+                            ],
+                          }),
+                          (0, O.jsx)(wa, {
+                            variant: "link",
+                            asChild: !0,
+                            className: "text-muted-foreground",
+                            size: "sm",
+                            children: (0, O.jsxs)("a", {
+                              href: "#",
+                              children: ["Learn More ", (0, O.jsx)(_s, {})],
+                            }),
+                          }),
+                        ],
+                      })),
+                (e[64] = N),
+                (e[65] = g),
+                (e[66] = u),
+                (e[67] = J))
+              : (J = e[67]),
+            e[68] !== A || e[69] !== F || e[70] !== Z || e[71] !== J
+              ? ((ee = (0, O.jsxs)("div", {
                   className: "no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto",
-                  children: [I, $, ee, te],
+                  children: [A, F, Z, J],
                 })),
-                (e[68] = I),
-                (e[69] = $),
-                (e[70] = ee),
-                (e[71] = te),
-                (e[72] = ne))
-              : (ne = e[72]),
-            e[73] !== D || e[74] !== ne
-              ? ((re = (0, O.jsxs)("div", {
+                (e[68] = A),
+                (e[69] = F),
+                (e[70] = Z),
+                (e[71] = J),
+                (e[72] = ee))
+              : (ee = e[72]),
+            e[73] !== R || e[74] !== ee
+              ? ((te = (0, O.jsxs)("div", {
                   className: "flex min-h-0 flex-1 flex-col border-border sm:border-x",
-                  children: [D, ne],
+                  children: [R, ee],
                 })),
-                (e[73] = D),
-                (e[74] = ne),
-                (e[75] = re))
-              : (re = e[75]),
+                (e[73] = R),
+                (e[74] = ee),
+                (e[75] = te))
+              : (te = e[75]),
             e[76] === Symbol.for("react.memo_cache_sentinel")
-              ? ((ae = (0, O.jsx)(Ss, { placeholder: "Search..." })), (e[76] = ae))
-              : (ae = e[76]),
+              ? ((ne = (0, O.jsx)(Ss, { placeholder: "Search..." })), (e[76] = ne))
+              : (ne = e[76]),
             e[77] === Symbol.for("react.memo_cache_sentinel")
-              ? ((oe = (0, O.jsx)("div", {
+              ? ((re = (0, O.jsx)("div", {
                   className: "sticky top-0 z-10 bg-background/80 backdrop-blur-sm",
                   children: (0, O.jsxs)(bs, {
-                    children: [ae, (0, O.jsx)(xs, { children: (0, O.jsx)(h, {}) })],
+                    children: [ne, (0, O.jsx)(xs, { children: (0, O.jsx)(h, {}) })],
                   }),
                 })),
-                (e[77] = oe))
-              : (oe = e[77]),
-            e[78] !== b
-              ? ((le = (0, O.jsx)(Ms, { followers: b })), (e[78] = b), (e[79] = le))
-              : (le = e[79]),
+                (e[77] = re))
+              : (re = e[77]),
+            e[78] !== p
+              ? ((ae = (0, O.jsx)(Ms, { followers: p })), (e[78] = p), (e[79] = ae))
+              : (ae = e[79]),
             e[80] === Symbol.for("react.memo_cache_sentinel")
-              ? ((ie = (0, O.jsx)("a", {
+              ? ((oe = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Terms of Service",
                 })),
-                (se = (0, O.jsx)("a", {
+                (le = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Privacy Policy",
                 })),
-                (ce = (0, O.jsx)("a", {
+                (ie = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Cookie Policy",
                 })),
-                (ue = (0, O.jsx)("a", {
+                (se = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Accessibility",
                 })),
-                (de = (0, O.jsx)("a", {
+                (ce = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Ads Info",
                 })),
-                (fe = (0, O.jsx)("a", {
+                (ue = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "More ...",
                 })),
-                (e[80] = ie),
-                (e[81] = se),
-                (e[82] = ce),
-                (e[83] = ue),
-                (e[84] = de),
-                (e[85] = fe))
-              : ((ie = e[80]),
-                (se = e[81]),
-                (ce = e[82]),
-                (ue = e[83]),
-                (de = e[84]),
-                (fe = e[85])),
+                (e[80] = oe),
+                (e[81] = le),
+                (e[82] = ie),
+                (e[83] = se),
+                (e[84] = ce),
+                (e[85] = ue))
+              : ((oe = e[80]),
+                (le = e[81]),
+                (ie = e[82]),
+                (se = e[83]),
+                (ce = e[84]),
+                (ue = e[85])),
             e[86] === Symbol.for("react.memo_cache_sentinel")
-              ? ((pe = (0, O.jsxs)("div", {
+              ? ((de = (0, O.jsxs)("div", {
                   className: "flex flex-wrap gap-2 text-xs text-muted-foreground",
                   children: [
+                    oe,
+                    le,
                     ie,
                     se,
                     ce,
                     ue,
-                    de,
-                    fe,
                     (0, O.jsxs)("span", { children: ["© ", new Date().getFullYear(), " Chitter"] }),
                   ],
                 })),
-                (e[86] = pe))
-              : (pe = e[86]),
-            e[87] !== le || e[88] !== pe
-              ? ((me = (0, O.jsxs)("div", {
+                (e[86] = de))
+              : (de = e[86]),
+            e[87] !== ae || e[88] !== de
+              ? ((fe = (0, O.jsxs)("div", {
                   className: "hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm",
                   children: [
-                    oe,
+                    re,
                     (0, O.jsxs)("div", {
                       className: "no-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto",
-                      children: [le, pe],
+                      children: [ae, de],
                     }),
                   ],
                 })),
-                (e[87] = le),
-                (e[88] = pe),
-                (e[89] = me))
-              : (me = e[89]),
-            e[90] !== re || e[91] !== me
-              ? ((he = (0, O.jsx)("div", {
+                (e[87] = ae),
+                (e[88] = de),
+                (e[89] = fe))
+              : (fe = e[89]),
+            e[90] !== te || e[91] !== fe
+              ? ((pe = (0, O.jsx)("div", {
                   className: "flex h-dvh flex-col overflow-hidden",
                   children: (0, O.jsxs)("div", {
                     className:
                       "mx-auto flex h-full w-full max-w-5xl flex-col-reverse border-border sm:flex-row sm:border-x",
-                    children: [P, re, me],
+                    children: [_, te, fe],
                   }),
                 })),
-                (e[90] = re),
-                (e[91] = me),
-                (e[92] = he))
-              : (he = e[92]),
-            he
+                (e[90] = te),
+                (e[91] = fe),
+                (e[92] = pe))
+              : (pe = e[92]),
+            pe
           );
         }
         function xd(e) {

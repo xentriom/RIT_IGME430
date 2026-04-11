@@ -24,16 +24,14 @@ import { ProfilePreview } from "../../components/profile-preview";
 export default function App() {
   const postId = window.location.pathname.split("/").pop();
   const { isLoggedIn, session } = useContext(SessionContext);
-  const [isPostPending, startPostTransition] = useTransition();
   const [isRepliesPending, startRepliesTransition] = useTransition();
   const [post, setPost] = useState<PostType | null>(null);
   const [replies, setReplies] = useState<PostType[]>([]);
   const [ownerIsFollowing, setOwnerIsFollowing] = useState(false);
 
   useEffect(() => {
-    if (!postId) return;
-
-    startPostTransition(async () => {
+    async function loadPost() {
+      if (!postId) return;
       const res = await fetch(`/posts/${postId}`, {
         credentials: "same-origin",
         headers: { Accept: "application/json" },
@@ -48,6 +46,7 @@ export default function App() {
       const data = (await res.json()) as PostType;
       setPost(data);
 
+      // we use transition here since its not a blocking operation
       startRepliesTransition(async () => {
         const repliesRes = await fetch(`/posts/${postId}/replies`, {
           credentials: "same-origin",
@@ -62,7 +61,9 @@ export default function App() {
         const repliesData = (await repliesRes.json()) as PostType[];
         setReplies(repliesData);
       });
-    });
+    }
+
+    loadPost();
   }, [postId]);
 
   useEffect(() => {

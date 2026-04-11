@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useTransition } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { SessionContext } from "../contexts/session";
 import type { Account } from "../types";
@@ -9,18 +9,21 @@ import { ProfileBadge } from "./profile-badge";
 
 export function ProfilePreview({ username }: { username: string }) {
   const { isLoggedIn, session } = useContext(SessionContext);
-  const [isPending, startTransition] = useTransition();
   const [account, setAccount] = useState<Account | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    startTransition(async () => {
+    async function loadAccount() {
       const res = await fetch(`/api/users/${username}`);
       const data = await res.json();
       setAccount(data);
-    });
+      setLoading(false);
+    }
+
+    loadAccount();
   }, [username]);
 
-  if (isPending) {
+  if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-2">
         <Spinner data-icon="inline-start" />

@@ -20,7 +20,6 @@ import { ProfileAvatar } from "../../components/profile-avatar";
 import { ProfileBadge } from "../../components/profile-badge";
 import {
   Empty,
-  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
@@ -30,34 +29,11 @@ import {
 export default function App() {
   const { isLoggedIn, session } = useContext(SessionContext);
   const username = window.location.pathname.split("/").pop();
-  const [isAccountPending, startAccountTransition] = useTransition();
-  const [isPostsPending, startPostsTransition] = useTransition();
-  const [isFollowersPending, startFollowersTransition] = useTransition();
   const [account, setAccount] = useState<Account | null>(null);
   const [posts, setPosts] = useState<PostType[]>([]);
   const [followers, setFollowers] = useState<Account[]>([]);
-
-  const loadAccount = () => {
-    startAccountTransition(async () => {
-      const res = await fetch(`/api/users/${username}`);
-      const data = await res.json();
-      setAccount(data);
-
-      // Get the account's posts
-      startPostsTransition(async () => {
-        const res = await fetch(`/api/users/${username}/posts`);
-        const data = await res.json();
-        setPosts(data);
-      });
-
-      // Get the account's followers
-      startFollowersTransition(async () => {
-        const res = await fetch(`/api/users/${username}/followers`);
-        const data = await res.json();
-        setFollowers(data);
-      });
-    });
-  };
+  const [isPending, startTransition] = useTransition();
+  const [loading, setLoading] = useState(true);
 
   const refreshAccount = async () => {
     const res = await fetch(`/api/users/${username}`);
@@ -68,6 +44,30 @@ export default function App() {
   };
 
   useEffect(() => {
+    async function loadAccount() {
+      setLoading(true);
+
+      // get account details
+      const res = await fetch(`/api/users/${username}`);
+      const data = await res.json();
+      setAccount(data);
+
+      // get followers
+      const followersRes = await fetch(`/api/users/${username}/followers`);
+      const followersData = await followersRes.json();
+      setFollowers(followersData);
+
+      // init load is done, we can start showing the UI
+      setLoading(false);
+
+      // get post in background
+      startTransition(async () => {
+        const postsRes = await fetch(`/api/users/${username}/posts`);
+        const postsData = await postsRes.json();
+        setPosts(postsData);
+      });
+    }
+
     loadAccount();
 
     // BFCache, look at Web/App.tsx for more details
@@ -77,9 +77,9 @@ export default function App() {
 
     window.addEventListener("pageshow", onPageShow);
     return () => window.removeEventListener("pageshow", onPageShow);
-  }, [loadAccount]);
+  }, [username]);
 
-  if (isAccountPending) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
   if (!account) return <div>Account not found</div>;
 
   const isSelf = Boolean(isLoggedIn && session.username === account.username);
@@ -165,7 +165,7 @@ export default function App() {
                 </div>
               </div>
             </div>
-            {canViewPosts ? (
+            {isPending ? null : canViewPosts ? (
               posts.length > 0 ? (
                 <>
                   {posts.map((post) => (

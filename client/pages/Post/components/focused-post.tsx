@@ -19,7 +19,7 @@ export function FocusedPost({
   setReplies: Dispatch<SetStateAction<PostType[]>>;
 }) {
   const { isLoggedIn, session } = useContext(SessionContext);
-  const [isLikePending, startLikeTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   const sessionUser = isLoggedIn ? session : null;
   const isSelfPost = Boolean(sessionUser && post.owner.username === sessionUser.username);
@@ -52,7 +52,7 @@ export function FocusedPost({
       likeCount: wasLiked ? n - 1 : n + 1,
     });
 
-    startLikeTransition(async () => {
+    startTransition(async () => {
       try {
         const res = await fetch(`/posts/${String(prev._id)}/like`, {
           method: "POST",
@@ -121,7 +121,7 @@ export function FocusedPost({
             className={`flex flex-row items-center gap-1 rounded-md py-1 hover:text-rose-400 ${
               post.likedByMe ? "text-rose-400" : ""
             }`}
-            disabled={!isLoggedIn || isLikePending}
+            disabled={!isLoggedIn || isPending}
             onClick={toggleLike}
           >
             <HeartIcon className={`size-4 ${post.likedByMe ? "fill-current" : ""}`} />

@@ -57,6 +57,7 @@
     --text-6xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
+    --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --tracking-tight: -0.025em;
     --tracking-widest: 0.1em;
@@ -494,6 +495,9 @@
   .mt-auto {
     margin-top: auto;
   }
+  .mr-auto {
+    margin-right: auto;
+  }
   .-mb-4 {
     margin-bottom: calc(var(--spacing) * -4);
   }
@@ -738,6 +742,9 @@
   .max-h-24 {
     max-height: calc(var(--spacing) * 24);
   }
+  .max-h-26 {
+    max-height: calc(var(--spacing) * 26);
+  }
   .max-h-32 {
     max-height: calc(var(--spacing) * 32);
   }
@@ -888,8 +895,14 @@
   .max-w-\[40\%\] {
     max-width: 40%;
   }
+  .max-w-\[80\%\] {
+    max-width: 80%;
+  }
   .max-w-\[calc\(100\%-2rem\)\] {
     max-width: calc(100% - 2rem);
+  }
+  .max-w-\[min\(100\%\,28rem\)\] {
+    max-width: min(100%, 28rem);
   }
   .max-w-full {
     max-width: 100%;
@@ -1780,6 +1793,10 @@
   .font-normal {
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
   }
   .tracking-tight {
     --tw-tracking: var(--tracking-tight);

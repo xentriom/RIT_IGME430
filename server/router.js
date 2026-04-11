@@ -74,6 +74,23 @@ const router = (app) => {
     controllers.Premium.purchase,
   );
 
+  // Myna (chats)
+  app.get("/api/myna/chats", mid.requiresSecure, mid.requiresLogin, controllers.Myna.listChats);
+  app.post("/api/myna/chats", mid.requiresSecure, mid.requiresLogin, controllers.Myna.createChat);
+  app.get("/api/myna/chats/:chatId", mid.requiresSecure, controllers.Myna.getChat);
+  app.post(
+    "/api/myna/chats/:chatId/messages",
+    mid.requiresSecure,
+    mid.requiresLogin,
+    controllers.Myna.appendMessage,
+  );
+  app.patch(
+    "/api/myna/chats/:chatId",
+    mid.requiresSecure,
+    mid.requiresLogin,
+    controllers.Myna.updateChat,
+  );
+
   // Dawg express changed the syntax from "*" to "/*{name}"
   // The name is useless as far as I can tell so have womp
   app.get("/*womp", controllers.Pages.notFoundPage);

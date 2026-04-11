@@ -7895,17 +7895,17 @@
           const t = (0, l.c)(43),
             { username: n } = e,
             { isLoggedIn: a, session: o } = (0, r.useContext)(ds),
-            [i, s] = (0, r.useTransition)(),
-            [u, c] = (0, r.useState)(null);
+            [i, s] = (0, r.useState)(null),
+            [u, c] = (0, r.useState)(!0);
           let d, f;
           if (
             (t[0] !== n
               ? ((d = () => {
-                  s(async () => {
+                  !(async function () {
                     const e = await fetch(`/api/users/${n}`),
                       t = await e.json();
-                    c(t);
-                  });
+                    (s(t), c(!1));
+                  })();
                 }),
                 (f = [n]),
                 (t[0] = n),
@@ -7913,7 +7913,7 @@
                 (t[2] = f))
               : ((d = t[1]), (f = t[2])),
             (0, r.useEffect)(d, f),
-            i)
+            u)
           ) {
             let e;
             return (
@@ -7927,32 +7927,32 @@
               e
             );
           }
-          if (!u) return null;
-          const p = Boolean(a && o.username === u.username),
+          if (!i) return null;
+          const p = Boolean(a && o.username === i.username),
             m = a && !p,
-            h = `/api/avatar/${u.avatar}`;
+            h = `/api/avatar/${i.avatar}`;
           let g, v, y;
-          (t[4] !== u.isOrg || t[5] !== u.username || t[6] !== h
+          (t[4] !== i.isOrg || t[5] !== i.username || t[6] !== h
             ? ((g = (0, Ve.jsx)(Ms, {
-                isOrg: u.isOrg,
+                isOrg: i.isOrg,
                 avatar: h,
-                username: u.username,
+                username: i.username,
                 className: "size-20 shrink-0",
               })),
-              (t[4] = u.isOrg),
-              (t[5] = u.username),
+              (t[4] = i.isOrg),
+              (t[5] = i.username),
               (t[6] = h),
               (t[7] = g))
             : (g = t[7]),
-            t[8] !== u.isFollowing || t[9] !== m || t[10] !== n
+            t[8] !== i.isFollowing || t[9] !== m || t[10] !== n
               ? ((v =
                   m &&
                   (0, Ve.jsx)(hu, {
                     username: n,
-                    isFollowing: u.isFollowing,
-                    onFollowStateChange: (e) => c((t) => (t ? { ...t, ...e } : null)),
+                    isFollowing: i.isFollowing,
+                    onFollowStateChange: (e) => s((t) => (t ? { ...t, ...e } : null)),
                   })),
-                (t[8] = u.isFollowing),
+                (t[8] = i.isFollowing),
                 (t[9] = m),
                 (t[10] = n),
                 (t[11] = v))
@@ -7966,20 +7966,20 @@
                 (t[13] = v),
                 (t[14] = y))
               : (y = t[14]));
-          const b = `/u/${u.username}`;
+          const b = `/u/${i.username}`;
           let w, x, k, S, E;
-          (t[15] !== u.displayName
+          (t[15] !== i.displayName
             ? ((w = (0, Ve.jsx)("span", {
                 className: "truncate text-lg font-bold",
-                children: u.displayName,
+                children: i.displayName,
               })),
-              (t[15] = u.displayName),
+              (t[15] = i.displayName),
               (t[16] = w))
             : (w = t[16]),
-            t[17] !== u.isOrg || t[18] !== u.plan
-              ? ((x = (0, Ve.jsx)(bu, { isOrg: u.isOrg, plan: u.plan })),
-                (t[17] = u.isOrg),
-                (t[18] = u.plan),
+            t[17] !== i.isOrg || t[18] !== i.plan
+              ? ((x = (0, Ve.jsx)(bu, { isOrg: i.isOrg, plan: i.plan })),
+                (t[17] = i.isOrg),
+                (t[18] = i.plan),
                 (t[19] = x))
               : (x = t[19]),
             t[20] !== w || t[21] !== x
@@ -7991,12 +7991,12 @@
                 (t[21] = x),
                 (t[22] = k))
               : (k = t[22]),
-            t[23] !== u.username
+            t[23] !== i.username
               ? ((S = (0, Ve.jsxs)("span", {
                   className: "text-sm text-muted-foreground",
-                  children: ["@", u.username],
+                  children: ["@", i.username],
                 })),
-                (t[23] = u.username),
+                (t[23] = i.username),
                 (t[24] = S))
               : (S = t[24]),
             t[25] !== k || t[26] !== S || t[27] !== b
@@ -8011,7 +8011,7 @@
                 (t[27] = b),
                 (t[28] = E))
               : (E = t[28]));
-          const C = u.bio || "No bio yet";
+          const C = i.bio || "No bio yet";
           let N, j, _, z, P;
           return (
             t[29] !== C
@@ -8019,26 +8019,26 @@
                 (t[29] = C),
                 (t[30] = N))
               : (N = t[30]),
-            t[31] !== u.followingCount
+            t[31] !== i.followingCount
               ? ((j = (0, Ve.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
-                    (0, Ve.jsx)("span", { className: "font-bold", children: u.followingCount }),
+                    (0, Ve.jsx)("span", { className: "font-bold", children: i.followingCount }),
                     "Following",
                   ],
                 })),
-                (t[31] = u.followingCount),
+                (t[31] = i.followingCount),
                 (t[32] = j))
               : (j = t[32]),
-            t[33] !== u.followersCount
+            t[33] !== i.followersCount
               ? ((_ = (0, Ve.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
-                    (0, Ve.jsx)("span", { className: "font-bold", children: u.followersCount }),
+                    (0, Ve.jsx)("span", { className: "font-bold", children: i.followersCount }),
                     "Followers",
                   ],
                 })),
-                (t[33] = u.followersCount),
+                (t[33] = i.followersCount),
                 (t[34] = _))
               : (_ = t[34]),
             t[35] !== j || t[36] !== _
@@ -10435,86 +10435,85 @@
             : (t = e[0]);
           const n = t,
             { isLoggedIn: a, session: o } = (0, r.useContext)(ds),
-            [, i] = (0, r.useTransition)(),
-            [s, u] = (0, r.useTransition)(),
-            [c, d] = (0, r.useState)(null);
-          let f;
-          e[1] === Symbol.for("react.memo_cache_sentinel") ? ((f = []), (e[1] = f)) : (f = e[1]);
-          const [p, v] = (0, r.useState)(f),
-            [y, b] = (0, r.useState)(!1);
-          let w, x, k, S, E, C, N, j, _, z;
+            [i, s] = (0, r.useTransition)(),
+            [u, c] = (0, r.useState)(null);
+          let d;
+          e[1] === Symbol.for("react.memo_cache_sentinel") ? ((d = []), (e[1] = d)) : (d = e[1]);
+          const [f, p] = (0, r.useState)(d),
+            [v, y] = (0, r.useState)(!1);
+          let b, w, x, k, S, E, C, N, j, _;
           return (
             e[2] === Symbol.for("react.memo_cache_sentinel")
-              ? ((w = () => {
-                  n &&
-                    i(async () => {
-                      const e = await fetch(`/posts/${n}`, {
-                        credentials: "same-origin",
-                        headers: { Accept: "application/json" },
-                      });
-                      if (!e.ok) return (d(null), void v([]));
-                      const t = await e.json();
-                      (d(t),
-                        u(async () => {
-                          const e = await fetch(`/posts/${n}/replies`, {
-                            credentials: "same-origin",
-                            headers: { Accept: "application/json" },
-                          });
-                          if (!e.ok) return void v([]);
-                          const t = await e.json();
-                          v(t);
-                        }));
+              ? ((b = () => {
+                  !(async function () {
+                    if (!n) return;
+                    const e = await fetch(`/posts/${n}`, {
+                      credentials: "same-origin",
+                      headers: { Accept: "application/json" },
                     });
+                    if (!e.ok) return (c(null), void p([]));
+                    const t = await e.json();
+                    (c(t),
+                      s(async () => {
+                        const e = await fetch(`/posts/${n}/replies`, {
+                          credentials: "same-origin",
+                          headers: { Accept: "application/json" },
+                        });
+                        if (!e.ok) return void p([]);
+                        const t = await e.json();
+                        p(t);
+                      }));
+                  })();
                 }),
-                (x = [n]),
-                (e[2] = w),
-                (e[3] = x))
-              : ((w = e[2]), (x = e[3])),
-            (0, r.useEffect)(w, x),
-            e[4] !== a || e[5] !== c || e[6] !== o
-              ? ((k = () => {
-                  c &&
+                (w = [n]),
+                (e[2] = b),
+                (e[3] = w))
+              : ((b = e[2]), (w = e[3])),
+            (0, r.useEffect)(b, w),
+            e[4] !== a || e[5] !== u || e[6] !== o
+              ? ((x = () => {
+                  u &&
                     a &&
                     o &&
-                    o.username !== c.owner.username &&
-                    fetch(`/api/users/${c.owner.username}`, { credentials: "same-origin" })
+                    o.username !== u.owner.username &&
+                    fetch(`/api/users/${u.owner.username}`, { credentials: "same-origin" })
                       .then(gc)
                       .then((e) => {
-                        e && b(Boolean(e.isFollowing));
+                        e && y(Boolean(e.isFollowing));
                       });
                 }),
-                (S = [c, a, o]),
+                (k = [u, a, o]),
                 (e[4] = a),
-                (e[5] = c),
+                (e[5] = u),
                 (e[6] = o),
-                (e[7] = k),
-                (e[8] = S))
-              : ((k = e[7]), (S = e[8])),
-            (0, r.useEffect)(k, S),
+                (e[7] = x),
+                (e[8] = k))
+              : ((x = e[7]), (k = e[8])),
+            (0, r.useEffect)(x, k),
             e[9] === Symbol.for("react.memo_cache_sentinel")
-              ? ((E = (0, Ve.jsx)(Rs, {})), (e[9] = E))
-              : (E = e[9]),
+              ? ((S = (0, Ve.jsx)(Rs, {})), (e[9] = S))
+              : (S = e[9]),
             e[10] === Symbol.for("react.memo_cache_sentinel")
-              ? ((C = (0, Ve.jsxs)("div", {
+              ? ((E = (0, Ve.jsxs)("div", {
                   className:
                     "flex cursor-pointer flex-row items-center gap-4 p-4 pb-0 text-lg font-bold",
                   onClick: hc,
                   children: [(0, Ve.jsx)(m, { className: "size-4" }), "Post"],
                 })),
-                (e[10] = C))
-              : (C = e[10]),
-            e[11] !== s || e[12] !== c || e[13] !== p
-              ? ((N =
-                  c &&
+                (e[10] = E))
+              : (E = e[10]),
+            e[11] !== i || e[12] !== u || e[13] !== f
+              ? ((C =
+                  u &&
                   (0, Ve.jsxs)(Ve.Fragment, {
                     children: [
-                      (0, Ve.jsx)(dc, { post: c, setPost: d, setReplies: v }),
-                      s
+                      (0, Ve.jsx)(dc, { post: u, setPost: c, setReplies: p }),
+                      i
                         ? (0, Ve.jsx)(Gu, {})
                         : (0, Ve.jsx)(Ve.Fragment, {
                             children:
-                              p.length > 0
-                                ? (0, Ve.jsx)(Ve.Fragment, { children: p.map(mc) })
+                              f.length > 0
+                                ? (0, Ve.jsx)(Ve.Fragment, { children: f.map(mc) })
                                 : (0, Ve.jsx)(Uu, {
                                     children: (0, Ve.jsxs)(Vu, {
                                       children: [
@@ -10532,28 +10531,28 @@
                           }),
                     ],
                   })),
-                (e[11] = s),
-                (e[12] = c),
-                (e[13] = p),
-                (e[14] = N))
-              : (N = e[14]),
-            e[15] !== N
-              ? ((j = (0, Ve.jsxs)("div", {
+                (e[11] = i),
+                (e[12] = u),
+                (e[13] = f),
+                (e[14] = C))
+              : (C = e[14]),
+            e[15] !== C
+              ? ((N = (0, Ve.jsxs)("div", {
                   className: "flex min-h-0 flex-1 flex-col border-border sm:border-x",
                   children: [
-                    C,
+                    E,
                     (0, Ve.jsx)("div", {
                       className: "no-scrollbar min-h-0 flex-1 overflow-y-auto",
-                      children: N,
+                      children: C,
                     }),
                   ],
                 })),
-                (e[15] = N),
-                (e[16] = j))
-              : (j = e[16]),
-            e[17] !== y || e[18] !== c
-              ? ((_ =
-                  c &&
+                (e[15] = C),
+                (e[16] = N))
+              : (N = e[16]),
+            e[17] !== v || e[18] !== u
+              ? ((j =
+                  u &&
                   (0, Ve.jsxs)("div", {
                     className:
                       "hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm",
@@ -10588,9 +10587,9 @@
                                     children: [
                                       (0, Ve.jsx)(Ms, {
                                         size: "lg",
-                                        isOrg: c.owner.isOrg,
-                                        avatar: `/api/avatar/${c.owner.avatar}`,
-                                        username: c.owner.username,
+                                        isOrg: u.owner.isOrg,
+                                        avatar: `/api/avatar/${u.owner.avatar}`,
+                                        username: u.owner.username,
                                         className: "shrink-0",
                                       }),
                                       (0, Ve.jsxs)("div", {
@@ -10607,38 +10606,38 @@
                                                     (0, Ve.jsx)("span", {
                                                       className:
                                                         "block min-w-0 truncate text-base font-bold hover:underline",
-                                                      children: c.owner.displayName,
+                                                      children: u.owner.displayName,
                                                     }),
                                                     (0, Ve.jsx)(bu, {
-                                                      isOrg: c.owner.isOrg,
-                                                      plan: c.owner.plan,
+                                                      isOrg: u.owner.isOrg,
+                                                      plan: u.owner.plan,
                                                     }),
                                                   ],
                                                 }),
                                               }),
                                               (0, Ve.jsx)(mu, {
                                                 children: (0, Ve.jsx)(wu, {
-                                                  username: c.owner.username,
+                                                  username: u.owner.username,
                                                 }),
                                               }),
                                             ],
                                           }),
                                           (0, Ve.jsxs)("span", {
                                             className: "text-sm text-muted-foreground",
-                                            children: ["@", c.owner.username],
+                                            children: ["@", u.owner.username],
                                           }),
                                           (0, Ve.jsx)("p", {
                                             className: "line-clamp-2 pt-1",
-                                            children: c.owner.bio?.trim()
-                                              ? c.owner.bio
+                                            children: u.owner.bio?.trim()
+                                              ? u.owner.bio
                                               : "No bio yet",
                                           }),
                                         ],
                                       }),
                                       (0, Ve.jsx)(hu, {
-                                        username: c.owner.username,
-                                        isFollowing: y,
-                                        onFollowStateChange: (e) => b(e.isFollowing),
+                                        username: u.owner.username,
+                                        isFollowing: v,
+                                        onFollowStateChange: (e) => y(e.isFollowing),
                                         className: "shrink-0 self-start",
                                       }),
                                     ],
@@ -10689,24 +10688,24 @@
                       }),
                     ],
                   })),
-                (e[17] = y),
-                (e[18] = c),
-                (e[19] = _))
-              : (_ = e[19]),
-            e[20] !== _ || e[21] !== j
-              ? ((z = (0, Ve.jsx)("div", {
+                (e[17] = v),
+                (e[18] = u),
+                (e[19] = j))
+              : (j = e[19]),
+            e[20] !== j || e[21] !== N
+              ? ((_ = (0, Ve.jsx)("div", {
                   className: "flex h-dvh flex-col overflow-hidden",
                   children: (0, Ve.jsxs)("div", {
                     className:
                       "mx-auto flex h-full w-full max-w-5xl flex-col-reverse border-border sm:flex-row sm:border-x",
-                    children: [E, j, _],
+                    children: [S, N, j],
                   }),
                 })),
-                (e[20] = _),
-                (e[21] = j),
-                (e[22] = z))
-              : (z = e[22]),
-            z
+                (e[20] = j),
+                (e[21] = N),
+                (e[22] = _))
+              : (_ = e[22]),
+            _
           );
         }
         function mc(e) {

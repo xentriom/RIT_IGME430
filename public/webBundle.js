@@ -9452,17 +9452,17 @@
           const t = (0, l.c)(43),
             { username: n } = e,
             { isLoggedIn: a, session: o } = (0, r.useContext)(Ut),
-            [i, s] = (0, r.useTransition)(),
-            [c, u] = (0, r.useState)(null);
+            [i, s] = (0, r.useState)(null),
+            [c, u] = (0, r.useState)(!0);
           let d, f;
           if (
             (t[0] !== n
               ? ((d = () => {
-                  s(async () => {
+                  !(async function () {
                     const e = await fetch(`/api/users/${n}`),
                       t = await e.json();
-                    u(t);
-                  });
+                    (s(t), u(!1));
+                  })();
                 }),
                 (f = [n]),
                 (t[0] = n),
@@ -9470,7 +9470,7 @@
                 (t[2] = f))
               : ((d = t[1]), (f = t[2])),
             (0, r.useEffect)(d, f),
-            i)
+            c)
           ) {
             let e;
             return (
@@ -9484,32 +9484,32 @@
               e
             );
           }
-          if (!c) return null;
-          const p = Boolean(a && o.username === c.username),
+          if (!i) return null;
+          const p = Boolean(a && o.username === i.username),
             m = a && !p,
-            h = `/api/avatar/${c.avatar}`;
+            h = `/api/avatar/${i.avatar}`;
           let g, v, y;
-          (t[4] !== c.isOrg || t[5] !== c.username || t[6] !== h
+          (t[4] !== i.isOrg || t[5] !== i.username || t[6] !== h
             ? ((g = (0, Ue.jsx)(Pt, {
-                isOrg: c.isOrg,
+                isOrg: i.isOrg,
                 avatar: h,
-                username: c.username,
+                username: i.username,
                 className: "size-20 shrink-0",
               })),
-              (t[4] = c.isOrg),
-              (t[5] = c.username),
+              (t[4] = i.isOrg),
+              (t[5] = i.username),
               (t[6] = h),
               (t[7] = g))
             : (g = t[7]),
-            t[8] !== c.isFollowing || t[9] !== m || t[10] !== n
+            t[8] !== i.isFollowing || t[9] !== m || t[10] !== n
               ? ((v =
                   m &&
                   (0, Ue.jsx)(tu, {
                     username: n,
-                    isFollowing: c.isFollowing,
-                    onFollowStateChange: (e) => u((t) => (t ? { ...t, ...e } : null)),
+                    isFollowing: i.isFollowing,
+                    onFollowStateChange: (e) => s((t) => (t ? { ...t, ...e } : null)),
                   })),
-                (t[8] = c.isFollowing),
+                (t[8] = i.isFollowing),
                 (t[9] = m),
                 (t[10] = n),
                 (t[11] = v))
@@ -9523,20 +9523,20 @@
                 (t[13] = v),
                 (t[14] = y))
               : (y = t[14]));
-          const b = `/u/${c.username}`;
+          const b = `/u/${i.username}`;
           let w, x, k, S, E;
-          (t[15] !== c.displayName
+          (t[15] !== i.displayName
             ? ((w = (0, Ue.jsx)("span", {
                 className: "truncate text-lg font-bold",
-                children: c.displayName,
+                children: i.displayName,
               })),
-              (t[15] = c.displayName),
+              (t[15] = i.displayName),
               (t[16] = w))
             : (w = t[16]),
-            t[17] !== c.isOrg || t[18] !== c.plan
-              ? ((x = (0, Ue.jsx)(nu, { isOrg: c.isOrg, plan: c.plan })),
-                (t[17] = c.isOrg),
-                (t[18] = c.plan),
+            t[17] !== i.isOrg || t[18] !== i.plan
+              ? ((x = (0, Ue.jsx)(nu, { isOrg: i.isOrg, plan: i.plan })),
+                (t[17] = i.isOrg),
+                (t[18] = i.plan),
                 (t[19] = x))
               : (x = t[19]),
             t[20] !== w || t[21] !== x
@@ -9548,12 +9548,12 @@
                 (t[21] = x),
                 (t[22] = k))
               : (k = t[22]),
-            t[23] !== c.username
+            t[23] !== i.username
               ? ((S = (0, Ue.jsxs)("span", {
                   className: "text-sm text-muted-foreground",
-                  children: ["@", c.username],
+                  children: ["@", i.username],
                 })),
-                (t[23] = c.username),
+                (t[23] = i.username),
                 (t[24] = S))
               : (S = t[24]),
             t[25] !== k || t[26] !== S || t[27] !== b
@@ -9568,7 +9568,7 @@
                 (t[27] = b),
                 (t[28] = E))
               : (E = t[28]));
-          const C = c.bio || "No bio yet";
+          const C = i.bio || "No bio yet";
           let N, j, _, z, P;
           return (
             t[29] !== C
@@ -9576,26 +9576,26 @@
                 (t[29] = C),
                 (t[30] = N))
               : (N = t[30]),
-            t[31] !== c.followingCount
+            t[31] !== i.followingCount
               ? ((j = (0, Ue.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
-                    (0, Ue.jsx)("span", { className: "font-bold", children: c.followingCount }),
+                    (0, Ue.jsx)("span", { className: "font-bold", children: i.followingCount }),
                     "Following",
                   ],
                 })),
-                (t[31] = c.followingCount),
+                (t[31] = i.followingCount),
                 (t[32] = j))
               : (j = t[32]),
-            t[33] !== c.followersCount
+            t[33] !== i.followersCount
               ? ((_ = (0, Ue.jsxs)("div", {
                   className: "flex flex-row items-center gap-1",
                   children: [
-                    (0, Ue.jsx)("span", { className: "font-bold", children: c.followersCount }),
+                    (0, Ue.jsx)("span", { className: "font-bold", children: i.followersCount }),
                     "Followers",
                   ],
                 })),
-                (t[33] = c.followersCount),
+                (t[33] = i.followersCount),
                 (t[34] = _))
               : (_ = t[34]),
             t[35] !== j || t[36] !== _
