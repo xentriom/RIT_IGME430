@@ -10870,7 +10870,7 @@
           );
         }
         function wd() {
-          const e = (0, l.c)(93),
+          const e = (0, l.c)(101),
             { isLoggedIn: t, session: n } = (0, r.useContext)(qi);
           let a;
           e[0] === Symbol.for("react.memo_cache_sentinel")
@@ -11091,7 +11091,7 @@
                 (e[44] = U))
               : (U = e[44]));
           const W = i.bio || "No bio yet";
-          let V, q, K, Q, Y, G, X, Z, J, ee, te, ne, re, ae, oe, le, ie, se, ce, ue, de, fe, pe;
+          let V, q, K, Q, Y, G, X, Z, J, ee, te, ne, re, ae, oe, le, ie, se, ce, ue, de, fe, pe, me;
           return (
             e[45] !== W
               ? ((V = (0, O.jsx)("p", { className: "text-sm", children: W })),
@@ -11151,19 +11151,61 @@
                 (e[57] = G),
                 (e[58] = X))
               : (X = e[58]),
-            e[59] !== U || e[60] !== V || e[61] !== Q || e[62] !== X
-              ? ((Z = (0, O.jsxs)("div", {
+            e[59] !== i.isOrg ||
+            e[60] !== i.plan ||
+            e[61] !== i.username ||
+            e[62] !== t ||
+            e[63] !== C ||
+            e[64] !== n
+              ? ((Z =
+                  t &&
+                  !C &&
+                  !i.isOrg &&
+                  ("premium" === i.plan || "premium+" === i.plan) &&
+                  (!n.isOrg || "free" === n.plan || "basic" === n.plan) &&
+                  (0, O.jsxs)("div", {
+                    className: "flex flex-col gap-2 rounded-lg bg-sidebar-primary/25 p-4 text-sm",
+                    children: [
+                      (0, O.jsxs)("span", {
+                        className: "text-lg font-bold",
+                        children: ["@", n.username, ", you aren't verified yet"],
+                      }),
+                      (0, O.jsxs)("span", {
+                        children: [
+                          "Get verified like ",
+                          (0, O.jsxs)("b", { children: ["@", i.username] }),
+                          " to stand out and get boosted reply reach.",
+                        ],
+                      }),
+                      (0, O.jsx)(wa, {
+                        asChild: !0,
+                        className: "w-fit",
+                        children: (0, O.jsx)("a", { href: "/premium", children: "Get Verified" }),
+                      }),
+                    ],
+                  })),
+                (e[59] = i.isOrg),
+                (e[60] = i.plan),
+                (e[61] = i.username),
+                (e[62] = t),
+                (e[63] = C),
+                (e[64] = n),
+                (e[65] = Z))
+              : (Z = e[65]),
+            e[66] !== U || e[67] !== V || e[68] !== Q || e[69] !== X || e[70] !== Z
+              ? ((J = (0, O.jsxs)("div", {
                   className: "flex flex-col gap-3 border-b border-border p-4",
-                  children: [U, V, Q, X],
+                  children: [U, V, Q, X, Z],
                 })),
-                (e[59] = U),
-                (e[60] = V),
-                (e[61] = Q),
-                (e[62] = X),
-                (e[63] = Z))
-              : (Z = e[63]),
-            e[64] !== N || e[65] !== g || e[66] !== u
-              ? ((J = g
+                (e[66] = U),
+                (e[67] = V),
+                (e[68] = Q),
+                (e[69] = X),
+                (e[70] = Z),
+                (e[71] = J))
+              : (J = e[71]),
+            e[72] !== N || e[73] !== g || e[74] !== u
+              ? ((ee = g
                   ? null
                   : N
                     ? u.length > 0
@@ -11198,133 +11240,133 @@
                           }),
                         ],
                       })),
-                (e[64] = N),
-                (e[65] = g),
-                (e[66] = u),
-                (e[67] = J))
-              : (J = e[67]),
-            e[68] !== A || e[69] !== F || e[70] !== Z || e[71] !== J
-              ? ((ee = (0, O.jsxs)("div", {
-                  className: "no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto",
-                  children: [A, F, Z, J],
-                })),
-                (e[68] = A),
-                (e[69] = F),
-                (e[70] = Z),
-                (e[71] = J),
-                (e[72] = ee))
-              : (ee = e[72]),
-            e[73] !== R || e[74] !== ee
+                (e[72] = N),
+                (e[73] = g),
+                (e[74] = u),
+                (e[75] = ee))
+              : (ee = e[75]),
+            e[76] !== A || e[77] !== F || e[78] !== J || e[79] !== ee
               ? ((te = (0, O.jsxs)("div", {
-                  className: "flex min-h-0 flex-1 flex-col border-border sm:border-x",
-                  children: [R, ee],
+                  className: "no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto",
+                  children: [A, F, J, ee],
                 })),
-                (e[73] = R),
-                (e[74] = ee),
-                (e[75] = te))
-              : (te = e[75]),
-            e[76] === Symbol.for("react.memo_cache_sentinel")
-              ? ((ne = (0, O.jsx)(Ss, { placeholder: "Search..." })), (e[76] = ne))
-              : (ne = e[76]),
-            e[77] === Symbol.for("react.memo_cache_sentinel")
-              ? ((re = (0, O.jsx)("div", {
+                (e[76] = A),
+                (e[77] = F),
+                (e[78] = J),
+                (e[79] = ee),
+                (e[80] = te))
+              : (te = e[80]),
+            e[81] !== R || e[82] !== te
+              ? ((ne = (0, O.jsxs)("div", {
+                  className: "flex min-h-0 flex-1 flex-col border-border sm:border-x",
+                  children: [R, te],
+                })),
+                (e[81] = R),
+                (e[82] = te),
+                (e[83] = ne))
+              : (ne = e[83]),
+            e[84] === Symbol.for("react.memo_cache_sentinel")
+              ? ((re = (0, O.jsx)(Ss, { placeholder: "Search..." })), (e[84] = re))
+              : (re = e[84]),
+            e[85] === Symbol.for("react.memo_cache_sentinel")
+              ? ((ae = (0, O.jsx)("div", {
                   className: "sticky top-0 z-10 bg-background/80 backdrop-blur-sm",
                   children: (0, O.jsxs)(bs, {
-                    children: [ne, (0, O.jsx)(xs, { children: (0, O.jsx)(h, {}) })],
+                    children: [re, (0, O.jsx)(xs, { children: (0, O.jsx)(h, {}) })],
                   }),
                 })),
-                (e[77] = re))
-              : (re = e[77]),
-            e[78] !== p
-              ? ((ae = (0, O.jsx)(Ms, { followers: p })), (e[78] = p), (e[79] = ae))
-              : (ae = e[79]),
-            e[80] === Symbol.for("react.memo_cache_sentinel")
-              ? ((oe = (0, O.jsx)("a", {
+                (e[85] = ae))
+              : (ae = e[85]),
+            e[86] !== p
+              ? ((oe = (0, O.jsx)(Ms, { followers: p })), (e[86] = p), (e[87] = oe))
+              : (oe = e[87]),
+            e[88] === Symbol.for("react.memo_cache_sentinel")
+              ? ((le = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Terms of Service",
                 })),
-                (le = (0, O.jsx)("a", {
+                (ie = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Privacy Policy",
                 })),
-                (ie = (0, O.jsx)("a", {
+                (se = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Cookie Policy",
                 })),
-                (se = (0, O.jsx)("a", {
+                (ce = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Accessibility",
                 })),
-                (ce = (0, O.jsx)("a", {
+                (ue = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "Ads Info",
                 })),
-                (ue = (0, O.jsx)("a", {
+                (de = (0, O.jsx)("a", {
                   href: "/",
                   className: "hover:underline",
                   children: "More ...",
                 })),
-                (e[80] = oe),
-                (e[81] = le),
-                (e[82] = ie),
-                (e[83] = se),
-                (e[84] = ce),
-                (e[85] = ue))
-              : ((oe = e[80]),
-                (le = e[81]),
-                (ie = e[82]),
-                (se = e[83]),
-                (ce = e[84]),
-                (ue = e[85])),
-            e[86] === Symbol.for("react.memo_cache_sentinel")
-              ? ((de = (0, O.jsxs)("div", {
+                (e[88] = le),
+                (e[89] = ie),
+                (e[90] = se),
+                (e[91] = ce),
+                (e[92] = ue),
+                (e[93] = de))
+              : ((le = e[88]),
+                (ie = e[89]),
+                (se = e[90]),
+                (ce = e[91]),
+                (ue = e[92]),
+                (de = e[93])),
+            e[94] === Symbol.for("react.memo_cache_sentinel")
+              ? ((fe = (0, O.jsxs)("div", {
                   className: "flex flex-wrap gap-2 text-xs text-muted-foreground",
                   children: [
-                    oe,
                     le,
                     ie,
                     se,
                     ce,
                     ue,
+                    de,
                     (0, O.jsxs)("span", { children: ["© ", new Date().getFullYear(), " Chitter"] }),
                   ],
                 })),
-                (e[86] = de))
-              : (de = e[86]),
-            e[87] !== ae || e[88] !== de
-              ? ((fe = (0, O.jsxs)("div", {
+                (e[94] = fe))
+              : (fe = e[94]),
+            e[95] !== oe || e[96] !== fe
+              ? ((pe = (0, O.jsxs)("div", {
                   className: "hidden h-full w-full max-w-xs flex-col gap-4 p-4 sm:flex md:max-w-sm",
                   children: [
-                    re,
+                    ae,
                     (0, O.jsxs)("div", {
                       className: "no-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto",
-                      children: [ae, de],
+                      children: [oe, fe],
                     }),
                   ],
                 })),
-                (e[87] = ae),
-                (e[88] = de),
-                (e[89] = fe))
-              : (fe = e[89]),
-            e[90] !== te || e[91] !== fe
-              ? ((pe = (0, O.jsx)("div", {
+                (e[95] = oe),
+                (e[96] = fe),
+                (e[97] = pe))
+              : (pe = e[97]),
+            e[98] !== ne || e[99] !== pe
+              ? ((me = (0, O.jsx)("div", {
                   className: "flex h-dvh flex-col overflow-hidden",
                   children: (0, O.jsxs)("div", {
                     className:
                       "mx-auto flex h-full w-full max-w-5xl flex-col-reverse border-border sm:flex-row sm:border-x",
-                    children: [_, te, fe],
+                    children: [_, ne, pe],
                   }),
                 })),
-                (e[90] = te),
-                (e[91] = fe),
-                (e[92] = pe))
-              : (pe = e[92]),
-            pe
+                (e[98] = ne),
+                (e[99] = pe),
+                (e[100] = me))
+              : (me = e[100]),
+            me
           );
         }
         function xd(e) {

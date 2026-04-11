@@ -164,6 +164,25 @@ export default function App() {
                   Followers
                 </div>
               </div>
+              {/** Promo banner; logged in and is not self viewing a premium/premium+ account (not org)  */}
+              {isLoggedIn &&
+                !isSelf &&
+                !account.isOrg &&
+                (account.plan === "premium" || account.plan === "premium+") &&
+                (!session.isOrg || session.plan === "free" || session.plan === "basic") && (
+                  <div className="flex flex-col gap-2 rounded-lg bg-sidebar-primary/25 p-4 text-sm">
+                    <span className="text-lg font-bold">
+                      @{session.username}, you aren&apos;t verified yet
+                    </span>
+                    <span>
+                      Get verified like <b>@{account.username}</b> to stand out and get boosted
+                      reply reach.
+                    </span>
+                    <Button asChild className="w-fit">
+                      <a href="/premium">Get Verified</a>
+                    </Button>
+                  </div>
+                )}
             </div>
             {isPending ? null : canViewPosts ? (
               posts.length > 0 ? (

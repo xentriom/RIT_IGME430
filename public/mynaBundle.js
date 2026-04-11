@@ -7159,12 +7159,12 @@
             ["rect", { width: "8", height: "4", x: "10", y: "6", rx: "1", key: "aywv1n" }],
           ]);
         function ks() {
-          const e = (0, l.c)(33),
+          const e = (0, l.c)(34),
             { isLoggedIn: t } = (0, r.useContext)(Vi),
             [n, o] = (0, r.useState)(""),
             [a, i] = (0, r.useState)(!1);
           let s;
-          e[0] !== n || e[1] !== t
+          e[0] !== n || e[1] !== t || e[2] !== a
             ? ((s = async function () {
                 if (!t) return;
                 const e = n.trim();
@@ -7172,7 +7172,11 @@
                 const r = await fetch("/api/myna/chats", {
                   method: "POST",
                   headers: { "Content-Type": "application/json", Credentials: "same-origin" },
-                  body: JSON.stringify({ content: e, messageId: crypto.randomUUID() }),
+                  body: JSON.stringify({
+                    isPublic: !a,
+                    content: e,
+                    messageId: crypto.randomUUID(),
+                  }),
                 });
                 if (!r.ok) return;
                 const { _id: o } = await r.json();
@@ -7180,29 +7184,30 @@
               }),
               (e[0] = n),
               (e[1] = t),
-              (e[2] = s))
-            : (s = e[2]);
+              (e[2] = a),
+              (e[3] = s))
+            : (s = e[3]);
           const u = s;
           let c, d, f;
-          (e[3] === Symbol.for("react.memo_cache_sentinel")
-            ? ((c = (0, R.jsx)(gs, { className: "size-4" })), (e[3] = c))
-            : (c = e[3]),
-            e[4] === Symbol.for("react.memo_cache_sentinel")
+          (e[4] === Symbol.for("react.memo_cache_sentinel")
+            ? ((c = (0, R.jsx)(gs, { className: "size-4" })), (e[4] = c))
+            : (c = e[4]),
+            e[5] === Symbol.for("react.memo_cache_sentinel")
               ? ((d = (0, R.jsxs)(wo, {
                   variant: "ghost",
                   type: "button",
                   children: [(0, R.jsx)(vs, { className: "size-4" }), "History"],
                 })),
-                (e[4] = d))
-              : (d = e[4]),
-            e[5] !== a ? ((f = () => i(!a)), (e[5] = a), (e[6] = f)) : (f = e[6]));
+                (e[5] = d))
+              : (d = e[5]),
+            e[6] !== a ? ((f = () => i(!a)), (e[6] = a), (e[7] = f)) : (f = e[7]));
           const p = a && "text-primary hover:text-primary";
           let m, h, g, v;
-          (e[7] !== p ? ((m = co(p)), (e[7] = p), (e[8] = m)) : (m = e[8]),
-            e[9] === Symbol.for("react.memo_cache_sentinel")
-              ? ((h = (0, R.jsx)(ys, { className: "size-4" })), (e[9] = h))
-              : (h = e[9]),
-            e[10] !== f || e[11] !== m
+          (e[8] !== p ? ((m = co(p)), (e[8] = p), (e[9] = m)) : (m = e[9]),
+            e[10] === Symbol.for("react.memo_cache_sentinel")
+              ? ((h = (0, R.jsx)(ys, { className: "size-4" })), (e[10] = h))
+              : (h = e[10]),
+            e[11] !== f || e[12] !== m
               ? ((g = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center justify-between",
                   children: [
@@ -7222,11 +7227,11 @@
                     }),
                   ],
                 })),
-                (e[10] = f),
-                (e[11] = m),
-                (e[12] = g))
-              : (g = e[12]),
-            e[13] === Symbol.for("react.memo_cache_sentinel")
+                (e[11] = f),
+                (e[12] = m),
+                (e[13] = g))
+              : (g = e[13]),
+            e[14] === Symbol.for("react.memo_cache_sentinel")
               ? ((v = (0, R.jsxs)("div", {
                   className: "flex flex-row items-center gap-2",
                   children: [
@@ -7237,26 +7242,26 @@
                     }),
                   ],
                 })),
-                (e[13] = v))
-              : (v = e[13]));
+                (e[14] = v))
+              : (v = e[14]));
           const y = !t;
           let w, x, k, S, E, C, N;
           return (
-            e[14] === Symbol.for("react.memo_cache_sentinel")
-              ? ((w = (e) => o(e.target.value)), (e[14] = w))
-              : (w = e[14]),
-            e[15] !== t || e[16] !== u
+            e[15] === Symbol.for("react.memo_cache_sentinel")
+              ? ((w = (e) => o(e.target.value)), (e[15] = w))
+              : (w = e[15]),
+            e[16] !== t || e[17] !== u
               ? ((x = (e) => {
                   if ("Enter" === e.key && !e.shiftKey) {
                     if ((e.preventDefault(), !t)) return;
                     u();
                   }
                 }),
-                (e[15] = t),
-                (e[16] = u),
-                (e[17] = x))
-              : (x = e[17]),
-            e[18] !== n || e[19] !== x || e[20] !== y
+                (e[16] = t),
+                (e[17] = u),
+                (e[18] = x))
+              : (x = e[18]),
+            e[19] !== n || e[20] !== x || e[21] !== y
               ? ((k = (0, R.jsx)(hs, {
                   rows: 2,
                   placeholder: "Ask anything",
@@ -7267,12 +7272,12 @@
                   onChange: w,
                   onKeyDown: x,
                 })),
-                (e[18] = n),
-                (e[19] = x),
-                (e[20] = y),
-                (e[21] = k))
-              : (k = e[21]),
-            e[22] !== a
+                (e[19] = n),
+                (e[20] = x),
+                (e[21] = y),
+                (e[22] = k))
+              : (k = e[22]),
+            e[23] !== a
               ? ((S = a
                   ? (0, R.jsx)("p", {
                       className: "text-sm wrap-break-word text-muted-foreground",
@@ -7299,19 +7304,19 @@
                         }),
                       ],
                     })),
-                (e[22] = a),
-                (e[23] = S))
-              : (S = e[23]),
-            e[24] !== k || e[25] !== S
+                (e[23] = a),
+                (e[24] = S))
+              : (S = e[24]),
+            e[25] !== k || e[26] !== S
               ? ((E = (0, R.jsxs)("div", {
                   className: "flex flex-1 flex-col items-center justify-center gap-4",
                   children: [v, k, S],
                 })),
-                (e[24] = k),
-                (e[25] = S),
-                (e[26] = E))
-              : (E = e[26]),
-            e[27] !== t
+                (e[25] = k),
+                (e[26] = S),
+                (e[27] = E))
+              : (E = e[27]),
+            e[28] !== t
               ? ((C =
                   !t &&
                   (0, R.jsx)("div", {
@@ -7329,16 +7334,16 @@
                       ],
                     }),
                   })),
-                (e[27] = t),
-                (e[28] = C))
-              : (C = e[28]),
-            e[29] !== E || e[30] !== C || e[31] !== g
+                (e[28] = t),
+                (e[29] = C))
+              : (C = e[29]),
+            e[30] !== E || e[31] !== C || e[32] !== g
               ? ((N = (0, R.jsxs)(R.Fragment, { children: [g, E, C] })),
-                (e[29] = E),
-                (e[30] = C),
-                (e[31] = g),
-                (e[32] = N))
-              : (N = e[32]),
+                (e[30] = E),
+                (e[31] = C),
+                (e[32] = g),
+                (e[33] = N))
+              : (N = e[33]),
             N
           );
         }
