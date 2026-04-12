@@ -84,12 +84,6 @@ const router = (app) => {
     mid.requiresLogin,
     controllers.Myna.appendMessage,
   );
-  app.patch(
-    "/api/myna/chats/:chatId",
-    mid.requiresSecure,
-    mid.requiresLogin,
-    controllers.Myna.updateChat,
-  );
 
   // Dawg express changed the syntax from "*" to "/*{name}"
   // The name is useless as far as I can tell so have womp

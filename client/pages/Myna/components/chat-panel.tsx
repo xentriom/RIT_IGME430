@@ -1,26 +1,19 @@
 import type { RefObject } from "react";
-import { Button } from "../../../components/ui/button";
 import { Textarea } from "../../../components/ui/textarea";
 import type { ChatMessage } from "../../../types";
-import { ArrowLeftIcon, BookmarkIcon, HistoryIcon, ShareIcon, SquarePenIcon } from "lucide-react";
 import { cn } from "../../../lib/utils";
-import { toast } from "sonner";
 
 type ChatPanelProps = {
-  conversationId: string;
   messages: ChatMessage[];
   draft: string;
   setDraft: (v: string) => void;
   send: () => void;
   listRef: RefObject<HTMLDivElement | null>;
-  /** When true, messages are view-only (e.g. public chat as guest). */
   readOnly?: boolean;
-  /** Typing indicator on the latest assistant line (optional). */
   isStreaming?: boolean;
 };
 
 export function ChatPanel({
-  conversationId,
   messages,
   draft,
   setDraft,

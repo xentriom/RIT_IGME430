@@ -92,7 +92,6 @@ const appendMessage = async (req, res) => {
 
   const message = {
     id: req.body?.id,
-    role: req.body?.role,
     content: req.body?.content,
   };
 
@@ -111,37 +110,9 @@ const appendMessage = async (req, res) => {
   }
 };
 
-const updateChat = async (req, res) => {
-  const accountId = sessionAccountId(req);
-  if (!accountId) return res.status(401).json({ error: "Unauthorized" });
-
-  const chatId = String(req.params.chatId ?? "").trim();
-  if (!chatId || !mongoose.isObjectIdOrHexString(chatId)) {
-    return res.status(400).json({ error: "Invalid chat id" });
-  }
-
-  if (!Object.prototype.hasOwnProperty.call(req.body ?? {}, "isPublic")) {
-    return res.status(400).json({ error: "isPublic is required" });
-  }
-
-  const isPublic = Boolean(req.body.isPublic);
-
-  try {
-    const updated = await Myna.setChatPublic(chatId, accountId, isPublic);
-    if (!updated) {
-      return res.status(404).json({ error: "Not found" });
-    }
-    const hydrated = await Myna.getChatById(updated._id);
-    return res.json(hydrated);
-  } catch {
-    return res.status(500).json({ error: "An error occurred" });
-  }
-};
-
 module.exports = {
   listChats,
   getChat,
   createChat,
   appendMessage,
-  updateChat,
 };

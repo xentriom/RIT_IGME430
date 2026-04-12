@@ -28,19 +28,69 @@ type LoadState =
   | { status: "missing" }
   | { status: "ready"; canEdit: boolean };
 
-type ConversationViewProps = {
-  conversationId: string;
-};
+type StreamTarget = { messageId: string; full: string };
 
-export function ConversationView({ conversationId }: ConversationViewProps) {
+export function ConversationView({ conversationId }: { conversationId: string }) {
   const { isLoggedIn, session } = useContext(SessionContext);
   const [load, setLoad] = useState<LoadState>({ status: "loading" });
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
+  const [streamTarget, setStreamTarget] = useState<StreamTarget | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!streamTarget) return;
+
+    const { messageId, full } = streamTarget;
+    let i = 0;
+    let rafId = 0;
+
+    const applySlice = () => {
+      setMessages((prev) => {
+        const idx = prev.findIndex((m) => m.id === messageId);
+        if (idx === -1) return prev;
+        const next = [...prev];
+        next[idx] = { ...next[idx], content: full.slice(0, i) };
+        return next;
+      });
+    };
+
+    const bump = () => {
+      i = Math.min(full.length, i + 2);
+      applySlice();
+    };
+
+    bump();
+    if (i >= full.length) {
+      setStreamTarget(null);
+      return;
+    }
+
+    let nextAt = performance.now() + 5;
+
+    const loop = (now: number) => {
+      if (i >= full.length) {
+        setStreamTarget(null);
+        return;
+      }
+      if (now >= nextAt) {
+        bump();
+        nextAt += 5;
+        if (i >= full.length) {
+          setStreamTarget(null);
+          return;
+        }
+      }
+      rafId = requestAnimationFrame(loop);
+    };
+
+    rafId = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(rafId);
+  }, [streamTarget]);
+
+  useEffect(() => {
     async function run() {
+      setStreamTarget(null);
       setLoad({ status: "loading" });
 
       const result = await loadMynaConversation(conversationId, isLoggedIn, session);
@@ -62,30 +112,40 @@ export function ConversationView({ conversationId }: ConversationViewProps) {
     run();
   }, [conversationId, isLoggedIn, session]);
 
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el) return;
+    const id = requestAnimationFrame(() => {
+      el.scrollTop = el.scrollHeight;
+    });
+    return () => cancelAnimationFrame(id);
+  }, [messages]);
+
   async function send() {
     if (load.status !== "ready" || !load.canEdit) return;
     const text = draft.trim();
     if (!text) return;
 
-    const post = (msg: { id: string; role: "user" | "assistant"; content: string }) =>
-      fetch(`/api/myna/chats/${encodeURIComponent(conversationId)}/messages`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Credentials: "same-origin" },
-        body: JSON.stringify(msg),
-      });
+    const res = await fetch(`/api/myna/chats/${encodeURIComponent(conversationId)}/messages`, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: crypto.randomUUID(), content: text }),
+    });
+    if (!res.ok) return;
 
-    const userRes = await post({ id: crypto.randomUUID(), role: "user", content: text });
-    if (!userRes.ok) return;
+    const updated = (await res.json()) as MynaChat;
+    const list = updated.messages ?? [];
+    const last = list[list.length - 1];
 
-    const afterUser = (await userRes.json()) as MynaChat;
-    setMessages(afterUser.messages ?? []);
-    setDraft("");
-
-    const asstRes = await post({ id: crypto.randomUUID(), role: "assistant", content: text });
-    if (asstRes.ok) {
-      const afterAsst = (await asstRes.json()) as MynaChat;
-      setMessages(afterAsst.messages ?? []);
+    if (last?.role === "assistant" && last.content.length > 0) {
+      setMessages([...list.slice(0, -1), { ...last, content: "" }]);
+      setStreamTarget({ messageId: last.id, full: last.content });
+    } else {
+      setStreamTarget(null);
+      setMessages(list);
     }
+    setDraft("");
   }
 
   if (load.status === "loading") {
@@ -137,13 +197,13 @@ export function ConversationView({ conversationId }: ConversationViewProps) {
     <>
       <ConversationToolbar />
       <ChatPanel
-        conversationId={conversationId}
         messages={messages}
         draft={draft}
         setDraft={setDraft}
         send={send}
         listRef={listRef}
         readOnly={!load.canEdit}
+        isStreaming={streamTarget !== null}
       />
     </>
   );

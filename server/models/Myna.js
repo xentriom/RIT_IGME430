@@ -57,20 +57,19 @@ MynaSchema.index({ isPublic: 1 });
 MynaSchema.statics.getChats = (accountId) =>
   MynaModel.find({ account: accountId }).sort({ updatedAt: -1 }).lean().exec();
 
-/** Lightweight rows for sidebar / index (no full message arrays). */
 MynaSchema.statics.getChatSummariesForAccount = (accountId) => {
   const oid = mongoose.Types.ObjectId.createFromHexString(accountId);
   return MynaModel.aggregate([
-    { $match: { account: oid } },
-    { $sort: { updatedAt: -1 } },
+    { $match: { account: oid } }, // filter by account id
+    { $sort: { updatedAt: -1 } }, // sort by updated at descending
     {
       $project: {
         _id: 1,
         createdAt: 1,
         updatedAt: 1,
         isPublic: 1,
-        messageCount: { $size: { $ifNull: ["$messages", []] } },
-        lastMessage: { $arrayElemAt: ["$messages", -1] },
+        messageCount: { $size: { $ifNull: ["$messages", []] } }, // get message count
+        lastMessage: { $arrayElemAt: ["$messages", -1] }, // get last message
       },
     },
   ]).exec();
@@ -78,12 +77,6 @@ MynaSchema.statics.getChatSummariesForAccount = (accountId) => {
 
 MynaSchema.statics.getChatById = (id) =>
   MynaModel.findById(id).populate("account", "_id username").lean().exec();
-
-MynaSchema.statics.getChatByIdForAccount = (id, accountId) =>
-  MynaModel.findOne({ _id: id, account: accountId })
-    .populate("account", "_id username")
-    .lean()
-    .exec();
 
 MynaSchema.statics.startChat = (accountId, content, messageId, isPublic = true) => {
   const trimmed = typeof content === "string" ? content.trim() : "";
@@ -101,10 +94,10 @@ MynaSchema.statics.startChat = (accountId, content, messageId, isPublic = true) 
   });
 };
 
-MynaSchema.statics.appendMessage = (chatId, accountId, message) => {
-  const { id, role, content } = message;
-  if (!id || !role || typeof content !== "string") {
-    return Promise.reject(new Error("Message id, role, and content are required"));
+MynaSchema.statics.appendMessage = function appendMessage(chatId, accountId, message) {
+  const { id, content } = message;
+  if (!id || typeof content !== "string") {
+    return Promise.reject(new Error("Message id and content are required"));
   }
 
   const trimmed = content.trim();
@@ -112,9 +105,16 @@ MynaSchema.statics.appendMessage = (chatId, accountId, message) => {
     return Promise.reject(new Error("Message content is required"));
   }
 
-  return MynaModel.findOneAndUpdate(
+  const userMsg = { id, role: "user", content: trimmed };
+  const assistantMsg = {
+    id: crypto.randomUUID(),
+    role: "assistant",
+    content: trimmed,
+  };
+
+  return this.findOneAndUpdate(
     { _id: chatId, account: accountId },
-    { $push: { messages: { id, role, content: trimmed } } },
+    { $push: { messages: { $each: [userMsg, assistantMsg] } } },
     { new: true, runValidators: true, timestamps: true },
   )
     .lean()

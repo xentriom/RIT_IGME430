@@ -7265,7 +7265,7 @@
               ? ((k = (0, R.jsx)(hs, {
                   rows: 2,
                   placeholder: "Ask anything",
-                  className: "max-w-full resize-none md:max-w-[80%] max-h-24",
+                  className: "max-h-24 max-w-full resize-none md:max-w-[80%]",
                   disabled: y,
                   value: n,
                   maxLength: 4096,
@@ -8598,7 +8598,7 @@
           );
         });
         function eu(e) {
-          const t = (0, l.c)(27),
+          const t = (0, l.c)(33),
             { conversationId: n } = e,
             { isLoggedIn: o, session: a } = (0, r.useContext)(Vi);
           let i;
@@ -8610,100 +8610,143 @@
           t[1] === Symbol.for("react.memo_cache_sentinel") ? ((c = []), (t[1] = c)) : (c = t[1]);
           const [d, f] = (0, r.useState)(c),
             [p, m] = (0, r.useState)(""),
-            h = (0, r.useRef)(null);
-          let g, v, y;
-          (t[2] !== n || t[3] !== o || t[4] !== a
-            ? ((g = () => {
-                !(async function () {
-                  u({ status: "loading" });
-                  const e = await (async function (e, t, n) {
-                    const r = await fetch(`/api/myna/chats/${encodeURIComponent(e)}`, {
-                      credentials: "same-origin",
-                    });
-                    if (403 === r.status) {
-                      const e = await r.json();
-                      return "CHAT_PRIVATE" === e.code
-                        ? { kind: "private", account: e.account }
-                        : { kind: "missing" };
-                    }
-                    if (!r.ok) return { kind: "missing" };
-                    const o = await r.json();
-                    return {
-                      kind: "ready",
-                      messages: o.messages ?? [],
-                      canEdit: Boolean(t && n && String(o.account._id) === String(n._id)),
-                    };
-                  })(n, o, a);
-                  "private" !== e.kind
-                    ? "missing" !== e.kind
-                      ? (f(e.messages), u({ status: "ready", canEdit: e.canEdit }))
-                      : u({ status: "missing" })
-                    : u({ status: "private", account: e.account });
-                })();
+            [h, g] = (0, r.useState)(null),
+            v = (0, r.useRef)(null);
+          let y, b, w, x, k, S, E;
+          (t[2] !== h
+            ? ((y = () => {
+                if (!h) return;
+                const { messageId: e, full: t } = h;
+                let n = 0,
+                  r = 0;
+                const o = () => {
+                  ((n = Math.min(t.length, n + 2)),
+                    f((r) => {
+                      const o = r.findIndex((t) => t.id === e);
+                      if (-1 === o) return r;
+                      const a = [...r];
+                      return ((a[o] = { ...a[o], content: t.slice(0, n) }), a);
+                    }));
+                };
+                if ((o(), n >= t.length)) return void g(null);
+                let a = performance.now() + 5;
+                const l = (e) => {
+                  n >= t.length || (e >= a && (o(), (a += 5), n >= t.length))
+                    ? g(null)
+                    : (r = requestAnimationFrame(l));
+                };
+                return ((r = requestAnimationFrame(l)), () => cancelAnimationFrame(r));
               }),
-              (v = [n, o, a]),
-              (t[2] = n),
-              (t[3] = o),
-              (t[4] = a),
-              (t[5] = g),
-              (t[6] = v))
-            : ((g = t[5]), (v = t[6])),
-            (0, r.useEffect)(g, v),
-            t[7] !== n || t[8] !== p || t[9] !== s.canEdit || t[10] !== s.status
-              ? ((y = async function () {
+              (b = [h]),
+              (t[2] = h),
+              (t[3] = y),
+              (t[4] = b))
+            : ((y = t[3]), (b = t[4])),
+            (0, r.useEffect)(y, b),
+            t[5] !== n || t[6] !== o || t[7] !== a
+              ? ((w = () => {
+                  !(async function () {
+                    (g(null), u({ status: "loading" }));
+                    const e = await (async function (e, t, n) {
+                      const r = await fetch(`/api/myna/chats/${encodeURIComponent(e)}`, {
+                        credentials: "same-origin",
+                      });
+                      if (403 === r.status) {
+                        const e = await r.json();
+                        return "CHAT_PRIVATE" === e.code
+                          ? { kind: "private", account: e.account }
+                          : { kind: "missing" };
+                      }
+                      if (!r.ok) return { kind: "missing" };
+                      const o = await r.json();
+                      return {
+                        kind: "ready",
+                        messages: o.messages ?? [],
+                        canEdit: Boolean(t && n && String(o.account._id) === String(n._id)),
+                      };
+                    })(n, o, a);
+                    "private" !== e.kind
+                      ? "missing" !== e.kind
+                        ? (f(e.messages), u({ status: "ready", canEdit: e.canEdit }))
+                        : u({ status: "missing" })
+                      : u({ status: "private", account: e.account });
+                  })();
+                }),
+                (x = [n, o, a]),
+                (t[5] = n),
+                (t[6] = o),
+                (t[7] = a),
+                (t[8] = w),
+                (t[9] = x))
+              : ((w = t[8]), (x = t[9])),
+            (0, r.useEffect)(w, x),
+            t[10] === Symbol.for("react.memo_cache_sentinel")
+              ? ((k = () => {
+                  const e = v.current;
+                  if (!e) return;
+                  const t = requestAnimationFrame(() => {
+                    e.scrollTop = e.scrollHeight;
+                  });
+                  return () => cancelAnimationFrame(t);
+                }),
+                (t[10] = k))
+              : (k = t[10]),
+            t[11] !== d ? ((S = [d]), (t[11] = d), (t[12] = S)) : (S = t[12]),
+            (0, r.useEffect)(k, S),
+            t[13] !== n || t[14] !== p || t[15] !== s.canEdit || t[16] !== s.status
+              ? ((E = async function () {
                   if ("ready" !== s.status || !s.canEdit) return;
                   const e = p.trim();
                   if (!e) return;
-                  const t = (e) =>
-                      fetch(`/api/myna/chats/${encodeURIComponent(n)}/messages`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json", Credentials: "same-origin" },
-                        body: JSON.stringify(e),
-                      }),
-                    r = await t({ id: crypto.randomUUID(), role: "user", content: e });
-                  if (!r.ok) return;
-                  const o = await r.json();
-                  (f(o.messages ?? []), m(""));
-                  const a = await t({ id: crypto.randomUUID(), role: "assistant", content: e });
-                  if (a.ok) {
-                    const e = await a.json();
-                    f(e.messages ?? []);
-                  }
+                  const t = await fetch(`/api/myna/chats/${encodeURIComponent(n)}/messages`, {
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id: crypto.randomUUID(), content: e }),
+                  });
+                  if (!t.ok) return;
+                  const r = (await t.json()).messages ?? [],
+                    o = r[r.length - 1];
+                  ("assistant" === o?.role && o.content.length > 0
+                    ? (f([...r.slice(0, -1), { ...o, content: "" }]),
+                      g({ messageId: o.id, full: o.content }))
+                    : (g(null), f(r)),
+                    m(""));
                 }),
-                (t[7] = n),
-                (t[8] = p),
-                (t[9] = s.canEdit),
-                (t[10] = s.status),
-                (t[11] = y))
-              : (y = t[11]));
-          const b = y;
+                (t[13] = n),
+                (t[14] = p),
+                (t[15] = s.canEdit),
+                (t[16] = s.status),
+                (t[17] = E))
+              : (E = t[17]));
+          const C = E;
           if ("loading" === s.status) {
             let e;
             return (
-              t[12] === Symbol.for("react.memo_cache_sentinel")
+              t[18] === Symbol.for("react.memo_cache_sentinel")
                 ? ((e = (0, R.jsx)("div", {
                     className:
                       "flex flex-1 items-center justify-center text-sm text-muted-foreground",
                     children: "Loading…",
                   })),
-                  (t[12] = e))
-                : (e = t[12]),
+                  (t[18] = e))
+                : (e = t[18]),
               e
             );
           }
           if ("private" === s.status) {
             let e, n, r, o;
             return (
-              t[13] === Symbol.for("react.memo_cache_sentinel")
-                ? ((e = (0, R.jsx)(tu, {})), (t[13] = e))
-                : (e = t[13]),
-              t[14] === Symbol.for("react.memo_cache_sentinel")
+              t[19] === Symbol.for("react.memo_cache_sentinel")
+                ? ((e = (0, R.jsx)(tu, {})), (t[19] = e))
+                : (e = t[19]),
+              t[20] === Symbol.for("react.memo_cache_sentinel")
                 ? ((n = (0, R.jsx)(_s, { variant: "icon", children: (0, R.jsx)(Ts, {}) })),
                   (r = (0, R.jsx)(zs, { children: "This chat is private" })),
-                  (t[14] = n),
-                  (t[15] = r))
-                : ((n = t[14]), (r = t[15])),
-              t[16] !== s.account.username
+                  (t[20] = n),
+                  (t[21] = r))
+                : ((n = t[20]), (r = t[21])),
+              t[22] !== s.account.username
                 ? ((o = (0, R.jsxs)(R.Fragment, {
                     children: [
                       e,
@@ -8727,19 +8770,19 @@
                       }),
                     ],
                   })),
-                  (t[16] = s.account.username),
-                  (t[17] = o))
-                : (o = t[17]),
+                  (t[22] = s.account.username),
+                  (t[23] = o))
+                : (o = t[23]),
               o
             );
           }
           if ("missing" === s.status) {
             let e, n;
             return (
-              t[18] === Symbol.for("react.memo_cache_sentinel")
-                ? ((e = (0, R.jsx)(tu, {})), (t[18] = e))
-                : (e = t[18]),
-              t[19] === Symbol.for("react.memo_cache_sentinel")
+              t[24] === Symbol.for("react.memo_cache_sentinel")
+                ? ((e = (0, R.jsx)(tu, {})), (t[24] = e))
+                : (e = t[24]),
+              t[25] === Symbol.for("react.memo_cache_sentinel")
                 ? ((n = (0, R.jsxs)(R.Fragment, {
                     children: [
                       e,
@@ -8756,41 +8799,42 @@
                       }),
                     ],
                   })),
-                  (t[19] = n))
-                : (n = t[19]),
+                  (t[25] = n))
+                : (n = t[25]),
               n
             );
           }
-          let w;
-          t[20] === Symbol.for("react.memo_cache_sentinel")
-            ? ((w = (0, R.jsx)(tu, {})), (t[20] = w))
-            : (w = t[20]);
-          const x = !s.canEdit;
-          let k;
+          let N;
+          t[26] === Symbol.for("react.memo_cache_sentinel")
+            ? ((N = (0, R.jsx)(tu, {})), (t[26] = N))
+            : (N = t[26]);
+          const _ = !s.canEdit,
+            z = null !== h;
+          let P;
           return (
-            t[21] !== n || t[22] !== p || t[23] !== d || t[24] !== b || t[25] !== x
-              ? ((k = (0, R.jsxs)(R.Fragment, {
+            t[27] !== p || t[28] !== d || t[29] !== C || t[30] !== _ || t[31] !== z
+              ? ((P = (0, R.jsxs)(R.Fragment, {
                   children: [
-                    w,
+                    N,
                     (0, R.jsx)(Ss, {
-                      conversationId: n,
                       messages: d,
                       draft: p,
                       setDraft: m,
-                      send: b,
-                      listRef: h,
-                      readOnly: x,
+                      send: C,
+                      listRef: v,
+                      readOnly: _,
+                      isStreaming: z,
                     }),
                   ],
                 })),
-                (t[21] = n),
-                (t[22] = p),
-                (t[23] = d),
-                (t[24] = b),
-                (t[25] = x),
-                (t[26] = k))
-              : (k = t[26]),
-            k
+                (t[27] = p),
+                (t[28] = d),
+                (t[29] = C),
+                (t[30] = _),
+                (t[31] = z),
+                (t[32] = P))
+              : (P = t[32]),
+            P
           );
         }
         function tu() {
