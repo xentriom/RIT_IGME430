@@ -66,7 +66,7 @@ export function Composer() {
         <Textarea
           rows={2}
           placeholder="Ask anything"
-          className="max-w-full resize-none md:max-w-[80%]"
+          className="max-h-24 max-w-full resize-none md:max-w-[80%]"
           disabled={!isLoggedIn}
           value={draft}
           maxLength={4096}

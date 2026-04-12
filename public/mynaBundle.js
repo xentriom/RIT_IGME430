@@ -7265,7 +7265,7 @@
               ? ((k = (0, R.jsx)(hs, {
                   rows: 2,
                   placeholder: "Ask anything",
-                  className: "max-w-full resize-none md:max-w-[80%]",
+                  className: "max-w-full resize-none md:max-w-[80%] max-h-24",
                   disabled: y,
                   value: n,
                   maxLength: 4096,
