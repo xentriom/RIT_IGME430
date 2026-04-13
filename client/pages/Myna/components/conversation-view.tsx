@@ -30,6 +30,42 @@ type LoadState =
 
 type StreamTarget = { messageId: string; full: string };
 
+const MAX_MESSAGE_CHARS = 4096;
+const STREAM_MS_TOTAL_MIN = 2200;
+const STREAM_MS_TOTAL_MAX = 8500;
+const STREAM_MS_PER_TICK_MIN = 8;
+const STREAM_MS_PER_TICK_MAX = 45;
+
+// get the timing for the typewriter effect
+// this was only done because SSE didnt work out despite trying for a few hours
+// and the static effect of 5ms delay was weird and got too long for longer messages
+function streamTiming(charCount: number) {
+  if (charCount < 1) return { delayMs: STREAM_MS_PER_TICK_MIN, charsPerTick: 1 };
+
+  // proportion of max composer length (0–1)
+  const fill = Math.min(1, charCount / MAX_MESSAGE_CHARS);
+
+  // target duration for the whole typewriter: lerp between min and max
+  // thank you to those almost useless unity courses????
+  // https://www.wmcnamara.com/post/linear-interpolation-explained
+  const targetTotalMs = STREAM_MS_TOTAL_MIN + (STREAM_MS_TOTAL_MAX - STREAM_MS_TOTAL_MIN) * fill;
+
+  // how many ticks could fit in that budget if every pause were only STREAM_MS_PER_TICK_MIN?
+  const maxStepsAtMinDelay = Math.max(1, Math.floor(targetTotalMs / STREAM_MS_PER_TICK_MIN));
+
+  // enough characters per tick that we don’t need more than maxStepsAtMinDelay ticks
+  const charsPerTick = Math.max(1, Math.ceil(charCount / maxStepsAtMinDelay));
+  const steps = Math.ceil(charCount / charsPerTick);
+
+  // aim for targetTotalMs / steps per tick, but clamp pause length
+  const delayMs = Math.max(
+    STREAM_MS_PER_TICK_MIN,
+    Math.min(STREAM_MS_PER_TICK_MAX, targetTotalMs / steps),
+  );
+
+  return { delayMs, charsPerTick };
+}
+
 export function ConversationView({ conversationId }: { conversationId: string }) {
   const { isLoggedIn, session } = useContext(SessionContext);
   const [load, setLoad] = useState<LoadState>({ status: "loading" });
@@ -42,6 +78,7 @@ export function ConversationView({ conversationId }: { conversationId: string })
     if (!streamTarget) return;
 
     const { messageId, full } = streamTarget;
+    const { delayMs, charsPerTick } = streamTiming(full.length);
     let i = 0;
     let rafId = 0;
 
@@ -56,7 +93,7 @@ export function ConversationView({ conversationId }: { conversationId: string })
     };
 
     const bump = () => {
-      i = Math.min(full.length, i + 2);
+      i = Math.min(full.length, i + charsPerTick);
       applySlice();
     };
 
@@ -66,7 +103,7 @@ export function ConversationView({ conversationId }: { conversationId: string })
       return;
     }
 
-    let nextAt = performance.now() + 5;
+    let nextAt = performance.now() + delayMs;
 
     const loop = (now: number) => {
       if (i >= full.length) {
@@ -75,7 +112,7 @@ export function ConversationView({ conversationId }: { conversationId: string })
       }
       if (now >= nextAt) {
         bump();
-        nextAt += 5;
+        nextAt += delayMs;
         if (i >= full.length) {
           setStreamTarget(null);
           return;
