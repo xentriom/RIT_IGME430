@@ -87,8 +87,11 @@ const appendMessage = async (req, res) => {
     return res.status(400).json({ error: "Invalid chat id" });
   }
 
+  const oChatId = mongoose.Types.ObjectId.createFromHexString(chatId);
+  const oAccountId = mongoose.Types.ObjectId.createFromHexString(accountId);
+
   try {
-    const updated = await Myna.appendMessage(chatId, accountId, { id, content });
+    const updated = await Myna.appendMessage(oChatId, oAccountId, { id, content });
     if (!updated) {
       return res.status(404).json({ error: "Not found" });
     }
