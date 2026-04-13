@@ -190,16 +190,22 @@ const getUserAvatar = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  const { username, password } = req.body;
-  if (!username) return res.status(400).json({ error: "Username is required" });
+  const { password } = req.body;
+  if (!password) return res.status(400).json({ error: "Password is required" });
 
-  const account = await models.Account.findByUsername(username);
-  if (!account) return res.status(404).json({ error: "User not found" });
+  const session = req.session;
+  if (!session) return res.status(401).json({ error: "Login required" });
 
   const hash = await models.Account.generateHash(password);
-  account.password = hash;
-  await account.save();
-  
+
+  const updated = await models.Account.findByIdAndUpdate(
+    session.account._id,
+    { $set: { password: hash } },
+    { new: true },
+  ).exec();
+
+  if (!updated) return res.status(404).json({ error: "User not found" });
+
   return res.json({ message: "Password reset successfully" });
 };
 
