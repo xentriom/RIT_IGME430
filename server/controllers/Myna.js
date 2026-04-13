@@ -82,16 +82,13 @@ const appendMessage = async (req, res) => {
   const accountId = sessionAccountId(req);
   if (!accountId) return res.status(401).json({ error: "Unauthorized" });
 
-  const { chatId, id, content } = req.params;
+  const { chatId } = req.params;
   if (!chatId || !mongoose.isObjectIdOrHexString(chatId)) {
     return res.status(400).json({ error: "Invalid chat id" });
   }
 
-  const oChatId = mongoose.Types.ObjectId.createFromHexString(chatId);
-  const oAccountId = mongoose.Types.ObjectId.createFromHexString(accountId);
-
   try {
-    const updated = await Myna.appendMessage(oChatId, oAccountId, { id, content });
+    const updated = await Myna.appendMessage(chatId, accountId, req.body);
     if (!updated) {
       return res.status(404).json({ error: "Not found" });
     }

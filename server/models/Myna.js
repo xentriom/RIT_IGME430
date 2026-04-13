@@ -94,7 +94,8 @@ MynaSchema.statics.startChat = (accountId, content, messageId, isPublic = true) 
   });
 };
 
-MynaSchema.statics.appendMessage = (chatId, accountId, message) => {
+// this has to be a function so this is populated
+MynaSchema.statics.appendMessage = function (chatId, accountId, message) {
   const { id, content } = message;
   if (!id || typeof content !== "string") {
     return Promise.reject(new Error("Message id and content are required"));
