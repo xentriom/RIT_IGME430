@@ -190,16 +190,16 @@ const getUserAvatar = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  const { username } = req.body;
+  const { username, password } = req.body;
   if (!username) return res.status(400).json({ error: "Username is required" });
 
   const account = await models.Account.findByUsername(username);
   if (!account) return res.status(404).json({ error: "User not found" });
 
-  const newPassword = crypto.randomBytes(16).toString("hex");
-  account.password = newPassword;
+  const hash = await models.Account.generateHash(password);
+  account.password = hash;
   await account.save();
-
+  
   return res.json({ message: "Password reset successfully" });
 };
 
@@ -212,4 +212,5 @@ module.exports = {
   updateAccount,
   getAvatar,
   getUserAvatar,
+  resetPassword,
 };
