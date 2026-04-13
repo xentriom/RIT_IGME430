@@ -24,11 +24,7 @@ import { Spinner } from "../../../components/ui/spinner";
 import { Checkbox } from "../../../components/ui/checkbox";
 import { AvatarUpload } from "./avatar-upload";
 
-type EditProfileProps = {
-  onSaved?: () => void;
-};
-
-export function EditProfile({ onSaved }: EditProfileProps) {
+export function EditProfile({ onSaved }: { onSaved?: () => void }) {
   const { isLoggedIn, session, setSession } = useContext(SessionContext);
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);

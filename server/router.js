@@ -75,9 +75,11 @@ const router = (app) => {
   );
 
   // Myna (chats)
+  // Ik this isnt how actual ai chatbots work, they send a post
+  // and then establish a sse connection to stream the response
   app.get("/api/myna/chats", mid.requiresSecure, mid.requiresLogin, controllers.Myna.listChats);
-  app.post("/api/myna/chats", mid.requiresSecure, mid.requiresLogin, controllers.Myna.createChat);
   app.get("/api/myna/chats/:chatId", mid.requiresSecure, controllers.Myna.getChat);
+  app.post("/api/myna/chats", mid.requiresSecure, mid.requiresLogin, controllers.Myna.createChat);
   app.post(
     "/api/myna/chats/:chatId/messages",
     mid.requiresSecure,

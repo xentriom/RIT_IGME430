@@ -94,7 +94,7 @@ MynaSchema.statics.startChat = (accountId, content, messageId, isPublic = true) 
   });
 };
 
-MynaSchema.statics.appendMessage = function appendMessage(chatId, accountId, message) {
+MynaSchema.statics.appendMessage = (chatId, accountId, message) => {
   const { id, content } = message;
   if (!id || typeof content !== "string") {
     return Promise.reject(new Error("Message id and content are required"));
@@ -106,6 +106,11 @@ MynaSchema.statics.appendMessage = function appendMessage(chatId, accountId, mes
   }
 
   const userMsg = { id, role: "user", content: trimmed };
+
+  // use a nlp to maybe generate a response
+  // like node-nlp
+  // itll have simple intent recognition like who are you etc
+
   const assistantMsg = {
     id: crypto.randomUUID(),
     role: "assistant",

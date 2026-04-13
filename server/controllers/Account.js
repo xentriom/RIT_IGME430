@@ -13,12 +13,12 @@ const logout = (req, res) => {
 const login = (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    return res.status(400).json({ error: "All fields are required!" });
+    return res.status(400).json({ error: "All fields are required" });
   }
 
   return Account.authenticate(username, password, (err, account) => {
     if (err || !account) {
-      return res.status(401).json({ error: "Wrong username or password!" });
+      return res.status(401).json({ error: "Wrong username or password" });
     }
 
     req.session.account = Account.toAPI(account);
@@ -29,11 +29,11 @@ const login = (req, res) => {
 const signup = async (req, res) => {
   const { username, password, repeatPassword } = req.body;
   if (!username || !password || !repeatPassword) {
-    return res.status(400).json({ error: "All fields are required!" });
+    return res.status(400).json({ error: "All fields are required" });
   }
 
   if (password !== repeatPassword) {
-    return res.status(400).json({ error: "Passwords do not match!" });
+    return res.status(400).json({ error: "Passwords do not match" });
   }
 
   try {
@@ -44,7 +44,7 @@ const signup = async (req, res) => {
     return res.json({ redirect: "/" });
   } catch (err) {
     if (err.code === 11000) {
-      return res.status(400).json({ error: "Username already in use!" });
+      return res.status(400).json({ error: "Username already in use" });
     }
 
     if (err.name === "ValidationError" && err.errors) {

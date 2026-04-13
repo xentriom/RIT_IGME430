@@ -3,11 +3,11 @@ const { enrichPosts, canViewPrivateAuthor, parseLimit } = require("./Post");
 const mongoose = require("mongoose");
 
 const getAccount = async (req, res) => {
-  const username = req.params.username;
-  if (!username) return res.status(400).json({ error: "Username is required!" });
+  const { username } = req.params;
+  if (!username) return res.status(400).json({ error: "Username is required" });
 
   const account = await models.Account.findByUsername(username);
-  if (!account) return res.status(404).json({ error: "User not found!" });
+  if (!account) return res.status(404).json({ error: "User not found" });
 
   const [followingCount, followersCount] = await Promise.all([
     models.Relationship.countFollowing(account._id),
@@ -26,10 +26,8 @@ const getAccount = async (req, res) => {
 };
 
 const toggleFollow = async (req, res) => {
-  const username = String(req.params.username ?? "")
-    .trim()
-    .toLowerCase();
-  if (!username) return res.status(400).json({ error: "Username is required!" });
+  const { username } = req.params;
+  if (!username) return res.status(400).json({ error: "Username is required" });
 
   const viewer = req.session?.account;
   if (!viewer) return res.status(401).json({ error: "Login required" });
@@ -73,23 +71,23 @@ const getAccounts = async (req, res) => {
 };
 
 const getFollowers = async (req, res) => {
-  const username = req.params.username;
-  if (!username) return res.status(400).json({ error: "Username is required!" });
+  const { username } = req.params;
+  if (!username) return res.status(400).json({ error: "Username is required" });
 
   const account = await models.Account.findByUsername(username);
-  if (!account) return res.status(404).json({ error: "User not found!" });
+  if (!account) return res.status(404).json({ error: "User not found" });
 
   const followers = await models.Relationship.findFollowers(account._id);
   return res.json(followers);
 };
 
 const getPosts = async (req, res) => {
-  const username = req.params.username;
-  if (!username) return res.status(400).json({ error: "Username is required!" });
+  const { username } = req.params;
+  if (!username) return res.status(400).json({ error: "Username is required" });
 
   try {
     const account = await models.Account.findByUsername(username);
-    if (!account) return res.status(404).json({ error: "User not found!" });
+    if (!account) return res.status(404).json({ error: "User not found" });
 
     const viewerId = req.session?.account?._id ?? null;
     if (!(await canViewPrivateAuthor(account, viewerId))) {
@@ -153,15 +151,16 @@ const updateAccount = async (req, res) => {
 };
 
 const getAvatar = async (req, res) => {
-  const id = String(req.params.id ?? "").trim();
+  const { id } = req.params;
+  if (!id) return res.status(400).json({ error: "ID is required" });
 
-  if (!id) return res.status(400).json({ error: "ID is required!" });
-  if (typeof id !== "string") return res.status(400).json({ error: "ID must be a string!" });
-  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ error: "Invalid ID!" });
+  if (typeof id !== "string") return res.status(400).json({ error: "ID must be a string" });
+  if (!mongoose.isObjectIdOrHexString(id))
+    return res.status(400).json({ error: "Invalid ID format" });
 
-  const oid = new mongoose.Types.ObjectId(id);
+  const oid = mongoose.Types.ObjectId.createFromHexString(id);
   const photo = await models.Filestore.findById(oid).exec();
-  if (!photo?.data?.length) return res.status(404).json({ error: "User has no avatar" });
+  if (!photo?.data?.length) return res.status(404).json({ error: "Avatar not found" });
 
   res.set({
     "Content-Type": "image/webp",
@@ -173,15 +172,13 @@ const getAvatar = async (req, res) => {
 };
 
 const getUserAvatar = async (req, res) => {
-  const username = req.params.username;
-  if (!username) return res.status(400).json({ error: "Username is required!" });
+  const { username, avatarId } = req.params;
+  if (!username || !avatarId)
+    return res.status(400).json({ error: "Username and avatar ID are required" });
 
-  const avatarId = req.params.avatarId;
-  if (!avatarId) return res.status(400).json({ error: "Avatar ID is required!" });
-
-  const oid = new mongoose.Types.ObjectId(avatarId);
+  const oid = mongoose.Types.ObjectId.createFromHexString(avatarId);
   const photo = await models.Filestore.findById(oid).exec();
-  if (!photo?.data?.length) return res.status(404).json({ error: "User has no avatar" });
+  if (!photo?.data?.length) return res.status(404).json({ error: "Avatar not found" });
 
   res.set({
     "Content-Type": "image/webp",
@@ -190,6 +187,20 @@ const getUserAvatar = async (req, res) => {
   });
 
   return res.send(photo.data);
+};
+
+const resetPassword = async (req, res) => {
+  const { username } = req.body;
+  if (!username) return res.status(400).json({ error: "Username is required" });
+
+  const account = await models.Account.findByUsername(username);
+  if (!account) return res.status(404).json({ error: "User not found" });
+
+  const newPassword = crypto.randomBytes(16).toString("hex");
+  account.password = newPassword;
+  await account.save();
+
+  return res.json({ message: "Password reset successfully" });
 };
 
 module.exports = {

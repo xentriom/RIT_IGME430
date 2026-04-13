@@ -5,7 +5,7 @@ const webPage = (_req, res) => {
 };
 
 const profilePage = async (req, res) => {
-  const username = req.params.username ?? "".trim();
+  const { username } = req.params;
   if (!username) return res.redirect("/app");
 
   const account = await models.Account.findByUsername(username);
@@ -20,9 +20,7 @@ const profilePage = async (req, res) => {
 };
 
 const authPage = (req, res) => {
-  const type = String(req.params.type ?? "login")
-    .trim()
-    .toLowerCase();
+  const { type } = req.params;
   res.render("auth", {
     title: "Auth",
     type,
@@ -34,7 +32,7 @@ const premiumPage = (req, res) => {
 };
 
 const postPage = async (req, res) => {
-  const postId = req.params.postId;
+  const { postId } = req.params;
   if (!postId) return res.redirect("/");
 
   const post = await models.Post.findById(postId);

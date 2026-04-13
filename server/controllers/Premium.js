@@ -5,16 +5,12 @@ const AllowedPlans = new Set(["free", "basic", "premium", "premium+"]);
 const purchase = async (req, res) => {
   try {
     const session = req.session.account;
-    if (!session?._id) {
+    if (!session || !session._id) {
       return res.status(401).json({ error: "You must be logged in to purchase a subscription" });
     }
 
-    const plan = String(req.body?.plan ?? "")
-      .trim()
-      .toLowerCase();
-    const cycle = String(req.body?.cycle ?? "")
-      .trim()
-      .toLowerCase();
+    const { plan, cycle } = req.body;
+    if (!plan || !cycle) return res.status(400).json({ error: "Plan and cycle are required" });
 
     if (!AllowedPlans.has(plan) || plan === "free") {
       return res.status(400).json({ error: "Invalid subscription plan" });

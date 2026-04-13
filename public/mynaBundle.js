@@ -8616,26 +8616,34 @@
           (t[2] !== h
             ? ((y = () => {
                 if (!h) return;
-                const { messageId: e, full: t } = h;
-                let n = 0,
-                  r = 0;
-                const o = () => {
-                  ((n = Math.min(t.length, n + 2)),
-                    f((r) => {
-                      const o = r.findIndex((t) => t.id === e);
-                      if (-1 === o) return r;
-                      const a = [...r];
-                      return ((a[o] = { ...a[o], content: t.slice(0, n) }), a);
+                const { messageId: e, full: t } = h,
+                  { delayMs: n, charsPerTick: r } = (function (e) {
+                    if (e < 1) return { delayMs: 8, charsPerTick: 1 };
+                    const t = 2200 + 6300 * Math.min(1, e / 4096),
+                      n = Math.max(1, Math.floor(t / 8)),
+                      r = Math.max(1, Math.ceil(e / n)),
+                      o = Math.ceil(e / r);
+                    return { delayMs: Math.max(8, Math.min(45, t / o)), charsPerTick: r };
+                  })(t.length);
+                let o = 0,
+                  a = 0;
+                const l = () => {
+                  ((o = Math.min(t.length, o + r)),
+                    f((n) => {
+                      const r = n.findIndex((t) => t.id === e);
+                      if (-1 === r) return n;
+                      const a = [...n];
+                      return ((a[r] = { ...a[r], content: t.slice(0, o) }), a);
                     }));
                 };
-                if ((o(), n >= t.length)) return void g(null);
-                let a = performance.now() + 5;
-                const l = (e) => {
-                  n >= t.length || (e >= a && (o(), (a += 5), n >= t.length))
+                if ((l(), o >= t.length)) return void g(null);
+                let i = performance.now() + n;
+                const s = (e) => {
+                  o >= t.length || (e >= i && (l(), (i += n), o >= t.length))
                     ? g(null)
-                    : (r = requestAnimationFrame(l));
+                    : (a = requestAnimationFrame(s));
                 };
-                return ((r = requestAnimationFrame(l)), () => cancelAnimationFrame(r));
+                return ((a = requestAnimationFrame(s)), () => cancelAnimationFrame(a));
               }),
               (b = [h]),
               (t[2] = h),

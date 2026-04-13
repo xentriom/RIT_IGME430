@@ -26,7 +26,7 @@ const listChats = async (req, res) => {
 };
 
 const getChat = async (req, res) => {
-  const chatId = String(req.params.chatId ?? "").trim();
+  const { chatId } = req.params;
   if (!chatId || !mongoose.isObjectIdOrHexString(chatId)) {
     return res.status(400).json({ error: "Invalid chat id" });
   }
@@ -62,11 +62,8 @@ const createChat = async (req, res) => {
   const accountId = sessionAccountId(req);
   if (!accountId) return res.status(401).json({ error: "Unauthorized" });
 
-  const content = String(req.body?.content ?? "").trim();
-  const messageId =
-    typeof req.body?.messageId === "string" && req.body.messageId.trim()
-      ? req.body.messageId.trim()
-      : undefined;
+  const content = String(req.body?.content ?? "").trim() || "";
+  const messageId = req.body?.messageId ? String(req.body.messageId).trim() : undefined;
   const isPublic = req.body?.isPublic === undefined ? true : Boolean(req.body.isPublic);
 
   try {
@@ -85,18 +82,13 @@ const appendMessage = async (req, res) => {
   const accountId = sessionAccountId(req);
   if (!accountId) return res.status(401).json({ error: "Unauthorized" });
 
-  const chatId = String(req.params.chatId ?? "").trim();
+  const { chatId, id, content } = req.params;
   if (!chatId || !mongoose.isObjectIdOrHexString(chatId)) {
     return res.status(400).json({ error: "Invalid chat id" });
   }
 
-  const message = {
-    id: req.body?.id,
-    content: req.body?.content,
-  };
-
   try {
-    const updated = await Myna.appendMessage(chatId, accountId, message);
+    const updated = await Myna.appendMessage(chatId, accountId, { id, content });
     if (!updated) {
       return res.status(404).json({ error: "Not found" });
     }
