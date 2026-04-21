@@ -156,10 +156,14 @@ export function Post({ post }: { post: PostType }) {
                   </div>
                 </HoverCardContent>
                 <ProfileBadge isOrg={ownerUi.isOrg} plan={ownerUi.plan} />
-                <span className="shrink-0 text-sm text-muted-foreground">•</span>
-                <span className="shrink-0 text-sm whitespace-nowrap text-muted-foreground">
-                  {formatDate(post.createdDate)}
-                </span>
+                {post.owner.username !== "ads" && (
+                  <>
+                    <span className="shrink-0 text-sm text-muted-foreground">•</span>
+                    <span className="shrink-0 text-sm whitespace-nowrap text-muted-foreground">
+                      {formatDate(post.createdDate)}
+                    </span>
+                  </>
+                )}
               </div>
               <div className="flex flex-row items-center gap-2">
                 {post.owner.username === "ads" && (

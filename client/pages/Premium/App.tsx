@@ -69,14 +69,11 @@ export default function App() {
         type="button"
         onClick={() => {
           const ref = document.referrer;
-          try {
-            if (ref && new URL(ref).origin === window.location.origin) {
-              window.history.back();
-              return;
-            }
-          } catch {
-            // invalid referrer
+          if (ref && new URL(ref).origin === window.location.origin) {
+            window.history.back();
+            return;
           }
+
           window.location.href = "/";
         }}
         className="absolute top-4 left-4 rounded-full bg-muted p-2"
@@ -101,7 +98,7 @@ export default function App() {
             </Tabs>
             <Plans cycle={cycle} model={model} setModel={setModel} />
           </div>
-          <div className="mx-auto flex max-w-7xl flex-row items-center justify-between rounded-lg border border-border p-4">
+          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between rounded-lg border border-border p-4 max-md:gap-2 md:flex-row">
             <div className="flex flex-row gap-2">
               <BadgeCheck className="size-16 text-yellow-500" />
               <div className="flex flex-col text-left">
@@ -109,7 +106,9 @@ export default function App() {
                 <p>Gain credibility and grow faster with Premium Business</p>
               </div>
             </div>
-            <Button variant="secondary">Explore Premium Business</Button>
+            <Button variant="secondary" className="max-md:w-full">
+              Explore Premium Business
+            </Button>
           </div>
           <section className="mx-auto max-w-5xl space-y-4">
             <h2 className="text-left text-2xl font-bold">Compare tiers & features</h2>
