@@ -4386,11 +4386,11 @@
                             },
                             body: JSON.stringify({ plan: s, cycle: o }),
                           })
-                            .then(kr)
+                            .then(xr)
                             .then((t) => e(t))
                             .catch((e) => t(e));
                         }),
-                        { loading: "Purchasing...", success: wr, error: yr },
+                        { loading: "Purchasing...", success: kr, error: wr },
                       )
                     : v.error("You must be logged in to purchase a subscription");
                 });
@@ -4404,8 +4404,9 @@
           let h, g, b, y, w, k, x, S, E, N, C, z, _, P, T, j, L, R, A, D, F, I, $, U, B, H, W;
           return (
             e[4] === Symbol.for("react.memo_cache_sentinel")
-              ? ((h = (0, V.jsx)("a", {
-                  href: "/",
+              ? ((h = (0, V.jsx)("button", {
+                  type: "button",
+                  onClick: yr,
                   className: "absolute top-4 left-4 rounded-full bg-muted p-2",
                   children: (0, V.jsx)(O, { className: "size-4" }),
                 })),
@@ -4666,25 +4667,31 @@
             e.experience,
           );
         }
-        function yr(e) {
-          return e instanceof Error ? e.message : "Purchase failed";
+        function yr() {
+          const e = document.referrer;
+          e && e.includes(window.location.hostname)
+            ? window.history.back()
+            : (window.location.href = "/");
         }
         function wr(e) {
-          return `Your payment for ${e.plan} ${e.cycle} has been processed.`;
+          return e instanceof Error ? e.message : "Purchase failed";
         }
         function kr(e) {
+          return `Your payment for ${e.plan} ${e.cycle} has been processed.`;
+        }
+        function xr(e) {
           return e.json();
         }
-        const xr = R("circle-check", [
+        const Sr = R("circle-check", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }],
           ]),
-          Sr = R("info", [
+          Er = R("info", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "M12 16v-4", key: "1dtifu" }],
             ["path", { d: "M12 8h.01", key: "e9boi3" }],
           ]),
-          Er = R("triangle-alert", [
+          Nr = R("triangle-alert", [
             [
               "path",
               {
@@ -4695,7 +4702,7 @@
             ["path", { d: "M12 9v4", key: "juzpu7" }],
             ["path", { d: "M12 17h.01", key: "p32p05" }],
           ]),
-          Nr = R("octagon-x", [
+          Cr = R("octagon-x", [
             ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
             [
               "path",
@@ -4706,17 +4713,17 @@
             ],
             ["path", { d: "m9 9 6 6", key: "z0biqf" }],
           ]),
-          Cr = (e) => {
+          zr = (e) => {
             const t = (0, l.c)(7);
             let n, r, a, o, i;
             return (
               t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
               t[2] === Symbol.for("react.memo_cache_sentinel")
                 ? ((r = {
-                    success: (0, V.jsx)(xr, { className: "size-4" }),
-                    info: (0, V.jsx)(Sr, { className: "size-4" }),
-                    warning: (0, V.jsx)(Er, { className: "size-4" }),
-                    error: (0, V.jsx)(Nr, { className: "size-4" }),
+                    success: (0, V.jsx)(Sr, { className: "size-4" }),
+                    info: (0, V.jsx)(Er, { className: "size-4" }),
+                    warning: (0, V.jsx)(Nr, { className: "size-4" }),
+                    error: (0, V.jsx)(Cr, { className: "size-4" }),
                     loading: (0, V.jsx)(gn, { className: "size-4 animate-spin" }),
                   }),
                   (a = {
@@ -4751,7 +4758,7 @@
             children: (0, V.jsxs)(yn, {
               children: [
                 (0, V.jsx)(br, {}),
-                (0, V.jsx)(Cr, { position: "top-center", richColors: !0 }),
+                (0, V.jsx)(zr, { position: "top-center", richColors: !0 }),
               ],
             }),
           }),

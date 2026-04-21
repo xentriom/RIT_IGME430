@@ -65,9 +65,20 @@ export default function App() {
 
   return (
     <div className="relative flex h-dvh flex-col">
-      <a href="/" className="absolute top-4 left-4 rounded-full bg-muted p-2">
+      <button
+        type="button"
+        onClick={() => {
+          const ref = document.referrer;
+          if (ref && ref.includes(window.location.hostname)) {
+            window.history.back();
+          } else {
+            window.location.href = "/";
+          }
+        }}
+        className="absolute top-4 left-4 rounded-full bg-muted p-2"
+      >
         <X className="size-4" />
-      </a>
+      </button>
 
       <div className="flex-1 overflow-y-auto pb-64 md:pb-48">
         <div className="space-y-4 p-4 text-center md:space-y-8 md:p-8">
