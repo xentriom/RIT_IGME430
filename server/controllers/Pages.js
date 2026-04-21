@@ -52,9 +52,7 @@ const mynaPage = (req, res) => {
 };
 
 const settingsPage = (req, res) => {
-  res.render("setting", {
-    title: "bob",
-  });
+  res.render("setting");
 };
 
 const notFoundPage = (req, res) => {
