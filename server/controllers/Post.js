@@ -3,9 +3,11 @@ const models = require("../models");
 const Post = models.Post;
 const Like = models.Like;
 const Relationship = models.Relationship;
+const Account = models.Account;
 
-const DEFAULT_FEED_LIMIT = 50;
+const DEFAULT_FEED_LIMIT = 100;
 const MAX_REPLY_LIMIT = 200;
+const ADS_PROMO_POOL_LIMIT = 50;
 
 // helpers
 const sessionAccountId = (req) => req.session?.account?._id ?? null;
@@ -78,6 +80,42 @@ const enrichPosts = async (posts, viewerId) => {
   });
 };
 
+const feedAdPolicy = (plan) => {
+  if (plan === "premium+") return null;
+  if (plan === "premium") return { meanGap: 4 };
+  return { meanGap: 2 };
+};
+
+const injectRandomizedFeedAds = (enrichedPosts, policy, adPoolEnriched) => {
+  if (!policy || !enrichedPosts.length || !adPoolEnriched?.length) return enrichedPosts;
+
+  const out = [];
+  let postsSinceAd = 0;
+
+  for (const post of enrichedPosts) {
+    out.push(post);
+    postsSinceAd += 1;
+
+    // base %; longer we go without an ad, the higher the base chance of an ad
+    const baseP = 1 - Math.exp(-postsSinceAd / policy.meanGap);
+
+    // randomizes spacing so 2 feeds are not identical and promos vary
+    const jitter = 0.82 + Math.random() * 0.36;
+
+    // combine base % and jitter. this is the chance for ad clamped at 95 to never guarantee
+    const p = Math.min(0.95, baseP * jitter);
+
+    // roll random, if less than p we inject an ad
+    if (Math.random() < p) {
+      postsSinceAd = 0;
+      const pick = adPoolEnriched[Math.floor(Math.random() * adPoolEnriched.length)];
+      out.push({ ...pick }); // push ad to output
+    }
+  }
+
+  return out;
+};
+
 const getFeed = async (req, res) => {
   const limit = parseLimit(req.query.limit);
 
@@ -87,7 +125,25 @@ const getFeed = async (req, res) => {
     const posts = await Post.findRecentFeedForViewer(viewerId, followingIds, limit);
 
     const payload = await enrichPosts(posts, viewerId);
-    return res.json(payload);
+
+    let viewerPlan = "free";
+    if (viewerId) {
+      const acc = await Account.findById(viewerId).select("plan").lean().exec();
+      if (acc?.plan) viewerPlan = acc.plan;
+    }
+
+    const policy = feedAdPolicy(viewerPlan);
+    const adsUsername = Post.adsTimelineUsername();
+    const adsAccount = await Account.findOne({ username: adsUsername }).select("_id").lean().exec();
+    let adPoolEnriched = [];
+    if (policy && adsAccount?._id) {
+      const adRoots = await Post.findRootsByOwnerWithOwner(adsAccount._id, ADS_PROMO_POOL_LIMIT);
+      adPoolEnriched = await enrichPosts(adRoots, viewerId);
+    }
+
+    const withAds = injectRandomizedFeedAds(payload, policy, adPoolEnriched);
+
+    return res.json(withAds);
   } catch {
     return res.status(500).json({ error: "An error occurred" });
   }

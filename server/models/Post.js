@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+/** System promo account: excluded from home feed query; posts are injected as ads elsewhere */
+const ADS_TIMELINE_USERNAME = "ads";
+
 let PostModel = {};
 
 const ownerPopulateFields = "username plan displayName bio isPublic isOrg avatar";
@@ -115,6 +118,7 @@ PostSchema.statics.findRecentFeedForViewer = async (viewerId, followingIds, limi
     },
     { $unwind: "$ownerArr" }, // unwind the owner array
     { $match: visibilityMatch }, // match the visibility
+    { $match: { "ownerArr.username": { $ne: ADS_TIMELINE_USERNAME } } }, // promo account never in raw feed
     { $limit: limit }, // limit the results
     {
       // project the results
@@ -167,6 +171,8 @@ PostSchema.statics.createRoot = (ownerId, body) =>
 
 PostSchema.statics.createReply = (parentId, ownerId, body) =>
   PostModel.create({ owner: ownerId, body, parent: parentId });
+
+PostSchema.statics.adsTimelineUsername = () => ADS_TIMELINE_USERNAME;
 
 PostModel = mongoose.model("Post", PostSchema);
 module.exports = PostModel;

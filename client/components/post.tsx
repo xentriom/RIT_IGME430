@@ -7,6 +7,7 @@ import {
   FlagIcon,
   ChartColumnIcon,
   BotIcon,
+  FrownIcon,
   MegaphoneIcon,
 } from "lucide-react";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "./ui/hover-card";
@@ -160,47 +161,62 @@ export function Post({ post }: { post: PostType }) {
                   {formatDate(post.createdDate)}
                 </span>
               </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div className="rounded-full p-1 hover:bg-muted">
-                    <MoreHorizontal className="size-4" />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-40">
-                  <DropdownMenuItem asChild>
-                    <div className="flex flex-row items-center gap-2">
-                      <ChartColumnIcon className="size-4" />
-                      View Chirp Interactions
+              <div className="flex flex-row items-center gap-2">
+                {post.owner.username === "ads" && (
+                  <span className="shrink-0 text-sm text-muted-foreground">Ad</span>
+                )}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <div className="rounded-full p-1 hover:bg-muted">
+                      <MoreHorizontal className="size-4" />
                     </div>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <div className="flex flex-row items-center gap-2">
-                      <FlagIcon className="size-4" />
-                      Report Chirp
-                    </div>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <div className="flex flex-row items-center gap-2">
-                      <BotIcon className="size-4" />
-                      Mark as Spam
-                    </div>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <div className="flex flex-row items-center gap-2">
-                      <MegaphoneIcon className="size-4" />
-                      Request Community Note
-                    </div>
-                  </DropdownMenuItem>
-                  {isOwner && (
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-40">
+                    {post.owner.username === "ads" && (
+                      <DropdownMenuItem asChild>
+                        <div className="flex flex-row items-center gap-2">
+                          <FrownIcon className="size-4" />
+                          Not interested in this ad
+                        </div>
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem asChild>
-                      <div className="flex flex-row items-center gap-2" onClick={deletePost}>
-                        <TrashIcon className="size-4" />
-                        Delete Chirp
+                      <div className="flex flex-row items-center gap-2">
+                        <ChartColumnIcon className="size-4" />
+                        View Chirp Interactions
                       </div>
                     </DropdownMenuItem>
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                    <DropdownMenuItem asChild>
+                      <div className="flex flex-row items-center gap-2">
+                        <FlagIcon className="size-4" />
+                        Report {post.owner.username === "ads" ? "Ad" : "Chirp"}
+                      </div>
+                    </DropdownMenuItem>
+                    {post.owner.username !== "ads" && (
+                      <DropdownMenuItem asChild>
+                        <div className="flex flex-row items-center gap-2">
+                          <BotIcon className="size-4" />
+                          Mark as Spam
+                        </div>
+                      </DropdownMenuItem>
+                    )}
+                    <DropdownMenuItem asChild>
+                      <div className="flex flex-row items-center gap-2">
+                        <MegaphoneIcon className="size-4" />
+                        Request Community Note
+                      </div>
+                    </DropdownMenuItem>
+                    {isOwner && (
+                      <DropdownMenuItem asChild>
+                        <div className="flex flex-row items-center gap-2" onClick={deletePost}>
+                          <TrashIcon className="size-4" />
+                          Delete Chirp
+                        </div>
+                      </DropdownMenuItem>
+                    )}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </div>
             <div className="w-full wrap-anywhere whitespace-pre-wrap">{post.body}</div>
             <div className="flex flex-row items-center gap-6">

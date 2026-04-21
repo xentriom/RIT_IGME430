@@ -5,7 +5,7 @@
     t,
     n,
     r = {
-      83(e, t, n) {
+      662(e, t, n) {
         var r = n(540),
           a = n.t(r, 2),
           o = n(338),
@@ -9035,13 +9035,19 @@
             ["circle", { cx: "19", cy: "12", r: "1", key: "1wjl8i" }],
             ["circle", { cx: "5", cy: "12", r: "1", key: "1pcz8c" }],
           ]),
-          Sc = p("chart-column", [
+          Sc = p("frown", [
+            ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+            ["path", { d: "M16 16s-1.5-2-4-2-4 2-4 2", key: "epbg0q" }],
+            ["line", { x1: "9", x2: "9.01", y1: "9", y2: "9", key: "yxxnd0" }],
+            ["line", { x1: "15", x2: "15.01", y1: "9", y2: "9", key: "1p4y9e" }],
+          ]),
+          Ec = p("chart-column", [
             ["path", { d: "M3 3v16a2 2 0 0 0 2 2h16", key: "c24i48" }],
             ["path", { d: "M18 17V9", key: "2bz60n" }],
             ["path", { d: "M13 17V5", key: "1frdt8" }],
             ["path", { d: "M8 17v-3", key: "17ska0" }],
           ]),
-          Ec = p("bot", [
+          Nc = p("bot", [
             ["path", { d: "M12 8V4H8", key: "hb8ula" }],
             ["rect", { width: "16", height: "12", x: "4", y: "8", rx: "2", key: "enze0r" }],
             ["path", { d: "M2 14h2", key: "vft8re" }],
@@ -9049,7 +9055,7 @@
             ["path", { d: "M15 13v2", key: "1xurst" }],
             ["path", { d: "M9 13v2", key: "rq6x2g" }],
           ]),
-          Nc = p("megaphone", [
+          Cc = p("megaphone", [
             [
               "path",
               {
@@ -9063,12 +9069,12 @@
             ],
             ["path", { d: "M8 6v8", key: "15ugcq" }],
           ]),
-          Cc = p("trash", [
+          jc = p("trash", [
             ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
             ["path", { d: "M3 6h18", key: "d0wm0j" }],
             ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }],
           ]),
-          jc = p("heart", [
+          _c = p("heart", [
             [
               "path",
               {
@@ -9077,17 +9083,17 @@
               },
             ],
           ]),
-          _c = p("share", [
+          zc = p("share", [
             ["path", { d: "M12 2v13", key: "1km8f5" }],
             ["path", { d: "m16 6-4-4-4 4", key: "13yo43" }],
             ["path", { d: "M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8", key: "1b2hhj" }],
           ]);
-        var zc,
-          Pc = "HoverCard",
-          [Tc, Mc] = at(Pc, [xa]),
-          Oc = xa(),
-          [Rc, Lc] = Tc(Pc),
-          Dc = (e) => {
+        var Pc,
+          Tc = "HoverCard",
+          [Mc, Oc] = at(Tc, [xa]),
+          Rc = xa(),
+          [Lc, Dc] = Mc(Tc),
+          Ac = (e) => {
             const {
                 __scopeHoverCard: t,
                 children: n,
@@ -9097,12 +9103,12 @@
                 openDelay: i = 700,
                 closeDelay: s = 300,
               } = e,
-              c = Oc(t),
+              c = Rc(t),
               u = r.useRef(0),
               d = r.useRef(0),
               f = r.useRef(!1),
               p = r.useRef(!1),
-              [m, h] = gn({ prop: a, defaultProp: o ?? !1, onChange: l, caller: Pc }),
+              [m, h] = gn({ prop: a, defaultProp: o ?? !1, onChange: l, caller: Tc }),
               g = r.useCallback(() => {
                 (clearTimeout(d.current), (u.current = window.setTimeout(() => h(!0), i)));
               }, [i, h]),
@@ -9118,7 +9124,7 @@
                 },
                 [],
               ),
-              (0, Ue.jsx)(Rc, {
+              (0, Ue.jsx)(Lc, {
                 scope: t,
                 open: m,
                 onOpenChange: h,
@@ -9131,12 +9137,12 @@
               })
             );
           };
-        Dc.displayName = Pc;
-        var Ac = "HoverCardTrigger",
-          Fc = r.forwardRef((e, t) => {
+        Ac.displayName = Tc;
+        var Fc = "HoverCardTrigger",
+          Ic = r.forwardRef((e, t) => {
             const { __scopeHoverCard: n, ...r } = e,
-              a = Lc(Ac, n),
-              o = Oc(n);
+              a = Dc(Fc, n),
+              o = Rc(n);
             return (0, Ue.jsx)(Fa, {
               asChild: !0,
               ...o,
@@ -9144,21 +9150,21 @@
                 "data-state": a.open ? "open" : "closed",
                 ...r,
                 ref: t,
-                onPointerEnter: mn(e.onPointerEnter, qc(a.onOpen)),
-                onPointerLeave: mn(e.onPointerLeave, qc(a.onClose)),
+                onPointerEnter: mn(e.onPointerEnter, Kc(a.onOpen)),
+                onPointerLeave: mn(e.onPointerLeave, Kc(a.onClose)),
                 onFocus: mn(e.onFocus, a.onOpen),
                 onBlur: mn(e.onBlur, a.onClose),
                 onTouchStart: mn(e.onTouchStart, (e) => e.preventDefault()),
               }),
             });
           });
-        Fc.displayName = Ac;
-        var Ic = "HoverCardPortal",
-          [Hc, $c] = Tc(Ic, { forceMount: void 0 }),
-          Bc = (e) => {
+        Ic.displayName = Fc;
+        var Hc = "HoverCardPortal",
+          [$c, Bc] = Mc(Hc, { forceMount: void 0 }),
+          Uc = (e) => {
             const { __scopeHoverCard: t, forceMount: n, children: r, container: a } = e,
-              o = Lc(Ic, t);
-            return (0, Ue.jsx)(Hc, {
+              o = Dc(Hc, t);
+            return (0, Ue.jsx)($c, {
               scope: t,
               forceMount: n,
               children: (0, Ue.jsx)(Ba, {
@@ -9167,25 +9173,25 @@
               }),
             });
           };
-        Bc.displayName = Ic;
-        var Uc = "HoverCardContent",
-          Vc = r.forwardRef((e, t) => {
-            const n = $c(Uc, e.__scopeHoverCard),
+        Uc.displayName = Hc;
+        var Vc = "HoverCardContent",
+          Wc = r.forwardRef((e, t) => {
+            const n = Bc(Vc, e.__scopeHoverCard),
               { forceMount: r = n.forceMount, ...a } = e,
-              o = Lc(Uc, e.__scopeHoverCard);
+              o = Dc(Vc, e.__scopeHoverCard);
             return (0, Ue.jsx)(Ba, {
               present: r || o.open,
-              children: (0, Ue.jsx)(Wc, {
+              children: (0, Ue.jsx)(qc, {
                 "data-state": o.open ? "open" : "closed",
                 ...a,
-                onPointerEnter: mn(e.onPointerEnter, qc(o.onOpen)),
-                onPointerLeave: mn(e.onPointerLeave, qc(o.onClose)),
+                onPointerEnter: mn(e.onPointerEnter, Kc(o.onOpen)),
+                onPointerLeave: mn(e.onPointerLeave, Kc(o.onClose)),
                 ref: t,
               }),
             });
           });
-        Vc.displayName = Uc;
-        var Wc = r.forwardRef((e, t) => {
+        Wc.displayName = Vc;
+        var qc = r.forwardRef((e, t) => {
           const {
               __scopeHoverCard: n,
               onEscapeKeyDown: a,
@@ -9194,8 +9200,8 @@
               onInteractOutside: i,
               ...s
             } = e,
-            c = Lc(Uc, n),
-            u = Oc(n),
+            c = Dc(Vc, n),
+            u = Rc(n),
             d = r.useRef(null),
             f = Be(t, d),
             [p, m] = r.useState(!1);
@@ -9204,11 +9210,11 @@
               if (p) {
                 const e = document.body;
                 return (
-                  (zc = e.style.userSelect || e.style.webkitUserSelect),
+                  (Pc = e.style.userSelect || e.style.webkitUserSelect),
                   (e.style.userSelect = "none"),
                   (e.style.webkitUserSelect = "none"),
                   () => {
-                    ((e.style.userSelect = zc), (e.style.webkitUserSelect = zc));
+                    ((e.style.userSelect = Pc), (e.style.webkitUserSelect = Pc));
                   }
                 );
               }
@@ -9281,43 +9287,43 @@
             })
           );
         });
-        function qc(e) {
+        function Kc(e) {
           return (t) => ("touch" === t.pointerType ? void 0 : e());
         }
         r.forwardRef((e, t) => {
           const { __scopeHoverCard: n, ...r } = e,
-            a = Oc(n);
+            a = Rc(n);
           return (0, Ue.jsx)(Ha, { ...a, ...r, ref: t });
         }).displayName = "HoverCardArrow";
-        var Kc = Dc,
-          Qc = Fc,
-          Yc = Bc,
-          Gc = Vc;
-        function Xc(e) {
-          const t = (0, l.c)(4);
-          let n, r;
-          return (
-            t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
-            t[2] !== n
-              ? ((r = (0, Ue.jsx)(Kc, { "data-slot": "hover-card", ...n })), (t[2] = n), (t[3] = r))
-              : (r = t[3]),
-            r
-          );
-        }
+        var Qc = Ac,
+          Yc = Ic,
+          Gc = Uc,
+          Xc = Wc;
         function Zc(e) {
           const t = (0, l.c)(4);
           let n, r;
           return (
             t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
             t[2] !== n
-              ? ((r = (0, Ue.jsx)(Qc, { "data-slot": "hover-card-trigger", ...n })),
+              ? ((r = (0, Ue.jsx)(Qc, { "data-slot": "hover-card", ...n })), (t[2] = n), (t[3] = r))
+              : (r = t[3]),
+            r
+          );
+        }
+        function Jc(e) {
+          const t = (0, l.c)(4);
+          let n, r;
+          return (
+            t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
+            t[2] !== n
+              ? ((r = (0, Ue.jsx)(Yc, { "data-slot": "hover-card-trigger", ...n })),
                 (t[2] = n),
                 (t[3] = r))
               : (r = t[3]),
             r
           );
         }
-        function Jc(e) {
+        function eu(e) {
           const t = (0, l.c)(12);
           let n, r, a, o;
           t[0] !== e
@@ -9341,9 +9347,9 @@
                 (t[6] = c))
               : (c = t[6]),
             t[7] !== i || t[8] !== r || t[9] !== s || t[10] !== c
-              ? ((u = (0, Ue.jsx)(Yc, {
+              ? ((u = (0, Ue.jsx)(Gc, {
                   "data-slot": "hover-card-portal",
-                  children: (0, Ue.jsx)(Gc, {
+                  children: (0, Ue.jsx)(Xc, {
                     "data-slot": "hover-card-content",
                     align: i,
                     sideOffset: s,
@@ -9360,7 +9366,7 @@
             u
           );
         }
-        function eu(e) {
+        function tu(e) {
           const t = (0, l.c)(15),
             { username: n, isFollowing: a, onFollowStateChange: o, className: i } = e,
             { isLoggedIn: s, session: c } = (0, r.useContext)(Ut),
@@ -9430,7 +9436,7 @@
             w
           );
         }
-        function tu(e) {
+        function nu(e) {
           const t = (0, l.c)(2),
             { isOrg: n, plan: r } = e;
           if (n) {
@@ -9457,7 +9463,7 @@
             a
           );
         }
-        function nu(e) {
+        function ru(e) {
           const t = (0, l.c)(43),
             { username: n } = e,
             { isLoggedIn: a, session: o } = (0, r.useContext)(Ut),
@@ -9513,7 +9519,7 @@
             t[8] !== i.isFollowing || t[9] !== m || t[10] !== n
               ? ((v =
                   m &&
-                  (0, Ue.jsx)(eu, {
+                  (0, Ue.jsx)(tu, {
                     username: n,
                     isFollowing: i.isFollowing,
                     onFollowStateChange: (e) => s((t) => (t ? { ...t, ...e } : null)),
@@ -9543,7 +9549,7 @@
               (t[16] = w))
             : (w = t[16]),
             t[17] !== i.isOrg || t[18] !== i.plan
-              ? ((x = (0, Ue.jsx)(tu, { isOrg: i.isOrg, plan: i.plan })),
+              ? ((x = (0, Ue.jsx)(nu, { isOrg: i.isOrg, plan: i.plan })),
                 (t[17] = i.isOrg),
                 (t[18] = i.plan),
                 (t[19] = x))
@@ -9627,8 +9633,8 @@
             P
           );
         }
-        function ru(e) {
-          const t = (0, l.c)(94),
+        function au(e) {
+          const t = (0, l.c)(107),
             { post: n } = e,
             { isLoggedIn: a, session: o } = (0, r.useContext)(Ut),
             [i, s] = (0, r.useTransition)(),
@@ -9717,7 +9723,7 @@
                       {
                         loading: "Deleting post...",
                         success: () => (h(!0), "Post deleted successfully"),
-                        error: ou,
+                        error: lu,
                       },
                     ));
               }),
@@ -9744,7 +9750,7 @@
               (t[23] = _))
             : (_ = t[23]);
           const z = `/u/${n.owner.username}`;
-          let P, T, M, O, R, L, D, A, F, I, H, $, B, U, V, W, q, K, Q, Y, G;
+          let P, T, M, O, R, L, D, A, F, I, H, $, B, U, V;
           (t[24] !== x.displayName
             ? ((P = (0, Ue.jsx)("span", {
                 className: "font-bold hover:underline",
@@ -9771,7 +9777,7 @@
                 (t[30] = M))
               : (M = t[30]),
             t[31] !== M || t[32] !== z
-              ? ((O = (0, Ue.jsx)(Zc, {
+              ? ((O = (0, Ue.jsx)(Jc, {
                   asChild: !0,
                   children: (0, Ue.jsx)("a", {
                     href: z,
@@ -9784,17 +9790,17 @@
                 (t[33] = O))
               : (O = t[33]),
             t[34] !== n.owner.username
-              ? ((R = (0, Ue.jsx)(Jc, {
+              ? ((R = (0, Ue.jsx)(eu, {
                   children: (0, Ue.jsx)("div", {
                     className: "flex flex-col gap-1",
-                    children: (0, Ue.jsx)(nu, { username: n.owner.username }),
+                    children: (0, Ue.jsx)(ru, { username: n.owner.username }),
                   }),
                 })),
                 (t[34] = n.owner.username),
                 (t[35] = R))
               : (R = t[35]),
             t[36] !== x.isOrg || t[37] !== x.plan
-              ? ((L = (0, Ue.jsx)(tu, { isOrg: x.isOrg, plan: x.plan })),
+              ? ((L = (0, Ue.jsx)(nu, { isOrg: x.isOrg, plan: x.plan })),
                 (t[36] = x.isOrg),
                 (t[37] = x.plan),
                 (t[38] = L))
@@ -9842,209 +9848,259 @@
                 (t[47] = F),
                 (t[48] = I))
               : (I = t[48]),
-            t[49] === Symbol.for("react.memo_cache_sentinel")
-              ? ((H = (0, Ue.jsx)(Ji, {
+            t[49] !== n.owner.username
+              ? ((H =
+                  "ads" === n.owner.username &&
+                  (0, Ue.jsx)("span", {
+                    className: "shrink-0 text-sm text-muted-foreground",
+                    children: "Ad",
+                  })),
+                (t[49] = n.owner.username),
+                (t[50] = H))
+              : (H = t[50]),
+            t[51] === Symbol.for("react.memo_cache_sentinel")
+              ? (($ = (0, Ue.jsx)(Ji, {
                   asChild: !0,
                   children: (0, Ue.jsx)("div", {
                     className: "rounded-full p-1 hover:bg-muted",
                     children: (0, Ue.jsx)(kc, { className: "size-4" }),
                   }),
                 })),
-                (t[49] = H))
-              : (H = t[49]),
-            t[50] === Symbol.for("react.memo_cache_sentinel")
-              ? (($ = (0, Ue.jsx)(ns, {
-                  asChild: !0,
-                  children: (0, Ue.jsxs)("div", {
-                    className: "flex flex-row items-center gap-2",
-                    children: [(0, Ue.jsx)(Sc, { className: "size-4" }), "View Chirp Interactions"],
-                  }),
-                })),
-                (t[50] = $))
-              : ($ = t[50]),
-            t[51] === Symbol.for("react.memo_cache_sentinel")
-              ? ((B = (0, Ue.jsx)(ns, {
-                  asChild: !0,
-                  children: (0, Ue.jsxs)("div", {
-                    className: "flex flex-row items-center gap-2",
-                    children: [(0, Ue.jsx)(Dt, { className: "size-4" }), "Report Chirp"],
-                  }),
-                })),
-                (t[51] = B))
-              : (B = t[51]),
-            t[52] === Symbol.for("react.memo_cache_sentinel")
+                (t[51] = $))
+              : ($ = t[51]),
+            t[52] !== n.owner.username
+              ? ((B =
+                  "ads" === n.owner.username &&
+                  (0, Ue.jsx)(ns, {
+                    asChild: !0,
+                    children: (0, Ue.jsxs)("div", {
+                      className: "flex flex-row items-center gap-2",
+                      children: [
+                        (0, Ue.jsx)(Sc, { className: "size-4" }),
+                        "Not interested in this ad",
+                      ],
+                    }),
+                  })),
+                (t[52] = n.owner.username),
+                (t[53] = B))
+              : (B = t[53]),
+            t[54] === Symbol.for("react.memo_cache_sentinel")
               ? ((U = (0, Ue.jsx)(ns, {
                   asChild: !0,
                   children: (0, Ue.jsxs)("div", {
                     className: "flex flex-row items-center gap-2",
-                    children: [(0, Ue.jsx)(Ec, { className: "size-4" }), "Mark as Spam"],
+                    children: [(0, Ue.jsx)(Ec, { className: "size-4" }), "View Chirp Interactions"],
                   }),
                 })),
-                (t[52] = U))
-              : (U = t[52]),
-            t[53] === Symbol.for("react.memo_cache_sentinel")
-              ? ((V = (0, Ue.jsx)(ns, {
+                (t[54] = U))
+              : (U = t[54]),
+            t[55] === Symbol.for("react.memo_cache_sentinel")
+              ? ((V = (0, Ue.jsx)(Dt, { className: "size-4" })), (t[55] = V))
+              : (V = t[55]));
+          const W = "ads" === n.owner.username ? "Ad" : "Chirp";
+          let q, K, Q, Y, G, X, Z, J, ee, te;
+          (t[56] !== W
+            ? ((q = (0, Ue.jsx)(ns, {
+                asChild: !0,
+                children: (0, Ue.jsxs)("div", {
+                  className: "flex flex-row items-center gap-2",
+                  children: [V, "Report ", W],
+                }),
+              })),
+              (t[56] = W),
+              (t[57] = q))
+            : (q = t[57]),
+            t[58] !== n.owner.username
+              ? ((K =
+                  "ads" !== n.owner.username &&
+                  (0, Ue.jsx)(ns, {
+                    asChild: !0,
+                    children: (0, Ue.jsxs)("div", {
+                      className: "flex flex-row items-center gap-2",
+                      children: [(0, Ue.jsx)(Nc, { className: "size-4" }), "Mark as Spam"],
+                    }),
+                  })),
+                (t[58] = n.owner.username),
+                (t[59] = K))
+              : (K = t[59]),
+            t[60] === Symbol.for("react.memo_cache_sentinel")
+              ? ((Q = (0, Ue.jsx)(ns, {
                   asChild: !0,
                   children: (0, Ue.jsxs)("div", {
                     className: "flex flex-row items-center gap-2",
-                    children: [(0, Ue.jsx)(Nc, { className: "size-4" }), "Request Community Note"],
+                    children: [(0, Ue.jsx)(Cc, { className: "size-4" }), "Request Community Note"],
                   }),
                 })),
-                (t[53] = V))
-              : (V = t[53]),
-            t[54] !== N || t[55] !== b
-              ? ((W =
+                (t[60] = Q))
+              : (Q = t[60]),
+            t[61] !== N || t[62] !== b
+              ? ((Y =
                   b &&
                   (0, Ue.jsx)(ns, {
                     asChild: !0,
                     children: (0, Ue.jsxs)("div", {
                       className: "flex flex-row items-center gap-2",
                       onClick: N,
-                      children: [(0, Ue.jsx)(Cc, { className: "size-4" }), "Delete Chirp"],
+                      children: [(0, Ue.jsx)(jc, { className: "size-4" }), "Delete Chirp"],
                     }),
                   })),
-                (t[54] = N),
-                (t[55] = b),
-                (t[56] = W))
-              : (W = t[56]),
-            t[57] !== W
-              ? ((q = (0, Ue.jsxs)(Zi, {
-                  children: [H, (0, Ue.jsxs)(es, { className: "w-40", children: [$, B, U, V, W] })],
+                (t[61] = N),
+                (t[62] = b),
+                (t[63] = Y))
+              : (Y = t[63]),
+            t[64] !== B || t[65] !== q || t[66] !== K || t[67] !== Y
+              ? ((G = (0, Ue.jsxs)(Zi, {
+                  children: [
+                    $,
+                    (0, Ue.jsxs)(es, { className: "w-40", children: [B, U, q, K, Q, Y] }),
+                  ],
                 })),
-                (t[57] = W),
-                (t[58] = q))
-              : (q = t[58]),
-            t[59] !== I || t[60] !== q
-              ? ((K = (0, Ue.jsxs)("div", {
+                (t[64] = B),
+                (t[65] = q),
+                (t[66] = K),
+                (t[67] = Y),
+                (t[68] = G))
+              : (G = t[68]),
+            t[69] !== H || t[70] !== G
+              ? ((X = (0, Ue.jsxs)("div", {
+                  className: "flex flex-row items-center gap-2",
+                  children: [H, G],
+                })),
+                (t[69] = H),
+                (t[70] = G),
+                (t[71] = X))
+              : (X = t[71]),
+            t[72] !== I || t[73] !== X
+              ? ((Z = (0, Ue.jsxs)("div", {
                   className: "flex justify-between gap-2",
-                  children: [I, q],
+                  children: [I, X],
                 })),
-                (t[59] = I),
-                (t[60] = q),
-                (t[61] = K))
-              : (K = t[61]),
-            t[62] !== n.body
-              ? ((Q = (0, Ue.jsx)("div", {
+                (t[72] = I),
+                (t[73] = X),
+                (t[74] = Z))
+              : (Z = t[74]),
+            t[75] !== n.body
+              ? ((J = (0, Ue.jsx)("div", {
                   className: "w-full wrap-anywhere whitespace-pre-wrap",
                   children: n.body,
                 })),
-                (t[62] = n.body),
-                (t[63] = Q))
-              : (Q = t[63]),
-            t[64] === Symbol.for("react.memo_cache_sentinel")
-              ? ((Y = (0, Ue.jsx)(m, { className: "size-4" })), (t[64] = Y))
-              : (Y = t[64]),
-            t[65] !== n.replyCount
-              ? ((G = (0, Ue.jsxs)("button", {
+                (t[75] = n.body),
+                (t[76] = J))
+              : (J = t[76]),
+            t[77] === Symbol.for("react.memo_cache_sentinel")
+              ? ((ee = (0, Ue.jsx)(m, { className: "size-4" })), (t[77] = ee))
+              : (ee = t[77]),
+            t[78] !== n.replyCount
+              ? ((te = (0, Ue.jsxs)("button", {
                   type: "button",
                   className:
                     "flex cursor-pointer flex-row items-center gap-1 hover:text-foreground/80",
-                  onClick: au,
+                  onClick: ou,
                   children: [
-                    Y,
+                    ee,
                     (0, Ue.jsx)("span", { className: "tabular-nums", children: n.replyCount }),
                   ],
                 })),
-                (t[65] = n.replyCount),
-                (t[66] = G))
-              : (G = t[66]));
-          const X =
+                (t[78] = n.replyCount),
+                (t[79] = te))
+              : (te = t[79]));
+          const ne =
               "flex cursor-pointer flex-row items-center gap-1 hover:text-rose-400 " +
               (d ? "text-rose-400" : ""),
-            Z = !a || i,
-            J = "size-4 " + (d ? "fill-current" : "");
-          let ee, te, ne, re, ae, oe, le, ie, se;
+            re = !a || i,
+            ae = "size-4 " + (d ? "fill-current" : "");
+          let oe, le, ie, se, ce, ue, de, fe, pe;
           return (
-            t[67] !== J
-              ? ((ee = (0, Ue.jsx)(jc, { className: J })), (t[67] = J), (t[68] = ee))
-              : (ee = t[68]),
-            t[69] !== c
-              ? ((te = (0, Ue.jsx)("span", { className: "tabular-nums", children: c })),
-                (t[69] = c),
-                (t[70] = te))
-              : (te = t[70]),
-            t[71] !== X || t[72] !== Z || t[73] !== ee || t[74] !== te || t[75] !== S
-              ? ((ne = (0, Ue.jsxs)("button", {
+            t[80] !== ae
+              ? ((oe = (0, Ue.jsx)(_c, { className: ae })), (t[80] = ae), (t[81] = oe))
+              : (oe = t[81]),
+            t[82] !== c
+              ? ((le = (0, Ue.jsx)("span", { className: "tabular-nums", children: c })),
+                (t[82] = c),
+                (t[83] = le))
+              : (le = t[83]),
+            t[84] !== ne || t[85] !== re || t[86] !== oe || t[87] !== le || t[88] !== S
+              ? ((ie = (0, Ue.jsxs)("button", {
                   type: "button",
-                  className: X,
-                  disabled: Z,
+                  className: ne,
+                  disabled: re,
                   onClick: S,
-                  children: [ee, te],
+                  children: [oe, le],
                 })),
-                (t[71] = X),
-                (t[72] = Z),
-                (t[73] = ee),
-                (t[74] = te),
-                (t[75] = S),
-                (t[76] = ne))
-              : (ne = t[76]),
-            t[77] !== n._id
-              ? ((re = (e) => {
+                (t[84] = ne),
+                (t[85] = re),
+                (t[86] = oe),
+                (t[87] = le),
+                (t[88] = S),
+                (t[89] = ie))
+              : (ie = t[89]),
+            t[90] !== n._id
+              ? ((se = (e) => {
                   (e.preventDefault(),
                     e.stopPropagation(),
                     navigator.clipboard.writeText(`${window.location.origin}/p/${n._id}`),
                     rn.success("Link copied to clipboard"));
                 }),
-                (t[77] = n._id),
-                (t[78] = re))
-              : (re = t[78]),
-            t[79] === Symbol.for("react.memo_cache_sentinel")
-              ? ((ae = (0, Ue.jsx)(_c, { className: "size-4" })), (t[79] = ae))
-              : (ae = t[79]),
-            t[80] !== re
-              ? ((oe = (0, Ue.jsx)("button", {
+                (t[90] = n._id),
+                (t[91] = se))
+              : (se = t[91]),
+            t[92] === Symbol.for("react.memo_cache_sentinel")
+              ? ((ce = (0, Ue.jsx)(zc, { className: "size-4" })), (t[92] = ce))
+              : (ce = t[92]),
+            t[93] !== se
+              ? ((ue = (0, Ue.jsx)("button", {
                   type: "button",
                   className: "cursor-pointer hover:text-foreground/80",
-                  onClick: re,
-                  children: ae,
+                  onClick: se,
+                  children: ce,
                 })),
-                (t[80] = re),
-                (t[81] = oe))
-              : (oe = t[81]),
-            t[82] !== G || t[83] !== ne || t[84] !== oe
-              ? ((le = (0, Ue.jsxs)("div", {
+                (t[93] = se),
+                (t[94] = ue))
+              : (ue = t[94]),
+            t[95] !== te || t[96] !== ie || t[97] !== ue
+              ? ((de = (0, Ue.jsxs)("div", {
                   className: "flex flex-row items-center gap-6",
-                  children: [G, ne, oe],
+                  children: [te, ie, ue],
                 })),
-                (t[82] = G),
-                (t[83] = ne),
-                (t[84] = oe),
-                (t[85] = le))
-              : (le = t[85]),
-            t[86] !== K || t[87] !== Q || t[88] !== le
-              ? ((ie = (0, Ue.jsxs)("div", {
+                (t[95] = te),
+                (t[96] = ie),
+                (t[97] = ue),
+                (t[98] = de))
+              : (de = t[98]),
+            t[99] !== Z || t[100] !== J || t[101] !== de
+              ? ((fe = (0, Ue.jsxs)("div", {
                   className: "flex min-w-0 flex-1 flex-col gap-1",
-                  children: [K, Q, le],
+                  children: [Z, J, de],
                 })),
-                (t[86] = K),
-                (t[87] = Q),
-                (t[88] = le),
-                (t[89] = ie))
-              : (ie = t[89]),
-            t[90] !== ie || t[91] !== C || t[92] !== _
-              ? ((se = (0, Ue.jsx)(Ue.Fragment, {
-                  children: (0, Ue.jsx)(Xc, {
+                (t[99] = Z),
+                (t[100] = J),
+                (t[101] = de),
+                (t[102] = fe))
+              : (fe = t[102]),
+            t[103] !== fe || t[104] !== C || t[105] !== _
+              ? ((pe = (0, Ue.jsx)(Ue.Fragment, {
+                  children: (0, Ue.jsx)(Zc, {
                     children: (0, Ue.jsxs)("a", {
                       href: C,
                       className:
                         "group/post flex w-full flex-row gap-2 border-b border-border p-4 hover:bg-muted/50",
-                      children: [_, ie],
+                      children: [_, fe],
                     }),
                   }),
                 })),
-                (t[90] = ie),
-                (t[91] = C),
-                (t[92] = _),
-                (t[93] = se))
-              : (se = t[93]),
-            se
+                (t[103] = fe),
+                (t[104] = C),
+                (t[105] = _),
+                (t[106] = pe))
+              : (pe = t[106]),
+            pe
           );
         }
-        function au() {}
-        function ou(e) {
+        function ou() {}
+        function lu(e) {
           return e instanceof Error ? e.message : "Could not delete the post.";
         }
-        function lu(e) {
+        function iu(e) {
           const t = (0, l.c)(8);
           let n, r, a, o;
           return (
@@ -10063,7 +10119,7 @@
             o
           );
         }
-        function iu() {
+        function su() {
           const e = (0, l.c)(7),
             [t, n] = (0, r.useTransition)();
           let a;
@@ -10104,9 +10160,9 @@
                         className: "flex flex-col gap-2",
                         children: t
                           ? (0, Ue.jsx)(Ue.Fragment, {
-                              children: Array.from({ length: 3 }).map(cu),
+                              children: Array.from({ length: 3 }).map(uu),
                             })
-                          : (0, Ue.jsx)(Ue.Fragment, { children: o.map(su) }),
+                          : (0, Ue.jsx)(Ue.Fragment, { children: o.map(cu) }),
                       }),
                     }),
                   ],
@@ -10118,7 +10174,7 @@
             d
           );
         }
-        function su(e) {
+        function cu(e) {
           return (0, Ue.jsxs)(
             "a",
             {
@@ -10142,7 +10198,7 @@
             e.id,
           );
         }
-        function cu(e, t) {
+        function uu(e, t) {
           return (0, Ue.jsxs)(
             "div",
             {
@@ -10151,15 +10207,15 @@
                 (0, Ue.jsxs)("div", {
                   className: "space-y-1",
                   children: [
-                    (0, Ue.jsx)(lu, { className: "h-4 w-full" }),
-                    (0, Ue.jsx)(lu, { className: "h-4 w-1/2" }),
+                    (0, Ue.jsx)(iu, { className: "h-4 w-full" }),
+                    (0, Ue.jsx)(iu, { className: "h-4 w-1/2" }),
                   ],
                 }),
                 (0, Ue.jsxs)("div", {
                   className: "flex flex-row items-center gap-2",
                   children: [
-                    (0, Ue.jsx)(lu, { className: "h-5 w-12" }),
-                    (0, Ue.jsx)(lu, { className: "h-5 w-16" }),
+                    (0, Ue.jsx)(iu, { className: "h-5 w-12" }),
+                    (0, Ue.jsx)(iu, { className: "h-5 w-16" }),
                   ],
                 }),
               ],
@@ -10167,7 +10223,7 @@
             t,
           );
         }
-        function uu() {
+        function du() {
           const e = (0, l.c)(11),
             { isLoggedIn: t, session: n } = (0, r.useContext)(Ut),
             [a, o] = (0, r.useTransition)();
@@ -10214,7 +10270,7 @@
                         className: "flex flex-col gap-2",
                         children: a
                           ? (0, Ue.jsx)(Ue.Fragment, {
-                              children: Array.from({ length: 3 }).map(du),
+                              children: Array.from({ length: 3 }).map(fu),
                             })
                           : (0, Ue.jsx)(Ue.Fragment, {
                               children: s.map((e) =>
@@ -10236,9 +10292,9 @@
                                           (0, Ue.jsxs)("div", {
                                             className: "flex min-w-0 flex-1 flex-col",
                                             children: [
-                                              (0, Ue.jsxs)(Xc, {
+                                              (0, Ue.jsxs)(Zc, {
                                                 children: [
-                                                  (0, Ue.jsx)(Zc, {
+                                                  (0, Ue.jsx)(Jc, {
                                                     asChild: !0,
                                                     children: (0, Ue.jsxs)("div", {
                                                       className:
@@ -10249,15 +10305,15 @@
                                                             "block min-w-0 truncate text-base font-bold hover:underline",
                                                           children: e.displayName,
                                                         }),
-                                                        (0, Ue.jsx)(tu, {
+                                                        (0, Ue.jsx)(nu, {
                                                           isOrg: e.isOrg,
                                                           plan: e.plan,
                                                         }),
                                                       ],
                                                     }),
                                                   }),
-                                                  (0, Ue.jsx)(Jc, {
-                                                    children: (0, Ue.jsx)(nu, {
+                                                  (0, Ue.jsx)(eu, {
+                                                    children: (0, Ue.jsx)(ru, {
                                                       username: e.username,
                                                     }),
                                                   }),
@@ -10271,7 +10327,7 @@
                                           }),
                                           (0, Ue.jsx)("div", {
                                             className: "shrink-0 self-start",
-                                            children: (0, Ue.jsx)(eu, {
+                                            children: (0, Ue.jsx)(tu, {
                                               username: e.username,
                                               isFollowing: e.isFollowing,
                                               onFollowStateChange: (t) =>
@@ -10301,26 +10357,26 @@
             m
           );
         }
-        function du(e, t) {
+        function fu(e, t) {
           return (0, Ue.jsxs)(
             "div",
             {
               className: "flex flex-row items-center gap-2",
               children: [
-                (0, Ue.jsx)(lu, { className: "size-8 shrink-0" }),
+                (0, Ue.jsx)(iu, { className: "size-8 shrink-0" }),
                 (0, Ue.jsxs)("div", {
                   className: "flex min-w-0 flex-1 flex-row items-center gap-0.5",
                   children: [
                     (0, Ue.jsxs)("div", {
                       className: "flex flex-1 flex-col gap-0.5",
                       children: [
-                        (0, Ue.jsx)(lu, { className: "h-6.5 w-1/2" }),
-                        (0, Ue.jsx)(lu, { className: "h-4.5 w-1/3" }),
+                        (0, Ue.jsx)(iu, { className: "h-6.5 w-1/2" }),
+                        (0, Ue.jsx)(iu, { className: "h-4.5 w-1/3" }),
                       ],
                     }),
                     (0, Ue.jsx)("div", {
                       className: "shrink-0 self-start",
-                      children: (0, Ue.jsx)(lu, { className: "h-8 w-15.5" }),
+                      children: (0, Ue.jsx)(iu, { className: "h-8 w-15.5" }),
                     }),
                   ],
                 }),
@@ -10329,12 +10385,12 @@
             t,
           );
         }
-        function fu() {
+        function pu() {
           const e = (0, l.c)(5);
           let t, n, r, a, o;
           return (
             e[0] === Symbol.for("react.memo_cache_sentinel")
-              ? ((t = (0, Ue.jsx)(lu, { className: "size-10 shrink-0 rounded-full" })), (e[0] = t))
+              ? ((t = (0, Ue.jsx)(iu, { className: "size-10 shrink-0 rounded-full" })), (e[0] = t))
               : (t = e[0]),
             e[1] === Symbol.for("react.memo_cache_sentinel")
               ? ((n = (0, Ue.jsxs)("div", {
@@ -10343,13 +10399,13 @@
                     (0, Ue.jsxs)("div", {
                       className: "flex min-w-0 flex-row flex-wrap items-center gap-1",
                       children: [
-                        (0, Ue.jsx)(lu, { className: "h-4 w-28 max-w-[40%]" }),
-                        (0, Ue.jsx)(lu, { className: "h-4 w-24 max-w-[35%]" }),
-                        (0, Ue.jsx)(lu, { className: "size-1 shrink-0 rounded-full" }),
-                        (0, Ue.jsx)(lu, { className: "h-4 w-10 shrink-0" }),
+                        (0, Ue.jsx)(iu, { className: "h-4 w-28 max-w-[40%]" }),
+                        (0, Ue.jsx)(iu, { className: "h-4 w-24 max-w-[35%]" }),
+                        (0, Ue.jsx)(iu, { className: "size-1 shrink-0 rounded-full" }),
+                        (0, Ue.jsx)(iu, { className: "h-4 w-10 shrink-0" }),
                       ],
                     }),
-                    (0, Ue.jsx)(lu, { className: "size-8 shrink-0 rounded-full" }),
+                    (0, Ue.jsx)(iu, { className: "size-8 shrink-0 rounded-full" }),
                   ],
                 })),
                 (e[1] = n))
@@ -10358,9 +10414,9 @@
               ? ((r = (0, Ue.jsxs)("div", {
                   className: "flex flex-col gap-2 pt-0.5",
                   children: [
-                    (0, Ue.jsx)(lu, { className: "h-4 w-full" }),
-                    (0, Ue.jsx)(lu, { className: "h-4 w-[92%]" }),
-                    (0, Ue.jsx)(lu, { className: "h-4 w-[64%]" }),
+                    (0, Ue.jsx)(iu, { className: "h-4 w-full" }),
+                    (0, Ue.jsx)(iu, { className: "h-4 w-[92%]" }),
+                    (0, Ue.jsx)(iu, { className: "h-4 w-[64%]" }),
                   ],
                 })),
                 (e[2] = r))
@@ -10369,8 +10425,8 @@
               ? ((a = (0, Ue.jsxs)("span", {
                   className: "inline-flex items-center gap-1",
                   children: [
-                    (0, Ue.jsx)(lu, { className: "size-4 rounded-sm" }),
-                    (0, Ue.jsx)(lu, { className: "h-4 w-5" }),
+                    (0, Ue.jsx)(iu, { className: "size-4 rounded-sm" }),
+                    (0, Ue.jsx)(iu, { className: "h-4 w-5" }),
                   ],
                 })),
                 (e[3] = a))
@@ -10392,11 +10448,11 @@
                             (0, Ue.jsxs)("span", {
                               className: "inline-flex items-center gap-1",
                               children: [
-                                (0, Ue.jsx)(lu, { className: "size-4 rounded-sm" }),
-                                (0, Ue.jsx)(lu, { className: "h-4 w-5" }),
+                                (0, Ue.jsx)(iu, { className: "size-4 rounded-sm" }),
+                                (0, Ue.jsx)(iu, { className: "h-4 w-5" }),
                               ],
                             }),
-                            (0, Ue.jsx)(lu, { className: "size-4 rounded-sm" }),
+                            (0, Ue.jsx)(iu, { className: "size-4 rounded-sm" }),
                           ],
                         }),
                       ],
@@ -10408,7 +10464,7 @@
             o
           );
         }
-        function pu(e) {
+        function mu(e) {
           const t = (0, l.c)(8);
           let n, r, a, o;
           return (
@@ -10432,7 +10488,7 @@
             o
           );
         }
-        function mu(e) {
+        function hu(e) {
           const t = (0, l.c)(8);
           let n, r, a, o;
           return (
@@ -10451,7 +10507,7 @@
             o
           );
         }
-        const hu = w(
+        const gu = w(
           "mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0",
           {
             variants: {
@@ -10463,7 +10519,7 @@
             defaultVariants: { variant: "default" },
           },
         );
-        function gu(e) {
+        function vu(e) {
           const t = (0, l.c)(11);
           let n, r, a;
           t[0] !== e
@@ -10477,7 +10533,7 @@
           let i, s;
           return (
             t[4] !== n || t[5] !== o
-              ? ((i = Ie(hu({ variant: o, className: n }))), (t[4] = n), (t[5] = o), (t[6] = i))
+              ? ((i = Ie(gu({ variant: o, className: n }))), (t[4] = n), (t[5] = o), (t[6] = i))
               : (i = t[6]),
             t[7] !== r || t[8] !== i || t[9] !== o
               ? ((s = (0, Ue.jsx)("div", {
@@ -10494,7 +10550,7 @@
             s
           );
         }
-        function vu(e) {
+        function yu(e) {
           const t = (0, l.c)(8);
           let n, r, a, o;
           return (
@@ -10515,7 +10571,7 @@
             o
           );
         }
-        function yu(e) {
+        function bu(e) {
           const t = (0, l.c)(8);
           let n, r, a, o;
           return (
@@ -10539,7 +10595,7 @@
             o
           );
         }
-        function bu() {
+        function wu() {
           const e = (0, l.c)(24),
             [t, n] = (0, r.useTransition)();
           let a;
@@ -10579,15 +10635,15 @@
               : (d = e[4]),
             e[5] !== t || e[6] !== o
               ? ((f = t
-                  ? (0, Ue.jsx)(Ue.Fragment, { children: Array.from({ length: 3 }).map(xu) })
+                  ? (0, Ue.jsx)(Ue.Fragment, { children: Array.from({ length: 3 }).map(ku) })
                   : o.length > 0
-                    ? o.map(wu)
-                    : (0, Ue.jsx)(pu, {
-                        children: (0, Ue.jsxs)(mu, {
+                    ? o.map(xu)
+                    : (0, Ue.jsx)(mu, {
+                        children: (0, Ue.jsxs)(hu, {
                           children: [
-                            (0, Ue.jsx)(gu, { variant: "icon", children: (0, Ue.jsx)(m, {}) }),
-                            (0, Ue.jsx)(vu, { children: "No Chirps Yet" }),
-                            (0, Ue.jsx)(yu, { children: "Be the first to chirp" }),
+                            (0, Ue.jsx)(vu, { variant: "icon", children: (0, Ue.jsx)(m, {}) }),
+                            (0, Ue.jsx)(yu, { children: "No Chirps Yet" }),
+                            (0, Ue.jsx)(bu, { children: "Be the first to chirp" }),
                           ],
                         }),
                       })),
@@ -10623,8 +10679,8 @@
               : (v = e[11]),
             e[12] === Symbol.for("react.memo_cache_sentinel")
               ? ((w = (0, Ue.jsx)(ys, {})),
-                (y = (0, Ue.jsx)(iu, {})),
-                (b = (0, Ue.jsx)(uu, {})),
+                (y = (0, Ue.jsx)(su, {})),
+                (b = (0, Ue.jsx)(du, {})),
                 (e[12] = y),
                 (e[13] = b),
                 (e[14] = w))
@@ -10714,22 +10770,22 @@
             _
           );
         }
-        function wu(e) {
-          return (0, Ue.jsx)(ru, { post: e }, e._id);
+        function xu(e) {
+          return (0, Ue.jsx)(au, { post: e }, e._id);
         }
-        function xu(e, t) {
-          return (0, Ue.jsx)(fu, {}, t);
+        function ku(e, t) {
+          return (0, Ue.jsx)(pu, {}, t);
         }
-        const ku = p("circle-check", [
+        const Su = p("circle-check", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }],
           ]),
-          Su = p("info", [
+          Eu = p("info", [
             ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
             ["path", { d: "M12 16v-4", key: "1dtifu" }],
             ["path", { d: "M12 8h.01", key: "e9boi3" }],
           ]),
-          Eu = p("triangle-alert", [
+          Nu = p("triangle-alert", [
             [
               "path",
               {
@@ -10740,7 +10796,7 @@
             ["path", { d: "M12 9v4", key: "juzpu7" }],
             ["path", { d: "M12 17h.01", key: "p32p05" }],
           ]),
-          Nu = p("octagon-x", [
+          Cu = p("octagon-x", [
             ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
             [
               "path",
@@ -10751,17 +10807,17 @@
             ],
             ["path", { d: "m9 9 6 6", key: "z0biqf" }],
           ]),
-          Cu = (e) => {
+          ju = (e) => {
             const t = (0, l.c)(7);
             let n, r, a, o, i;
             return (
               t[0] !== e ? (({ ...n } = e), (t[0] = e), (t[1] = n)) : (n = t[1]),
               t[2] === Symbol.for("react.memo_cache_sentinel")
                 ? ((r = {
-                    success: (0, Ue.jsx)(ku, { className: "size-4" }),
-                    info: (0, Ue.jsx)(Su, { className: "size-4" }),
-                    warning: (0, Ue.jsx)(Eu, { className: "size-4" }),
-                    error: (0, Ue.jsx)(Nu, { className: "size-4" }),
+                    success: (0, Ue.jsx)(Su, { className: "size-4" }),
+                    info: (0, Ue.jsx)(Eu, { className: "size-4" }),
+                    warning: (0, Ue.jsx)(Nu, { className: "size-4" }),
+                    error: (0, Ue.jsx)(Cu, { className: "size-4" }),
                     loading: (0, Ue.jsx)(Wt, { className: "size-4 animate-spin" }),
                   }),
                   (a = {
@@ -10796,8 +10852,8 @@
             children: (0, Ue.jsx)(Vt, {
               children: (0, Ue.jsxs)(hc, {
                 children: [
-                  (0, Ue.jsx)(bu, {}),
-                  (0, Ue.jsx)(Cu, { position: "top-center", richColors: !0 }),
+                  (0, Ue.jsx)(wu, {}),
+                  (0, Ue.jsx)(ju, { position: "top-center", richColors: !0 }),
                 ],
               }),
             }),
@@ -22362,6 +22418,6 @@
       (n.forEach(t.bind(null, 0)), (n.push = t.bind(null, n.push.bind(n))));
     })(),
     (o.nc = void 0));
-  var l = o.O(void 0, [869], () => o(83));
+  var l = o.O(void 0, [869], () => o(662));
   l = o.O(l);
 })();

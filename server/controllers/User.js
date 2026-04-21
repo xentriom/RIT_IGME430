@@ -62,7 +62,8 @@ const shuffleToNew = (arr) => {
 
 const getAccounts = async (req, res) => {
   const limit = req.query.limit ?? 10;
-  const accounts = await models.Account.find({})
+  const adsUsername = models.Post.adsTimelineUsername();
+  const accounts = await models.Account.find({ username: { $ne: adsUsername } })
     .select("_id username displayName avatar isPublic bio plan isOrg createdDate")
     .exec();
 
