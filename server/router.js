@@ -8,7 +8,7 @@ const router = (app) => {
   app.get("/u/:username", mid.requiresSecure, controllers.Pages.profilePage);
   app.get("/p/:postId", mid.requiresSecure, controllers.Pages.postPage);
   app.get("/myna", mid.requiresSecure, controllers.Pages.mynaPage);
-  app.get("/settings", mid.requiresSecure, controllers.Pages.settingsPage);
+  app.get("/settings", mid.requiresSecure, mid.requiresLogin, controllers.Pages.settingsPage);
 
   // Helper to redirect on session
   app.get("/profile", mid.requiresSecure, (req, res) => {
@@ -23,6 +23,14 @@ const router = (app) => {
   app.post("/auth/login", mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post("/auth/signup", mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.get("/api/session", mid.requiresSecure, controllers.Account.getSession);
+
+  // Account
+  app.post(
+    "/api/account/reset-password",
+    mid.requiresSecure,
+    mid.requiresLogin,
+    controllers.Account.resetPassword,
+  );
 
   // Users
   app.get("/api/users", mid.requiresSecure, controllers.User.getAccounts);

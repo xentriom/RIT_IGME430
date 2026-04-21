@@ -86,6 +86,10 @@
   @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
 
+@utility link {
+  @apply text-primary hover:underline;
+}
+
 @layer base {
   * {
     @apply border-border font-sans outline-none;

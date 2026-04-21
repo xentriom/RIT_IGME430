@@ -100,8 +100,8 @@ export function Sidebar() {
   return (
     <div className="flex shrink-0 flex-row items-center gap-4 overflow-y-hidden border-border p-4 max-sm:border-t sm:flex-col sm:px-2">
       <div className="flex min-w-0 flex-row gap-4 max-sm:flex-1 sm:flex-col">
-        <div className="hidden size-9 shrink-0 items-center justify-center rounded-lg bg-primary select-none sm:inline-flex">
-          C
+        <div className="hidden size-9 shrink-0 items-center justify-center rounded-lg select-none sm:inline-flex">
+          <img src="/assets/icons/android-icon-512x512.png" alt="Chitter" />
         </div>
         <div className="flex min-w-0 flex-row items-center gap-0.5 max-sm:w-full max-sm:justify-between max-sm:px-1 sm:flex-col sm:justify-start sm:px-0">
           {sidebarItems.map((item) => (
@@ -178,8 +178,10 @@ export function Sidebar() {
               <DropdownMenuItem>
                 <SquareArrowOutUpRightIcon /> Ads
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <SettingsIcon /> Settings & Privacy
+              <DropdownMenuItem asChild>
+                <a href="/settings">
+                  <SettingsIcon /> Settings & Privacy
+                </a>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

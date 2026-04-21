@@ -8819,8 +8819,11 @@
           (e[0] === Symbol.for("react.memo_cache_sentinel")
             ? ((a = (0, Ue.jsx)("div", {
                 className:
-                  "hidden size-9 shrink-0 items-center justify-center rounded-lg bg-primary select-none sm:inline-flex",
-                children: "C",
+                  "hidden size-9 shrink-0 items-center justify-center rounded-lg select-none sm:inline-flex",
+                children: (0, Ue.jsx)("img", {
+                  src: "/assets/icons/android-icon-512x512.png",
+                  alt: "Chitter",
+                }),
               })),
               (e[0] = a))
             : (a = e[0]),
@@ -8940,7 +8943,13 @@
                   children: [
                     S,
                     E,
-                    (0, Ue.jsxs)(ns, { children: [(0, Ue.jsx)(zs, {}), " Settings & Privacy"] }),
+                    (0, Ue.jsx)(ns, {
+                      asChild: !0,
+                      children: (0, Ue.jsxs)("a", {
+                        href: "/settings",
+                        children: [(0, Ue.jsx)(zs, {}), " Settings & Privacy"],
+                      }),
+                    }),
                   ],
                 })),
                 (C = (0, Ue.jsx)(ls, {})),

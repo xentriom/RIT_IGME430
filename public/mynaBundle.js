@@ -6875,8 +6875,11 @@
           (e[0] === Symbol.for("react.memo_cache_sentinel")
             ? ((o = (0, R.jsx)("div", {
                 className:
-                  "hidden size-9 shrink-0 items-center justify-center rounded-lg bg-primary select-none sm:inline-flex",
-                children: "C",
+                  "hidden size-9 shrink-0 items-center justify-center rounded-lg select-none sm:inline-flex",
+                children: (0, R.jsx)("img", {
+                  src: "/assets/icons/android-icon-512x512.png",
+                  alt: "Chitter",
+                }),
               })),
               (e[0] = o))
             : (o = e[0]),
@@ -6990,7 +6993,13 @@
                   children: [
                     P,
                     T,
-                    (0, R.jsxs)(Bi, { children: [(0, R.jsx)(N, {}), " Settings & Privacy"] }),
+                    (0, R.jsx)(Bi, {
+                      asChild: !0,
+                      children: (0, R.jsxs)("a", {
+                        href: "/settings",
+                        children: [(0, R.jsx)(N, {}), " Settings & Privacy"],
+                      }),
+                    }),
                   ],
                 })),
                 (j = (0, R.jsx)(Ui, {})),
