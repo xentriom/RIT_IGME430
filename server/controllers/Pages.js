@@ -51,6 +51,12 @@ const mynaPage = (req, res) => {
   res.render("myna");
 };
 
+const settingsPage = (req, res) => {
+  res.render("setting", {
+    title: "bob",
+  });
+};
+
 const notFoundPage = (req, res) => {
   res.status(404).render("not-found");
 };
@@ -62,5 +68,6 @@ module.exports = {
   premiumPage,
   postPage,
   mynaPage,
+  settingsPage,
   notFoundPage,
 };

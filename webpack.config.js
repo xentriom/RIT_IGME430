@@ -10,6 +10,7 @@ module.exports = {
     auth: "./client/pages/Auth/main.tsx",
     post: "./client/pages/Post/main.tsx",
     myna: "./client/pages/Myna/main.tsx",
+    settings: "./client/pages/Settings/main.tsx",
     pwa: "./client/pwa/register.ts",
   },
   devtool: "cheap-module-source-map",

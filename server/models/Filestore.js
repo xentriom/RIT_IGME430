@@ -4,12 +4,6 @@ const sharp = require("sharp");
 let FilestoreModel = {};
 
 const FilestoreSchema = new mongoose.Schema({
-  account: {
-    type: mongoose.Schema.ObjectId,
-    required: true,
-    ref: "Account",
-    index: true,
-  },
   filename: {
     type: String,
     required: true,
@@ -22,12 +16,11 @@ const FilestoreSchema = new mongoose.Schema({
 
 FilestoreSchema.statics.toAPI = (doc) => ({
   _id: doc._id,
-  account: doc.account,
   filename: doc.filename,
 });
 
-FilestoreSchema.statics.upload = async (accountId, filename, data) => {
-  if (!accountId || !filename || !data) return null;
+FilestoreSchema.statics.upload = async (filename, data) => {
+  if (!filename || !data) return null;
 
   // generate a safe filename
   const sfn = `${Date.now()}-${filename.toLowerCase().replace(/[^a-z0-9]/g, "")}.webp`;
@@ -40,7 +33,6 @@ FilestoreSchema.statics.upload = async (accountId, filename, data) => {
     .toBuffer();
 
   const doc = new FilestoreModel({
-    account: accountId,
     filename: sfn,
     data: buffer,
   });
@@ -48,9 +40,6 @@ FilestoreSchema.statics.upload = async (accountId, filename, data) => {
   await doc.save();
   return doc;
 };
-
-FilestoreSchema.statics.findByAccountId = (accountId) =>
-  FilestoreModel.find({ account: accountId }).exec();
 
 FilestoreModel = mongoose.model("Filestore", FilestoreSchema);
 module.exports = FilestoreModel;

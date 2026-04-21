@@ -10498,7 +10498,7 @@
                   className:
                     "flex cursor-pointer flex-row items-center gap-4 p-4 pb-0 text-lg font-bold",
                   onClick: hc,
-                  children: [(0, Ve.jsx)(m, { className: "size-4" }), "Post"],
+                  children: [(0, Ve.jsx)(m, { className: "size-4" }), "Chirp"],
                 })),
                 (e[10] = E))
               : (E = e[10]),

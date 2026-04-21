@@ -1,4 +1,5 @@
 import type { PaymentCycle, SubscriptionPlan } from "../types";
+import { XIcon, CheckIcon } from "lucide-react";
 
 // These cost, discount, and benefits are directly copied from Twitter/X
 // As of March 31, 2026
@@ -75,3 +76,48 @@ export const PremiumInheritedBenefitLead: Partial<Record<SubscriptionPlan, strin
   premium: "Everything in Basic, and",
   "premium+": "Everything in Premium, and",
 } as const;
+
+export const EnhancedExperienceBenefits = [
+  {
+    experience: "Ads",
+    basic: "No reduction",
+    premium: "Half in For You & Following",
+    "premium+": "Fully ad-free",
+  },
+  {
+    experience: "Reply boost",
+    basic: "Smallest",
+    premium: "Larger",
+    "premium+": "Largest",
+  },
+  {
+    experience: "Radar",
+    basic: "x",
+    premium: "x",
+    "premium+": "✓",
+  },
+  {
+    experience: "Edit posts",
+    basic: "✓",
+    premium: "✓",
+    "premium+": "✓",
+  },
+  {
+    experience: "Longer posts",
+    basic: "✓",
+    premium: "✓",
+    "premium+": "✓",
+  },
+  {
+    experience: "Background video playback",
+    basic: "✓",
+    premium: "✓",
+    "premium+": "✓",
+  },
+  {
+    experience: "Download videos",
+    basic: "✓",
+    premium: "✓",
+    "premium+": "✓",
+  },
+];

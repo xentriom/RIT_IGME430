@@ -86,7 +86,7 @@ export default function App() {
             onClick={() => history.back()}
           >
             <ArrowLeft className="size-4" />
-            Post
+            Chirp
           </div>
           <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto">
             {post && (

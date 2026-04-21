@@ -131,7 +131,7 @@ const updateAccount = async (req, res) => {
       // so we can delete the old one
       const previousAvatarId = account.avatar;
 
-      const photo = await models.Filestore.upload(account._id, account.username, avatar.data);
+      const photo = await models.Filestore.upload(account.username, avatar.data);
       if (!photo) return res.status(400).json({ error: "Failed to upload avatar" });
 
       // uploaded, so set and delete the old one if exists

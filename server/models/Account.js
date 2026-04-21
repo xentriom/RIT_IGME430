@@ -15,7 +15,7 @@ async function defaultAvatarWebpBuffer(username) {
   const svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128">
     <rect width="100%" height="100%" fill="${randomHexColor()}"/>
-    <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Arial" font-size="72" font-weight="bold" fill="#ffffff">
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="72" font-weight="bold" fill="#ffffff">
       ${username.charAt(0).toUpperCase()}
     </text>
   </svg>`;

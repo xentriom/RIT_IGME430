@@ -8,6 +8,7 @@ const router = (app) => {
   app.get("/u/:username", mid.requiresSecure, controllers.Pages.profilePage);
   app.get("/p/:postId", mid.requiresSecure, controllers.Pages.postPage);
   app.get("/myna", mid.requiresSecure, controllers.Pages.mynaPage);
+  app.get("/settings", mid.requiresSecure, controllers.Pages.settingsPage);
 
   // Helper to redirect on session
   app.get("/profile", mid.requiresSecure, (req, res) => {

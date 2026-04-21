@@ -101,7 +101,7 @@ export default function App() {
                 <span className="text-lg font-bold">{account.displayName}</span>
                 <ProfileBadge isOrg={account.isOrg} plan={account.plan} />
               </div>
-              <span className="text-sm text-muted-foreground">{posts.length} posts</span>
+              <span className="text-sm text-muted-foreground">{posts.length} chirps</span>
             </div>
           </div>
           <div className="no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto">

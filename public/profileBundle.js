@@ -10985,7 +10985,7 @@
             e[18] !== u.length
               ? ((M = (0, O.jsxs)("span", {
                   className: "text-sm text-muted-foreground",
-                  children: [u.length, " posts"],
+                  children: [u.length, " chirps"],
                 })),
                 (e[18] = u.length),
                 (e[19] = M))

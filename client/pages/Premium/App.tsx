@@ -8,6 +8,15 @@ import { SessionContext } from "../../contexts/session";
 import type { PaymentCycle, SubscriptionPlan } from "../../types";
 import { PremiumCost, PremiumDiscount } from "../../constants";
 import { Plans } from "./components/plans";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../components/ui/table";
+import { EnhancedExperienceBenefits } from "../../constants/premium";
 
 export default function App() {
   const { isLoggedIn } = useContext(SessionContext);
@@ -68,7 +77,7 @@ export default function App() {
               Don&apos;t lose your {PremiumDiscount.premium.monthly}% discount on Premium
             </h1>
           </div>
-          <div className="mx-auto max-w-4xl space-y-2">
+          <div className="mx-auto max-w-7xl space-y-2">
             <Tabs value={cycle} onValueChange={(value) => setCycle(value as PaymentCycle)}>
               <TabsList className="mx-auto">
                 <TabsTrigger value="annual">Annual</TabsTrigger>
@@ -77,6 +86,39 @@ export default function App() {
             </Tabs>
             <Plans cycle={cycle} model={model} setModel={setModel} />
           </div>
+          <div className="mx-auto flex max-w-7xl flex-row items-center justify-between rounded-lg border border-border p-4">
+            <div className="flex flex-row gap-2">
+              <BadgeCheck className="size-16 text-yellow-500" />
+              <div className="flex flex-col text-left">
+                <h2 className="text-2xl font-bold">Are you a buisness?</h2>
+                <p>Gain credibility and grow faster with Premium Business</p>
+              </div>
+            </div>
+            <Button variant="secondary">Explore Premium Business</Button>
+          </div>
+          <section className="mx-auto max-w-5xl space-y-4">
+            <h2 className="text-left text-2xl font-bold">Compare tiers & features</h2>
+            <Table className="rounded-lg border border-border">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Enhanced Experience</TableHead>
+                  <TableHead>Basic</TableHead>
+                  <TableHead>Premium</TableHead>
+                  <TableHead>Premium+</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {EnhancedExperienceBenefits.map((benefit) => (
+                  <TableRow key={benefit.experience}>
+                    <TableCell>{benefit.experience}</TableCell>
+                    <TableCell>{benefit.basic}</TableCell>
+                    <TableCell>{benefit.premium}</TableCell>
+                    <TableCell>{benefit["premium+"]}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </section>
         </div>
       </div>
 
