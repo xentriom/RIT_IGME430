@@ -80,7 +80,8 @@ const enrichPosts = async (posts, viewerId) => {
   });
 };
 
-const feedAdPolicy = (plan) => {
+const feedAdPolicy = (plan, isOrg) => {
+  if (isOrg) return null;
   if (plan === "premium+") return null;
   if (plan === "premium") return { meanGap: 4 };
   return { meanGap: 2 };
@@ -127,12 +128,14 @@ const getFeed = async (req, res) => {
     const payload = await enrichPosts(posts, viewerId);
 
     let viewerPlan = "free";
+    let viewerIsOrg = false;
     if (viewerId) {
-      const acc = await Account.findById(viewerId).select("plan").lean().exec();
-      if (acc?.plan) viewerPlan = acc.plan;
+      const acc = await Account.findById(viewerId).select("plan isOrg").lean().exec();
+      viewerPlan = acc?.plan ?? "free";
+      viewerIsOrg = acc?.isOrg ?? false;
     }
 
-    const policy = feedAdPolicy(viewerPlan);
+    const policy = feedAdPolicy(viewerPlan, viewerIsOrg);
     const adsUsername = Post.adsTimelineUsername();
     const adsAccount = await Account.findOne({ username: adsUsername }).select("_id").lean().exec();
     let adPoolEnriched = [];
