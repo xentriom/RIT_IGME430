@@ -69,11 +69,15 @@ export default function App() {
         type="button"
         onClick={() => {
           const ref = document.referrer;
-          if (ref && ref.includes(window.location.hostname)) {
-            window.history.back();
-          } else {
-            window.location.href = "/";
+          try {
+            if (ref && new URL(ref).origin === window.location.origin) {
+              window.history.back();
+              return;
+            }
+          } catch {
+            // invalid referrer
           }
+          window.location.href = "/";
         }}
         className="absolute top-4 left-4 rounded-full bg-muted p-2"
       >
