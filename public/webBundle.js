@@ -2312,7 +2312,7 @@
             ["path", { d: "m17 17 5 5", key: "p7ous7" }],
             ["path", { d: "m22 17-5 5", key: "gqnmv0" }],
           ]),
-          $t = { free: 128, basic: 256, premium: 512, "premium+": 1024 },
+          $t = { free: 128, basic: 256, premium: 512, "premium+": 1024, org: 2048 },
           Bt = {
             everyone: { icon: At, label: "Everyone" },
             followers: { icon: Ft, label: "Accounts you follow" },
@@ -7579,7 +7579,7 @@
                   });
               }),
               (v = Bt[f]),
-              (x = s ? $t[c.plan] : $t.free),
+              (x = s ? (c.isOrg ? $t.org : $t[c.plan]) : $t.free),
               (w = s ? ("free" === c.plan || "basic" === c.plan ? "premium" : "premium+") : null),
               (b = m.slice(0, x)),
               (k = m.slice(x)),

@@ -78,7 +78,12 @@ export function ChatInput({
 
   const currentOption = PostReplyOptions[replyOption];
 
-  const planLimit = isLoggedIn ? ReplyLength[session.plan] : ReplyLength["free"];
+  const planLimit = isLoggedIn
+    ? session.isOrg
+      ? ReplyLength.org
+      : ReplyLength[session.plan]
+    : ReplyLength["free"];
+
   const nextPlanTier = isLoggedIn
     ? session.plan === "free" || session.plan === "basic"
       ? "premium"

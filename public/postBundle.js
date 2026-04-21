@@ -9814,7 +9814,7 @@
             ["path", { d: "m17 17 5 5", key: "p7ous7" }],
             ["path", { d: "m22 17-5 5", key: "gqnmv0" }],
           ]),
-          lc = { free: 128, basic: 256, premium: 512, "premium+": 1024 },
+          lc = { free: 128, basic: 256, premium: 512, "premium+": 1024, org: 2048 },
           ic = {
             everyone: { icon: rc, label: "Everyone" },
             followers: { icon: ac, label: "Accounts you follow" },
@@ -9867,7 +9867,7 @@
                   });
               }),
               (v = ic[f]),
-              (x = s ? lc[u.plan] : lc.free),
+              (x = s ? (u.isOrg ? lc.org : lc[u.plan]) : lc.free),
               (w = s ? ("free" === u.plan || "basic" === u.plan ? "premium" : "premium+") : null),
               (b = m.slice(0, x)),
               (k = m.slice(x)),

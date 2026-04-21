@@ -7,11 +7,12 @@ import {
 } from "lucide-react";
 import type { ReplyOptions, SubscriptionPlan } from "../types";
 
-export const ReplyLength: Record<SubscriptionPlan, number> = {
+export const ReplyLength: Record<SubscriptionPlan | "org", number> = {
   free: 128,
   basic: 256,
   premium: 512,
   "premium+": 1024,
+  org: 2048,
 } as const;
 
 export const PostReplyOptions: Record<ReplyOptions, { icon: LucideIcon; label: string }> = {
